@@ -1,64 +1,51 @@
-# Contentful Gatsby Starter Blog
+# Ring Savvy JAMstack Migration
 
-Create a [Gatsby](http://gatsbyjs.com/) blog powered by [Contentful](https://www.contentful.com). This is a simplified version of the [Gatsby Contentful Starter](https://github.com/contentful-userland/gatsby-contentful-starter) which is maintained by our Community.
+Migrate the Ring Savvy website from WordPress over to a more modern JAMstack approach where we will use Git workflows, modern build tools & a content API to render blog posts.
 
-![The index page of the starter blog](https://rawgit.com/contentful-userland/gatsby-contentful-starter/master/screenshot.jpg "The index page of the starter blog")
+More specifically, we will be using React.js & Gatsby.js for the front end, & Contentful’s Headless CMS platform to serve our content’s data to be dynamically rendered onto our blog through APIs & serverless functions.
 
-Static sites are scalable, secure and have very little required maintenance. They come with a drawback though. Not everybody feels good editing files, building a project and uploading it somewhere. This is where Contentful comes into play.
+## Main Goal(s)
 
-With Contentful and Gatsby you can connect your favorite static site generator with an API that provides an easy to use interface for people writing content and automate the publishing using services like [Travis CI](https://travis-ci.org/) or [Netlify](https://www.netlify.com/).
+With the adoption of modern technology & Agile practices, enable the department to regularly release new content, site features &/or updates more efficiently so the website can continue to deliver value as the business grows & evolves.
 
-## Features
+## Technology
 
-- Simple content model and structure. Easy to adjust to your needs.
-- Use the [synchronization feature](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization) of our [Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/).
-- Responsive/adaptive images via [gatsby-image](https://www.gatsbyjs.org/packages/gatsby-image/) and our [Images API](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization/initial-synchronization-of-entries-of-a-specific-content-type).
+- [Gatsby.js](https://www.gatsbyjs.com/) (SSG)
+- [Gatsby Cloud](https://www.gatsbyjs.com/cloud/)
+- [React.js](https://reactjs.org/)
+- [Contentful](https://www.contentful.com/) (Headless CMS)
+- [GraphQL](https://graphql.org/) (Query data from CMS response)
+- [Git](https://git-scm.com/) & [Github](https://github.com/) (Version Control)
 
-## Getting started
+## Functionality
 
-See our [official Contentful getting started guide](https://www.contentful.com/developers/docs/tutorials/general/get-started/).
+### Development (Application side)
 
-### Get the source code and install dependencies.
+- Git Version Control
+- Continuous Builds & Deployment
+  - on push to git repository
+  - on change to Contentful
+- Preview/Staging Environment
+- Scalable, Reusable & Maintainable CSS
+- Optimized image processing & rendering
+- SEO Best Practices
 
-```
-$ git clone https://github.com/contentful/starter-gatsby-blog.git
-$ npm install
-```
+### User/Editor (Contentful side)
 
-Or use the [Gatsby CLI](https://www.npmjs.com/package/gatsby-cli).
+- Ability to publish & edit blog posts in Contentful without needing the help from a developer
+  - Rich Text Editor preferred over Markdown Editor for ease of use (although Markdown offers better functionality & features)
+- Ability to stage & preview additions or changes to content in Contentful
+- User permissions in Contentful if necessary
+- Templated SEO meta fields within content models
 
-```
-$ gatsby new contentful-starter-blog https://github.com/contentful/starter-gatsby-blog/
-```
+## Deliverables
 
-### Set up of the needed content model and create a configuration file
-
-This project comes with a Contentful setup command `npm run setup`.
-
-This command will ask you for a space ID, and access tokens for the Contentful Management and Delivery API and then import the needed content model into the space you define and write a config file (`./.contentful.json`).
-
-`npm run setup` automates that for you but if you want to do it yourself rename `.contentful.json.sample` to `.contentful.json` and add your configuration in this file.
-
-## Crucial Commands
-
-### `npm run dev`
-
-Run the project locally with live reload in development mode.
-
-### `npm run build`
-
-Run a production build into `./public`. The result is ready to be put on any static hosting you prefer.
-
-### `npm run serve`
-
-Spin up a production-ready server with your blog. Don't forget to build your page beforehand.
-
-## Deployment
-
-See the [official Contentful getting started guide](https://www.contentful.com/developers/docs/tutorials/general/get-started/).
-
-## Contribution
-
-Feel free to open pull requests to fix bugs. If you want to add features, please have a look at the [original version](https://github.com/contentful-userland/gatsby-contentful-starter). It is always open to contributions and pull requests.
-
-You can learn more about how Contentful userland is organized by visiting [our about repository](https://github.com/contentful-userland/about).
+- Optimized content models within Contentful to build blog posts efficiently
+  - future iterations & features of content models will be added after the whole blog/website is done with development.
+- All published posts on Ring Savvy migrated over to Contentful & rendered correctly.
+- All published web pages migrated to React.js with simple, easily scalable & maintainable components
+- Automated building & deployment via Git & Gatsby Cloud
+- Contentful link to a preview for editor to review additions & changes before publishing
+- QA/Staging environment in Contentful for testing new features or content model migrations
+- Optimized image processing & rendering
+- SEO best practices & meta

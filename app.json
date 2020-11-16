@@ -1,13 +1,7 @@
 {
-  "name": "Contentful Gatsby Starter",
-  "description": "Gatsby starter for a Contentful project.",
-  "keywords": [
-    "contentful",
-    "gatsby",
-    "static",
-    "ssg"
-  ],
-  "repository": "https://github.com/contentful-userland/gatsby-contentful-starter",
+  "name": "Ring Savvy",
+  "description": "Ring Savvy Website",
+  "repository": "https://github.com/answeringLegal/ringsavvy-website",
   "success_url": "/",
   "buildpacks": [
     {

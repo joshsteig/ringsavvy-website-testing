@@ -25,6 +25,11 @@ export default function BlogPostTemplate(props) {
         <div className="wrapper">
           <h1 className="section-headline">{post.title}</h1>
           <p>{post.publishDate}</p>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: post.body.childContentfulRichText.html,
+            }}
+          />
         </div>
       </div>
     </Layout>
@@ -39,6 +44,11 @@ export const pageQuery = graphql`
       featuredImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid
+        }
+      }
+      body: childContentfulPostBodyRichTextNode {
+        childContentfulRichText {
+          html
         }
       }
     }

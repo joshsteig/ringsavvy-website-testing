@@ -8,7 +8,8 @@
     "url": "https://github.com/answeringLegal/ringsavvy-website/issues"
   },
   "dependencies": {
-    "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
+    "@contentful/rich-text-react-renderer": "^14.1.2",
+    "@contentful/rich-text-types": "^14.1.2",
     "bluebird": "^3.7.2",
     "dotenv": "^8.2.0",
     "gatsby": "^2.23.9",

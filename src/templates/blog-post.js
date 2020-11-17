@@ -8,7 +8,7 @@ import Layout from '../components/layout';
 import heroStyles from '../components/hero.module.css';
 
 export default function BlogPostTemplate(props) {
-  const post = get(props, 'data.contentfulBlogPost');
+  const post = get(props, 'data.contentfulPost');
   const siteTitle = get(props, 'data.site.siteMetadata.title');
 
   return (
@@ -19,17 +19,12 @@ export default function BlogPostTemplate(props) {
           <Img
             className={heroStyles.heroImage}
             alt={post.title}
-            fluid={post.heroImage.fluid}
+            fluid={post.featuredImage.fluid}
           />
         </div>
         <div className="wrapper">
           <h1 className="section-headline">{post.title}</h1>
           <p>{post.publishDate}</p>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: post.body.childMarkdownRemark.html,
-            }}
-          />
         </div>
       </div>
     </Layout>
@@ -37,18 +32,13 @@ export default function BlogPostTemplate(props) {
 }
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    contentfulBlogPost(slug: { eq: $slug }) {
+  query PostBySlug($slug: String!) {
+    contentfulPost(slug: { eq: $slug }) {
       title
-      publishDate(formatString: "MMMM Do, YYYY")
-      heroImage {
+      createdAt(formatString: "MMMM Do, YYYY")
+      featuredImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {
           ...GatsbyContentfulFluid
-        }
-      }
-      body {
-        childMarkdownRemark {
-          html
         }
       }
     }

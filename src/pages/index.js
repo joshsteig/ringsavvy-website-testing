@@ -24,23 +24,12 @@ export default function RootIndex(props) {
 
 export const pageQuery = graphql`
   query HomeQuery {
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulPost(sort: { fields: [createdAt], order: DESC }) {
       edges {
         node {
           title
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          tags
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          description {
-            childMarkdownRemark {
-              html
-            }
-          }
+          createdAt(formatString: "MMMM Do, YYYY")
         }
       }
     }

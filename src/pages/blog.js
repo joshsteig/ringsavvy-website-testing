@@ -6,7 +6,7 @@ import Layout from '../components/layout';
 import PostPreview from '../components/post-preview';
 
 export default function BlogIndex(props) {
-  const posts = get(props, 'data.allContentfulBlogPost.edges');
+  const posts = get(props, 'data.allContentfulPost.edges');
   const { location } = props;
 
   return (
@@ -36,18 +36,17 @@ export default function BlogIndex(props) {
 
 export const pageQuery = graphql`
   query BlogIndexQuery {
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulPost(sort: { fields: [createdAt], order: DESC }) {
       edges {
         node {
           title
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          tags
-          heroImage {
+          featuredImage {
             fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
               ...GatsbyContentfulFluid
             }
           }
+          createdAt(formatString: "MMMM Do, YYYY")
           description {
             childMarkdownRemark {
               html

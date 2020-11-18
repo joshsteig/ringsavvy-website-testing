@@ -2,8 +2,10 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import get from 'lodash/get';
 import { Helmet } from 'react-helmet';
-import Layout from '../components/layout';
-import PostPreview from '../components/post-preview';
+
+import Layout from '../components/Layout';
+import PostPreview from '../components/PostPreview';
+import Wrapper from '../components/Wrapper/Wrapper';
 
 export default function BlogIndex(props) {
   const posts = get(props, 'data.allContentfulPost.edges');
@@ -18,8 +20,8 @@ export default function BlogIndex(props) {
           content="Ring Savvy - Answering Service Innovators! Serving Industries and Small Businesses - Unparalleled Customer Service and Support - Call Now To Try It Free!"
         />
       </Helmet>
-      <div className="wrapper">
-        <h2 className="section-headline">Recent articles</h2>
+      <Wrapper>
+        <h2>Recent articles</h2>
         <ul className="article-list">
           {posts.map(({ node }) => {
             return (
@@ -29,7 +31,7 @@ export default function BlogIndex(props) {
             );
           })}
         </ul>
-      </div>
+      </Wrapper>
     </Layout>
   );
 }

@@ -3,12 +3,12 @@ import { graphql, Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 import Img from 'gatsby-image';
-
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
-import Layout from '../components/layout';
 
-import heroStyles from '../components/hero.module.css';
+import Layout from '../components/Layout';
+import Wrapper from '../components/Wrapper/Wrapper';
+import PostHeader from '../components/PostHeader/PostHeader';
 
 const options = {
   renderNode: {
@@ -28,21 +28,21 @@ export default function BlogPostTemplate(props) {
 
   return (
     <Layout location={post.location}>
-      <div>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
-        <div className={heroStyles.hero}>
-          <Img
-            className={heroStyles.heroImage}
-            alt={post.title}
-            fluid={post.featuredImage.fluid}
+      <Helmet title={`${post.title} | ${siteTitle}`} />
+      <Wrapper>
+        <article>
+          <PostHeader
+            title={post.title}
+            author={post.author.name}
+            date={post.createdAt}
           />
-        </div>
-        <div className="wrapper">
-          <h1 className="section-headline">{post.title}</h1>
-          <p>{post.publishDate}</p>
-          <div>{renderRichText(post.body, options)}</div>
-        </div>
-      </div>
+          <Img alt={post.title} fluid={post.featuredImage.fluid} />
+          <div className="wrapper">
+            <p>{post.publishDate}</p>
+            <div>{renderRichText(post.body, options)}</div>
+          </div>
+        </article>
+      </Wrapper>
     </Layout>
   );
 }
@@ -51,6 +51,9 @@ export const pageQuery = graphql`
   query PostBySlug($slug: String!) {
     contentfulPost(slug: { eq: $slug }) {
       title
+      author {
+        name
+      }
       createdAt(formatString: "MMMM Do, YYYY")
       featuredImage {
         fluid(maxWidth: 1180, background: "rgb:000000") {

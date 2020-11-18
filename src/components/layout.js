@@ -1,15 +1,19 @@
 import React from 'react';
-import './base.css';
-import Container from './container';
-import Navigation from './navigation';
+import Container from './Container';
+import Navigation from './Navigation';
+
+import { GlobalStyles } from './GlobalStyles';
 
 export default function Template(props) {
   const { children } = props;
 
   return (
-    <Container>
-      <Navigation />
-      {children}
-    </Container>
+    <>
+      <GlobalStyles />
+      <Container>
+        <Navigation />
+        {children}
+      </Container>
+    </>
   );
 }

@@ -1,31 +1,30 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 import Img from 'gatsby-image';
-import { BLOCKS } from '@contentful/rich-text-types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import Layout from '../components/layout';
 
 import heroStyles from '../components/hero.module.css';
 
+const options = {
+  renderNode: {
+    [INLINES.ENTRY_HYPERLINK]: (node, children) => {
+      const { slug } = node.data.target;
+      const url = `/blog/${slug}`;
+
+      return <Link to={url}>{children}</Link>;
+    },
+    [BLOCKS.EMBEDDED_ASSET]: (node) => <Img {...node.data.target} />,
+  },
+};
+
 export default function BlogPostTemplate(props) {
   const post = get(props, 'data.contentfulPost');
   const siteTitle = get(props, 'data.site.siteMetadata.title');
-
-  const options = {
-    renderNode: {
-      [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 style={{ color: 'red' }}>{children}</h2>
-      ),
-      [BLOCKS.EMBEDDED_ASSET]: (node) => (
-        <img
-          src={`${node.data.target.fields.file['en-US'].url}`}
-          alt={node.data.target.fields.title['en-US']}
-        />
-      ),
-    },
-  };
 
   return (
     <Layout location={post.location}>
@@ -41,7 +40,7 @@ export default function BlogPostTemplate(props) {
         <div className="wrapper">
           <h1 className="section-headline">{post.title}</h1>
           <p>{post.publishDate}</p>
-          <div>{documentToReactComponents(post.body.json, options)}</div>
+          <div>{renderRichText(post.body, options)}</div>
         </div>
       </div>
     </Layout>
@@ -58,8 +57,31 @@ export const pageQuery = graphql`
           ...GatsbyContentfulFluid
         }
       }
-      body: childContentfulPostBodyRichTextNode {
-        json
+      body {
+        raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            title
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+          ... on ContentfulPost {
+            contentful_id
+            title
+            featuredImage {
+              fluid {
+                ...GatsbyContentfulFluid
+              }
+            }
+            createdAt(formatString: "MMMM Do, YYYY")
+            slug
+            author {
+              name
+            }
+          }
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Title } from './PostHeader.styles';
+import { Title } from './Header.styles';
 
-import PostAuthor from '../PostAuthor/PostAuthor';
+import PostAuthor from '../Author/Author';
 
 export default ({ title, author, date }) => (
   <header>

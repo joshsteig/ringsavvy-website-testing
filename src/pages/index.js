@@ -1,13 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import Layout from '../components/Layout';
+
+import PageLayout from '../components/PageLayout';
+import Wrapper from '../components/Wrapper/Wrapper';
 
 export default function RootIndex(props) {
   const { location } = props;
 
   return (
-    <Layout location={location}>
+    <PageLayout location={location}>
       <Helmet>
         <title>
           Best Quality 24/7 Live Answering Service and Virtual Receptionists
@@ -17,8 +19,10 @@ export default function RootIndex(props) {
           content="Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual."
         />
       </Helmet>
-      <div>Home</div>
-    </Layout>
+      <Wrapper>
+        <div>Home</div>
+      </Wrapper>
+    </PageLayout>
   );
 }
 

@@ -1,49 +1,23 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
-import Img from 'gatsby-image';
-import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 
-import Layout from '../components/Layout';
+import PostLayout from '../components/PostLayout';
 import Wrapper from '../components/Wrapper/Wrapper';
-import PostHeader from '../components/PostHeader/PostHeader';
-
-const options = {
-  renderNode: {
-    [INLINES.ENTRY_HYPERLINK]: (node, children) => {
-      const { slug } = node.data.target;
-      const url = `/blog/${slug}`;
-
-      return <Link to={url}>{children}</Link>;
-    },
-    [BLOCKS.EMBEDDED_ASSET]: (node) => <Img {...node.data.target} />,
-  },
-};
+import Article from '../components/Post/Article/Article';
 
 export default function BlogPostTemplate(props) {
   const post = get(props, 'data.contentfulPost');
   const siteTitle = get(props, 'data.site.siteMetadata.title');
 
   return (
-    <Layout location={post.location}>
+    <PostLayout location={post.location}>
       <Helmet title={`${post.title} | ${siteTitle}`} />
       <Wrapper>
-        <article>
-          <PostHeader
-            title={post.title}
-            author={post.author.name}
-            date={post.createdAt}
-          />
-          <Img alt={post.title} fluid={post.featuredImage.fluid} />
-          <div className="wrapper">
-            <p>{post.publishDate}</p>
-            <div>{renderRichText(post.body, options)}</div>
-          </div>
-        </article>
+        <Article post={post} />
       </Wrapper>
-    </Layout>
+    </PostLayout>
   );
 }
 

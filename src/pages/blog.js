@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import get from 'lodash/get';
 import { Helmet } from 'react-helmet';
 
-import Layout from '../components/Layout';
+import PageLayout from '../components/PageLayout';
 import PostPreview from '../components/PostPreview';
 import Wrapper from '../components/Wrapper/Wrapper';
 
@@ -12,7 +12,7 @@ export default function BlogIndex(props) {
   const { location } = props;
 
   return (
-    <Layout location={location}>
+    <PageLayout location={location}>
       <Helmet>
         <title>Blog - Ring Savvy, Inc. - Answering Service Innovators</title>
         <meta
@@ -32,7 +32,7 @@ export default function BlogIndex(props) {
           })}
         </ul>
       </Wrapper>
-    </Layout>
+    </PageLayout>
   );
 }
 

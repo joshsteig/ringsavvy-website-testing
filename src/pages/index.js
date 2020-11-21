@@ -2,8 +2,8 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
-import PageLayout from '../components/PageLayout';
-import Wrapper from '../components/Wrapper/Wrapper';
+import PageLayout from '../components/pageLayout/index';
+import { Wrapper } from '../components/wrapper/style';
 
 export default function RootIndex(props) {
   const { location } = props;

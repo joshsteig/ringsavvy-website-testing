@@ -15,6 +15,9 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   title
                   slug
+                  category {
+                    contentful_id
+                  }
                 }
               }
             }
@@ -32,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/blog/${post.node.slug}/`,
             component: blogPost,
             context: {
+              category: post.node.category,
               slug: post.node.slug,
             },
           });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from './FeaturedImage.styles';
+import { Image } from './style';
 
 export default ({ alt, fluid }) => (
   <figure>

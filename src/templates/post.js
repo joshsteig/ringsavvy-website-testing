@@ -3,9 +3,10 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 
-import PostLayout from '../components/PostLayout';
-import Wrapper from '../components/Wrapper/Wrapper';
-import Article from '../components/Post/Article/Article';
+import PostLayout from '../components/post/layout';
+import Article from '../components/post/article';
+import Sidebar from '../components/post/sidebar';
+import { Wrapper } from '../components/wrapper/style';
 
 export default function BlogPostTemplate(props) {
   const post = get(props, 'data.contentfulPost');
@@ -14,8 +15,9 @@ export default function BlogPostTemplate(props) {
   return (
     <PostLayout location={post.location}>
       <Helmet title={`${post.title} | ${siteTitle}`} />
-      <Wrapper>
+      <Wrapper display='flex'>
         <Article post={post} />
+        <Sidebar />
       </Wrapper>
     </PostLayout>
   );
@@ -27,6 +29,10 @@ export const pageQuery = graphql`
       title
       author {
         name
+      }
+      category {
+        name
+        contentful_id
       }
       createdAt(formatString: "MMMM Do, YYYY")
       featuredImage {

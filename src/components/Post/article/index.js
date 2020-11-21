@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../Header/Header';
-import FeaturedImage from '../FeaturedImage/FeaturedImage';
-import Body from '../Body/Body';
+import Header from '../header';
+import FeaturedImage from '../featuredImage';
+import Body from '../body';
 
-import { Article } from './Article.styles';
+import { Article } from './style';
 
 export default ({ post }) => {
   const { title, author, createdAt, body, featuredImage } = post;

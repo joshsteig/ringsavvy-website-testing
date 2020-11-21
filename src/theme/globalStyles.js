@@ -27,7 +27,9 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
-  p {
+  p,
+  ul,
+  ol {
     color: ${(props) => props.theme.global.colors.grey};
   }
 

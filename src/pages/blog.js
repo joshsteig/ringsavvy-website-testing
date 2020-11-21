@@ -3,9 +3,9 @@ import { graphql } from 'gatsby';
 import get from 'lodash/get';
 import { Helmet } from 'react-helmet';
 
-import PageLayout from '../components/PageLayout';
-import PostPreview from '../components/PostPreview';
-import Wrapper from '../components/Wrapper/Wrapper';
+import PageLayout from '../components/pageLayout/index';
+import PostPreview from '../components/postPreview';
+import { Wrapper } from '../components/wrapper/style';
 
 export default function BlogIndex(props) {
   const posts = get(props, 'data.allContentfulPost.edges');

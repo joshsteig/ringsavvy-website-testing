@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import { Wrapper } from '../wrapper/style';
 import { StyledOutlineLink } from '../button/style';
+
+export const NavigationWrapper = styled(Wrapper)`
+  display: flex;
+  align-items: center;
+  margin: 40px auto 60px;
+`;
 
 export const NavigationList = styled.ul`
   align-items: center;
   display: flex;
   font-size: ${(props) => props.theme.global.fontSizes.base};
   list-style: none;
-  margin: 40px 0 60px;
+  margin: 0;
   padding: 0;
 `;
 
@@ -24,6 +31,10 @@ export const LogoLink = styled(Link)`
 
 export const ListItem = styled.li`
   margin: 0 0.75em;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 `;
 
 export const NavigationCTA = styled(StyledOutlineLink)`

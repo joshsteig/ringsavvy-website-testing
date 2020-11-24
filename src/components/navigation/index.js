@@ -1,7 +1,7 @@
 import React from 'react';
-import { Wrapper } from '../wrapper/style';
-import Logo from '../logo/index';
+import Logo from '../logo';
 import {
+  NavigationWrapper,
   LogoLink,
   NavigationList,
   ListItem,
@@ -10,12 +10,12 @@ import {
 } from './style';
 
 export default () => (
-  <nav role='navigation' aria-label='Main Navigation'>
-    <Wrapper>
+  <NavigationWrapper>
+    <LogoLink to='/'>
+      <Logo />
+    </LogoLink>
+    <nav role='navigation' aria-label='Main Navigation'>
       <NavigationList>
-        <LogoLink to='/'>
-          <Logo />
-        </LogoLink>
         <ListItem>
           <NavigationLink to='/'>Home</NavigationLink>
         </ListItem>
@@ -26,6 +26,6 @@ export default () => (
           <NavigationCTA to='/'>Get Started</NavigationCTA>
         </ListItem>
       </NavigationList>
-    </Wrapper>
-  </nav>
+    </nav>
+  </NavigationWrapper>
 );

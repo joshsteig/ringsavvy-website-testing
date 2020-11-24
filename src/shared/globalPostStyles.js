@@ -39,4 +39,22 @@ export const GlobalPostStyles = createGlobalStyle`
   ol > li {
     margin: 0 0 .666666em
   }
+
+  @media ${(props) => props.theme.global.mediaQueries.sm} {
+    h1 {
+    font-size: ${(props) => props.theme.post.fontSizes.xl}
+    }
+
+    h2 {
+      font-size: ${(props) => props.theme.post.fontSizes.xl}
+    }
+
+    h3 {
+      font-size: ${(props) => props.theme.post.fontSizes.lg}
+    }
+
+    h4 {
+      font-size: ${(props) => props.theme.post.fontSizes.md}
+    }
+  }
 `;

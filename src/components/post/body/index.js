@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
@@ -33,4 +33,20 @@ const options = {
   },
 };
 
-export default ({ body }) => <div>{renderRichText(body, options)}</div>;
+export default class Body extends Component {
+  componentDidMount() {
+    const sections = document.querySelectorAll('h2');
+    let sectionNum = 0;
+
+    sections.forEach((section) => {
+      sectionNum += 1;
+
+      section.setAttribute('id', `section-${sectionNum}`);
+    });
+  }
+
+  render() {
+    const { body } = this.props;
+    return <div>{renderRichText(body, options)}</div>;
+  }
+}

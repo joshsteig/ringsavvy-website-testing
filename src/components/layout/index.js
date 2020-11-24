@@ -1,7 +1,8 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
-import Container from '../container/index';
-import Navigation from '../navigation/index';
+import Container from '../container';
+import Navigation from '../navigation';
 
 import { GlobalStyles } from '../../shared/globalStyles';
 import { GlobalPostStyles } from '../../shared/globalPostStyles';
@@ -12,10 +13,15 @@ export default function Template(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Helmet>
+        <html lang='en' />
+      </Helmet>
       {postLayout ? <GlobalPostStyles /> : null}
       <GlobalStyles />
       <Container>
-        <Navigation />
+        <header>
+          <Navigation />
+        </header>
         {children}
       </Container>
     </ThemeProvider>

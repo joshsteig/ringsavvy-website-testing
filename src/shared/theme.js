@@ -14,6 +14,11 @@ export default {
       base: '1rem',
       sm: '.875rem',
     },
+    mediaQueries: {
+      lg: '(max-width: 992px)',
+      md: '(max-width: 768px)',
+      sm: '(max-width: 576px)',
+    },
   },
   post: {
     fontSizes: {

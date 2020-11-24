@@ -13,8 +13,11 @@ export default function BlogPostTemplate(props) {
 
   return (
     <Layout postLayout location={post.location}>
-      <Helmet title={`${post.title} - Ring Savvy, Inc.`} />
-      <Wrapper display='flex'>
+      <Helmet>
+        <title>{`${post.title} - Ring Savvy, Inc.`}</title>
+        <meta name='description' content={post.description.description} />
+      </Helmet>
+      <Wrapper flex>
         <Article post={post} />
         <Sidebar />
       </Wrapper>
@@ -26,6 +29,9 @@ export const pageQuery = graphql`
   query PostBySlug($slug: String!) {
     contentfulPost(slug: { eq: $slug }) {
       title
+      description {
+        description
+      }
       author {
         name
         gravatar {
@@ -41,7 +47,7 @@ export const pageQuery = graphql`
       }
       createdAt(formatString: "MMMM Do, YYYY")
       featuredImage {
-        fluid(maxWidth: 1180, background: "rgb:000000") {
+        fluid(maxWidth: 605, background: "rgb:000000") {
           ...GatsbyContentfulFluid
         }
       }
@@ -51,7 +57,7 @@ export const pageQuery = graphql`
           ... on ContentfulAsset {
             contentful_id
             title
-            fluid {
+            fluid(maxWidth: 605) {
               ...GatsbyContentfulFluid
             }
           }

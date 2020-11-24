@@ -8,6 +8,11 @@ export const P = styled.p`
 export const Aside = styled.aside`
   margin-left: auto;
   width: 335px;
+
+  @media ${(props) => props.theme.global.mediaQueries.lg} {
+    margin-right: auto;
+    width: 100%;
+  }
 `;
 
 export const Section = styled.section`

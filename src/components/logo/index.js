@@ -6,9 +6,8 @@ export default () => (
     width='200'
     height='33.291'
     viewBox='0 0 200 33.291'
-    aria-labelledby='title'
+    aria-label='Ring Savvy Logo'
   >
-    <title id='logo'>Logo</title>
     <g transform='translate(-31.065 -171.88)'>
       <g transform='translate(76.469 175.478)'>
         <g transform='translate(0 2.697)'>

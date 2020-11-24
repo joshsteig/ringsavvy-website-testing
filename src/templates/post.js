@@ -3,23 +3,22 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import get from 'lodash/get';
 
-import PostLayout from '../components/post/layout';
+import Layout from '../components/layout';
 import Article from '../components/post/article';
 import Sidebar from '../components/post/sidebar';
 import { Wrapper } from '../components/wrapper/style';
 
 export default function BlogPostTemplate(props) {
   const post = get(props, 'data.contentfulPost');
-  const siteTitle = get(props, 'data.site.siteMetadata.title');
 
   return (
-    <PostLayout location={post.location}>
-      <Helmet title={`${post.title} | ${siteTitle}`} />
+    <Layout postLayout location={post.location}>
+      <Helmet title={`${post.title} - Ring Savvy, Inc.`} />
       <Wrapper display='flex'>
         <Article post={post} />
         <Sidebar />
       </Wrapper>
-    </PostLayout>
+    </Layout>
   );
 }
 
@@ -29,6 +28,12 @@ export const pageQuery = graphql`
       title
       author {
         name
+        gravatar {
+          fluid(maxWidth: 54, quality: 80) {
+            ...GatsbyContentfulFluid
+          }
+          title
+        }
       }
       category {
         name

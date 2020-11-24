@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from '../Image/Image';
+import Image from '../image';
 
 const options = {
   renderNode: {

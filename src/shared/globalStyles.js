@@ -16,6 +16,15 @@ export const GlobalStyles = createGlobalStyle`
     src: url(../fonts/Merriweather-Bold.woff) format('woff') font-weight-bold,
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+
   html {
     font-size: 16px;
   }

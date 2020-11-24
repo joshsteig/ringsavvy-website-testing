@@ -10,7 +10,7 @@ export default ({ post }) => {
 
   return (
     <Article>
-      <Header title={title} author={author.name} date={createdAt} />
+      <Header title={title} author={author} date={createdAt} />
       <FeaturedImage alt={title} fluid={featuredImage.fluid} />
       <Body body={body} />
     </Article>

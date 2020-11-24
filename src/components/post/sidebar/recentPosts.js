@@ -2,14 +2,14 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import RecentPost from './recentPostItem';
 
-import { UnorderedList } from './style';
+import { SectionTitle, UnorderedList } from './style';
 
 const RecentPosts = ({ data }) => {
   const posts = data.allContentfulPost.edges;
 
   return (
     <div>
-      <h3>Recent Posts</h3>
+      <SectionTitle>Recent Posts</SectionTitle>
       <UnorderedList>
         {posts.map(({ node }) => {
           return <RecentPost key={node.contentful_id} post={node} />;

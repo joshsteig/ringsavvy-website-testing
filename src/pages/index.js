@@ -2,27 +2,27 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
-import PageLayout from '../components/pageLayout/index';
+import Layout from '../components/layout';
 import { Wrapper } from '../components/wrapper/style';
 
 export default function RootIndex(props) {
   const { location } = props;
 
   return (
-    <PageLayout location={location}>
+    <Layout location={location}>
       <Helmet>
         <title>
           Best Quality 24/7 Live Answering Service and Virtual Receptionists
         </title>
         <meta
-          name="description"
-          content="Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual."
+          name='description'
+          content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
       <Wrapper>
         <div>Home</div>
       </Wrapper>
-    </PageLayout>
+    </Layout>
   );
 }
 

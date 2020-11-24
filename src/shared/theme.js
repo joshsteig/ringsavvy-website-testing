@@ -1,9 +1,18 @@
 export default {
   global: {
     colors: {
-      primary: '#0ABE51',
+      primary: '#0abe51',
       black: '#222222',
       grey: '#666666',
+      white: '#ffffff',
+    },
+    fonts: {
+      serif: `'Merriweather', serif`,
+      sans: `'Open Sans', sans-serif`,
+    },
+    fontSizes: {
+      base: '1rem',
+      sm: '.875rem',
     },
   },
   post: {
@@ -14,6 +23,7 @@ export default {
       md: '1.25rem',
       base: '1.125rem',
       sm: '1rem',
+      xs: '.875rem',
     },
   },
 };

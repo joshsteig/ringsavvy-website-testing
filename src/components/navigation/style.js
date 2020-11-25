@@ -6,7 +6,7 @@ import { StyledOutlineLink } from '../button/style';
 export const NavigationWrapper = styled(Wrapper)`
   display: flex;
   align-items: center;
-  margin: 40px auto 60px;
+  margin: 40px auto 48px;
 `;
 
 export const NavigationList = styled.ul`

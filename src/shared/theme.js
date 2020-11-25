@@ -4,6 +4,7 @@ export default {
       primary: '#0abe51',
       black: '#222222',
       grey: '#666666',
+      lightGrey: '#f9f9f9',
       white: '#ffffff',
     },
     fonts: {
@@ -11,6 +12,7 @@ export default {
       sans: `'Open Sans', sans-serif`,
     },
     fontSizes: {
+      md: '1.125rem',
       base: '1rem',
       sm: '.875rem',
     },

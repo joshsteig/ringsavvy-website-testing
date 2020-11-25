@@ -1,5 +1,6 @@
 import React from 'react';
 import { P, SectionTitle } from './style';
+
 import { StyledLink } from '../../button/style';
 
 export default () => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthorGravatar from './authorGravatar';
+
 import { AuthorContainer, MetaContainer, Author, Date } from './style';
 
 export default ({ author, date }) => (

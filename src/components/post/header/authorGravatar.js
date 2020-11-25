@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { GravatarImage } from './style';
 
 export default ({ gravatar }) => (

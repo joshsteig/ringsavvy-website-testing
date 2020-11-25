@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../logo';
+
 import {
   NavigationWrapper,
   LogoLink,
@@ -10,22 +11,24 @@ import {
 } from './style';
 
 export default () => (
-  <NavigationWrapper>
-    <LogoLink to='/'>
-      <Logo />
-    </LogoLink>
-    <nav role='navigation' aria-label='Main Navigation'>
-      <NavigationList>
-        <ListItem>
-          <NavigationLink to='/'>Home</NavigationLink>
-        </ListItem>
-        <ListItem>
-          <NavigationLink to='/blog/'>Blog</NavigationLink>
-        </ListItem>
-        <ListItem>
-          <NavigationCTA to='/'>Get Started</NavigationCTA>
-        </ListItem>
-      </NavigationList>
-    </nav>
-  </NavigationWrapper>
+  <header>
+    <NavigationWrapper>
+      <LogoLink to='/'>
+        <Logo />
+      </LogoLink>
+      <nav role='navigation' aria-label='Main Navigation'>
+        <NavigationList>
+          <ListItem>
+            <NavigationLink to='/'>Home</NavigationLink>
+          </ListItem>
+          <ListItem>
+            <NavigationLink to='/blog/'>Blog</NavigationLink>
+          </ListItem>
+          <ListItem>
+            <NavigationCTA to='/'>Get Started</NavigationCTA>
+          </ListItem>
+        </NavigationList>
+      </nav>
+    </NavigationWrapper>
+  </header>
 );

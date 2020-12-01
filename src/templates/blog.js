@@ -35,8 +35,12 @@ export default function BlogIndex({ data, location }) {
 }
 
 export const pageQuery = graphql`
-  query BlogIndexQuery {
-    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 6) {
+  query BlogIndexQuery($skip: Int!, $limit: Int!) {
+    allContentfulPost(
+      sort: { fields: [publishDate], order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
       edges {
         node {
           title

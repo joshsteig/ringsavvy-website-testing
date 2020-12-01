@@ -1,15 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import get from 'lodash/get';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 import PostPreview from '../components/postPreview';
 import { Wrapper } from '../components/wrapper/style';
 
-export default function BlogIndex(props) {
-  const posts = get(props, 'data.allContentfulPost.edges');
-  const { location } = props;
+export default function BlogIndex({ data, location }) {
+  const posts = data.allContentfulPost.edges;
 
   return (
     <Layout location={location}>
@@ -38,17 +36,17 @@ export default function BlogIndex(props) {
 
 export const pageQuery = graphql`
   query BlogIndexQuery {
-    allContentfulPost(sort: { fields: [createdAt], order: DESC }) {
+    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 6) {
       edges {
         node {
           title
           slug
           featuredImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+            fluid(maxWidth: 470, maxHeight: 230) {
               ...GatsbyContentfulFluid
             }
           }
-          createdAt(formatString: "MMMM Do, YYYY")
+          publishDate(formatString: "MMMM Do, YYYY")
           description {
             childMarkdownRemark {
               html

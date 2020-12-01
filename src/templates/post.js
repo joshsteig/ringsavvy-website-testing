@@ -1,15 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import get from 'lodash/get';
+// import get from 'lodash/get';
 
 import Layout from '../components/layout';
 import Article from '../components/post/article';
 import Sidebar from '../components/post/sidebar';
 import { Wrapper } from '../components/wrapper/style';
 
-export default function BlogPostTemplate(props) {
-  const post = get(props, 'data.contentfulPost');
+export default function BlogPostTemplate({ data }) {
+  const post = data.contentfulPost;
 
   return (
     <Layout postLayout location={post.location}>

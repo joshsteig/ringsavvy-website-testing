@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-// import get from 'lodash/get';
 
 import Layout from '../components/layout';
 import Article from '../components/post/article';

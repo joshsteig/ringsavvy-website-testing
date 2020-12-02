@@ -32,7 +32,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.5;
     margin: 0;
   }
 
@@ -65,17 +65,6 @@ export const GlobalStyles = createGlobalStyle`
   
   a {
     color: ${(props) => props.theme.global.colors.black};
-  }
-  
-  /**
-   * article grid
-   */
-  .article-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 5vmin;
+    transition: all 0.2s ease-in-out;
   }
 `;

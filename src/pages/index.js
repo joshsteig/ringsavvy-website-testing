@@ -4,6 +4,9 @@ import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 import { Wrapper } from '../components/wrapper/style';
+import Hero from '../views/home/Hero';
+import LeadSection from '../views/home/LeadSection';
+import Features from '../views/home/Features';
 
 export default function RootIndex(props) {
   const { location } = props;
@@ -19,9 +22,10 @@ export default function RootIndex(props) {
           content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-      <Wrapper>
-        <div>Home</div>
-      </Wrapper>
+
+      <Hero />
+      <LeadSection />
+      <Features />
     </Layout>
   );
 }

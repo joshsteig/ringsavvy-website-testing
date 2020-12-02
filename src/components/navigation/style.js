@@ -31,6 +31,7 @@ export const LogoLink = styled(Link)`
 
 export const ListItem = styled.li`
   margin: 0 0.75em;
+  color: white;
 
   &:last-of-type {
     margin-right: 0;

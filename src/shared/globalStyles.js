@@ -63,9 +63,7 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
   }
   
-  a {
-    color: ${(props) => props.theme.global.colors.black};
-  }
+  
   
   /**
    * article grid

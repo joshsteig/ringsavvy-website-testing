@@ -8,6 +8,7 @@ import Hero from '../views/home/Hero';
 import LeadSection from '../views/home/LeadSection';
 import Features from '../views/home/Features';
 import MarketingCompaign from '../views/home/MarketingCompaign';
+import Blogs from '../views/home/Blogs';
 
 export default function RootIndex(props) {
   const { location } = props;
@@ -91,6 +92,7 @@ export default function RootIndex(props) {
       <MarketingCompaign />
       <LeadSection LeadData={LeadData[1]} horizontal={true} />
       <Features FeaturesData={FeaturesData[1]} />
+      <Blogs />
     </Layout>
   );
 }

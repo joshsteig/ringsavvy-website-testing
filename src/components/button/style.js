@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 
 export const StyledLink = styled(Link)`
@@ -34,4 +34,43 @@ export const StyledOutlineLink = styled(StyledLink)`
     color: #fff;
     transform: none;
   }
+`;
+
+export const Button = styled.button`
+  font-weight: 600;
+  padding: 0.5rem 3rem;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+  ${(props) =>
+    props.padding === 'large' &&
+    css`
+      background: transparent;
+      padding: 1rem 3rem;
+    `}
+  ${(props) =>
+    props.transparent &&
+    css`
+      background: transparent;
+      color: white;
+      &:hover {
+        background-color: #0abe51;
+        border-color: #0abe51;
+      }
+    `}
+  ${(props) =>
+    props.whiteBorder &&
+    css`
+      border: 2px solid white;
+    `}
+      ${(props) =>
+    props.greenBorder &&
+    css`
+      border: 1px solid #0abe51;
+    `}
+  ${(props) =>
+    props.primary &&
+    css`
+      background: #0abe51;
+      color: white;
+    `}
 `;

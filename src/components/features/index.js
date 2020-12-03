@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import './index.scss';
+import './style.scss';
+
 const Features = ({ FeaturesData }) => {
   const [currentTab, setTab] = useState(0);
 
   return (
-    <div className=''>
+    <div>
       <div className='max-w-6xl mx-auto py-12 px-5'>
         <div className='w-full flex '>
           <div className='w-1/2 flex flex-col items-center'>
@@ -32,7 +33,7 @@ const Features = ({ FeaturesData }) => {
                 dangerouslySetInnerHTML={{
                   __html: FeaturesData[currentTab].description,
                 }}
-              ></div>
+              />
               <button className='w-1/2 rounded-full py-3 px-12  font-bold bg-green mt-8 text-white'>
                 Learn More
               </button>

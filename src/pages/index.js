@@ -4,11 +4,11 @@ import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 import { Wrapper } from '../components/wrapper/style';
-import Hero from '../views/home/Hero';
-import LeadSection from '../views/home/LeadSection';
-import Features from '../views/home/Features';
-import MarketingCompaign from '../views/home/MarketingCompaign';
-import Blogs from '../views/home/Blogs';
+import Hero from '../components/hero';
+import LeadSection from '../components/leadSection';
+import Features from '../components/features';
+import MarketingCompaign from '../components/marketingCompaign';
+import Blogs from '../components/blogs';
 
 export default function RootIndex(props) {
   const { location } = props;

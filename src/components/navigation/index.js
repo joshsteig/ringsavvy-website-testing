@@ -1,5 +1,7 @@
 import React from 'react';
+import { Button } from '../button/style';
 import Logo from '../logo';
+import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   NavigationWrapper,
   LogoLink,
@@ -33,23 +35,25 @@ const Links = [
 ];
 
 export default () => (
-  <header className='flex items-center max-w-6xl mx-auto px-5 py-12 absolute left-0 right-0 z-10 text-white'>
-    <LogoLink to='/'>
-      <Logo />
-    </LogoLink>
-    <nav role='navigation' aria-label='Main Navigation'>
-      <NavigationList>
-        {Links.map(({ name, path }) => (
+  <Wrapper>
+    <NavigationWrapper>
+      <LogoLink to='/'>
+        <Logo />
+      </LogoLink>
+      <nav role='navigation' aria-label='Main Navigation'>
+        <NavigationList>
+          {Links.map(({ name, path }) => (
+            <ListItem>
+              <NavigationLink to={path}>{name}</NavigationLink>
+            </ListItem>
+          ))}
           <ListItem>
-            <NavigationLink to={path}>{name}</NavigationLink>
+            <Button transparent whiteBorder>
+              Try for Free
+            </Button>
           </ListItem>
-        ))}
-        <ListItem>
-          <button className='border border-white rounded-full py-2 px-12 white-button font-bold'>
-            Try for free
-          </button>
-        </ListItem>
-      </NavigationList>
-    </nav>
-  </header>
+        </NavigationList>
+      </nav>
+    </NavigationWrapper>
+  </Wrapper>
 );

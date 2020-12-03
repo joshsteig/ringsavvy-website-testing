@@ -3,10 +3,15 @@ import { Link } from 'gatsby';
 import { Wrapper } from '../wrapper/style';
 import { StyledOutlineLink } from '../button/style';
 
-export const NavigationWrapper = styled(Wrapper)`
+export const NavigationWrapper = styled.header`
   display: flex;
   align-items: center;
-  margin: 40px auto 48px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  color: white;
+  padding: 3rem 1.25rem;
 `;
 
 export const NavigationList = styled.ul`

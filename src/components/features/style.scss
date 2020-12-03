@@ -3,11 +3,11 @@
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, .12);
     color: #7A7A7A;
+    transition: all .2s ease;
     cursor: pointer;
     h2{
         color: #7A7A7A;
     }
-    transition: all .2s ease;
     &.active{
         background: #0ABE51;
         color: #fff;
@@ -15,8 +15,8 @@
             color: #fff;
         }
     }
-  
 }
+
 .feature-description{
     span{
         display: block;

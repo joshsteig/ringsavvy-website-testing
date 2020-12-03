@@ -1,5 +1,6 @@
 import React from 'react';
-import './index.scss';
+import './style.scss';
+
 const BlogCard = ({ data }) => {
   return (
     <div className='blog-card-wrapper w-full'>

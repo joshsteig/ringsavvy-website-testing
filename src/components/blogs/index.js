@@ -1,6 +1,6 @@
 import React from 'react';
-import BlogCard from '../../../components/BlogCard';
-import './index.scss';
+import BlogCard from '../blogCard';
+
 const Blogs = ({ LeadData, horizontal = false }) => {
   const BlogsData = [
     {
@@ -29,8 +29,9 @@ const Blogs = ({ LeadData, horizontal = false }) => {
       },
     },
   ];
+
   return (
-    <div className=''>
+    <div>
       <div className='max-w-6xl mx-auto py-12 px-5'>
         <h2 className='text-5xl w-3/5'>
           For the latest marketing tips, trends, and news, check out our blog!

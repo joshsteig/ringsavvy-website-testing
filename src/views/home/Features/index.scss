@@ -7,4 +7,19 @@
     h2{
         color: #7A7A7A;
     }
+    transition: all .2s ease;
+    &.active{
+        background: #0ABE51;
+        color: #fff;
+        h2{
+            color: #fff;
+        }
+    }
+  
+}
+.feature-description{
+    span{
+        display: block;
+        margin-top: 1rem;
+    }
 }

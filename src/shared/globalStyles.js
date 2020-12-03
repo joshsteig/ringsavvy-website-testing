@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6 {
-    color: ${(props) => props.theme.global.colors.black};
+   
     font-family: 'Merriweather', serif;
     font-weight: bold;
     line-height: 1.3;

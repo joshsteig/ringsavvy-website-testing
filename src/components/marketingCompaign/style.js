@@ -55,4 +55,5 @@ export const FormWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
+  border: none;
 `;

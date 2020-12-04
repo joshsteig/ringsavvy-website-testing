@@ -58,6 +58,15 @@ export const Button = styled.button`
       }
     `}
   ${(props) =>
+    props.hoverColor &&
+    css`
+      &:hover {
+        background: transparent;
+        border: none;
+        color: #0abe51;
+      }
+    `}
+  ${(props) =>
     props.whiteBorder &&
     css`
       border: 2px solid white;

@@ -1,10 +1,7 @@
-const resolveConfig = require('tailwindcss/resolveConfig');
-// const tailwindConfig = require('./tailwind.config.js');
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-// const { theme } = resolveConfig(tailwindConfig);
 const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -40,12 +37,6 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
-    },
-    {
-      resolve: 'gatsby-plugin-postcss',
-      options: {
-        postCssPlugins: [require('tailwindcss'), require('autoprefixer')],
-      },
     },
   ],
 };

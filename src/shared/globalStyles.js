@@ -47,11 +47,11 @@ export const GlobalStyles = createGlobalStyle`
   h3,
   h4,
   h5,
-  h6 {
-   
+  h6 {   
     font-family: 'Merriweather', serif;
     font-weight: bold;
     line-height: 1.3;
+    margin : 0;
   }
 
   figure {
@@ -62,8 +62,18 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
     width: 100%;
   }
-  
-  
+
+  button {
+    background : transparent;
+    border: none;
+    outline : none;
+    cursor : pointer;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
   
   /**
    * article grid

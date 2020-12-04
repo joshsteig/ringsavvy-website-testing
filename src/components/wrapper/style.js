@@ -14,5 +14,5 @@ export const Wrapper = styled.div`
 
 export const GappedWrapper = styled.div`
   padding: ${(props) =>
-    props.padding === 'large' ? '6rem 1.25rem' : '3rem 1.25rem'};
+    props.padding === 'large' ? '6rem 1.25rem' : '2rem 1.25rem'};
 `;

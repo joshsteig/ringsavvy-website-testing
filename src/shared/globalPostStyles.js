@@ -39,6 +39,10 @@ export const GlobalPostStyles = createGlobalStyle`
   ol > li {
     margin: 0 0 .666666em
   }
+  a {
+    color : inherit;
+    text-decoration : inherit;
+  }
 
   @media ${(props) => props.theme.global.mediaQueries.sm} {
     h1 {

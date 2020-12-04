@@ -27,6 +27,7 @@ export const NavigationLink = styled(Link)`
   font-family: ${(props) => props.theme.global.fonts.serif};
   font-weight: bold;
   text-decoration: none;
+  color: white;
 `;
 
 export const LogoLink = styled(Link)`

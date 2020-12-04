@@ -28,7 +28,7 @@ const Hero = () => {
               <Button primary padding='large'>
                 Try free for 7 Days
               </Button>
-              <Button transparent padding='large'>
+              <Button transparent hoverColor padding='large'>
                 Get a custom quote
               </Button>
             </CtaWrapper>

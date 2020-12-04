@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
-import { Wrapper } from '../components/wrapper/style';
 import Hero from '../components/hero';
 import LeadSection from '../components/leadSection';
 import Features from '../components/features';
@@ -63,12 +62,12 @@ export default function RootIndex(props) {
 
   const LeadData = [
     {
-      title: '  Why businesses trust Ring Savvy for their lead capturing needs',
+      title: 'Why businesses trust Ring Savvy for their lead capturing needs',
       description:
-        ' Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York. We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
+        'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York. We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
     },
     {
-      title: '  How does our live answering service work?',
+      title: 'How does our live answering service work?',
       description:
         'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine. Here’s how we keep new leads from passing your company by:',
     },

@@ -32,5 +32,7 @@ export const Description = styled.p`
     props.paddingTop &&
     css`
       padding-top: ${props.paddingTop}rem;
+      color: ${props.color};
+      margin: ${props.margin ? props.margin : 'inherit'};
     `}
 `;

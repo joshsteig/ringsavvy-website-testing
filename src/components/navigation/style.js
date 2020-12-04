@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { Wrapper } from '../wrapper/style';
 import { StyledOutlineLink } from '../button/style';
 
 export const NavigationWrapper = styled.header`

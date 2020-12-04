@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from '../button/style';
+import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   ContentWrapper,
   CtaWrapper,
@@ -6,8 +8,7 @@ import {
   HeroWrapper,
   Title,
 } from './style';
-import { Button } from '../button/style';
-import { GappedWrapper, Wrapper } from '../wrapper/style';
+
 const Hero = () => {
   return (
     <HeroWrapper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../button/style';
 import Logo from '../logo';
-import { GappedWrapper, Wrapper } from '../wrapper/style';
+import { Wrapper } from '../wrapper/style';
 import {
   NavigationWrapper,
   LogoLink,

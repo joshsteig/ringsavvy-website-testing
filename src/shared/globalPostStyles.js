@@ -27,18 +27,6 @@ export const GlobalPostStyles = createGlobalStyle`
     font-size: ${(props) => props.theme.post.fontSizes.base};
   }
 
-  p {
-    margin: 0 0 1em;
-  }
-
-  ul, ol {
-    margin: 1.25em 0;
-  }
-
-  ul > li,
-  ol > li {
-    margin: 0 0 .666666em
-  }
   a {
     color : inherit;
     text-decoration : inherit;

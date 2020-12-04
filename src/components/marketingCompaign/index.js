@@ -44,7 +44,7 @@ const MarketingCompaign = () => {
           <BannerOverLay>
             <LeftWrapper>
               <Title fontSize='2'>Want to revisit this later?</Title>
-              <Description paddingTop={0.5}>
+              <Description color='white' margin={0} paddingTop={0.1}>
                 Let us send you our company brochure.
               </Description>
             </LeftWrapper>

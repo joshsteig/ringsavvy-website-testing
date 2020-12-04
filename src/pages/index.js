@@ -8,6 +8,7 @@ import LeadSection from '../components/leadSection';
 import Features from '../components/features';
 import MarketingCompaign from '../components/marketingCompaign';
 import Blogs from '../components/blogs';
+import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
   const { location } = props;
@@ -88,6 +89,7 @@ export default function RootIndex(props) {
       <Hero />
       <LeadSection LeadData={LeadData[0]} />
       <Features FeaturesData={FeaturesData[0]} />
+      <Testimonials />
       <MarketingCompaign />
       <LeadSection LeadData={LeadData[1]} horizontal={true} />
       <Features FeaturesData={FeaturesData[1]} />

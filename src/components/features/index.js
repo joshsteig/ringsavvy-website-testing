@@ -1,47 +1,55 @@
 import React, { useState } from 'react';
-import './style.scss';
-
+import { Button } from '../button/style';
+import { Description } from '../leadSection/style';
+import { GappedWrapper, Wrapper } from '../wrapper/style';
+import {
+  Content,
+  ContentWrapper,
+  Count,
+  CTAButton,
+  FeatureBox,
+  LeftWrapper,
+  RightContent,
+  RightWrapper,
+  Title,
+} from './style';
 const Features = ({ FeaturesData }) => {
   const [currentTab, setTab] = useState(0);
 
   return (
-    <div>
-      <div className='max-w-6xl mx-auto py-12 px-5'>
-        <div className='w-full flex '>
-          <div className='w-1/2 flex flex-col items-center'>
+    <Wrapper>
+      <GappedWrapper>
+        <ContentWrapper>
+          <LeftWrapper>
             {FeaturesData.map(({ title }, index) => (
-              <div
+              <FeatureBox
                 onClick={() => {
                   setTab(index);
                 }}
-                className={`py-8 px-6 text-white font-bold flex items-center feature-box mb-6 w-full ${
-                  index === currentTab ? 'active' : ''
-                }`}
+                active={index === currentTab ? true : false}
               >
-                <span className='text-2xl'>0{index + 1}</span>
-                <h2 className='ml-4 text-2xl leading-tight'>{title}</h2>
-              </div>
+                <Count> 0{index + 1}</Count>
+                <Title leftMargin={true}>{title}</Title>
+              </FeatureBox>
             ))}
-          </div>
-          <div className='w-1/2 flex flex-col justify-center px-16'>
-            <div className='flex flex-col'>
-              <h2 className='text-2xl leading-tight'>
-                {FeaturesData[currentTab].title}
-              </h2>
-              <div
-                className='feature-description mt-8'
+          </LeftWrapper>
+          <RightWrapper>
+            <RightContent>
+              <Title>{FeaturesData[currentTab].title}</Title>
+              <Content
                 dangerouslySetInnerHTML={{
                   __html: FeaturesData[currentTab].description,
                 }}
-              />
-              <button className='w-1/2 rounded-full py-3 px-12  font-bold bg-green mt-8 text-white'>
+                paddingTop={1}
+              ></Content>
+              <CTAButton primary padding='large'>
                 Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </CTAButton>
+            </RightContent>
+          </RightWrapper>
+        </ContentWrapper>
+      </GappedWrapper>
+    </Wrapper>
   );
 };
 

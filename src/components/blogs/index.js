@@ -1,6 +1,7 @@
 import React from 'react';
 import BlogCard from '../blogCard';
-
+import { GappedWrapper, Wrapper } from '../wrapper/style';
+import { BlogsWrapper, Title } from './style';
 const Blogs = ({ LeadData, horizontal = false }) => {
   const BlogsData = [
     {
@@ -29,22 +30,19 @@ const Blogs = ({ LeadData, horizontal = false }) => {
       },
     },
   ];
-
   return (
-    <div>
-      <div className='max-w-6xl mx-auto py-12 px-5'>
-        <h2 className='text-5xl w-3/5'>
+    <Wrapper>
+      <GappedWrapper>
+        <Title>
           For the latest marketing tips, trends, and news, check out our blog!
-        </h2>
-        <div className='grid grid-cols-3 grid-rows2 mt-12 gap-8'>
+        </Title>
+        <BlogsWrapper>
           {BlogsData.map((item) => (
-            <div>
-              <BlogCard data={item} />
-            </div>
+            <BlogCard data={item} />
           ))}
-        </div>
-      </div>
-    </div>
+        </BlogsWrapper>
+      </GappedWrapper>
+    </Wrapper>
   );
 };
 

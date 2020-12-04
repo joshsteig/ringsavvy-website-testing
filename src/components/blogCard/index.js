@@ -1,17 +1,16 @@
 import React from 'react';
-import './style.scss';
-
+import { BlogCardWrapper, ContentWrapper, ImageWrapper, Title } from './style';
 const BlogCard = ({ data }) => {
   return (
-    <div className='blog-card-wrapper w-full'>
-      <div className='w-full flex flex-col'>
-        <div
-          className={`image-wrapper ${data.overLay ? 'overlay' : ''}`}
-          style={{ backgroundImage: `url(${data.image})` }}
-        />
-        <h2 className='text-xl mt-8'>{data.title}</h2>
-      </div>
-    </div>
+    <BlogCardWrapper>
+      <ContentWrapper>
+        <ImageWrapper
+          backgroundImage={data.image}
+          overLay={data.overLay ? true : false}
+        ></ImageWrapper>
+        <Title>{data.title}</Title>
+      </ContentWrapper>
+    </BlogCardWrapper>
   );
 };
 

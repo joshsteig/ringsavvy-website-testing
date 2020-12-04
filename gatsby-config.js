@@ -1,10 +1,10 @@
 const resolveConfig = require('tailwindcss/resolveConfig');
-const tailwindConfig = require('./tailwind.config.js');
+// const tailwindConfig = require('./tailwind.config.js');
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const { theme } = resolveConfig(tailwindConfig);
+// const { theme } = resolveConfig(tailwindConfig);
 const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,

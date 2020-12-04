@@ -8,7 +8,6 @@ import {
 } from './style';
 import { Button } from '../button/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
-
 const Hero = () => {
   return (
     <HeroWrapper>

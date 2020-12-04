@@ -7,23 +7,21 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve('./src/templates/post.js');
     resolve(
-      graphql(
-        `
-          {
-            allContentfulPost {
-              edges {
-                node {
-                  title
-                  slug
-                  category {
-                    contentful_id
-                  }
+      graphql(`
+        {
+          allContentfulPost {
+            edges {
+              node {
+                title
+                slug
+                category {
+                  contentful_id
                 }
               }
             }
           }
-        `
-      ).then((result) => {
+        }
+      `).then((result) => {
         if (result.errors) {
           console.log(result.errors);
           reject(result.errors);

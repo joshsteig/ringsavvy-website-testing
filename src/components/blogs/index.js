@@ -2,6 +2,7 @@ import React from 'react';
 import BlogCard from '../blogCard';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import { BlogsWrapper, Title } from './style';
+
 const Blogs = ({ LeadData, horizontal = false }) => {
   const BlogsData = [
     {
@@ -24,6 +25,7 @@ const Blogs = ({ LeadData, horizontal = false }) => {
         'https://www.ringsavvy.com/wp-content/uploads/2020/11/11-of-the-best-tools-for-landscapers-featured-img-01-300x146.jpg',
     },
   ];
+  
   return (
     <Wrapper>
       <GappedWrapper>

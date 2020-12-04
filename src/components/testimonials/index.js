@@ -1,6 +1,5 @@
 import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import Swiper from 'react-id-swiper';
 
 import { Description } from '../leadSection/style';
 import { Wrapper } from '../wrapper/style';
@@ -14,6 +13,17 @@ import {
 } from './style';
 
 const Testimonials = () => {
+  const params = {
+    spaceBetween: 40,
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    on: {
+      init: function (e) {
+        e.slideTo(1, 1000);
+      },
+    },
+  };
+
   return (
     <SliderWrapper>
       <GreenContainer></GreenContainer>
@@ -22,17 +32,7 @@ const Testimonials = () => {
           <Title>What our clients are saying</Title>
         </HeadingWrapper>
       </Wrapper>
-      <Carousel
-        showIndicators={false}
-        showArrows={false}
-        autoPlay={true}
-        infiniteLoop={true}
-        swipeable={true}
-        showThumbs={true}
-        showStatus={false}
-        centerMode={true}
-        centerSlidePercentage={50}
-      >
+      <Swiper {...params}>
         {[1, 2, 3, 4].map((item) => (
           <SliderItem>
             <Heading>
@@ -47,7 +47,7 @@ const Testimonials = () => {
             </Description>
           </SliderItem>
         ))}
-      </Carousel>
+      </Swiper>
     </SliderWrapper>
   );
 };

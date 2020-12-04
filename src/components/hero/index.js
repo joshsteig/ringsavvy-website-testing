@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { client } from '../../utils/contentful';
 import { Button } from '../button/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
@@ -10,8 +11,16 @@ import {
 } from './style';
 
 const Hero = () => {
+  const [heroBg, setBg] = useState('');
+  useEffect(() => {
+    client
+      .getAsset('4UAfv2hN8DUQFyCinSQIfJ')
+      .then((asset) => setBg(asset.fields.file.url))
+      .catch(console.error);
+  }, []);
+
   return (
-    <HeroWrapper>
+    <HeroWrapper backgroundImage={heroBg}>
       <Wrapper>
         <GappedWrapper>
           <ContentWrapper>

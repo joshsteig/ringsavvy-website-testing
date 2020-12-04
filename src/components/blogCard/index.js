@@ -1,5 +1,11 @@
 import React from 'react';
-import { BlogCardWrapper, ContentWrapper, ImageWrapper, Title } from './style';
+import {
+  BlogCardWrapper,
+  ContentWrapper,
+  ImageWrapper,
+  Title
+} from './style';
+
 const BlogCard = ({ data }) => {
   return (
     <BlogCardWrapper>
@@ -7,7 +13,7 @@ const BlogCard = ({ data }) => {
         <ImageWrapper
           backgroundImage={data.image}
           overLay={data.overLay ? true : false}
-        ></ImageWrapper>
+        />
         <Title>{data.title}</Title>
       </ContentWrapper>
     </BlogCardWrapper>

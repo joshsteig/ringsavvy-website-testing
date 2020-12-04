@@ -1,5 +1,8 @@
 import React from 'react';
-import { GappedWrapper, Wrapper } from '../wrapper/style';
+import {
+  GappedWrapper,
+  Wrapper
+} from '../wrapper/style';
 import {
   ContentWrapper,
   Description,

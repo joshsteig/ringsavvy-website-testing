@@ -4,22 +4,15 @@ export const SliderWrapper = styled.div`
   width: 100%;
   padding: 2rem 0;
   margin: 2rem 0;
-  .carousel {
-    margin: 120px 0 20px 0;
-  }
-  .slide {
-    background: transparent;
-  }
   position: relative;
-
-  .axis-vertical {
-    display: none;
+  .swiper-wrapper {
+    margin: 120px 20px;
   }
 `;
 
 export const SliderItem = styled.div`
-  height: 300px;
-  width: 880px;
+  min-height: 300px;
+  max-width: 880px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.08);
@@ -40,6 +33,11 @@ export const Title = styled.h2`
   left: 0%;
   top: -50px;
   width: 50%;
+  @media (max-width: 767px) {
+    width: 100%;
+    top: 0;
+    font-size: 2rem;
+  }
 `;
 
 export const HeadingWrapper = styled.div`

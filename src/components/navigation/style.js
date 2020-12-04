@@ -11,6 +11,8 @@ export const NavigationWrapper = styled.header`
   z-index: 10;
   color: white;
   padding: 3rem 1.25rem;
+  @media (max-width: 767px) {
+  }
 `;
 
 export const NavigationList = styled.ul`
@@ -20,6 +22,9 @@ export const NavigationList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export const NavigationLink = styled(Link)`

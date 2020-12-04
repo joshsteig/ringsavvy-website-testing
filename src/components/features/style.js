@@ -5,6 +5,7 @@ import { Description } from '../leadSection/style';
 export const ContentWrapper = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const LeftWrapper = styled.div`
@@ -12,11 +13,17 @@ export const LeftWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export const RightWrapper = styled(LeftWrapper)`
   justify-content: center;
   padding: 0 4rem;
+  @media (max-width: 767px) {
+    padding: 0;
+  }
 `;
 
 export const FeatureBox = styled.div`

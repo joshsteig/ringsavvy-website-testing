@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '../button/style';
 import Logo from '../logo';
+import { Button } from '../button/style';
 import { Wrapper } from '../wrapper/style';
 import {
   NavigationWrapper,

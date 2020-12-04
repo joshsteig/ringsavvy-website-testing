@@ -4,6 +4,9 @@ import Background from '../../assets/images/corporate-office-bg-overlay.jpg';
 export const ContentWrapper = styled.div`
   width: 66.66%;
   margin: auto;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export const Content = styled.div`
@@ -16,7 +19,8 @@ export const BannerWrapper = styled.div`
 
 export const BannerOverLay = styled.div`
   margin-top: 3rem;
-  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 3rem;
   display: flex;
   align-items: center;
   background-repeat: no-repeat;
@@ -40,6 +44,14 @@ export const LeftWrapper = styled.div`
   color: white;
   position: relative;
   width: 50%;
+  @media (max-width: 767px) {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 export const RightWrapper = styled(LeftWrapper)``;
@@ -51,6 +63,12 @@ export const FormWrapper = styled.div`
   position: relative;
   background-color: white;
   padding: 0.5rem 1.5rem;
+  @media (max-width: 767px) {
+    padding: 0.5rem 1rem;
+    button {
+      padding: 0.75rem 2rem;
+    }
+  }
 `;
 
 export const Input = styled.input`

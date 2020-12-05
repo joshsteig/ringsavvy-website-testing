@@ -11,7 +11,7 @@ import Blogs from '../components/blogs';
 import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
-  const { location } = props;
+  const { location,  data } = props;
   const FeaturesData = [
     [
       {
@@ -93,19 +93,26 @@ export default function RootIndex(props) {
       <MarketingCompaign />
       <LeadSection LeadData={LeadData[1]} horizontal={true} />
       <Features FeaturesData={FeaturesData[1]} />
-      <Blogs />
+      <Blogs Blogs={data?.allContentfulPost?.edges}/>
     </Layout>
   );
 }
 
 export const pageQuery = graphql`
-  query HomeQuery {
-    allContentfulPost(sort: { fields: [createdAt], order: DESC }) {
+  query HomeQuery{
+    allContentfulPost(
+      sort: { fields: [publishDate], order: DESC }    
+      limit: 3
+    ) {
       edges {
         node {
           title
           slug
-          createdAt(formatString: "MMMM Do, YYYY")
+          featuredImage {
+            fluid(maxWidth: 470, maxHeight: 230) {
+              ...GatsbyContentfulFluid
+            }
+          }          
         }
       }
     }

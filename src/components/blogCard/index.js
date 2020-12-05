@@ -8,11 +8,11 @@ import {
 
 const BlogCard = ({ data }) => {
   return (
-    <BlogCardWrapper>
+    <BlogCardWrapper to={`/blog/${data?.slug}`}>
       <ContentWrapper>
         <ImageWrapper
-          backgroundImage={data.image}
-          overLay={data.overLay ? true : false}
+          backgroundImage={data.featuredImage?.fluid?.src}
+          overLay={false}
         />
         <Title>{data.title}</Title>
       </ContentWrapper>

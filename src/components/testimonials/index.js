@@ -23,6 +23,7 @@ const Testimonials = () => {
   const params = {
     slidesPerView: 1.1,
     spaceBetween: 20,
+    loop: true,
     centeredSlides: false,
     breakpoints: {      
       768: {   
@@ -50,7 +51,7 @@ const Testimonials = () => {
         </HeadingWrapper>
       </Wrapper>
       <Swiper {...params}>
-        {[1, 2, 3, 4].map((item) => (
+        {[1, 2, 3].map((item) => (
           <SliderItem>
             <Heading level={3}>
               Dont think twice about hiring Ring Savy, they are the one!
@@ -63,7 +64,7 @@ const Testimonials = () => {
               receive my messages after missing the call.
             </Description>
             <WriterWrapper>
-              <Heading level={4}>Tood Brickhouse</Heading>
+              <Heading level={4}>Tood Brickhouse({item})</Heading>
               <span>Brickhouse Design Group, ltd</span>
             </WriterWrapper>
           </SliderItem>

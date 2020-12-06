@@ -64,6 +64,9 @@ export const Count = styled.span`
 export const RightContent = styled.div`
   display: flex;
   flex-direction: column;
+  @media(max-width:767px){
+    display : none;
+  }
 `;
 
 export const Content = styled(Description)`
@@ -84,19 +87,22 @@ export const CTAButton = styled(Button)`
 export const MobileContentBox = styled(RightContent)`
   display : none;
 
-  @media(max-width:767px){
-    display : flex;
-    margin-bottom : 0;
-    transition : height .2s ease;
-    height : 0;
-    overflow : hidden;
+@media(max-width:767px){
+  display : flex;
+  margin-bottom : 0;
+  transition : height .5s, margin-bottom .5s , opacity .6s;
+  height : 0;
+  overflow : hidden;
+opacity : 0;
+  ${(props) =>
+    props.active &&
+    css`
+    margin-bottom : 2rem;
+    opacity : 1;
+    height : 100%;
+    transition : height .5s, margin-bottom .5s,opacity .6s;
+    overflow : visible;
 
-    ${(props) =>
-      props.active &&
-      css`
-      margin-bottom : 2rem;
-      height : 100%;
-      transition : height 1s ease-in-out;
-      `}
-  }
+    `}
+}
 `

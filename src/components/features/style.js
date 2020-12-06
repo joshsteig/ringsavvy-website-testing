@@ -51,6 +51,9 @@ export const FeatureBox = styled.div`
         color: #fff;
       }
     `}
+    @media(max-width:767px){
+      padding: 1rem 2rem;
+    }
 `;
 
 export const Count = styled.span`
@@ -73,4 +76,27 @@ export const Content = styled(Description)`
 export const CTAButton = styled(Button)`
   width: 50%;
   margin-top: 2rem;
+  @media(max-width:767px){
+    margin-top: 0;
+  }
 `;
+
+export const MobileContentBox = styled(RightContent)`
+  display : none;
+
+  @media(max-width:767px){
+    display : flex;
+    margin-bottom : 0;
+    transition : height .2s ease;
+    height : 0;
+    overflow : hidden;
+
+    ${(props) =>
+      props.active &&
+      css`
+      margin-bottom : 2rem;
+      height : 100%;
+      transition : height 1s ease-in-out;
+      `}
+  }
+`

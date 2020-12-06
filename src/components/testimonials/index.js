@@ -21,12 +21,19 @@ import {
 const Testimonials = () => {
   const [swiper,setSwiper] = useState(null)
   const params = {
-    spaceBetween: 40,
-    slidesPerView: 'auto',
-    centeredSlides: true,
+    slidesPerView: 1.1,
+    spaceBetween: 20,
+    centeredSlides: false,
+    breakpoints: {      
+      768: {   
+        spaceBetween: 40,
+        slidesPerView: 'auto',
+        centeredSlides: true,
+      },      
+    },
     on: {
       init: function (e) {
-        setSwiper(e);
+        setSwiper(e)
         e.slideTo(1, 1000);
       },
     },
@@ -56,7 +63,7 @@ const Testimonials = () => {
               receive my messages after missing the call.
             </Description>
             <WriterWrapper>
-              <Heading level={3}>Tood Brickhouse</Heading>
+              <Heading level={4}>Tood Brickhouse</Heading>
               <span>Brickhouse Design Group, ltd</span>
             </WriterWrapper>
           </SliderItem>

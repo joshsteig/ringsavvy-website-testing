@@ -24,9 +24,9 @@ export default {
   },
   post: {
     fontSizes: {
-      xxl: '2.25rem',
+      xxl: '2.5rem',
       xl: '1.75rem',
-      lg: '1.5rem',
+      lg: '1.25rem',
       md: '1.25rem',
       base: '1.125rem',
       sm: '1rem',

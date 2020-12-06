@@ -12,7 +12,9 @@ import {
   FeatureBox,
   LeftWrapper,
   RightContent,
-  RightWrapper, 
+  RightWrapper,
+  MobileContentBox
+ 
 } from './style';
 
 const Features = ({ FeaturesData }) => {
@@ -23,7 +25,8 @@ const Features = ({ FeaturesData }) => {
       <GappedWrapper>
         <ContentWrapper>
           <LeftWrapper>
-            {FeaturesData.map(({ title }, index) => (
+            {FeaturesData.map(({ title,description }, index) => (
+              <>
               <FeatureBox
                 onClick={() => {
                   setTab(index);
@@ -33,6 +36,20 @@ const Features = ({ FeaturesData }) => {
                 <Count> 0{index + 1}</Count>
                 <Heading level={3} color="#ffffff" >{title}</Heading>
               </FeatureBox>
+              <MobileContentBox active={index === currentTab ? true : false}>
+              <Heading level={3}>{title}</Heading>
+              <Content
+                dangerouslySetInnerHTML={{
+                  __html: description,
+                }}
+                paddingTop={1}
+              ></Content>
+              <CTAButton primary padding='large'>
+                Learn More
+              </CTAButton>
+              </MobileContentBox>
+              </>
+              
             ))}
           </LeftWrapper>
           <RightWrapper>

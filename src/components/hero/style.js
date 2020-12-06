@@ -28,6 +28,7 @@ export const ContentWrapper = styled.div`
   padding-bottom: 3rem;
   @media (max-width: 767px) {
     width: 100%;
+    padding-bottom: 0;
   }
 `;
 

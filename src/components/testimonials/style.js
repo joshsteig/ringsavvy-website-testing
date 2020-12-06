@@ -6,7 +6,14 @@ export const SliderWrapper = styled.div`
   margin: 2rem 0;
   position: relative;
   .swiper-wrapper {
+    margin-top : 120px;
+  }  
+
+  @media (max-width: 767px) {
     margin-top : 100px;
+    .swiper-wrapper {
+      margin-top : 0;
+    }  
   }
 `;
 
@@ -20,9 +27,7 @@ export const SliderItem = styled.div`
   text-align: left;
 `;
 
-export const Title = styled.h2`
-  
- 
+export const Title = styled.div`
   padding: 0 1.5rem;
   position: absolute;
   left: 0%;
@@ -30,8 +35,7 @@ export const Title = styled.h2`
   width: 50%;
   @media (max-width: 767px) {
     width: 100%;
-    top: 0;
-  
+    top: -100px;  
   }
 `;
 

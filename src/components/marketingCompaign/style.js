@@ -21,6 +21,7 @@ export const ContentWrapper = styled.div`
   padding : 0 20px;
   @media (max-width: 767px) {
     width: 100%;
+    padding : 0;
   }
 `;
 
@@ -52,6 +53,9 @@ export const BannerOverLay = styled.div`
     right: 0;
     bottom: 0;
     background: rgba(39, 39, 39, 0.86);
+  }
+  @media(max-width:767px){
+    padding: 1rem 1rem;
   }
 `;
 

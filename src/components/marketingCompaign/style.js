@@ -1,9 +1,24 @@
 import styled, { css } from 'styled-components';
 import Background from '../../assets/images/corporate-office-bg-overlay.jpg';
+import WaterMark from '../../assets/images/logo-watermark.svg'
+
+export const MarketingWrapper = styled.div`
+  background-image: url(${WaterMark});
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: 100%;
+  left: -20vw;
+  position: absolute;
+  top: 3%;
+  width: 42%;
+  z-index: -1;
+`
 
 export const ContentWrapper = styled.div`
   width: 66.66%;
-  margin: auto;
+  margin-left: auto;
+  padding : 0 20px;
   @media (max-width: 767px) {
     width: 100%;
   }
@@ -62,7 +77,7 @@ export const FormWrapper = styled.div`
   border-radius: 100px;
   position: relative;
   background-color: white;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.75rem 0.5rem 1.5rem;
   @media (max-width: 767px) {
     padding: 0.5rem 1rem;
     button {

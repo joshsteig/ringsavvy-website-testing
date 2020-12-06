@@ -1,4 +1,5 @@
 import React from 'react';
+import Heading from '../heading/style';
 import {
   GappedWrapper,
   Wrapper
@@ -8,7 +9,6 @@ import {
   Description,
   LeftWrapper,
   RightWrapper,
-  Title,
 } from './style';
 
 const LeadSection = ({ LeadData, horizontal = false }) => {
@@ -18,7 +18,7 @@ const LeadSection = ({ LeadData, horizontal = false }) => {
       <GappedWrapper padding='large'>
         <ContentWrapper horizontal={horizontal}>
           <LeftWrapper>
-            <Title>{title}</Title>
+            <Heading level={1}>{title}</Heading>
           </LeftWrapper>
           <RightWrapper>
             <Description>{description}</Description>

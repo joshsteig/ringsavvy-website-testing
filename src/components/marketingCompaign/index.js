@@ -1,6 +1,7 @@
 import React from 'react';
+import Heading from '../heading/style';
 import { Button } from '../button/style';
-import { Description, Title } from '../leadSection/style';
+import { Description } from '../leadSection/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   BannerOverLay,
@@ -10,17 +11,19 @@ import {
   FormWrapper,
   Input,
   LeftWrapper,
+  MarketingWrapper,
   RightWrapper,
 } from './style';
 
 const MarketingCompaign = () => {
   return (
     <Wrapper>
+      <MarketingWrapper />
       <GappedWrapper>
         <ContentWrapper>
-          <Title>
+          <Heading level={2}>
             A great marketing campaign can only take your business so far
-          </Title>
+          </Heading>
           <Content>
             <Description paddingTop={1}>
               If you’re unable to capture all the new leads your advertising
@@ -43,7 +46,9 @@ const MarketingCompaign = () => {
         <BannerWrapper>
           <BannerOverLay>
             <LeftWrapper>
-              <Title fontSize='2'>Want to revisit this later?</Title>
+              <Heading level={3} color="#ffffff">
+                Want to revisit this later?
+              </Heading> 
               <Description color='white' margin={0} paddingTop={0.1}>
                 Let us send you our company brochure.
               </Description>

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../../utils/contentful';
 import { Button } from '../button/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
+import Heading from '../heading/style';
 import {
   ContentWrapper,
   CtaWrapper,
   Description,
   HeroWrapper,
-  Title,
 } from './style';
 
 const Hero = () => {
@@ -24,10 +24,10 @@ const Hero = () => {
       <Wrapper>
         <GappedWrapper>
           <ContentWrapper>
-            <Title>
+            <Heading level={1} color="#ffffff">
               Our Virtual receptionists help optimize the workflow of field
               service businesses
-            </Title>
+            </Heading>
             <Description>
               You’ve got enough on your plate already. Our 24/7 live
               receptionist service is ready to answer any phone calls you don’t

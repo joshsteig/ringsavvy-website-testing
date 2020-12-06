@@ -33,7 +33,7 @@ export const FeatureBox = styled.div`
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
   color: #7a7a7a;
   cursor: pointer;
-  h2 {
+  h3 {
     color: #7a7a7a;
   }
   transition: all 0.2s ease;
@@ -47,7 +47,7 @@ export const FeatureBox = styled.div`
     css`
       background: #0abe51;
       color: #fff;
-      h2 {
+      h3 {
         color: #fff;
       }
     `}
@@ -55,15 +55,7 @@ export const FeatureBox = styled.div`
 
 export const Count = styled.span`
   font-size: 1.5rem;
-`;
-
-export const Title = styled.h2`
-  font-size: 1.5rem;
-  ${(props) =>
-    props.leftMargin &&
-    css`
-      margin-left: 1.5rem;
-    `}
+  margin-right: 1.5rem;
 `;
 
 export const RightContent = styled.div`

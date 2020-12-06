@@ -1,9 +1,9 @@
 import React from 'react';
+import Heading from '../heading/style';
 import {
   BlogCardWrapper,
   ContentWrapper,
-  ImageWrapper,
-  Title
+  ImageWrapper
 } from './style';
 
 const BlogCard = ({ data }) => {
@@ -14,7 +14,7 @@ const BlogCard = ({ data }) => {
           backgroundImage={data.featuredImage?.fluid?.src}
           overLay={false}
         />
-        <Title>{data.title}</Title>
+        <Heading level={3}>{data.title}</Heading>
       </ContentWrapper>
     </BlogCardWrapper>
   );

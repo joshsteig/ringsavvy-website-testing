@@ -50,10 +50,44 @@ export const GlobalStyles = createGlobalStyle`
   h6 {   
     font-family: 'Merriweather', serif;
     font-weight: bold;
-    line-height: 1.3;
+    line-height: 1.2;
     margin : 0;
   }
 
+  h1 {
+    font-size: ${(props) => props.theme.post.fontSizes.xxl}
+  }
+
+  h2 {
+    font-size: ${(props) => props.theme.post.fontSizes.xxl}
+  }
+
+  h3 {
+    font-size: ${(props) => props.theme.post.fontSizes.lg}
+  }
+
+  h4 {
+    font-size: ${(props) => props.theme.post.fontSizes.md}
+  }
+
+  @media ${(props) => props.theme.global.mediaQueries.sm} {
+    h1 {
+      font-size: ${(props) => props.theme.post.fontSizes.xl}
+    }
+
+    h2 {
+      font-size: ${(props) => props.theme.post.fontSizes.xl}
+    }
+
+    h3 {
+      font-size: ${(props) => props.theme.post.fontSizes.lg}
+    }
+
+    h4 {
+      font-size: ${(props) => props.theme.post.fontSizes.md}
+    }
+  }
+  
   figure {
     margin: 0;
   }

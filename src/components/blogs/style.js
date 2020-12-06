@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-export const Title = styled.h2`
-  width: 60%;
-  font-size: 3rem;
-  @media (max-width: 767px) {
-    width: 100%;
-    font-size: 2rem;
+export const BlogMain = styled.div`
+h2{
+  width:60%;
+}
+@media (max-width: 767px) {
+  grid-template-columns: 1fr;
+  h2{
+    width:100%;
   }
-`;
+}
+`
 
 export const BlogsWrapper = styled.div`
   display: grid;

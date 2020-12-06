@@ -3,6 +3,9 @@ import {Link} from 'gatsby'
 
 export const BlogCardWrapper = styled(Link)`
   width: 100%;
+  h3{
+    margin-top : 2rem;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -38,9 +41,4 @@ export const ImageWrapper = styled.div`
         background: rgba(39, 39, 39, 0.88);
       }
     `}
-`;
-
-export const Title = styled.h2`
-  font-size: 1.5rem;
-  margin-top: 2rem;
 `;

@@ -6,7 +6,7 @@ export const SliderWrapper = styled.div`
   margin: 2rem 0;
   position: relative;
   .swiper-wrapper {
-    margin: 120px 20px;
+    margin-top : 100px;
   }
 `;
 
@@ -20,14 +20,9 @@ export const SliderItem = styled.div`
   text-align: left;
 `;
 
-export const Heading = styled.h2`
-  font-size: 1.5rem;
-  color: #222;
-`;
-
 export const Title = styled.h2`
-  color: #222;
-  font-size: 3rem;
+  
+ 
   padding: 0 1.5rem;
   position: absolute;
   left: 0%;
@@ -36,7 +31,7 @@ export const Title = styled.h2`
   @media (max-width: 767px) {
     width: 100%;
     top: 0;
-    font-size: 2rem;
+  
   }
 `;
 
@@ -56,3 +51,44 @@ export const GreenContainer = styled.div`
   min-width: 0;
   left: 60%;
 `;
+
+export const WriterWrapper = styled.div`
+  display : flex;
+  flex-direction : column;
+`;
+
+export const Bottom = styled.div`
+  display : flex;
+  align-items-center;
+  justify-content : space-between;
+  min-height : 120px;
+  padding : 0 1.5rem;
+  max-width : 80%;
+`
+
+export const GoogleReviews = styled.div`
+  display : flex;
+  align-items : center;
+  img{
+    width : 25px;
+    height : 25px;
+    margin-right : 10px;
+  }
+  p{
+    margin : 0;
+    u{
+      cursor : pointer;
+    }
+  }
+`
+
+export const ArrowsWrapper = styled.div`
+  display : flex;
+  align-items : center;
+  img{
+    width : 30px;
+    height : 18px;
+    margin-right : 15px;
+    cursor : pointer;
+  }
+`

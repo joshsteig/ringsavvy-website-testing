@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../logo';
-import { Button } from '../button/style';
 import { Wrapper } from '../wrapper/style';
 import {
   NavigationWrapper,
@@ -9,6 +8,7 @@ import {
   ListItem,
   NavigationLink,
   NavigationCTA,
+  ToggleButton,
 } from './style';
 
 const Links = [
@@ -34,26 +34,29 @@ const Links = [
   },
 ];
 
-export default () => (
-  <Wrapper>
-    <NavigationWrapper>
-      <LogoLink to='/'>
-        <Logo />
-      </LogoLink>
-      <nav role='navigation' aria-label='Main Navigation'>
-        <NavigationList>
-          {Links.map(({ name, path }) => (
+export default () => {
+  const [isToggle,setToggle]= useState(false);
+
+  return (
+    <Wrapper>
+      <NavigationWrapper>
+        <LogoLink to='/'>
+          <Logo />
+        </LogoLink>
+        <ToggleButton onClick={()=>setToggle((prev)=>!prev)}><span>&#9776;</span> Menu</ToggleButton>
+          <NavigationList active={isToggle}>
+            {Links.map(({ name, path }) => (
+              <ListItem>
+                <NavigationLink to={path}>{name}</NavigationLink>
+              </ListItem>
+            ))}
             <ListItem>
-              <NavigationLink to={path}>{name}</NavigationLink>
+              <NavigationCTA transparent whiteBorder>
+                Try for Free
+              </NavigationCTA>
             </ListItem>
-          ))}
-          <ListItem>
-            <Button transparent whiteBorder>
-              Try for Free
-            </Button>
-          </ListItem>
-        </NavigationList>
-      </nav>
-    </NavigationWrapper>
-  </Wrapper>
-);
+          </NavigationList>
+      </NavigationWrapper>
+    </Wrapper>
+  )
+} 

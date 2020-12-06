@@ -86,23 +86,21 @@ export const CTAButton = styled(Button)`
 
 export const MobileContentBox = styled(RightContent)`
   display : none;
-
-@media(max-width:767px){
-  display : flex;
-  margin-bottom : 0;
-  transition : height .5s, margin-bottom .5s , opacity .6s;
-  height : 0;
-  overflow : hidden;
-opacity : 0;
-  ${(props) =>
-    props.active &&
-    css`
-    margin-bottom : 2rem;
-    opacity : 1;
-    height : 100%;
-    transition : height .5s, margin-bottom .5s,opacity .6s;
-    overflow : visible;
-
+  @media(max-width:767px){
+    display : flex;
+    margin-bottom : 0;
+    transition : height .5s, margin-bottom .5s , opacity .6s;
+    height : 0;
+    overflow : hidden;
+    opacity : 0;
+    ${(props) =>
+      props.active &&
+      css`
+      margin-bottom : 2rem;
+      opacity : 1;
+      height : 100%;
+      transition : height .5s, margin-bottom .5s,opacity .6s;
+      overflow : visible;
     `}
-}
-`
+  }
+`;

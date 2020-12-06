@@ -24,11 +24,12 @@ export const StyledLink = styled(Link)`
 
 export const StyledOutlineLink = styled(StyledLink)`
   background-color: transparent;
-  border: 2px solid ${(props) => props.theme.global.colors.primary};
+  border: 2px solid ${(props) => props.theme.global.colors.white};
   box-shadow: none;
-  color: ${(props) => props.theme.global.colors.primary};
-
+  color: ${(props) => props.theme.global.colors.white};
+  cursor : pointer;
   &:hover {
+    border: 2px solid ${(props) => props.theme.global.colors.primary};
     background-color: ${(props) => props.theme.global.colors.primary};
     box-shadow: none;
     color: #fff;

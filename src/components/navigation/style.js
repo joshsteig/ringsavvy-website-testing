@@ -1,10 +1,11 @@
-import styled from 'styled-components';
 import { Link } from 'gatsby';
+import styled, { css } from 'styled-components';
 import { StyledOutlineLink } from '../button/style';
 
 export const NavigationWrapper = styled.header`
   display: flex;
   align-items: center;
+  flex-wrap : wrap;
   position: absolute;
   left: 0;
   right: 0;
@@ -12,6 +13,7 @@ export const NavigationWrapper = styled.header`
   color: white;
   padding: 3rem 1.25rem;
   @media (max-width: 767px) {
+   justify-content : space-between
   }
 `;
 
@@ -23,7 +25,17 @@ export const NavigationList = styled.ul`
   margin: 0;
   padding: 0;
   @media (max-width: 767px) {
-    display: none;
+    width : 100%;
+    flex-direction : column;
+    background: grey;
+    align-items: flex-start;
+    margin-top : 20px;
+    height : 0;
+    overflow : hidden;
+    ${(props) => props.active && css`    
+      height : 100%;
+      overflow : visible;
+    `}
   }
 `;
 
@@ -42,12 +54,36 @@ export const LogoLink = styled(Link)`
 export const ListItem = styled.li`
   margin: 0 0.75em;
   color: white;
-
   &:last-of-type {
     margin-right: 0;
+  }
+  @media(max-width:767px){
+    padding: 15px 20px;
+    width : 100%;
+    margin : 0;
   }
 `;
 
 export const NavigationCTA = styled(StyledOutlineLink)`
   padding: 0.625em 2.75em;
+  @media(max-width:767px){
+    border : none;
+    padding : 0;
+  }
+`;
+
+export const ToggleButton = styled.button`
+  font-size: ${(props) => props.theme.global.fontSizes.xl};
+  color: ${(props) => props.theme.global.colors.white};
+  font-weight : 600;
+  span{
+    margin-right : 5px;
+  }
+  &:focus{
+    color: ${(props) => props.theme.global.colors.primary};
+  }
+  display : none;
+  @media(max-width:767px){
+    display : block
+  }
 `;

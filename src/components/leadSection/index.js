@@ -18,7 +18,7 @@ const LeadSection = ({ LeadData, horizontal = false }) => {
       <GappedWrapper padding='large'>
         <ContentWrapper horizontal={horizontal}>
           <LeftWrapper>
-            <Heading level={1}>{title}</Heading>
+            <Heading level={2}>{title}</Heading>
           </LeftWrapper>
           <RightWrapper>
             <Description>{description}</Description>

@@ -15,7 +15,12 @@ export const FooterNavigation = styled.ul`
     flex: 1;
   }
   @media (max-width: 767px) {
-    display: none;
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap;
+    > li {
+        width: 100%;
+        flex: auto;
+    }
   }
 `;
 

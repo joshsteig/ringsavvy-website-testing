@@ -18,7 +18,7 @@ import {
 
 const Features = ({ FeaturesData }) => {
   const [currentTab, setTab] = useState(0);
-  const [activeTabs, setTabs] = useState([])
+  const [activeTabs, setTabs] = useState([0])
 
   return (
     <Wrapper>

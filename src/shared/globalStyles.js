@@ -72,7 +72,7 @@ export const GlobalStyles = createGlobalStyle`
 
   @media ${(props) => props.theme.global.mediaQueries.sm} {
     h1 {
-      font-size: ${(props) => props.theme.post.fontSizes.xl}
+      font-size: ${(props) => props.theme.post.fontSizes.xxl}
     }
 
     h2 {

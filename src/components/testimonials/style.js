@@ -67,8 +67,10 @@ export const Bottom = styled.div`
   justify-content : space-between;
   min-height : 120px;
   padding : 0 1.5rem;
-  max-width : 80%;
-`
+  @media(max-width:767px){
+    display : none;
+  }
+`;
 
 export const GoogleReviews = styled.div`
   display : flex;
@@ -84,7 +86,7 @@ export const GoogleReviews = styled.div`
       cursor : pointer;
     }
   }
-`
+`;
 
 export const ArrowsWrapper = styled.div`
   display : flex;
@@ -92,7 +94,7 @@ export const ArrowsWrapper = styled.div`
   img{
     width : 30px;
     height : 18px;
-    margin-right : 15px;
+    margin-right : 50px;
     cursor : pointer;
   }
-`
+`;

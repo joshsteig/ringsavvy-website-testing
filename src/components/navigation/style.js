@@ -40,7 +40,7 @@ export const NavigationList = styled.ul`
 `;
 
 export const NavigationLink = styled(Link)`
-  font-family: ${(props) => props.theme.global.fonts.serif};
+  font-family: ${(props) => props.theme.global.fonts.sans};
   font-weight: bold;
   text-decoration: none;
   color: white;
@@ -66,6 +66,8 @@ export const ListItem = styled.li`
 
 export const NavigationCTA = styled(StyledOutlineLink)`
   padding: 0.625em 2.75em;
+  font-family: ${(props) => props.theme.global.fonts.serif};
+  font-weight: 600;
   @media(max-width:767px){
     border : none;
     padding : 0;

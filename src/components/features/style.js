@@ -79,6 +79,7 @@ export const Content = styled(Description)`
 export const CTAButton = styled(Button)`
   width: 50%;
   margin-top: 2rem;
+  white-space: nowrap;
   @media(max-width:767px){
     margin-top: 0;
   }

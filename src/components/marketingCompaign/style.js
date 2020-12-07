@@ -8,10 +8,10 @@ export const MarketingWrapper = styled.div`
   background-size: contain;
   content: "";
   height: 100%;
-  left: -20vw;
+  left: -30vw;
   position: absolute;
   top: 3%;
-  width: 42%;
+  width: 90%;
   z-index: -1;
 `
 

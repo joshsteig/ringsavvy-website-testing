@@ -1,19 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import Merriweather from '../../static/fonts/Merriweather-Bold.woff'
+import OpenSansRegular from '../../static/fonts/OpenSans-Regular.woff'
+import OpenSansItalic from '../../static/fonts/OpenSans-Italic.woff'
+import OpenSansBold from '../../static/fonts/OpenSans-Bold.woff'
 
 export const GlobalStyles = createGlobalStyle`
   ${normalize}
 
   @font-face {
     font-family: 'Open Sans';
-    src: url(../fonts/OpenSans-Regular.woff) format('woff') font-weight-normal,
-        url(../fonts/OpenSans-Bold.woff) format('woff') font-weight-bold,
-        url(../fonts/OpenSans-Italic.woff) format('woff') font-italic;
+    src: url(${OpenSansRegular}) ,
+        url(${OpenSansItalic}) ,
+        url(${OpenSansBold}) ;
   }
 
   @font-face {
     font-family: 'Merriweather';
-    src: url(../fonts/Merriweather-Bold.woff) format('woff') font-weight-bold,
+    src: url(${Merriweather});
+    font-weight : 600;
   }
 
   * {

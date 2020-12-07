@@ -48,16 +48,14 @@ const Features = ({ FeaturesData }) => {
                   <Heading level={3} color="#ffffff" >{title}</Heading>
                 </FeatureBox>
                 <MobileContentBox active={activeTabs.some(()=> activeTabs.includes(index))}>
-                <Heading level={3}>{title}</Heading>
-                <Content
-                  dangerouslySetInnerHTML={{
-                    __html: description,
-                  }}
-                  paddingTop={1}
-                />
-                <CTAButton primary padding='large'>
-                  Learn More
-                </CTAButton>
+                  <Heading level={3}>{title}</Heading>
+                  <Content
+                    dangerouslySetInnerHTML={{
+                      __html: description,
+                    }}
+                    paddingTop={1}
+                  />
+                  <CTAButton primary padding='large'> Learn More </CTAButton>
                 </MobileContentBox>
               </>              
             ))}
@@ -71,9 +69,7 @@ const Features = ({ FeaturesData }) => {
                 }}
                 paddingTop={1}
               />
-              <CTAButton primary padding='large'>
-                Learn More
-              </CTAButton>
+              <CTAButton primary padding='large'>  Learn More </CTAButton>
             </RightContent>
           </RightWrapper>
         </ContentWrapper>

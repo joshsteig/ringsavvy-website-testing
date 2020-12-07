@@ -14,7 +14,8 @@ export const ContentWrapper = styled.div`
 `;
 
 export const LeftWrapper = styled.div`
-  width: 50%;
+  width: 100%;
+  max-width: 500px;
   @media (max-width: 767px) {
     width: 100%;
   }
@@ -22,11 +23,12 @@ export const LeftWrapper = styled.div`
 
 export const RightWrapper = styled(LeftWrapper)`
   margin-left: auto;
+  max-width: 580px;
 `;
 
 export const Title = styled.h2`
   font-size: 3rem;
-  @media(max-width:767px) {
+  @media (max-width: 767px) {
     font-size: 2rem;
   }
   ${(props) =>

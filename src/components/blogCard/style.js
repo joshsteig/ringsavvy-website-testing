@@ -1,31 +1,21 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'gatsby'
+import { Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 export const BlogCardWrapper = styled(Link)`
   width: 100%;
+  display: flex;
+  flex-direction: column;
   h3 {
     margin-top: 2rem;
   }
 `;
 
-export const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled(Img)`
   min-height: 150px;
-  background-size: cover;
-  background-position: center;
   position: relative;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
-  ${(props) =>
-    props.backgroundImage &&
-    css`
-      background-image: url(${props.backgroundImage});
-    `}
   ${(props) =>
     props.overLay &&
     css`

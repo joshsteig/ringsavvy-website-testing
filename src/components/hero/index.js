@@ -3,12 +3,7 @@ import { client } from '../../utils/contentful';
 import { Button } from '../button/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import Heading from '../heading/style';
-import {
-  ContentWrapper,
-  CtaWrapper,
-  Description,
-  HeroWrapper,
-} from './style';
+import { ContentWrapper, CtaWrapper, Description, HeroWrapper } from './style';
 
 const Hero = () => {
   const [heroBg, setBg] = useState('');
@@ -24,7 +19,7 @@ const Hero = () => {
       <Wrapper>
         <GappedWrapper>
           <ContentWrapper>
-            <Heading level={1} color="#ffffff">
+            <Heading level={1} color='#ffffff'>
               Our Virtual receptionists help optimize the workflow of field
               service businesses
             </Heading>
@@ -38,7 +33,7 @@ const Hero = () => {
               <Button primary padding='large'>
                 Try free for 7 Days
               </Button>
-              <Button transparent hoverColor padding='large'>
+              <Button transparent hoverColor padding='large' fontSize='1.1rem'>
                 Get a custom quote
               </Button>
             </CtaWrapper>

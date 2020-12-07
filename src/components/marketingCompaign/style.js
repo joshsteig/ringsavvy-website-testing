@@ -1,27 +1,27 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Background from '../../assets/images/corporate-office-bg-overlay.jpg';
-import WaterMark from '../../assets/images/logo-watermark.svg'
+import WaterMark from '../../assets/images/logo-watermark.svg';
 
 export const MarketingWrapper = styled.div`
   background-image: url(${WaterMark});
   background-repeat: no-repeat;
   background-size: contain;
-  content: "";
+  content: '';
   height: 100%;
   left: -30vw;
   position: absolute;
   top: 3%;
   width: 90%;
   z-index: -1;
-`
+`;
 
 export const ContentWrapper = styled.div`
   width: 66.66%;
   margin-left: auto;
-  padding : 0 20px;
+  padding: 0 20px;
   @media (max-width: 767px) {
     width: 100%;
-    padding : 0;
+    padding: 0;
   }
 `;
 
@@ -36,7 +36,7 @@ export const BannerWrapper = styled.div`
 export const BannerOverLay = styled.div`
   margin-top: 3rem;
   flex-wrap: wrap;
-  padding: 1.5rem 3rem;
+  padding: 2.5rem 3rem;
   display: flex;
   align-items: center;
   background-repeat: no-repeat;
@@ -54,7 +54,7 @@ export const BannerOverLay = styled.div`
     bottom: 0;
     background: rgba(39, 39, 39, 0.86);
   }
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     padding: 1rem 1rem;
   }
 `;

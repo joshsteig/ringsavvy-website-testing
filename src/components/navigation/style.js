@@ -5,15 +5,15 @@ import { StyledOutlineLink } from '../button/style';
 export const NavigationWrapper = styled.header`
   display: flex;
   align-items: center;
-  flex-wrap : wrap;
+  flex-wrap: wrap;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 10;
   color: white;
-  padding: 3rem 1.25rem;
+  padding-top: 3rem;
   @media (max-width: 767px) {
-   justify-content : space-between
+    justify-content: space-between;
   }
 `;
 
@@ -25,17 +25,19 @@ export const NavigationList = styled.ul`
   margin: 0;
   padding: 0;
   @media (max-width: 767px) {
-    width : 100%;
-    flex-direction : column;
+    width: 100%;
+    flex-direction: column;
     background: grey;
     align-items: flex-start;
-    margin-top : 20px;
-    height : 0;
-    overflow : hidden;
-    ${(props) => props.active && css`    
-      height : 100%;
-      overflow : visible;
-    `}
+    margin-top: 20px;
+    height: 0;
+    overflow: hidden;
+    ${(props) =>
+      props.active &&
+      css`
+        height: 100%;
+        overflow: visible;
+      `}
   }
 `;
 
@@ -57,10 +59,10 @@ export const ListItem = styled.li`
   &:last-of-type {
     margin-right: 0;
   }
-  @media(max-width:767px){
+  @media (max-width: 767px) {
     padding: 15px 20px;
-    width : 100%;
-    margin : 0;
+    width: 100%;
+    margin: 0;
   }
 `;
 
@@ -68,24 +70,24 @@ export const NavigationCTA = styled(StyledOutlineLink)`
   padding: 0.625em 2.75em;
   font-family: ${(props) => props.theme.global.fonts.serif};
   font-weight: 600;
-  @media(max-width:767px){
-    border : none;
-    padding : 0;
+  @media (max-width: 767px) {
+    border: none;
+    padding: 0;
   }
 `;
 
 export const ToggleButton = styled.button`
   font-size: ${(props) => props.theme.global.fontSizes.xl};
   color: ${(props) => props.theme.global.colors.white};
-  font-weight : 600;
-  span{
-    margin-right : 5px;
+  font-weight: 600;
+  span {
+    margin-right: 5px;
   }
-  &:focus{
+  &:focus {
     color: ${(props) => props.theme.global.colors.primary};
   }
-  display : none;
-  @media(max-width:767px){
-    display : block
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
   }
 `;

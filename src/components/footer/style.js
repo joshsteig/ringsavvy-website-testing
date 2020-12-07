@@ -18,8 +18,8 @@ export const FooterNavigation = styled.ul`
     padding: 1rem 1.25rem;
     flex-wrap: wrap;
     > li {
-        width: 100%;
-        flex: auto;
+      width: 100%;
+      flex: auto;
     }
   }
 `;

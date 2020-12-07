@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import Merriweather from '../../static/fonts/Merriweather-Bold.woff'
-import OpenSansRegular from '../../static/fonts/OpenSans-Regular.woff'
-import OpenSansItalic from '../../static/fonts/OpenSans-Italic.woff'
-import OpenSansBold from '../../static/fonts/OpenSans-Bold.woff'
+import Merriweather from '../../static/fonts/Merriweather-Bold.woff';
+import OpenSansRegular from '../../static/fonts/OpenSans-Regular.woff';
+import OpenSansItalic from '../../static/fonts/OpenSans-Italic.woff';
+import OpenSansBold from '../../static/fonts/OpenSans-Bold.woff';
 
 export const GlobalStyles = createGlobalStyle`
   ${normalize}
@@ -39,6 +39,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1rem;
     line-height: 1.65;
     margin: 0;
+    -webkit-font-smoothing: antialiased;
   }
 
   p,

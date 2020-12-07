@@ -18,7 +18,7 @@ export const HeroWrapper = styled.div`
     background: rgba(39, 39, 39, 0.88);
   }
   @media (max-width: 767px) {
-    padding-top: 100px;
+    padding-top: 90px;
     background-position: center;
   }
 `;

@@ -19,22 +19,22 @@ import {
 } from './style';
 
 const Testimonials = () => {
-  const [swiper,setSwiper] = useState(null)
+  const [swiper, setSwiper] = useState(null);
   const params = {
     slidesPerView: 1.1,
     spaceBetween: 20,
     loop: true,
     centeredSlides: false,
-    breakpoints: {      
-      768: {   
+    breakpoints: {
+      768: {
         spaceBetween: 40,
         slidesPerView: 'auto',
         centeredSlides: true,
-      },      
+      },
     },
     on: {
-      init: function (e) {
-        setSwiper(e)
+      init: function(e) {
+        setSwiper(e);
         e.slideTo(1, 1000);
       },
     },
@@ -73,12 +73,14 @@ const Testimonials = () => {
       <Wrapper>
         <Bottom>
           <GoogleReviews>
-            <img src={Google}/>
-            <p><strong>4.1/5 stars</strong> based on <u>27 Google reviews</u></p>
+            <img src={Google} />
+            <p>
+              <strong>4.1/5 stars</strong> based on <u>27 Google reviews</u>
+            </p>
           </GoogleReviews>
           <ArrowsWrapper>
-            <img onClick={()=>swiper.slidePrev()} src={ArrowPrev}/>
-            <img onClick={()=>swiper.slideNext()} src={ArrowNext}/>
+            <img onClick={() => swiper.slidePrev()} src={ArrowPrev} />
+            <img onClick={() => swiper.slideNext()} src={ArrowNext} />
           </ArrowsWrapper>
         </Bottom>
       </Wrapper>

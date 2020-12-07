@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import Heading from '../heading/style';
-import {
-  GappedWrapper,
-  Wrapper
-} from '../wrapper/style';
+import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   Content,
   ContentWrapper,
@@ -13,41 +10,41 @@ import {
   LeftWrapper,
   RightContent,
   RightWrapper,
-  MobileContentBox 
+  MobileContentBox,
 } from './style';
 
 const Features = ({ FeaturesData }) => {
   const [currentTab, setTab] = useState(0);
-  const [activeTabs, setTabs] = useState([0])
+  const [activeTabs, setTabs] = useState([0]);
 
   return (
     <Wrapper>
       <GappedWrapper>
         <ContentWrapper>
           <LeftWrapper>
-            {FeaturesData.map(({ title,description }, index) => (
+            {FeaturesData.map(({ title, description }, index) => (
               <>
                 <FeatureBox
-                  onClick={async() => {                 
-                    let indexFound = activeTabs.indexOf(index)
-                    if(indexFound === -1 ){
-                      let tabs = [...activeTabs]
-                      tabs.push(index)
-                      setTabs((prev)=>tabs)                  
+                  onClick={async () => {
+                    const indexFound = activeTabs.indexOf(index);
+                    if (indexFound === -1) {
+                      setTabs([...activeTabs, index]);
+                    } else {
+                      activeTabs.splice(indexFound, 1);
+                      setTabs(activeTabs);
                     }
-                    else{
-                      let tabs = [...activeTabs]
-                      tabs.splice(indexFound,1)
-                      setTabs((prev)=>tabs)
-                    }
-                    setTab((prev)=>index);
+                    setTab(index);
                   }}
-                  active={currentTab === index ? true : false}
+                  active={currentTab === index}
                 >
                   <Count> 0{index + 1}</Count>
-                  <Heading level={3} color="#ffffff" >{title}</Heading>
+                  <Heading level={3} color='#FFFFFF'>
+                    {title}
+                  </Heading>
                 </FeatureBox>
-                <MobileContentBox active={activeTabs.some(()=> activeTabs.includes(index))}>
+                <MobileContentBox
+                  active={activeTabs.some(() => activeTabs.includes(index))}
+                >
                   <Heading level={3}>{title}</Heading>
                   <Content
                     dangerouslySetInnerHTML={{
@@ -55,9 +52,11 @@ const Features = ({ FeaturesData }) => {
                     }}
                     paddingTop={1}
                   />
-                  <CTAButton primary padding='large'> Learn More </CTAButton>
+                  <CTAButton primary padding='large'>
+                    Learn More
+                  </CTAButton>
                 </MobileContentBox>
-              </>              
+              </>
             ))}
           </LeftWrapper>
           <RightWrapper>
@@ -69,7 +68,9 @@ const Features = ({ FeaturesData }) => {
                 }}
                 paddingTop={1}
               />
-              <CTAButton primary padding='large'>  Learn More </CTAButton>
+              <CTAButton primary padding='large'>
+                Learn More
+              </CTAButton>
             </RightContent>
           </RightWrapper>
         </ContentWrapper>

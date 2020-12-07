@@ -27,7 +27,7 @@ export const StyledOutlineLink = styled(StyledLink)`
   border: 2px solid ${(props) => props.theme.global.colors.white};
   box-shadow: none;
   color: ${(props) => props.theme.global.colors.white};
-  cursor : pointer;
+  cursor: pointer;
   &:hover {
     border: 2px solid ${(props) => props.theme.global.colors.primary};
     background-color: ${(props) => props.theme.global.colors.primary};
@@ -37,16 +37,26 @@ export const StyledOutlineLink = styled(StyledLink)`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   font-weight: 600;
   padding: 0.5rem 3rem;
   border-radius: 100px;
   transition: all 0.2s ease;
+  cursor: pointer;
+  line-height: 1;
+  text-align: center;
+  font-family: ${(props) => props.theme.global.fonts.serif};
   ${(props) =>
     props.padding === 'large' &&
     css`
       background: transparent;
       padding: 1rem 3rem;
+    `}
+  ${(props) =>
+    props.padding === 'medium' &&
+    css`
+      background: transparent;
+      padding: 0.75rem 2.75rem;
     `}
   ${(props) =>
     props.transparent &&
@@ -72,7 +82,7 @@ export const Button = styled.button`
     css`
       border: 2px solid white;
     `}
-      ${(props) =>
+  ${(props) =>
     props.greenBorder &&
     css`
       border: 1px solid #0abe51;
@@ -82,5 +92,10 @@ export const Button = styled.button`
     css`
       background: #0abe51;
       color: white;
+    `}
+  ${(props) =>
+    props.fontSize &&
+    css`
+      font-size: ${props.fontSize};
     `}
 `;

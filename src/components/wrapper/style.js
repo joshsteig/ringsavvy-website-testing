@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const GappedWrapper = styled.div`
   padding: ${(props) =>
-    props.padding === 'large' ? '6rem 1.25rem' : '2rem 1.25rem'};
+    props.padding === 'large' ? '3rem 1.25rem' : '1.75rem 0rem'};
   @media (max-width: 767px) {
     padding: ${(props) =>
       props.padding === 'large' ? '3rem 1.25rem' : '1rem 1.25rem'};

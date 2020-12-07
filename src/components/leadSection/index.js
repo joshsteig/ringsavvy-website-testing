@@ -1,9 +1,6 @@
 import React from 'react';
 import Heading from '../heading/style';
-import {
-  GappedWrapper,
-  Wrapper
-} from '../wrapper/style';
+import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   ContentWrapper,
   Description,

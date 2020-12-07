@@ -4,7 +4,7 @@ import Heading from '../heading/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import { BlogsWrapper, BlogMain } from './style';
 
-const Blogs = ({ Blogs }) => { 
+const Blogs = ({ Blogs }) => {
   return (
     <Wrapper>
       <GappedWrapper>

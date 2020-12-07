@@ -35,7 +35,7 @@ const Links = [
 ];
 
 export default () => {
-  const [isToggle,setToggle]= useState(false);
+  const [isToggle, setToggle] = useState(false);
 
   return (
     <Wrapper>
@@ -43,20 +43,22 @@ export default () => {
         <LogoLink to='/'>
           <Logo />
         </LogoLink>
-        <ToggleButton onClick={()=>setToggle((prev)=>!prev)}><span>&#9776;</span> Menu</ToggleButton>
-          <NavigationList active={isToggle}>
-            {Links.map(({ name, path }) => (
-              <ListItem>
-                <NavigationLink to={path}>{name}</NavigationLink>
-              </ListItem>
-            ))}
+        <ToggleButton onClick={() => setToggle((prev) => !prev)}>
+          <span>&#9776;</span> Menu
+        </ToggleButton>
+        <NavigationList active={isToggle}>
+          {Links.map(({ name, path }) => (
             <ListItem>
-              <NavigationCTA transparent whiteBorder>
-                Try for Free
-              </NavigationCTA>
+              <NavigationLink to={path}>{name}</NavigationLink>
             </ListItem>
-          </NavigationList>
+          ))}
+          <ListItem>
+            <NavigationCTA transparent whiteBorder>
+              Try for Free
+            </NavigationCTA>
+          </ListItem>
+        </NavigationList>
       </NavigationWrapper>
     </Wrapper>
-  )
-} 
+  );
+};

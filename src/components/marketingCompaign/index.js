@@ -46,9 +46,9 @@ const MarketingCompaign = () => {
         <BannerWrapper>
           <BannerOverLay>
             <LeftWrapper>
-              <Heading level={3} color="#ffffff">
+              <Heading level={3} color='#ffffff'>
                 Want to revisit this later?
-              </Heading> 
+              </Heading>
               <Description color='white' margin={0} paddingTop={0.1}>
                 Let us send you our company brochure.
               </Description>
@@ -60,7 +60,7 @@ const MarketingCompaign = () => {
                   type='email'
                   placeholder='Email Address'
                 />
-                <Button padding='large' primary>
+                <Button padding='medium' primary>
                   Send
                 </Button>
               </FormWrapper>

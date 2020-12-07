@@ -20,7 +20,7 @@ export const LeftWrapper = styled.div`
 
 export const RightWrapper = styled(LeftWrapper)`
   justify-content: center;
-  padding: 0 4rem;
+  padding: 0 0 0 4rem;
   @media (max-width: 767px) {
     padding: 0;
   }
@@ -51,9 +51,9 @@ export const FeatureBox = styled.div`
         color: #fff;
       }
     `}
-    @media(max-width:767px){
-      padding: 1rem 2rem;
-    }
+  @media(max-width: 767px) {
+    padding: 1rem 2rem;
+  }
 `;
 
 export const Count = styled.span`
@@ -64,8 +64,8 @@ export const Count = styled.span`
 export const RightContent = styled.div`
   display: flex;
   flex-direction: column;
-  @media(max-width:767px){
-    display : none;
+  @media (max-width: 767px) {
+    display: none;
   }
 `;
 
@@ -80,28 +80,29 @@ export const CTAButton = styled(Button)`
   width: 50%;
   margin-top: 2rem;
   white-space: nowrap;
-  @media(max-width:767px){
+  padding: 0.75rem 2.5rem;
+  @media (max-width: 767px) {
     margin-top: 0;
   }
 `;
 
 export const MobileContentBox = styled(RightContent)`
-  display : none;
-  @media(max-width:767px){
-    display : flex;
-    margin-bottom : 0;
-    transition : height .5s, margin-bottom .5s , opacity .6s;
-    height : 0;
-    overflow : hidden;
-    opacity : 0;
+  display: none;
+  @media (max-width: 767px) {
+    display: flex;
+    margin-bottom: 0;
+    transition: height 0.5s, margin-bottom 0.5s, opacity 0.6s;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
     ${(props) =>
       props.active &&
       css`
-      margin-bottom : 2rem;
-      opacity : 1;
-      height : 100%;
-      transition : height .5s, margin-bottom .5s,opacity .6s;
-      overflow : visible;
-    `}
+        margin-bottom: 2rem;
+        opacity: 1;
+        height: 100%;
+        transition: height 0.5s, margin-bottom 0.5s, opacity 0.6s;
+        overflow: visible;
+      `}
   }
 `;

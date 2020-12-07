@@ -8,7 +8,7 @@ import {
 
 const BlogCard = ({ data }) => {
   return (
-    <BlogCardWrapper to={`/blog/${data?.slug}`}>
+    <BlogCardWrapper to={`/blog/${data.slug}`}>
       <ContentWrapper>
         <ImageWrapper
           backgroundImage={data.featuredImage?.fluid?.src}

@@ -2,7 +2,7 @@ import React from 'react';
 import BlogCard from '../blogCard';
 import Heading from '../heading/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
-import { BlogsWrapper, BlogMain} from './style';
+import { BlogsWrapper, BlogMain } from './style';
 
 const Blogs = ({ Blogs }) => { 
   return (

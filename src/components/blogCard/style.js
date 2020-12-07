@@ -8,6 +8,8 @@ export const BlogCardWrapper = styled(Link)`
   flex-direction: column;
   h3 {
     margin-top: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
   }
 `;
 

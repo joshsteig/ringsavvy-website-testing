@@ -136,16 +136,16 @@ export const IndustriesMenu = () => (
 export const SupportMenu = () => (
   <UnstyledList>
     <li>
-      <Title>About Us</Title>
+      <Title>Support</Title>
       <UnstyledList>
         <li>
-          <Link to='/'>Contact us</Link>
+          <Link to='/'>Privacy Policy</Link>
         </li>
         <li>
-          <Link to='/'>Submit a ticket</Link>
+          <Link to='/'>Terms Of Service</Link>
         </li>
         <li>
-          <Link to='/'>Careers</Link>
+          <Link to='/'>Employment Opportunities</Link>
         </li>
       </UnstyledList>
     </li>

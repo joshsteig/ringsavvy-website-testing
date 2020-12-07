@@ -35,6 +35,7 @@ export const FeatureBox = styled.div`
   cursor: pointer;
   h3 {
     color: #7a7a7a;
+    font-size: 1.125rem;
   }
   transition: all 0.2s ease;
   font-weight: bold;
@@ -57,8 +58,10 @@ export const FeatureBox = styled.div`
 `;
 
 export const Count = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-right: 1.5rem;
+  font-family: 'Merriweather', serif;
+  opacity: 0.5;
 `;
 
 export const RightContent = styled.div`

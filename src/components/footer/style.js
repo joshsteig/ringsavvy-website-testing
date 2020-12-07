@@ -30,6 +30,7 @@ export const SupportCallout = styled.div`
   text-align: center;
   h3 {
     margin: 0 0 0.3333333em;
+    font-size: 1.5625rem;
   }
   p {
     font-size: ${(props) => props.theme.global.fontSizes.md};

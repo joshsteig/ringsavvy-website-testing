@@ -20,7 +20,7 @@ const Hero = () => {
         <GappedWrapper>
           <ContentWrapper>
             <Heading level={1} color='#ffffff'>
-              Our Virtual receptionists help optimize the workflow of field
+              Our virtual receptionists help optimize the workflow of field
               service businesses
             </Heading>
             <Description>

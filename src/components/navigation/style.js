@@ -14,6 +14,8 @@ export const NavigationWrapper = styled.header`
   padding-top: 3rem;
   @media (max-width: 767px) {
     justify-content: space-between;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 `;
 
@@ -46,6 +48,11 @@ export const NavigationLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: white;
+  &:hover {
+    background: transparent;
+    border: none;
+    color: #0abe51;
+  }
 `;
 
 export const LogoLink = styled(Link)`

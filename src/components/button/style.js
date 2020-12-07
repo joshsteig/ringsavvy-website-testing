@@ -45,6 +45,10 @@ export const Button = styled(Link)`
   cursor: pointer;
   line-height: 1;
   text-align: center;
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
   font-family: ${(props) => props.theme.global.fonts.serif};
   ${(props) =>
     props.padding === 'large' &&

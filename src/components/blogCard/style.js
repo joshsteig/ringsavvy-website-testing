@@ -3,8 +3,8 @@ import {Link} from 'gatsby'
 
 export const BlogCardWrapper = styled(Link)`
   width: 100%;
-  h3{
-    margin-top : 2rem;
+  h3 {
+    margin-top: 2rem;
   }
 `;
 

@@ -8,6 +8,8 @@ import Tabs from '../components/tabs';
 import MarketingCompaign from '../components/marketingCampaign';
 import Blogs from '../components/blogs';
 import Testimonials from '../components/testimonials';
+import LeadContentSection from '../components/leadContentSection';
+import { Section } from '../components/section/style';
 
 export default function RootIndex(props) {
   const { location,  data } = props;
@@ -86,12 +88,27 @@ export default function RootIndex(props) {
       </Helmet>
 
       <Hero />
+
+      <Section>
+        <LeadContentSection leadData={leadData[0]} />
+        <Tabs featuresData={featuresData[0]} />
+      </Section>
       
-      <Tabs leadData={leadData[0]}  featuresData={featuresData[0]} />
       <Testimonials />
-      <MarketingCompaign />
-      <Tabs leadData={leadData[1]} featuresData={featuresData[1]} />
-      <Blogs Blogs={data?.allContentfulPost?.edges}/>
+      
+      <Section> 
+        <MarketingCompaign />
+      </Section>
+     
+      <Section> 
+        <LeadContentSection leadData={leadData[1]} />
+        <Tabs featuresData={featuresData[1]} />
+      </Section>
+
+      <Section>
+        <Blogs Blogs={data?.allContentfulPost?.edges} />
+      </Section>
+     
     </Layout>
   );
 }

@@ -1,35 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../button/style';
 
-export const ContentWrapper = styled.div`
-  padding-bottom: 30px;
-  width: 100%;
-`;
-
-export const LeftContentWrapper = styled.div`
-  width: 100%;
-  max-width: 500px;
-
-  @media (max-width: 767px) {
-    width: 100%;
-  }
-`;
-
-export const RightContentWrapper = styled(LeftContentWrapper)`
-  margin-left: auto;
-  max-width: 580px;
-`;
-
-export const ContentDescription = styled.p`
-  ${(props) =>
-    props.paddingTop &&
-    css`
-      padding-top: ${props.paddingTop}rem;
-      color: ${props.color};
-      margin: ${props.margin ? props.margin : 'inherit'};
-    `}
-`;
-
 export const TabWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -108,6 +79,16 @@ export const TabRightContent = styled.div`
   }
 `;
 
+export const ContentDescription = styled.p`
+  ${(props) =>
+    props.paddingTop &&
+    css`
+      padding-top: ${props.paddingTop}rem;
+      color: ${props.color};
+      margin: ${props.margin ? props.margin : 'inherit'};
+    `}
+`;
+
 export const TabContent = styled(ContentDescription)`
   span {
     display: block;
@@ -126,7 +107,7 @@ export const TabCTAButton = styled(Button)`
   }
 `;
 
-export const TabMobileContentBox = styled(RightContentWrapper)`
+export const TabMobileContentBox = styled.div`
   display: none;
 
   @media (max-width: 767px) {

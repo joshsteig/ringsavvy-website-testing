@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Swiper from 'react-id-swiper';
+import Google from '../../assets/images/google-logo.svg';
 import ArrowPrev from '../../assets/images/reviews-prev.svg';
-import Google from '../../assets/images/google-logo.svg'
-import ArrowNext from '../../assets/images/reviews-next.svg'
+import ArrowNext from '../../assets/images/reviews-next.svg';
 import { Wrapper } from '../wrapper/style';
 import {
   Description,

@@ -42,10 +42,8 @@ const MarketingCompaign = () => {
         <BannerWrapper>
           <BannerOverLay>
             <LeftWrapper>
-              <h3 style={{ color: '#ffffff' }}>Want to revisit this later?</h3>
-              <p style={{ color: '#fff', margin: 0, paddingTop: 0.1 }}>
-                Let us send you our company brochure.
-              </p>
+              <h3>Want to revisit this later?</h3>
+              <p>Let us send you our company brochure.</p>
             </LeftWrapper>
             <RightWrapper>
               <FormWrapper>

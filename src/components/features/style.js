@@ -45,6 +45,7 @@ export const FeatureBox = styled.div`
   h3 {
     color: #7a7a7a;
     font-size: 1.125rem;
+    margin: 0;
   }
   ${(props) =>
     props.active &&

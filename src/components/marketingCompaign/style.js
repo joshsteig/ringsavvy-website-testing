@@ -19,6 +19,7 @@ export const ContentWrapper = styled.div`
   width: 66.66%;
   margin-left: auto;
   padding: 0 20px;
+
   @media (max-width: 767px) {
     width: 100%;
     padding: 0;
@@ -44,6 +45,7 @@ export const BannerOverLay = styled.div`
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16);
   background-image: url(${Background});
+
   &::before {
     border-radius: 5px;
     content: '';
@@ -54,6 +56,7 @@ export const BannerOverLay = styled.div`
     bottom: 0;
     background: rgba(39, 39, 39, 0.86);
   }
+
   @media (max-width: 767px) {
     padding: 1rem 1rem;
   }
@@ -63,10 +66,22 @@ export const LeftWrapper = styled.div`
   color: white;
   position: relative;
   width: 50%;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: white;
+  }
+
+  p {
+    color: white;
+    margin: 0;
+  }
+
   @media (max-width: 767px) {
     width: 100%;
     margin-bottom: 10px;
     text-align: center;
+
     h2 {
       font-size: 1.5rem;
     }
@@ -82,8 +97,10 @@ export const FormWrapper = styled.div`
   position: relative;
   background-color: white;
   padding: 0.5rem 0.75rem 0.5rem 1.5rem;
+
   @media (max-width: 767px) {
     padding: 0.5rem 1rem;
+
     button {
       padding: 0.75rem 2rem;
     }

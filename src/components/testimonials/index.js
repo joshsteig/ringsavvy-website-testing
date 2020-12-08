@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Swiper from 'react-id-swiper';
-import Heading from '../heading/style';
 import ArrowPrev from '../../assets/images/reviews-prev.svg';
 import Google from '../../assets/images/google-logo.svg'
 import ArrowNext from '../../assets/images/reviews-next.svg'
@@ -46,16 +45,14 @@ const Testimonials = () => {
       <Wrapper>
         <HeadingWrapper>
           <Title>
-            <Heading level={2}> What our clients are saying </Heading>
+            <h2> What our clients are saying </h2>
           </Title>
         </HeadingWrapper>
       </Wrapper>
       <Swiper {...params}>
         {[1, 2, 3].map((item) => (
           <SliderItem>
-            <Heading level={3}>
-              Dont think twice about hiring Ring Savy, they are the one!
-            </Heading>
+            <h3>Dont think twice about hiring Ring Savy, they are the one!</h3>
             <Description marginTop={1}>
               Great answering service! You don’t realize how many business calls
               your actually missing from not having this service! Ring savvy
@@ -64,7 +61,7 @@ const Testimonials = () => {
               receive my messages after missing the call.
             </Description>
             <WriterWrapper>
-              <Heading level={4}>Tood Brickhouse({item})</Heading>
+              <h4>Tood Brickhouse({item})</h4>
               <span>Brickhouse Design Group, ltd</span>
             </WriterWrapper>
           </SliderItem>
@@ -73,14 +70,14 @@ const Testimonials = () => {
       <Wrapper>
         <Bottom>
           <GoogleReviews>
-            <img src={Google} />
+            <img src={Google} alt='Google Logo' />
             <p>
               <strong>4.1/5 stars</strong> based on <u>27 Google reviews</u>
             </p>
           </GoogleReviews>
           <ArrowsWrapper>
-            <img onClick={() => swiper.slidePrev()} src={ArrowPrev} />
-            <img onClick={() => swiper.slideNext()} src={ArrowNext} />
+            <img src={ArrowPrev} alt='Prev' onClick={() => swiper.slidePrev()} />
+            <img src={ArrowNext} alt='Next' onClick={() => swiper.slideNext()} />
           </ArrowsWrapper>
         </Bottom>
       </Wrapper>

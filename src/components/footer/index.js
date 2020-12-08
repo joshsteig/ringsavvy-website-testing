@@ -33,6 +33,7 @@ export default () => (
           <SupportMenu />
         </NavigationCol>
       </FooterNavigation>
+      <p>©&nbsp;2020 Ring Savvy, Inc.</p>
     </Wrapper>
   </Footer>
 );

@@ -94,6 +94,7 @@ export const Input = styled.input`
   width: 100%;
   outline: none;
   border: none;
+
   &:focus {
     outline: none;
     border: none;

@@ -42,6 +42,10 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  p {
+    margin: 0 0 1em;
+  }
+
   p,
   ul,
   ol {
@@ -58,40 +62,40 @@ export const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme.global.colors.black};
     font-weight: bold;
     line-height: 1.2;
-    margin : 0;
+    margin : 0 0 24px;
   }
 
   h1 {
-    font-size: ${(props) => props.theme.post.fontSizes.xxl}
+    font-size: ${(props) => props.theme.global.fontSizes.xxl}
   }
 
   h2 {
-    font-size: ${(props) => props.theme.post.fontSizes.xxl}
+    font-size: ${(props) => props.theme.global.fontSizes.xxl}
   }
 
   h3 {
-    font-size: ${(props) => props.theme.post.fontSizes.lg}
+    font-size: ${(props) => props.theme.global.fontSizes.lg}
   }
 
   h4 {
-    font-size: ${(props) => props.theme.post.fontSizes.md}
+    font-size: ${(props) => props.theme.global.fontSizes.md}
   }
 
   @media ${(props) => props.theme.global.mediaQueries.sm} {
     h1 {
-      font-size: ${(props) => props.theme.post.fontSizes.xxl}
+      font-size: ${(props) => props.theme.global.fontSizes.xxl}
     }
 
     h2 {
-      font-size: ${(props) => props.theme.post.fontSizes.xl}
+      font-size: ${(props) => props.theme.global.fontSizes.xl}
     }
 
     h3 {
-      font-size: ${(props) => props.theme.post.fontSizes.lg}
+      font-size: ${(props) => props.theme.global.fontSizes.lg}
     }
 
     h4 {
-      font-size: ${(props) => props.theme.post.fontSizes.md}
+      font-size: ${(props) => props.theme.global.fontSizes.md}
     }
   }
   

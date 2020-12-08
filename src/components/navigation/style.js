@@ -12,6 +12,7 @@ export const NavigationWrapper = styled.header`
   z-index: 10;
   color: white;
   padding-top: 3rem;
+
   @media (max-width: 767px) {
     justify-content: space-between;
     padding-left: 1.25rem;
@@ -26,6 +27,7 @@ export const NavigationList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+
   @media (max-width: 767px) {
     width: 100%;
     flex-direction: column;
@@ -48,6 +50,7 @@ export const NavigationLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: white;
+
   &:hover {
     background: transparent;
     border: none;
@@ -63,9 +66,11 @@ export const LogoLink = styled(Link)`
 export const ListItem = styled.li`
   margin: 0 0.75em;
   color: white;
+
   &:last-of-type {
     margin-right: 0;
   }
+
   @media (max-width: 767px) {
     padding: 15px 20px;
     width: 100%;
@@ -77,6 +82,7 @@ export const NavigationCTA = styled(StyledOutlineLink)`
   padding: 0.625em 2.75em;
   font-family: ${(props) => props.theme.global.fonts.serif};
   font-weight: 600;
+
   @media (max-width: 767px) {
     border: none;
     padding: 0;
@@ -87,13 +93,16 @@ export const ToggleButton = styled.button`
   font-size: ${(props) => props.theme.global.fontSizes.xl};
   color: ${(props) => props.theme.global.colors.white};
   font-weight: 600;
+  display: none;
+
   span {
     margin-right: 5px;
   }
+
   &:focus {
     color: ${(props) => props.theme.global.colors.primary};
   }
-  display: none;
+
   @media (max-width: 767px) {
     display: block;
   }

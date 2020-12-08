@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Heading from '../heading/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import {
   Content,
@@ -37,15 +36,13 @@ const Features = ({ FeaturesData }) => {
                   }}
                   active={currentTab === index}
                 >
-                  <Count> 0{index + 1}</Count>
-                  <Heading level={3} color='#FFFFFF'>
-                    {title}
-                  </Heading>
+                  <Count>0{index + 1}</Count>
+                  <h3> {title} </h3>
                 </FeatureBox>
                 <MobileContentBox
                   active={activeTabs.some(() => activeTabs.includes(index))}
                 >
-                  <Heading level={3}>{title}</Heading>
+                  <h3> {title} </h3>
                   <Content
                     dangerouslySetInnerHTML={{
                       __html: description,
@@ -53,7 +50,7 @@ const Features = ({ FeaturesData }) => {
                     paddingTop={1}
                   />
                   <CTAButton primary padding='large'>
-                    Learn More
+                    {FeaturesData[currentTab].ctaText}
                   </CTAButton>
                 </MobileContentBox>
               </>
@@ -61,7 +58,7 @@ const Features = ({ FeaturesData }) => {
           </LeftWrapper>
           <RightWrapper>
             <RightContent>
-              <Heading level={3}>{FeaturesData[currentTab].title}</Heading>
+              <h3>{FeaturesData[currentTab].title}</h3>
               <Content
                 dangerouslySetInnerHTML={{
                   __html: FeaturesData[currentTab].description,
@@ -69,7 +66,7 @@ const Features = ({ FeaturesData }) => {
                 paddingTop={1}
               />
               <CTAButton primary padding='large'>
-                Learn More
+                {FeaturesData[currentTab].ctaText}
               </CTAButton>
             </RightContent>
           </RightWrapper>

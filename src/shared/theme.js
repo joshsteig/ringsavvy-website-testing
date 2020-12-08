@@ -12,9 +12,13 @@ export default {
       sans: `'Open Sans', sans-serif`,
     },
     fontSizes: {
+      xxl: '2.5rem',
+      xl: '1.75rem',
+      lg: '1.25rem',
       md: '1.125rem',
       base: '1rem',
       sm: '.875rem',
+      xs: '.875rem',
     },
     mediaQueries: {
       lg: '(max-width: 992px)',
@@ -24,9 +28,9 @@ export default {
   },
   post: {
     fontSizes: {
-      xxl: '2.5rem',
+      xxl: '2.25rem',
       xl: '1.75rem',
-      lg: '1.25rem',
+      lg: '1.5rem',
       md: '1.25rem',
       base: '1.125rem',
       sm: '1rem',

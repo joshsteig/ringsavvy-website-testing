@@ -6,6 +6,7 @@ export const BlogCardWrapper = styled(Link)`
   width: 100%;
   display: flex;
   flex-direction: column;
+
   h3 {
     margin-top: 2rem;
     font-size: 1.125rem;

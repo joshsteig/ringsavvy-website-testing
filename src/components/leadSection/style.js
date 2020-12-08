@@ -8,6 +8,7 @@ export const ContentWrapper = styled.div`
     css`
       flex-direction: column;
     `}
+
   @media(max-width:767px) {
     flex-wrap: wrap;
   }
@@ -16,6 +17,7 @@ export const ContentWrapper = styled.div`
 export const LeftWrapper = styled.div`
   width: 100%;
   max-width: 500px;
+
   @media (max-width: 767px) {
     width: 100%;
   }
@@ -28,6 +30,7 @@ export const RightWrapper = styled(LeftWrapper)`
 
 export const Title = styled.h2`
   font-size: 3rem;
+
   @media (max-width: 767px) {
     font-size: 2rem;
   }

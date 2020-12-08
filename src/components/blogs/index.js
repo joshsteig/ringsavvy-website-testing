@@ -1,6 +1,5 @@
 import React from 'react';
 import BlogCard from '../blogCard';
-import Heading from '../heading/style';
 import { GappedWrapper, Wrapper } from '../wrapper/style';
 import { BlogsWrapper, BlogMain } from './style';
 
@@ -9,9 +8,9 @@ const Blogs = ({ Blogs }) => {
     <Wrapper>
       <GappedWrapper>
         <BlogMain>
-          <Heading level={2}>
+          <h2>
             For the latest marketing tips, trends, and news, check out our blog!
-          </Heading>
+          </h2>
         </BlogMain>
         <BlogsWrapper>
           {Blogs.map(({ node }) => (

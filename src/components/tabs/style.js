@@ -1,14 +1,42 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../button/style';
-import { Description } from '../leadSection/style';
 
 export const ContentWrapper = styled.div`
+  padding-bottom: 30px;
+  width: 100%;
+`;
+
+export const LeftContentWrapper = styled.div`
+  width: 100%;
+  max-width: 500px;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
+export const RightContentWrapper = styled(LeftContentWrapper)`
+  margin-left: auto;
+  max-width: 580px;
+`;
+
+export const ContentDescription = styled.p`
+  ${(props) =>
+    props.paddingTop &&
+    css`
+      padding-top: ${props.paddingTop}rem;
+      color: ${props.color};
+      margin: ${props.margin ? props.margin : 'inherit'};
+    `}
+`;
+
+export const TabWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const LeftWrapper = styled.div`
+export const LeftTabWrapper = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -19,7 +47,7 @@ export const LeftWrapper = styled.div`
   }
 `;
 
-export const RightWrapper = styled(LeftWrapper)`
+export const RightTabWrapper = styled(LeftTabWrapper)`
   justify-content: center;
   padding: 0 0 0 4rem;
 
@@ -28,7 +56,7 @@ export const RightWrapper = styled(LeftWrapper)`
   }
 `;
 
-export const FeatureBox = styled.div`
+export const TabFeatureBox = styled.div`
   padding: 1.75rem 1.5rem;
   background: #fff;
   border-radius: 5px;
@@ -47,6 +75,7 @@ export const FeatureBox = styled.div`
     font-size: 1.125rem;
     margin: 0;
   }
+
   ${(props) =>
     props.active &&
     css`
@@ -63,14 +92,14 @@ export const FeatureBox = styled.div`
   }
 `;
 
-export const Count = styled.span`
+export const TabCount = styled.span`
   font-size: 1.75rem;
   margin-right: 1.5rem;
   font-family: 'Merriweather', serif;
   opacity: 0.5;
 `;
 
-export const RightContent = styled.div`
+export const TabRightContent = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -79,14 +108,14 @@ export const RightContent = styled.div`
   }
 `;
 
-export const Content = styled(Description)`
+export const TabContent = styled(ContentDescription)`
   span {
     display: block;
     margin-top: 1rem;
   }
 `;
 
-export const CTAButton = styled(Button)`
+export const TabCTAButton = styled(Button)`
   width: 50%;
   margin-top: 2rem;
   white-space: nowrap;
@@ -97,7 +126,7 @@ export const CTAButton = styled(Button)`
   }
 `;
 
-export const MobileContentBox = styled(RightContent)`
+export const TabMobileContentBox = styled(RightContentWrapper)`
   display: none;
 
   @media (max-width: 767px) {

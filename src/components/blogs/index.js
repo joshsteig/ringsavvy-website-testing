@@ -1,12 +1,13 @@
 import React from 'react';
 import BlogCard from '../blogCard';
-import { GappedWrapper, Wrapper } from '../wrapper/style';
+import { Section } from '../section/style';
+import { Wrapper } from '../wrapper/style';
 import { BlogsWrapper, BlogMain } from './style';
 
 const Blogs = ({ Blogs }) => {
   return (
-    <Wrapper>
-      <GappedWrapper>
+    <Section>
+      <Wrapper>
         <BlogMain>
           <h2>
             For the latest marketing tips, trends, and news, check out our blog!
@@ -17,8 +18,8 @@ const Blogs = ({ Blogs }) => {
             <BlogCard data={node} />
           ))}
         </BlogsWrapper>
-      </GappedWrapper>
-    </Wrapper>
+      </Wrapper>
+    </Section>
   );
 };
 

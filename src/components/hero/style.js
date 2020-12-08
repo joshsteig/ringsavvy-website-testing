@@ -20,8 +20,11 @@ export const HeroWrapper = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding-top: 90px;
+    padding-top: 120px;
+    padding-bottom: 40px;
     background-position: center;
+    padding-right: 5%;
+    padding-left: 5%;
   }
 `;
 

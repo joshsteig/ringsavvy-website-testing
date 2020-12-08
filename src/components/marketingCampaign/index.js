@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../button/style';
-import { GappedWrapper, Wrapper } from '../wrapper/style';
+import { Section } from '../section/style';
+import { Wrapper } from '../wrapper/style';
 import {
   BannerOverLay,
   BannerWrapper,
@@ -15,9 +16,9 @@ import {
 
 const MarketingCompaign = () => {
   return (
-    <Wrapper>
-      <MarketingWrapper />
-      <GappedWrapper>
+    <Section>
+      <Wrapper>
+        <MarketingWrapper />
         <ContentWrapper>
           <h2>A great marketing campaign can only take your business so far</h2>
           <Content>
@@ -59,8 +60,8 @@ const MarketingCompaign = () => {
             </RightWrapper>
           </BannerOverLay>
         </BannerWrapper>
-      </GappedWrapper>
-    </Wrapper>
+      </Wrapper>
+    </Section>
   );
 };
 

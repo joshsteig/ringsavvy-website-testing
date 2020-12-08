@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const Description = styled.p`
+  ${(props) =>
+    props.paddingTop &&
+    css`
+      padding-top: ${props.paddingTop}rem;
+      color: ${props.color};
+      margin: ${props.margin ? props.margin : 'inherit'};
+    `}
+`;
 
 export const SliderWrapper = styled.div`
   width: 100%;

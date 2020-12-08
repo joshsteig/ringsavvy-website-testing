@@ -4,15 +4,14 @@ import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 import Hero from '../components/hero';
-import LeadSection from '../components/leadSection';
-import Features from '../components/features';
-import MarketingCompaign from '../components/marketingCompaign';
+import Tabs from '../components/tabs';
+import MarketingCompaign from '../components/marketingCampaign';
 import Blogs from '../components/blogs';
 import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
   const { location,  data } = props;
-  const FeaturesData = [
+  const featuresData = [
     [
       {
         title: 'We’re always live, always professional',
@@ -61,7 +60,7 @@ export default function RootIndex(props) {
     ],
   ];
 
-  const LeadData = [
+  const leadData = [
     {
       title: 'Why businesses trust Ring Savvy for their lead capturing needs',
       description:
@@ -87,12 +86,11 @@ export default function RootIndex(props) {
       </Helmet>
 
       <Hero />
-      <LeadSection LeadData={LeadData[0]} />
-      <Features FeaturesData={FeaturesData[0]} />
+      
+      <Tabs leadData={leadData[0]}  featuresData={featuresData[0]} />
       <Testimonials />
       <MarketingCompaign />
-      <LeadSection LeadData={LeadData[1]} horizontal={true} />
-      <Features FeaturesData={FeaturesData[1]} />
+      <Tabs leadData={leadData[1]} featuresData={featuresData[1]} />
       <Blogs Blogs={data?.allContentfulPost?.edges}/>
     </Layout>
   );

@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import Container from '../container';
 import Navigation from '../navigation';
 import Footer from '../footer';
-
 import { GlobalStyles } from '../../shared/globalStyles';
 import { GlobalPostStyles } from '../../shared/globalPostStyles';
 import theme from '../../shared/theme';

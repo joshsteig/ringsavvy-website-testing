@@ -101,7 +101,7 @@ export default function RootIndex(props) {
       </Section>
      
       <Section> 
-        <LeadContentSection leadData={leadData[1]} />
+        <LeadContentSection leadData={leadData[1]} horizontal={true} />
         <Tabs featuresData={featuresData[1]} />
       </Section>
 

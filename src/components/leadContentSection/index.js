@@ -8,16 +8,16 @@ import {
   LeadContentSectionWrapper,
 } from './style';
 
-const LeadContentSection = ({ leadData }) => {
+const LeadContentSection = ({ leadData, horizontal = false }) => {
   const { title, description } = leadData;
   return (
     <Wrapper>
       <LeadContentSectionWrapper>
         <ContentWrapper>
-          <LeftContentWrapper>
+          <LeftContentWrapper horizontal={horizontal}>
             <h2>{title}</h2>
           </LeftContentWrapper>
-          <RightContentWrapper>
+          <RightContentWrapper horizontal={horizontal}>
             <ContentDescription>{description}</ContentDescription>
           </RightContentWrapper>
         </ContentWrapper>

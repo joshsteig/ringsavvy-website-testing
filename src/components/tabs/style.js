@@ -112,6 +112,7 @@ export const TabMobileContentBox = styled.div`
 
   @media (max-width: 767px) {
     display: flex;
+    flex-direction: column;
     margin-bottom: 0;
     transition: height 0.5s, margin-bottom 0.5s, opacity 0.6s;
     height: 0;

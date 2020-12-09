@@ -9,8 +9,14 @@ export const LeadContentSectionWrapper = styled.div`
 export const ContentWrapper = styled.div`
   padding-bottom: 30px;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  ${(props) =>
+    props.horizontal &&
+    css`
+      display: flex;
+      @media (max-width: 767px) {
+        flex-direction: column;
+      }
+    `}
 `;
 
 export const LeftContentWrapper = styled.div`
@@ -35,18 +41,9 @@ export const RightContentWrapper = styled(LeftContentWrapper)`
   ${(props) =>
     props.horizontal &&
     css`
-      margin-left: 0;
-      margin-top: 1em;
       width: 60%;
-    `}
-`;
-
-export const ContentDescription = styled.p`
-  ${(props) =>
-    props.paddingTop &&
-    css`
-      padding-top: ${props.paddingTop}rem;
-      color: ${props.color};
-      margin: ${props.margin ? props.margin : 'inherit'};
+      @media (max-width: 767px) {
+        width: 100%;
+      }
     `}
 `;

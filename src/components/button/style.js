@@ -66,7 +66,7 @@ export const Button = styled(Link)`
       padding: 0.75rem 2.75rem;
     `}
   ${(props) =>
-    props.transparent &&
+    props.$transparent &&
     css`
       background: transparent;
       color: white;
@@ -76,7 +76,7 @@ export const Button = styled(Link)`
       }
     `}
   ${(props) =>
-    props.hoverColor &&
+    props.$hoverColor &&
     css`
       &:hover {
         background: transparent;
@@ -85,7 +85,7 @@ export const Button = styled(Link)`
       }
     `}
   ${(props) =>
-    props.whiteBorder &&
+    props.$whiteBorder &&
     css`
       border: 2px solid white;
     `}
@@ -95,7 +95,7 @@ export const Button = styled(Link)`
       border: 1px solid #0abe51;
     `}
   ${(props) =>
-    props.primary &&
+    props.$primary &&
     css`
       background: #0abe51;
       color: white;

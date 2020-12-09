@@ -47,13 +47,14 @@ export default () => {
           <span>&#9776;</span> Menu
         </ToggleButton>
         <NavigationList active={isToggle}>
-          {Links.map(({ name, path }) => (
-            <ListItem>
+          {Links.map(({ name, path }, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <ListItem key={i}>
               <NavigationLink to={path}>{name}</NavigationLink>
             </ListItem>
           ))}
           <ListItem>
-            <NavigationCTA transparent whiteBorder>
+            <NavigationCTA $transparent $whiteBorder to='/'>
               Try for Free
             </NavigationCTA>
           </ListItem>

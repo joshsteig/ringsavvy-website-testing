@@ -21,7 +21,8 @@ const Tabs = ({ featuresData }) => {
       <TabWrapper>
         <LeftTabWrapper>
           {featuresData.map(({ title, description }, index) => (
-            <>
+            // eslint-disable-next-line react/no-array-index-key
+            <React.Fragment key={index}>
               <TabFeatureBox
                 onClick={async () => {
                   const indexFound = activeTabs.indexOf(index);
@@ -29,7 +30,7 @@ const Tabs = ({ featuresData }) => {
                     setTabs([...activeTabs, index]);
                   } else {
                     activeTabs.splice(indexFound, 1);
-                    setTabs(activeTabs);
+                    setTabs([...activeTabs]);
                   }
                   setTab(index);
                 }}
@@ -48,11 +49,11 @@ const Tabs = ({ featuresData }) => {
                   }}
                   paddingTop={1}
                 />
-                <TabCTAButton primary padding='large'>
+                <TabCTAButton $primary padding='large' to='/'>
                   {featuresData[currentTab].ctaText}
                 </TabCTAButton>
               </TabMobileContentBox>
-            </>
+            </React.Fragment>
           ))}
         </LeftTabWrapper>
         <RightTabWrapper>
@@ -64,7 +65,7 @@ const Tabs = ({ featuresData }) => {
               }}
               paddingTop={1}
             />
-            <TabCTAButton primary padding='large'>
+            <TabCTAButton $primary padding='large' to='/'>
               {featuresData[currentTab].ctaText}
             </TabCTAButton>
           </TabRightContent>

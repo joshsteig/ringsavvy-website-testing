@@ -23,16 +23,16 @@ const Testimonials = () => {
     slidesPerView: 1.1,
     spaceBetween: 20,
     loop: true,
-    centeredSlides: false,
+    centeredSlides: true,
+    centeredSlidesBounds: true,
     breakpoints: {
       768: {
         spaceBetween: 40,
         slidesPerView: 'auto',
-        centeredSlides: true,
       },
     },
     on: {
-      init: function(e) {
+      init(e) {
         setSwiper(e);
         e.slideTo(1, 1000);
       },
@@ -50,8 +50,9 @@ const Testimonials = () => {
         </HeadingWrapper>
       </Wrapper>
       <Swiper {...params}>
-        {[1, 2, 3].map((item) => (
-          <SliderItem>
+        {[1, 2, 3].map((item, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <SliderItem key={i}>
             <h3>Dont think twice about hiring Ring Savy, they are the one!</h3>
             <Description marginTop={1}>
               Great answering service! You don’t realize how many business calls

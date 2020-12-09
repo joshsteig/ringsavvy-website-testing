@@ -58,7 +58,7 @@ export const CtaWrapper = styled.div`
   @media (max-width: 767px) {
     flex-wrap: wrap;
 
-    button {
+    a {
       width: 100%;
       margin: 0.5rem 0;
     }

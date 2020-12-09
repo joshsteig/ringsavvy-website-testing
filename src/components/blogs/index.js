@@ -12,8 +12,8 @@ const Blogs = ({ Blogs }) => {
         </h2>
       </BlogMain>
       <BlogsWrapper>
-        {Blogs.map(({ node }) => (
-          <BlogCard data={node} />
+        {Blogs.map(({ node }, index) => (
+          <BlogCard data={node} key={index} />
         ))}
       </BlogsWrapper>
     </Wrapper>

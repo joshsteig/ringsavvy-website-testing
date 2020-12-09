@@ -8,8 +8,6 @@ import Tabs from '../components/tabs';
 import MarketingCompaign from '../components/marketingCampaign';
 import Blogs from '../components/blogs';
 import Testimonials from '../components/testimonials';
-import LeadContentSection from '../components/leadContentSection';
-import { Section } from '../components/section/style';
 
 export default function RootIndex(props) {
   const { location,  data } = props;
@@ -86,29 +84,12 @@ export default function RootIndex(props) {
           content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-
-      <Hero />
-
-      <Section>
-        <LeadContentSection leadData={leadData[0]} />
-        <Tabs featuresData={featuresData[0]} />
-      </Section>
-      
+      <Hero />      
+      <Tabs leadData={leadData[0]}  featuresData={featuresData[0]} />
       <Testimonials />
-      
-      <Section> 
-        <MarketingCompaign />
-      </Section>
-     
-      <Section> 
-        <LeadContentSection leadData={leadData[1]} horizontal={true} />
-        <Tabs featuresData={featuresData[1]} />
-      </Section>
-
-      <Section>
-        <Blogs Blogs={data?.allContentfulPost?.edges} />
-      </Section>
-     
+      <MarketingCompaign />
+      <Tabs horizontal={true} leadData={leadData[1]} featuresData={featuresData[1]} />
+      <Blogs Blogs={data?.allContentfulPost?.edges}/>     
     </Layout>
   );
 }

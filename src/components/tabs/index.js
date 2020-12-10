@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import LeadContentSection from '../leadContentSection';
 import { Section } from '../section/style';
 import { Wrapper } from '../wrapper/style';
-import LeadContentSection from './leadContentSection';
 import {
   TabWrapper,
   LeftTabWrapper,

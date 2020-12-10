@@ -1,46 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../button/style';
 
-export const ContentWrapper = styled.div`
-  padding-bottom: 30px;
-  width: 100%;
-  ${(props) =>
-    props.horizontal &&
-    css`
-      display: flex;
-      @media (max-width: 767px) {
-        flex-direction: column;
-      }
-    `}
-`;
-
-export const LeftContentWrapper = styled.div`
-  width: 100%;
-  max-width: 500px;
-  ${(props) =>
-    props.horizontal &&
-    css`
-      width: 40%;
-    `}
-
-  @media (max-width: 767px) {
-    width: 100%;
-  }
-`;
-
-export const RightContentWrapper = styled(LeftContentWrapper)`
-  margin-left: auto;
-  max-width: 580px;
-  ${(props) =>
-    props.horizontal &&
-    css`
-      width: 60%;
-      @media (max-width: 767px) {
-        width: 100%;
-      }
-    `}
-`;
-
 export const TabWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -55,6 +15,8 @@ export const LeftTabWrapper = styled.div`
 
   @media (max-width: 767px) {
     width: 100%;
+    display: block;
+    height: 100%;
   }
 `;
 
@@ -169,15 +131,17 @@ export const TabMobileContentBox = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    transition: all 0.6s;
+    max-height: 0;
+    transition: height 0.5s, max-height 0.5s, margin-bottom 0.5s;
     height: 0;
     overflow: hidden;
     ${(props) =>
       props.active &&
       css`
         margin-bottom: 2rem;
+        max-height: 1200px;
         height: 100%;
-        transition: all 0.4s;
+        transition: height 0.5s, max-height 0.5s, margin-bottom 0.5s;
         overflow: visible;
       `}
   }

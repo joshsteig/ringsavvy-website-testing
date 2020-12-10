@@ -28,7 +28,7 @@ const Tabs = ({ featuresData, leadData, horizontal = false }) => {
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
                 <TabFeatureBox
-                  onClick={async () => {
+                  onClick={() => {
                     const indexFound = activeTabs.indexOf(index);
                     if (indexFound === -1) {
                       setTabs([...activeTabs, index]);

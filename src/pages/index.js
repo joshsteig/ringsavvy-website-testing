@@ -5,12 +5,11 @@ import { Helmet } from 'react-helmet';
 import Layout from '../components/layout';
 import Hero from '../components/hero';
 import Tabs from '../components/tabs';
-import MarketingCompaign from '../components/marketingCampaign';
-import Blogs from '../components/blogs';
+import MarketingCampaign from '../components/marketingCampaign';
 import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
-  const { location,  data } = props;
+  const { location, data } = props;
   const featuresData = [
     [
       {
@@ -84,22 +83,22 @@ export default function RootIndex(props) {
           content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-      <Hero />      
-      <Tabs leadData={leadData[0]}  featuresData={featuresData[0]} />
+      <Hero />
+      <Tabs leadData={leadData[0]} featuresData={featuresData[0]} />
       <Testimonials />
-      <MarketingCompaign />
-      <Tabs horizontal={true} leadData={leadData[1]} featuresData={featuresData[1]} />
-      <Blogs Blogs={data?.allContentfulPost?.edges}/>     
+      <MarketingCampaign />
+      <Tabs
+        horizontal={true}
+        leadData={leadData[1]}
+        featuresData={featuresData[1]}
+      />
     </Layout>
   );
 }
 
 export const pageQuery = graphql`
-  query HomeQuery{
-    allContentfulPost(
-      sort: { fields: [publishDate], order: DESC }    
-      limit: 3
-    ) {
+  query HomeQuery {
+    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 3) {
       edges {
         node {
           title
@@ -108,7 +107,7 @@ export const pageQuery = graphql`
             fluid(maxWidth: 470, maxHeight: 230) {
               ...GatsbyContentfulFluid
             }
-          }          
+          }
         }
       }
     }

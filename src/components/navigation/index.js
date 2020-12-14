@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Logo from '../logo';
-import { Wrapper } from '../wrapper/style';
+import { Wrapper } from '../wrapper';
 import {
-  NavigationWrapper,
+  Navigation,
   LogoLink,
   NavigationList,
   ListItem,
@@ -39,7 +39,7 @@ export default () => {
 
   return (
     <Wrapper>
-      <NavigationWrapper>
+      <Navigation>
         <LogoLink to='/'>
           <Logo />
         </LogoLink>
@@ -59,7 +59,7 @@ export default () => {
             </NavigationCTA>
           </ListItem>
         </NavigationList>
-      </NavigationWrapper>
+      </Navigation>
     </Wrapper>
   );
 };

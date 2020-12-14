@@ -1,7 +1,7 @@
 import React from 'react';
 import { P, SectionTitle } from './style';
 
-import { StyledLink } from '../../button/style';
+import { StyledLink } from '../../button';
 
 export default () => (
   <div>

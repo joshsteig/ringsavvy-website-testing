@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { Button } from '../button/style';
+import { Button } from '../button';
 
-export const TabWrapper = styled.div`
+export const Tabs = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;

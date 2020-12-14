@@ -21,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.5;
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
@@ -33,7 +33,7 @@ export const GlobalStyles = createGlobalStyle`
   p,
   ul,
   ol {
-    color: ${(props) => props.theme.global.colors.grey};
+    color: ${({ theme }) => theme.global.colors.grey};
   }
 
   h1,
@@ -42,44 +42,44 @@ export const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6 {   
-    font-family: ${(props) => props.theme.global.fonts.serif};
-    color: ${(props) => props.theme.global.colors.black};
+    font-family: ${({ theme }) => theme.global.fonts.serif};
+    color: ${({ theme }) => theme.global.colors.black};
     font-weight: bold;
     line-height: 1.2;
     margin : 0 0 24px;
   }
 
   h1 {
-    font-size: ${(props) => props.theme.global.fontSizes.xxl}
+    font-size: ${({ theme }) => theme.global.fontSizes.xxl}
   }
 
   h2 {
-    font-size: ${(props) => props.theme.global.fontSizes.xxl}
+    font-size: ${({ theme }) => theme.global.fontSizes.xxl}
   }
 
   h3 {
-    font-size: ${(props) => props.theme.global.fontSizes.lg}
+    font-size: ${({ theme }) => theme.global.fontSizes.lg}
   }
 
   h4 {
-    font-size: ${(props) => props.theme.global.fontSizes.md}
+    font-size: ${({ theme }) => theme.global.fontSizes.md}
   }
 
-  @media ${(props) => props.theme.global.mediaQueries.sm} {
+  @media ${({ theme }) => theme.global.mediaQueries.sm} {
     h1 {
-      font-size: ${(props) => props.theme.global.fontSizes.xxl}
+      font-size: ${({ theme }) => theme.global.fontSizes.xxl}
     }
 
     h2 {
-      font-size: ${(props) => props.theme.global.fontSizes.xl}
+      font-size: ${({ theme }) => theme.global.fontSizes.xl}
     }
 
     h3 {
-      font-size: ${(props) => props.theme.global.fontSizes.lg}
+      font-size: ${({ theme }) => theme.global.fontSizes.lg}
     }
 
     h4 {
-      font-size: ${(props) => props.theme.global.fontSizes.md}
+      font-size: ${({ theme }) => theme.global.fontSizes.md}
     }
   }
   
@@ -102,17 +102,5 @@ export const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
-  }
-  
-  /**
-   * article grid
-   */
-  .article-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 5vmin;
   }
 `;

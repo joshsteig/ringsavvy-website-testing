@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Footer = styled.footer`
-  background-color: ${(props) => props.theme.global.colors.lightGrey};
+  background-color: ${({ theme }) => theme.global.colors.lightGrey};
   margin-top: 80px;
 `;
 
@@ -37,7 +37,7 @@ export const SupportCallout = styled.div`
   }
 
   p {
-    font-size: ${(props) => props.theme.global.fontSizes.md};
+    font-size: ${({ theme }) => theme.global.fontSizes.md};
     margin: 0;
   }
 `;

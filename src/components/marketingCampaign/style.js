@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Background from '../../assets/images/corporate-office-bg-overlay.jpg';
 import WaterMark from '../../assets/images/logo-watermark.svg';
 
-export const MarketingWrapper = styled.div`
+export const LogoWatermark = styled.div`
   background-image: url(${WaterMark});
   background-repeat: no-repeat;
   background-size: contain;
@@ -15,19 +15,14 @@ export const MarketingWrapper = styled.div`
   z-index: -1;
 `;
 
-export const ContentWrapper = styled.div`
+export const Content = styled.div`
   width: 66.66%;
   margin-left: auto;
-  padding: 0 20px;
 
   @media (max-width: 767px) {
     width: 100%;
     padding: 0;
   }
-`;
-
-export const Content = styled.div`
-  margin: 2rem 0;
 `;
 
 export const BannerWrapper = styled.div`

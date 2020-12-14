@@ -8,7 +8,7 @@ import { GlobalStyles } from '../../shared/globalStyles';
 import { GlobalPostStyles } from '../../shared/globalPostStyles';
 import theme from '../../shared/theme';
 
-export default function Template(props) {
+export default (props) => {
   const { children, postLayout } = props;
 
   return (
@@ -16,8 +16,8 @@ export default function Template(props) {
       <Helmet>
         <html lang='en' />
       </Helmet>
-      {postLayout ? <GlobalPostStyles /> : null}
       <GlobalStyles />
+      {postLayout ? <GlobalPostStyles /> : null}
       <Container>
         <Navigation />
         {children}
@@ -25,4 +25,4 @@ export default function Template(props) {
       </Container>
     </ThemeProvider>
   );
-}
+};

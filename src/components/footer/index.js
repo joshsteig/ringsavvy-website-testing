@@ -9,7 +9,7 @@ import {
   SupportMenu,
 } from '../menu';
 
-import { Wrapper } from '../wrapper/style';
+import { Wrapper } from '../wrapper';
 import { Footer, FooterNavigation } from './style';
 
 export default () => (

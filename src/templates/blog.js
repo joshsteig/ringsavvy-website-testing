@@ -3,10 +3,18 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
-import PostPreview from '../components/postPreview';
-import { Wrapper } from '../components/wrapper/style';
+import PostPreview from '../components/postPreview/index';
+import Pagination from '../components/pagination';
+import { Wrapper } from '../components/wrapper';
+import { PostPreviewList } from '../components/postPreviewList';
 
-export default function BlogIndex({ data, location }) {
+export default function BlogIndex({ pageContext, data, location }) {
+  const { currentPage, numPages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
+  const prevPage = currentPage - 1 === 1 ? '' : `/${currentPage - 1}`;
+  const nextPage = `/${currentPage + 1}`;
+
   const posts = data.allContentfulPost.edges;
 
   return (
@@ -19,16 +27,24 @@ export default function BlogIndex({ data, location }) {
         />
       </Helmet>
       <Wrapper>
-        <h2>Recent articles</h2>
-        <ul className='article-list'>
+        <h2>Blog</h2>
+        <PostPreviewList>
           {posts.map(({ node }) => {
             return (
               <li key={node.slug}>
-                <PostPreview article={node} />
+                <PostPreview post={node} />
               </li>
             );
           })}
-        </ul>
+        </PostPreviewList>
+        <Pagination
+          currentPage={currentPage}
+          numPages={numPages}
+          isFirst={isFirst}
+          isLast={isLast}
+          nextPage={nextPage}
+          prevPage={prevPage}
+        />
       </Wrapper>
     </Layout>
   );
@@ -46,7 +62,7 @@ export const pageQuery = graphql`
           title
           slug
           featuredImage {
-            fluid(maxWidth: 470, maxHeight: 230) {
+            fluid(maxWidth: 470, quality: 70) {
               ...GatsbyContentfulFluid
             }
           }

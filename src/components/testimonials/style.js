@@ -10,7 +10,7 @@ export const Description = styled.p`
     `}
 `;
 
-export const SliderWrapper = styled.div`
+export const Slider = styled.div`
   width: 100%;
   padding: 2rem 0;
   margin: 2rem 0;
@@ -76,14 +76,14 @@ export const WriterWrapper = styled.div`
 `;
 
 export const Bottom = styled.div`
-  display : flex;
-  align-items-center;
-  justify-content : space-between;
-  min-height : 90px;
-  padding : 0 3rem 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+  padding: 0 3rem 0 1.5rem;
 
-  @media(max-width:767px){
-    display : none;
+  @media (max-width: 767px) {
+    display: none;
   }
 `;
 

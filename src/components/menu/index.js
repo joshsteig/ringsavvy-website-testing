@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const UnstyledList = styled.ul`
-  font-size: ${(props) => props.theme.global.fontSizes.base};
+  font-size: ${({ theme }) => theme.global.fontSizes.base};
   list-style: none;
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@ const UnstyledList = styled.ul`
 `;
 
 const Title = styled.h5`
-  font-size: ${(props) => props.theme.global.fontSizes.base};
+  font-size: ${({ theme }) => theme.global.fontSizes.base};
   margin: 0 0 0.75em;
 `;
 

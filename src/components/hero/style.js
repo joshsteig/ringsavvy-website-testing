@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HeroWrapper = styled.div`
+export const Hero = styled.div`
   background-image: url(${(props) => props.backgroundImage});
   background-position: 0 34%;
   background-repeat: no-repeat;
@@ -28,9 +28,14 @@ export const HeroWrapper = styled.div`
   }
 `;
 
-export const ContentWrapper = styled.div`
-  width: 60%;
+export const Content = styled.div`
   padding-bottom: 3rem;
+  width: 60%;
+
+  h1,
+  p {
+    color: #fff;
+  }
 
   @media (max-width: 767px) {
     width: 100%;
@@ -39,7 +44,6 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: white;
   font-size: 3rem;
 
   @media (max-width: 767px) {
@@ -48,7 +52,7 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.p`
-  color: white;
+  margin: 0 0 2.2em;
 `;
 
 export const CtaWrapper = styled.div`
@@ -60,7 +64,6 @@ export const CtaWrapper = styled.div`
 
     a {
       width: 100%;
-      margin: 0.5rem 0;
     }
   }
 `;

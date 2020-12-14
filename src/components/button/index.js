@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 
 export const StyledLink = styled(Link)`
-  background-color: ${(props) => props.theme.global.colors.primary};
+  background-color: ${({ theme }) => theme.global.colors.primary};
   border-radius: 100px;
   box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.14);
   color: #ffffff;
   display: inline-block;
-  font-family: ${(props) => props.theme.global.fonts.serif};
-  font-size: ${(props) => props.theme.global.fontSizes.base};
+  font-family: ${({ theme }) => theme.global.fonts.serif};
+  font-size: ${({ theme }) => theme.global.fontSizes.base};
   font-weight: bold;
   line-height: 1;
   padding: 1em 3.25em;
@@ -24,20 +24,21 @@ export const StyledLink = styled(Link)`
 
 export const StyledOutlineLink = styled(StyledLink)`
   background-color: transparent;
-  border: 2px solid ${(props) => props.theme.global.colors.white};
+  border: 2px solid ${({ theme }) => theme.global.colors.white};
   box-shadow: none;
-  color: ${(props) => props.theme.global.colors.white};
+  color: ${({ theme }) => theme.global.colors.white};
   cursor: pointer;
 
   &:hover {
-    border: 2px solid ${(props) => props.theme.global.colors.primary};
-    background-color: ${(props) => props.theme.global.colors.primary};
+    border: 2px solid ${({ theme }) => theme.global.colors.primary};
+    background-color: ${({ theme }) => theme.global.colors.primary};
     box-shadow: none;
     color: #fff;
     transform: none;
   }
 `;
 
+//TODO: Refactor Button into StyledLink component above - use throughout the website links
 export const Button = styled(Link)`
   font-weight: 600;
   padding: 0.5rem 3rem;
@@ -46,7 +47,7 @@ export const Button = styled(Link)`
   cursor: pointer;
   line-height: 1;
   text-align: center;
-  font-family: ${(props) => props.theme.global.fonts.serif};
+  font-family: ${({ theme }) => theme.global.fonts.serif};
 
   a {
     color: inherit;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ContentWrapper = styled.div`
+export const LeadContentSection = styled.div`
   padding-bottom: 30px;
   width: 100%;
   ${(props) =>

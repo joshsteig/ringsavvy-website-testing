@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import LeadContentSection from '../leadContentSection';
-import { Section } from '../section/style';
-import { Wrapper } from '../wrapper/style';
+import { Section } from '../section';
+import { Wrapper } from '../wrapper';
 import {
-  TabWrapper,
+  Tabs,
   LeftTabWrapper,
   RightTabWrapper,
   TabFeatureBox,
@@ -14,14 +14,14 @@ import {
   TabMobileContentBox,
 } from './style';
 
-const Tabs = ({ featuresData, leadData, horizontal = false }) => {
+export default ({ featuresData, leadData, horizontal = false }) => {
   const [currentTab, setTab] = useState(0);
   const [activeTabs, setTabs] = useState([0]);
 
   return (
     <Section>
       <Wrapper>
-        <TabWrapper>
+        <Tabs>
           <LeadContentSection leadData={leadData} horizontal={horizontal} />
           <LeftTabWrapper>
             {featuresData.map(({ title, description }, index) => (
@@ -77,10 +77,8 @@ const Tabs = ({ featuresData, leadData, horizontal = false }) => {
               </TabCTAButton>
             </TabRightContent>
           </RightTabWrapper>
-        </TabWrapper>
+        </Tabs>
       </Wrapper>
     </Section>
   );
 };
-
-export default Tabs;

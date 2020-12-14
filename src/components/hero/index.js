@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '../../utils/contentful';
-import { Button } from '../button/style';
-import { Wrapper } from '../wrapper/style';
-import { ContentWrapper, CtaWrapper, Description, HeroWrapper } from './style';
+import { Button } from '../button';
+import { Wrapper } from '../wrapper';
+import { Content, CtaWrapper, Description, Hero } from './style';
 
-const Hero = () => {
+export default () => {
+  //TODO: use StaticQuery to pull data? or just grab from assets/images?
   const [heroBg, setBg] = useState('');
   useEffect(() => {
     client
@@ -15,10 +16,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <HeroWrapper backgroundImage={heroBg}>
+    <Hero backgroundImage={heroBg}>
       <Wrapper>
-        <ContentWrapper>
-          <h1 style={{ color: '#ffffff' }}>
+        <Content>
+          <h1>
             Our virtual receptionists help optimize the workflow of field
             service businesses
           </h1>
@@ -42,10 +43,8 @@ const Hero = () => {
               Get a custom quote
             </Button>
           </CtaWrapper>
-        </ContentWrapper>
+        </Content>
       </Wrapper>
-    </HeroWrapper>
+    </Hero>
   );
 };
-
-export default Hero;

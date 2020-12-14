@@ -3,7 +3,7 @@ import Swiper from 'react-id-swiper';
 import Google from '../../assets/images/google-logo.svg';
 import ArrowPrev from '../../assets/images/reviews-prev.svg';
 import ArrowNext from '../../assets/images/reviews-next.svg';
-import { Wrapper } from '../wrapper/style';
+import { Wrapper } from '../wrapper';
 import {
   Description,
   ArrowsWrapper,
@@ -12,12 +12,12 @@ import {
   GreenContainer,
   HeadingWrapper,
   SliderItem,
-  SliderWrapper,
+  Slider,
   Title,
   WriterWrapper,
 } from './style';
 
-const Testimonials = () => {
+export default () => {
   const [swiper, setSwiper] = useState(null);
   const params = {
     slidesPerView: 1.1,
@@ -40,7 +40,7 @@ const Testimonials = () => {
   };
 
   return (
-    <SliderWrapper>
+    <Slider>
       <GreenContainer />
       <Wrapper>
         <HeadingWrapper>
@@ -77,13 +77,19 @@ const Testimonials = () => {
             </p>
           </GoogleReviews>
           <ArrowsWrapper>
-            <img src={ArrowPrev} alt='Prev' onClick={() => swiper.slidePrev()} />
-            <img src={ArrowNext} alt='Next' onClick={() => swiper.slideNext()} />
+            <img
+              src={ArrowPrev}
+              alt='Prev'
+              onClick={() => swiper.slidePrev()}
+            />
+            <img
+              src={ArrowNext}
+              alt='Next'
+              onClick={() => swiper.slideNext()}
+            />
           </ArrowsWrapper>
         </Bottom>
       </Wrapper>
-    </SliderWrapper>
+    </Slider>
   );
 };
-
-export default Testimonials;

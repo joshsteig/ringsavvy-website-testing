@@ -5,7 +5,7 @@ export const Section = styled.div`
   position: relative;
 
   :last-of-type {
-    padding-bttom: 0;
+    padding-bottom: 0;
   }
 
   @media only screen and (max-width: 860px) {

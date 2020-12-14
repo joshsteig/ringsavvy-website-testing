@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 
 export const P = styled.p`
-  font-size: ${(props) => props.theme.post.fontSizes.sm};
+  font-size: ${({ theme }) => theme.post.fontSizes.sm};
 `;
 
 export const Aside = styled.aside`
   margin-left: auto;
   width: 335px;
 
-  @media ${(props) => props.theme.global.mediaQueries.lg} {
+  @media ${({ theme }) => theme.global.mediaQueries.lg} {
     margin-right: auto;
     width: 100%;
   }
@@ -35,7 +35,7 @@ export const UnorderedList = styled.ul`
 
 export const RecentPostItem = styled.li`
   border-bottom: 1px solid #e8e8e8;
-  font-size: ${(props) => props.theme.post.fontSizes.sm};
+  font-size: ${({ theme }) => theme.post.fontSizes.sm};
   margin: 0;
   padding: 12px 0;
 
@@ -51,10 +51,10 @@ export const RecentPostItem = styled.li`
 
 export const Date = styled.span`
   display: block;
-  font-size: ${(props) => props.theme.post.fontSizes.xs};
+  font-size: ${({ theme }) => theme.post.fontSizes.xs};
 `;
 
 export const ArticleLink = styled(Link)`
-  color: ${(props) => props.theme.global.colors.primary};
+  color: ${({ theme }) => theme.global.colors.primary};
   text-decoration: none;
 `;

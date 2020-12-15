@@ -24,13 +24,13 @@ export const AuthorContainer = styled.div`
   display: flex;
 `;
 
-export const MetaContainer = styled.div`
+export const Meta = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-export const Author = styled.span`
+export const Name = styled.span`
   color: ${({ theme }) => theme.global.colors.black};
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: 18px;

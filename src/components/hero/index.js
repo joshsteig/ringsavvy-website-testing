@@ -11,7 +11,6 @@ const Hero = () => {
     client
       .getAsset('4UAfv2hN8DUQFyCinSQIfJ')
       .then((asset) => setBg(asset.fields.file.url))
-      // eslint-disable-next-line no-console
       .catch(console.error);
   }, []);
 

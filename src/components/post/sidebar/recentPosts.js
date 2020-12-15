@@ -2,20 +2,20 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import RecentPost from './recentPostItem';
 
-import { SectionTitle, UnorderedList } from './style';
+import * as Styled from './style';
 
 const RecentPosts = ({ data }) => {
   const posts = data.allContentfulPost.edges;
 
   return (
-    <div>
-      <SectionTitle>Recent Posts</SectionTitle>
-      <UnorderedList>
+    <Styled.Section>
+      <Styled.Title>Recent Posts</Styled.Title>
+      <Styled.UnorderedList>
         {posts.map(({ node }) => {
           return <RecentPost key={node.contentful_id} post={node} />;
         })}
-      </UnorderedList>
-    </div>
+      </Styled.UnorderedList>
+    </Styled.Section>
   );
 };
 
@@ -24,12 +24,15 @@ export default () => {
     <StaticQuery
       query={graphql`
         query RecentPosts {
-          allContentfulPost(limit: 4) {
+          allContentfulPost(
+            sort: { fields: [publishDate], order: DESC }
+            limit: 4
+          ) {
             edges {
               node {
                 title
                 contentful_id
-                createdAt(formatString: "MMMM Do, YYYY")
+                publishDate(formatString: "MMMM Do, YYYY")
                 slug
               }
             }

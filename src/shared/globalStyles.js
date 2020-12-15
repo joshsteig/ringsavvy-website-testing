@@ -9,11 +9,12 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  
   html, body {
     overflow-x: hidden;
     width: 100vw;
   }
-
+  
   html {
     font-size: 16px;
   }
@@ -25,15 +26,20 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     -webkit-font-smoothing: antialiased;
   }
-
+  
   a {
     transition: all 0.2s ease-in-out;
   }
-
+  
   p {
     margin: 0 0 1em;
   }
-
+  
+  figure {
+    margin: 0;
+    width: 100%;
+  }
+  
   p,
   ul,
   ol {

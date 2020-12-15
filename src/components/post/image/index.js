@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Image } from './style';
+import * as Styled from './style';
 
-export default ({ alt, fluid }) => (
+const Image = ({ alt, fluid }) => (
   <figure>
-    <Image alt={alt} fluid={fluid} />
+    <Styled.Image alt={alt} fluid={fluid} />
   </figure>
 );
+
+export default Image;

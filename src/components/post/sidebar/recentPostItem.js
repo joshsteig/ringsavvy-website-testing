@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { RecentPostItem, ArticleLink, Date } from './style';
+import * as Styled from './style';
 
-export default ({ post }) => {
-  const { title, slug, createdAt } = post;
+const RecentPostItem = ({ post }) => {
+  const { title, slug, publishDate } = post;
 
   return (
-    <RecentPostItem>
-      <ArticleLink to={`/blog/${slug}`}>{title}</ArticleLink>
-      <Date>{createdAt}</Date>
-    </RecentPostItem>
+    <Styled.RecentPostItem>
+      <Styled.ArticleLink to={`/blog/${slug}`}>{title}</Styled.ArticleLink>
+      <Styled.Date>{publishDate}</Styled.Date>
+    </Styled.RecentPostItem>
   );
 };
+
+export default RecentPostItem;

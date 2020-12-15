@@ -18,7 +18,7 @@ import {
 } from './style';
 
 //TODO: needs adjustments
-export default () => {
+const Testimonials = () => {
   const [swiper, setSwiper] = useState(null);
   const params = {
     slidesPerView: 1.1,
@@ -94,3 +94,5 @@ export default () => {
     </Slider>
   );
 };
+
+export default Testimonials;

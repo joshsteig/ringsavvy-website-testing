@@ -23,7 +23,7 @@ export const Section = styled.section`
   padding: ${(props) => (props.hasShadow ? '36px 28px' : null)};
 `;
 
-export const SectionTitle = styled.h4`
+export const Title = styled.h4`
   margin-top: 0;
 `;
 
@@ -35,7 +35,7 @@ export const UnorderedList = styled.ul`
 
 export const RecentPostItem = styled.li`
   border-bottom: 1px solid #e8e8e8;
-  font-size: ${({ theme }) => theme.post.fontSizes.sm};
+  font-size: 16px;
   margin: 0;
   padding: 12px 0;
 

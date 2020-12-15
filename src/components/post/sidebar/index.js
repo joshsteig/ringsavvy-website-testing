@@ -2,15 +2,13 @@ import React from 'react';
 import RecentPosts from './recentPosts';
 import SignUp from './signUp';
 
-import { Aside, Section } from './style';
+import { Aside } from './style';
 
-export default () => (
+const Sidebar = () => (
   <Aside>
-    <Section hasShadow>
-      <SignUp />
-    </Section>
-    <Section>
-      <RecentPosts />
-    </Section>
+    <SignUp />
+    <RecentPosts />
   </Aside>
 );
+
+export default Sidebar;

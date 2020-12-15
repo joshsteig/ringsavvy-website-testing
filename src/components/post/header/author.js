@@ -1,14 +1,17 @@
 import React from 'react';
 import AuthorGravatar from './authorGravatar';
 
-import { AuthorContainer, MetaContainer, Author, Date } from './style';
+import * as Styled from './style';
+// AuthorContainer, MetaContainer, Author, Date
 
-export default ({ author, date }) => (
-  <AuthorContainer>
+const Author = ({ author, date }) => (
+  <Styled.AuthorContainer>
     <AuthorGravatar gravatar={author.gravatar} />
-    <MetaContainer>
-      <Author>{author.name}</Author>
-      <Date>{date}</Date>
-    </MetaContainer>
-  </AuthorContainer>
+    <Styled.Meta>
+      <Styled.Name>{author.name}</Styled.Name>
+      <Styled.Date>{date}</Styled.Date>
+    </Styled.Meta>
+  </Styled.AuthorContainer>
 );
+
+export default Author;

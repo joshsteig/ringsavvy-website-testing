@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { GravatarImage } from './style';
+import * as Styled from './style';
 
-export default ({ gravatar }) => (
-  <GravatarImage alt={gravatar.title} fluid={gravatar.fluid} />
+const GravatarImage = ({ gravatar }) => (
+  <Styled.GravatarImage alt={gravatar.title} fluid={gravatar.fluid} />
 );
+
+export default GravatarImage;

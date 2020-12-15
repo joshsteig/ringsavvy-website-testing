@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 
-export const PreviewContainer = styled.div`
+export const PostContainer = styled.div`
   margin-bottom: 60px;
 `;
 
@@ -14,15 +14,17 @@ export const PostThumbnail = styled(Img)`
 `;
 
 export const StyledLink = styled(Link)`
-  h2 {
-    font-size: ${({ theme }) => theme.post.fontSizes.lg};
-    text-decoration: none;
-    transition: all 0.2s;
-  }
+  color: ${({ theme }) => theme.global.colors.black};
+  font-family: ${({ theme }) => theme.global.fonts.serif};
+  font-weight: bold;
 
   &:hover {
     color: ${({ theme }) => theme.global.colors.primary};
   }
+`;
+
+export const PostLink = styled(StyledLink)`
+  font-size: 25px;
 `;
 
 export const MoreLink = styled(StyledLink)`

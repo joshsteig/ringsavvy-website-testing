@@ -26,6 +26,10 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+
   p {
     margin: 0 0 1em;
   }
@@ -81,26 +85,5 @@ export const GlobalStyles = createGlobalStyle`
     h4 {
       font-size: ${({ theme }) => theme.global.fontSizes.md}
     }
-  }
-  
-  figure {
-    margin: 0;
-  }
-  
-  img {
-    display: block;
-    width: 100%;
-  }
-
-  button {
-    background : transparent;
-    border: none;
-    outline : none;
-    cursor : pointer;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
   }
 `;

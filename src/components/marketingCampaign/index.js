@@ -1,24 +1,13 @@
 import React from 'react';
 import { Button } from '../button';
-import { Section } from '../section';
 import { Wrapper } from '../wrapper';
-import {
-  BannerOverLay,
-  BannerWrapper,
-  Content,
-  FormWrapper,
-  Input,
-  LeftWrapper,
-  LogoWatermark,
-  RightWrapper,
-} from './style';
+import * as Styled from './style';
 
-export default () => {
+const MarketingCampaign = () => {
   return (
-    <Section>
+    <Styled.WatermarkSection>
       <Wrapper>
-        <LogoWatermark />
-        <Content>
+        <Styled.Content>
           <h2>A great marketing campaign can only take your business so far</h2>
           <p>
             If you’re unable to capture all the new leads your advertising
@@ -35,28 +24,25 @@ export default () => {
             away that you actually care. You only get to make a first impression
             once, and Ring Savvy will make sure it’s a great one.
           </p>
-        </Content>
-        <BannerWrapper>
-          <BannerOverLay>
-            <LeftWrapper>
-              <h3>Want to revisit this later?</h3>
-              <p>Let us send you our company brochure.</p>
-            </LeftWrapper>
-            <RightWrapper>
-              <FormWrapper>
-                <Input
-                  className='w-full'
-                  type='email'
-                  placeholder='Email Address'
-                />
-                <Button padding='medium' $primary to='/'>
-                  Send
-                </Button>
-              </FormWrapper>
-            </RightWrapper>
-          </BannerOverLay>
-        </BannerWrapper>
+        </Styled.Content>
+
+        <Styled.EmailCTA>
+          <Styled.HalfWrapper>
+            <h3>Want to revisit this later?</h3>
+            <p>Let us send you our company brochure.</p>
+          </Styled.HalfWrapper>
+          <Styled.HalfWrapper>
+            <Styled.FormWrapper>
+              <Styled.Input type='email' placeholder='Email Address' />
+              <Button padding='medium' $primary to='/'>
+                Send
+              </Button>
+            </Styled.FormWrapper>
+          </Styled.HalfWrapper>
+        </Styled.EmailCTA>
       </Wrapper>
-    </Section>
+    </Styled.WatermarkSection>
   );
 };
+
+export default MarketingCampaign;

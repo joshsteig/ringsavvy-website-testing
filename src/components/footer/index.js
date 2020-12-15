@@ -1,5 +1,4 @@
 import React from 'react';
-import SupportCallout from './supportCallout';
 import NavigationCol from './navigationCol';
 import {
   ServiceMenu,
@@ -8,15 +7,17 @@ import {
   IndustriesMenu,
   SupportMenu,
 } from '../menu';
-
 import { Wrapper } from '../wrapper';
-import { Footer, FooterNavigation } from './style';
+import * as Styled from './style';
 
-export default () => (
-  <Footer>
+const Footer = () => (
+  <Styled.Footer>
     <Wrapper>
-      <SupportCallout />
-      <FooterNavigation>
+      <Styled.SupportCallout>
+        <h3>Have questions? Our team is here to help. Call 917-765-6141</h3>
+        <p>Monday to Friday from 8am to 6pm EST.</p>
+      </Styled.SupportCallout>
+      <Styled.FooterNavigation>
         <NavigationCol>
           <ServiceMenu />
         </NavigationCol>
@@ -32,8 +33,10 @@ export default () => (
         <NavigationCol>
           <SupportMenu />
         </NavigationCol>
-      </FooterNavigation>
+      </Styled.FooterNavigation>
       <p>©&nbsp;2020 Ring Savvy, Inc.</p>
     </Wrapper>
-  </Footer>
+  </Styled.Footer>
 );
+
+export default Footer;

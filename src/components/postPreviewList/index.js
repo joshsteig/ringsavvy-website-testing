@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+//TODO: Refactor to use differrent grids. Ex. 3 column grid on home page vs blog 2 column page
 export const PostPreviewList = styled.ul`
   display: flex;
   flex-wrap: wrap;

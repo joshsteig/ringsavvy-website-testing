@@ -1,20 +1,19 @@
 import React from 'react';
-import {
-  LeftContentWrapper,
-  RightContentWrapper,
-  LeadContentSection,
-} from './style';
+import * as Styled from './style';
 
-export default ({ leadData, horizontal = false }) => {
-  const { title, description } = leadData;
+const LeadContentSection = ({ leadContent, horizontal = false }) => {
+  const { heading, content } = leadContent;
+
   return (
-    <LeadContentSection horizontal={horizontal}>
-      <LeftContentWrapper horizontal={horizontal}>
-        <h2>{title}</h2>
-      </LeftContentWrapper>
-      <RightContentWrapper horizontal={horizontal}>
-        <p>{description}</p>
-      </RightContentWrapper>
-    </LeadContentSection>
+    <Styled.LeadContentSection horizontal={horizontal}>
+      <Styled.Heading horizontal={horizontal}>
+        <h2>{heading}</h2>
+      </Styled.Heading>
+      <Styled.Content horizontal={horizontal}>
+        <p>{content}</p>
+      </Styled.Content>
+    </Styled.LeadContentSection>
   );
 };
+
+export default LeadContentSection;

@@ -1,13 +1,15 @@
 import React from 'react';
 import { PaginationList, PaginationLink } from './style';
 
-export default (props) => {
-  const { currentPage, numPages, isFirst, isLast, nextPage, prevPage } = props;
+const Pagination = ({
+  currentPage,
+  numPages,
+  isFirst,
+  isLast,
+  nextPage,
+  prevPage,
+}) => {
   const pageNumbers = [];
-
-  // const renderPageNumbers = () => {
-  //   const pages = [];
-  // };
 
   for (let i = 1; i <= currentPage + 3 && i <= numPages; i++) {
     pageNumbers.push(i);
@@ -22,6 +24,7 @@ export default (props) => {
           </PaginationLink>
         </li>
       )}
+
       {pageNumbers.map((number) => (
         <li key={number}>
           <PaginationLink
@@ -32,7 +35,7 @@ export default (props) => {
           </PaginationLink>
         </li>
       ))}
-      {/* <li>...</li> */}
+
       {isLast ? null : (
         <li>
           <PaginationLink to={`/blog${nextPage}`}>Next Page »</PaginationLink>
@@ -41,3 +44,5 @@ export default (props) => {
     </PaginationList>
   );
 };
+
+export default Pagination;

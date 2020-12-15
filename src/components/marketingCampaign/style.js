@@ -1,18 +1,21 @@
 import styled from 'styled-components';
+import { Section } from '../section';
 import Background from '../../assets/images/corporate-office-bg-overlay.jpg';
-import WaterMark from '../../assets/images/logo-watermark.svg';
+import Watermark from '../../assets/images/logo-watermark.svg';
 
-export const LogoWatermark = styled.div`
-  background-image: url(${WaterMark});
-  background-repeat: no-repeat;
-  background-size: contain;
-  content: '';
-  height: 100%;
-  left: -30vw;
-  position: absolute;
-  top: 3%;
-  width: 90%;
-  z-index: -1;
+export const WatermarkSection = styled(Section)`
+  &::before {
+    background-image: url(${Watermark});
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    height: 100%;
+    left: -10vw;
+    position: absolute;
+    top: 3%;
+    width: 90%;
+    z-index: -1;
+  }
 `;
 
 export const Content = styled.div`
@@ -25,11 +28,8 @@ export const Content = styled.div`
   }
 `;
 
-export const BannerWrapper = styled.div`
+export const EmailCTA = styled.div`
   position: relative;
-`;
-
-export const BannerOverLay = styled.div`
   margin-top: 3rem;
   flex-wrap: wrap;
   padding: 2.5rem 3rem;
@@ -57,7 +57,7 @@ export const BannerOverLay = styled.div`
   }
 `;
 
-export const LeftWrapper = styled.div`
+export const HalfWrapper = styled.div`
   color: white;
   position: relative;
   width: 50%;
@@ -82,8 +82,6 @@ export const LeftWrapper = styled.div`
     }
   }
 `;
-
-export const RightWrapper = styled(LeftWrapper)``;
 
 export const FormWrapper = styled.div`
   display: flex;

@@ -14,7 +14,8 @@ import {
   TabMobileContentBox,
 } from './style';
 
-export default ({ featuresData, leadData, horizontal = false }) => {
+//TODO: Refactor and add animation
+export default ({ featuresData, leadContent, horizontal = false }) => {
   const [currentTab, setTab] = useState(0);
   const [activeTabs, setTabs] = useState([0]);
 
@@ -22,10 +23,12 @@ export default ({ featuresData, leadData, horizontal = false }) => {
     <Section>
       <Wrapper>
         <Tabs>
-          <LeadContentSection leadData={leadData} horizontal={horizontal} />
+          <LeadContentSection
+            leadContent={leadContent}
+            horizontal={horizontal}
+          />
           <LeftTabWrapper>
-            {featuresData.map(({ title, description }, index) => (
-              // eslint-disable-next-line react/no-array-index-key
+            {featuresData.map(({ heading, content }, index) => (
               <React.Fragment key={index}>
                 <TabFeatureBox
                   onClick={() => {
@@ -44,15 +47,15 @@ export default ({ featuresData, leadData, horizontal = false }) => {
                   )}
                 >
                   <TabCount>0{index + 1}</TabCount>
-                  <h3> {title} </h3>
+                  <h3>{heading}</h3>
                 </TabFeatureBox>
                 <TabMobileContentBox
                   active={activeTabs.some(() => activeTabs.includes(index))}
                 >
-                  <h3> {title} </h3>
+                  <h3>{heading}</h3>
                   <TabContent
                     dangerouslySetInnerHTML={{
-                      __html: description,
+                      __html: content,
                     }}
                     paddingTop={1}
                   />
@@ -65,10 +68,10 @@ export default ({ featuresData, leadData, horizontal = false }) => {
           </LeftTabWrapper>
           <RightTabWrapper>
             <TabRightContent>
-              <h3>{featuresData[currentTab].title}</h3>
+              <h3>{featuresData[currentTab].heading}</h3>
               <TabContent
                 dangerouslySetInnerHTML={{
-                  __html: featuresData[currentTab].description,
+                  __html: featuresData[currentTab].content,
                 }}
                 paddingTop={1}
               />

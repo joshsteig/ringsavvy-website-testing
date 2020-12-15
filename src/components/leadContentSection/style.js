@@ -13,7 +13,7 @@ export const LeadContentSection = styled.div`
     `}
 `;
 
-export const LeftContentWrapper = styled.div`
+export const Heading = styled.div`
   width: 100%;
   max-width: 500px;
   ${(props) =>
@@ -27,13 +27,14 @@ export const LeftContentWrapper = styled.div`
   }
 `;
 
-export const RightContentWrapper = styled(LeftContentWrapper)`
+export const Content = styled.div`
   margin-left: auto;
   max-width: 580px;
   ${(props) =>
     props.horizontal &&
     css`
       width: 60%;
+
       @media (max-width: 767px) {
         width: 100%;
       }

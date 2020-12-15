@@ -8,21 +8,19 @@ import { GlobalStyles } from '../../shared/globalStyles';
 import { GlobalPostStyles } from '../../shared/globalPostStyles';
 import theme from '../../shared/theme';
 
-export default (props) => {
-  const { children, postLayout } = props;
+const Layout = ({ children, postLayout }) => (
+  <ThemeProvider theme={theme}>
+    <Helmet>
+      <html lang='en' />
+    </Helmet>
+    <GlobalStyles />
+    {postLayout ? <GlobalPostStyles /> : null}
+    <Container>
+      <Navigation />
+      {children}
+      <Footer />
+    </Container>
+  </ThemeProvider>
+);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Helmet>
-        <html lang='en' />
-      </Helmet>
-      <GlobalStyles />
-      {postLayout ? <GlobalPostStyles /> : null}
-      <Container>
-        <Navigation />
-        {children}
-        <Footer />
-      </Container>
-    </ThemeProvider>
-  );
-};
+export default Layout;

@@ -1,4 +1,6 @@
 import React from 'react';
-import Logo from '../../assets/images/ringsavvy-logo.png';
+import logo from '../../assets/images/ringsavvy-logo.png';
 
-export default () => <img src={Logo} alt='logo' />;
+const Logo = () => <img src={logo} alt='logo' />;
+
+export default Logo;

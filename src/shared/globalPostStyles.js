@@ -27,10 +27,6 @@ export const GlobalPostStyles = createGlobalStyle`
     font-size: ${({ theme }) => theme.post.fontSizes.base};
   }
 
-  p {
-    margin: 0 0 1em;
-  }
-
   ul, ol {
     margin: 1.25em 0;
   }

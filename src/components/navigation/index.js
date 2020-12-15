@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import Logo from '../logo';
 import { Wrapper } from '../wrapper';
-import {
-  Navigation,
-  LogoLink,
-  NavigationList,
-  ListItem,
-  NavigationLink,
-  NavigationCTA,
-  ToggleButton,
-} from './style';
+import * as Styled from './style';
 
-const Links = [
+//TODO: add to menus array component when that is refactored
+const links = [
   {
     name: 'How It works',
     path: '/',
@@ -25,7 +18,7 @@ const Links = [
     path: '/blog',
   },
   {
-    name: "FAQ's",
+    name: 'FAQs',
     path: '/faqs',
   },
   {
@@ -34,32 +27,36 @@ const Links = [
   },
 ];
 
-export default () => {
-  const [isToggle, setToggle] = useState(false);
+const Navigation = () => {
+  const [isToggled, setToggle] = useState(false);
 
   return (
     <Wrapper>
-      <Navigation>
-        <LogoLink to='/'>
+      <Styled.Navigation>
+        <Styled.LogoLink to='/'>
           <Logo />
-        </LogoLink>
-        <ToggleButton onClick={() => setToggle((prev) => !prev)}>
+        </Styled.LogoLink>
+
+        <Styled.ToggleButton onClick={() => setToggle(!isToggled)}>
           <span>&#9776;</span> Menu
-        </ToggleButton>
-        <NavigationList active={isToggle}>
-          {Links.map(({ name, path }, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ListItem key={i}>
-              <NavigationLink to={path}>{name}</NavigationLink>
-            </ListItem>
+        </Styled.ToggleButton>
+
+        <Styled.NavigationList active={isToggled}>
+          {links.map(({ name, path }, i) => (
+            <Styled.ListItem key={i}>
+              <Styled.NavigationLink to={path}>{name}</Styled.NavigationLink>
+            </Styled.ListItem>
           ))}
-          <ListItem>
-            <NavigationCTA $transparent $whiteBorder to='/'>
+
+          <Styled.ListItem>
+            <Styled.NavigationCTA $transparent $whiteBorder to='/'>
               Try for Free
-            </NavigationCTA>
-          </ListItem>
-        </NavigationList>
-      </Navigation>
+            </Styled.NavigationCTA>
+          </Styled.ListItem>
+        </Styled.NavigationList>
+      </Styled.Navigation>
     </Wrapper>
   );
 };
+
+export default Navigation;

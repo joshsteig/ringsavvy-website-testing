@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
+//TODO: Refactor - break out menu arrays into new file; rework with footer component
 const UnstyledList = styled.ul`
   font-size: ${({ theme }) => theme.global.fontSizes.base};
   list-style: none;

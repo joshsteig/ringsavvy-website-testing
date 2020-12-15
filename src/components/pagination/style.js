@@ -15,10 +15,10 @@ export const PaginationLink = styled(Link)`
     props.$isActive ? props.theme.global.colors.primary : '#fff'};
   border-radius: 100px;
   border: ${(props) =>
-    props.isActive
+    props.$isActive
       ? `1px solid ${props.theme.global.colors.primary}`
       : '1px solid #ddd'};
-  color: ${(props) => (props.$isActive ? '#fff' : null)};
+  color: ${(props) => (props.$isActive ? '#fff' : '#222')};
   display: inline-block;
   font-size: ${({ theme }) => theme.global.fontSizes.base};
   font-weight: bold;

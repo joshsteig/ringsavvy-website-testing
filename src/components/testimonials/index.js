@@ -17,6 +17,7 @@ import {
   WriterWrapper,
 } from './style';
 
+//TODO: needs adjustments
 export default () => {
   const [swiper, setSwiper] = useState(null);
   const params = {
@@ -45,7 +46,7 @@ export default () => {
       <Wrapper>
         <HeadingWrapper>
           <Title>
-            <h2> What our clients are saying </h2>
+            <h2>What our clients are saying</h2>
           </Title>
         </HeadingWrapper>
       </Wrapper>

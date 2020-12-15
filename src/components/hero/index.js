@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../../utils/contentful';
 import { Button } from '../button';
 import { Wrapper } from '../wrapper';
-import { Content, CtaWrapper, Description, Hero } from './style';
+import * as Styled from './style';
 
-export default () => {
+const Hero = () => {
   //TODO: use StaticQuery to pull data? or just grab from assets/images?
   const [heroBg, setBg] = useState('');
   useEffect(() => {
@@ -16,20 +16,20 @@ export default () => {
   }, []);
 
   return (
-    <Hero backgroundImage={heroBg}>
+    <Styled.Hero backgroundImage={heroBg}>
       <Wrapper>
-        <Content>
+        <Styled.Content>
           <h1>
             Our virtual receptionists help optimize the workflow of field
             service businesses
           </h1>
-          <Description>
+          <Styled.Description>
             You’ve got enough on your plate already. Our 24/7 live service is
             ready to answer any phone calls you don’t have time for, take highly
             detailed customer messages and help build a highly organized
             dispatching system for your company.
-          </Description>
-          <CtaWrapper>
+          </Styled.Description>
+          <Styled.CtaWrapper>
             <Button $primary padding='large' to='/'>
               Try free for 7 Days
             </Button>
@@ -42,9 +42,11 @@ export default () => {
             >
               Get a custom quote
             </Button>
-          </CtaWrapper>
-        </Content>
+          </Styled.CtaWrapper>
+        </Styled.Content>
       </Wrapper>
-    </Hero>
+    </Styled.Hero>
   );
 };
+
+export default Hero;

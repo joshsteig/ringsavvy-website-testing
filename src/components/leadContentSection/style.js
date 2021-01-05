@@ -1,12 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const LeadContentSection = styled.div`
-  padding-bottom: 30px;
+  margin-bottom: 30px;
   width: 100%;
-  ${(props) =>
-    props.horizontal &&
-    css`
+
+  ${({ horizontal }) =>
+    horizontal &&
+    `
       display: flex;
+
       @media (max-width: 767px) {
         flex-direction: column;
       }
@@ -16,9 +18,10 @@ export const LeadContentSection = styled.div`
 export const Heading = styled.div`
   width: 100%;
   max-width: 500px;
-  ${(props) =>
-    props.horizontal &&
-    css`
+
+  ${({ horizontal }) =>
+    horizontal &&
+    `
       width: 40%;
     `}
 
@@ -30,9 +33,10 @@ export const Heading = styled.div`
 export const Content = styled.div`
   margin-left: auto;
   max-width: 580px;
-  ${(props) =>
-    props.horizontal &&
-    css`
+
+  ${({ horizontal }) =>
+    horizontal &&
+    `
       width: 60%;
 
       @media (max-width: 767px) {

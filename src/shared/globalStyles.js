@@ -29,6 +29,7 @@ export const GlobalStyles = createGlobalStyle`
   
   a {
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
   }
   
   p {
@@ -68,11 +69,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h3 {
-    font-size: ${({ theme }) => theme.global.fontSizes.lg}
+    font-size: ${({ theme }) => theme.global.fontSizes.xl}
   }
 
   h4 {
-    font-size: ${({ theme }) => theme.global.fontSizes.md}
+    font-size: ${({ theme }) => theme.global.fontSizes.lg}
   }
 
   @media ${({ theme }) => theme.global.mediaQueries.sm} {

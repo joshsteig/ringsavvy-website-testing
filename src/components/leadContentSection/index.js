@@ -10,7 +10,11 @@ const LeadContentSection = ({ leadContent, horizontal = false }) => {
         <h2>{heading}</h2>
       </Styled.Heading>
       <Styled.Content horizontal={horizontal}>
-        <p>{content}</p>
+        {content.length > 1 && Array.isArray(content) ? (
+          content.map((p, index) => <p key={index}>{p}</p>)
+        ) : (
+          <p>{content}</p>
+        )}
       </Styled.Content>
     </Styled.LeadContentSection>
   );

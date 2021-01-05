@@ -1,87 +1,49 @@
 import React, { useState } from 'react';
 import LeadContentSection from '../leadContentSection';
+import Accordion from '../accordion';
 import { Section } from '../section';
 import { Wrapper } from '../wrapper';
-import {
-  Tabs,
-  LeftTabWrapper,
-  RightTabWrapper,
-  TabFeatureBox,
-  TabCount,
-  TabRightContent,
-  TabContent,
-  TabCTAButton,
-  TabMobileContentBox,
-} from './style';
+import { FlexRow } from '../globals';
+import { StyledLink } from '../button';
+import * as Styled from './style';
 
-//TODO: Refactor and add animation
-export default ({ featuresData, leadContent, horizontal = false }) => {
-  const [currentTab, setTab] = useState(0);
-  const [activeTabs, setTabs] = useState([0]);
+const Tabs = ({ tabData, leadContent, horizontal = false }) => {
+  const [isActive, setActive] = useState(tabData[0]);
 
   return (
     <Section>
       <Wrapper>
-        <Tabs>
-          <LeadContentSection
-            leadContent={leadContent}
-            horizontal={horizontal}
-          />
-          <LeftTabWrapper>
-            {featuresData.map(({ heading, content }, index) => (
-              <React.Fragment key={index}>
-                <TabFeatureBox
-                  onClick={() => {
-                    const indexFound = activeTabs.indexOf(index);
-                    if (indexFound === -1) {
-                      setTabs([...activeTabs, index]);
-                    } else {
-                      activeTabs.splice(indexFound, 1);
-                      setTabs([...activeTabs]);
-                    }
-                    setTab(index);
-                  }}
-                  active={currentTab === index}
-                  activeMobile={activeTabs.some(() =>
-                    activeTabs.includes(index)
-                  )}
-                >
-                  <TabCount>0{index + 1}</TabCount>
-                  <h3>{heading}</h3>
-                </TabFeatureBox>
-                <TabMobileContentBox
-                  active={activeTabs.some(() => activeTabs.includes(index))}
-                >
-                  <h3>{heading}</h3>
-                  <TabContent
-                    dangerouslySetInnerHTML={{
-                      __html: content,
-                    }}
-                    paddingTop={1}
-                  />
-                  <TabCTAButton $primary padding='large' to='/'>
-                    {featuresData[currentTab].ctaText}
-                  </TabCTAButton>
-                </TabMobileContentBox>
-              </React.Fragment>
+        <LeadContentSection leadContent={leadContent} horizontal={horizontal} />
+        <FlexRow>
+          <Styled.TabList>
+            {tabData.map((tab, index) => (
+              <Styled.Tab
+                key={index}
+                isActive={isActive === tab}
+                onClick={() => setActive(tab)}
+                title={tab.heading}
+              >
+                <Styled.Count>0{index + 1}</Styled.Count>
+                {tab.heading}
+              </Styled.Tab>
             ))}
-          </LeftTabWrapper>
-          <RightTabWrapper>
-            <TabRightContent>
-              <h3>{featuresData[currentTab].heading}</h3>
-              <TabContent
-                dangerouslySetInnerHTML={{
-                  __html: featuresData[currentTab].content,
-                }}
-                paddingTop={1}
-              />
-              <TabCTAButton $primary padding='large' to='/'>
-                {featuresData[currentTab].ctaText}
-              </TabCTAButton>
-            </TabRightContent>
-          </RightTabWrapper>
-        </Tabs>
+          </Styled.TabList>
+          <Styled.TabContent>
+            <h4>{isActive.heading}</h4>
+
+            {isActive.content.length > 1 && Array.isArray(isActive.content) ? (
+              isActive.content.map((p, index) => <p key={index}>{p}</p>)
+            ) : (
+              <p>{isActive.content}</p>
+            )}
+
+            <StyledLink to={isActive.ctaLink}>{isActive.ctaText}</StyledLink>
+          </Styled.TabContent>
+        </FlexRow>
+        <Accordion tabData={tabData} />
       </Wrapper>
     </Section>
   );
 };
+
+export default Tabs;

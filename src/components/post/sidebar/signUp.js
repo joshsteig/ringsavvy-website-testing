@@ -9,9 +9,7 @@ const SignUp = () => (
       All business owners are encouraged to sign up for a free trial with our
       company.
     </Styled.P>
-    <StyledLink style={{ width: '100%' }} to='/sign-up'>
-      Get Started
-    </StyledLink>
+    <StyledLink to='/sign-up'>Get Started</StyledLink>
   </Styled.Section>
 );
 

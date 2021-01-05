@@ -10,51 +10,70 @@ import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
   const { location, data } = props;
-  const featuresData = [
+  const tabData = [
     [
       {
         heading: 'We’re always live, always professional',
-        content:
-          '<p>You never know when a potentially significant customer will contact your business, and with our help, you can increase your lead capturing opportunities from 40 hours every week, to 168 hours!<span>And no matter what hour of the day a call comes in, the quality of our service remains the same.</span></p>',
+        content: [
+          'You never know when a potentially significant customer will contact your business, and with our help, you can increase your lead capturing opportunities from 40 hours every week, to 168 hours!',
+
+          'And no matter what hour of the day a call comes in, the quality of our service remains the same.',
+        ],
         ctaText: 'Learn more',
+        ctaLink: '/services/24-7-live-answering-service/',
       },
       {
         heading: 'New customer intake tailored towards your business',
-        content:
-          '<p>Our virtual receptionists are experts when it comes to gathering new customer information. Ring Savvy staff members take the time to make sure all the information we gather from a first time caller to your business is correct, and will never rush through a call.<span>Our receptionists are able to come off as a seamless extension of your firm, as they utilize intake scripts customized towards your business’ needs.</span></p>',
+        content: [
+          'Our virtual receptionists are experts when it comes to gathering new customer information. Ring Savvy staff members take the time to make sure all the information we gather from a first time caller to your business is correct, and will never rush through a call.',
+
+          'Our receptionists are able to come off as a seamless extension of your firm, as they utilize intake scripts customized towards your business’ needs.',
+        ],
         ctaText: 'Learn more',
+        ctaLink: '/services/new-customer-intake/',
       },
       {
         heading: 'Connect with Spanish speaking customers',
-        content:
-          '<p>The market for your business’ services may be bigger than you realize! With the help of Ring Savvy’s bilingual receptionist staff, you’ll have no problem engaging with Spanish speaking consumers in your area.<span>This could end up giving your business an incredible edge over competitors.</span></p>',
+        content: [
+          'The market for your business’ services may be bigger than you realize! With the help of Ring Savvy’s bilingual receptionist staff, you’ll have no problem engaging with Spanish speaking consumers in your area.',
+
+          'This could end up giving your business an incredible edge over competitors.',
+        ],
         ctaText: 'Learn more',
+        ctaLink: '/services/bilingual-answering-service/',
       },
       {
         heading: 'Stay engaged with customers while on the go',
-        content:
-          '<p>Not only will our virtual receptionist team cover your phones while you’re away from the office, but we’ll pass along all customer messages to your mobile device via text and/or email message.<span>This will provide you with incredible peace of mind, as you’ll always know when new customer opportunities arise.</span></p>',
+        content: [
+          'Not only will our virtual receptionist team cover your phones while you’re away from the office, but we’ll pass along all customer messages to your mobile device via text and/or email message.',
+
+          'This will provide you with incredible peace of mind, as you’ll always know when new customer opportunities arise.',
+        ],
         ctaText: 'Learn more',
+        ctaLink: '/services/live-call-transferring/',
       },
     ],
     [
       {
         heading: 'Personalized call forwarding setup',
         content:
-          '<p>You’ll get on the phone with our staff, and setup your call handling and forwarding preferences.</p>',
+          'You’ll get on the phone with our staff, and setup your call handling and forwarding preferences.',
         ctaText: 'Learn more',
+        ctaLink: '/services/live-call-transferring/',
       },
       {
         heading: 'New customer intake process',
         content:
-          '<p>Our receptionist will act as a representative of your business, letting your caller know who they have called, and taking all first time callers to your business through a new customer intake process.</p>',
+          'Our receptionist will act as a representative of your business, letting your caller know who they have called, and taking all first time callers to your business through a new customer intake process.',
         ctaText: 'Learn more',
+        ctaLink: '/services/new-customer-intake/',
       },
       {
         heading: 'Custom message taking protocols',
         content:
-          '<p>After the intake process is complete, our receptionist will reach out to you to see if you would like to be transferred in on the call. If you are unavailable to do so, our receptionist will take a message from your prospective or current customer, and send that message over to you via text and/or email at the conclusion of the call.</p>',
+          'After the intake process is complete, our receptionist will reach out to you to see if you would like to be transferred in on the call. If you are unavailable to do so, our receptionist will take a message from your prospective or current customer, and send that message over to you via text and/or email at the conclusion of the call.',
         ctaText: 'Learn more',
+        ctaLink: '/services/message-taking/',
       },
     ],
   ];
@@ -62,13 +81,19 @@ export default function RootIndex(props) {
   const leadContent = [
     {
       heading: 'Why businesses trust Ring Savvy for their lead capturing needs',
-      content:
-        'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York. We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
+      content: [
+        'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York.',
+
+        'We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
+      ],
     },
     {
       heading: 'How does our live answering service work?',
-      content:
-        'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine. Here’s how we keep new leads from passing your company by:',
+      content: [
+        'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine.',
+
+        'Here’s how we keep new leads from passing your company by:',
+      ],
     },
   ];
 
@@ -84,14 +109,10 @@ export default function RootIndex(props) {
         />
       </Helmet>
       <Hero />
-      <Tabs leadContent={leadContent[0]} featuresData={featuresData[0]} />
+      <Tabs leadContent={leadContent[0]} tabData={tabData[0]} />
       <Testimonials />
       <MarketingCampaign />
-      <Tabs
-        horizontal={true}
-        leadContent={leadContent[1]}
-        featuresData={featuresData[1]}
-      />
+      <Tabs horizontal leadContent={leadContent[1]} tabData={tabData[1]} />
     </Layout>
   );
 }

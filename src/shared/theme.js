@@ -12,12 +12,12 @@ export default {
       sans: `'Open Sans', sans-serif`,
     },
     fontSizes: {
-      xxl: '2.5em',
-      xl: '1.75em',
-      lg: '1.25em',
-      md: '1.125em',
-      base: '1em',
-      sm: '.875em',
+      xxl: '2.5em', // 40px
+      xl: '1.75em', // 28px
+      lg: '1.25em', // 20px
+      md: '1.125em', // 18px
+      base: '1em', // 16px
+      sm: '.875em', // 14px
     },
     mediaQueries: {
       lg: '(max-width: 992px)',
@@ -27,13 +27,13 @@ export default {
   },
   post: {
     fontSizes: {
-      xxl: '2.25em',
-      xl: '1.75em',
-      lg: '1.5em',
-      md: '1.25em',
-      base: '1.125em',
-      sm: '1em',
-      xs: '.875em',
+      xxl: '2.25em', // 36px
+      xl: '1.75em', // 28px
+      lg: '1.5em', // 24px
+      md: '1.25em', // 20px
+      base: '1.125em', // 18px
+      sm: '1em', // 16px
+      xs: '.875em', // 14px
     },
   },
 };

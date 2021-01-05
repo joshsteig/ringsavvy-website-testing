@@ -1,148 +1,71 @@
 import styled, { css } from 'styled-components';
-import { Button } from '../button';
+import { StyledLink } from '../button';
 
-export const Tabs = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-export const LeftTabWrapper = styled.div`
+export const TabList = styled.ul`
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  @media (max-width: 767px) {
-    width: 100%;
-    display: block;
-    height: 100%;
-  }
-`;
-
-export const RightTabWrapper = styled(LeftTabWrapper)`
-  justify-content: center;
-  padding: 0 0 0 4rem;
-
-  @media (max-width: 767px) {
-    padding: 0;
-  }
-`;
-
-export const TabFeatureBox = styled.div`
-  padding: 1.75rem 1.5rem;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
-  color: #7a7a7a;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 2rem;
-
-  h3 {
-    color: #7a7a7a;
-    font-size: 1.125rem;
-    margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    ${(props) =>
-      props.active &&
-      css`
-        background: #0abe51;
-        color: #fff;
-
-        h3 {
-          color: #fff;
-        }
-      `}
-  }
-
-  @media (max-width: 767px) {
-    ${(props) =>
-      props.activeMobile &&
-      css`
-        background: #0abe51;
-        color: #fff;
-
-        h3 {
-          color: #fff;
-        }
-      `}
-  }
-
-  @media (max-width: 767px) {
-    padding: 1rem 2rem;
-  }
-`;
-
-export const TabCount = styled.span`
-  font-size: 1.75rem;
-  margin-right: 1.5rem;
-  font-family: 'Merriweather', serif;
-  opacity: 0.5;
-`;
-
-export const TabRightContent = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 767px) {
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     display: none;
   }
 `;
 
-export const ContentDescription = styled.p`
-  ${(props) =>
-    props.paddingTop &&
+export const Tab = styled.li`
+  align-items: center;
+  background: ${({ theme }) => theme.global.colors.white};
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  color: #7a7a7a;
+  cursor: pointer;
+  display: flex;
+  font-family: ${({ theme }) => theme.global.fonts.serif};
+  font-size: ${({ theme }) => theme.global.fontSizes.md};
+  font-weight: 700;
+  line-height: 1.3em;
+  margin: 0 0 20px;
+  max-width: 480px;
+  padding: 2em 1.3333em;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  ${({ isActive }) =>
+    isActive &&
     css`
-      padding-top: ${props.paddingTop}rem;
-      color: ${props.color};
-      margin: ${props.margin ? props.margin : 'inherit'};
+      background: ${({ theme }) => theme.global.colors.primary};
+      color: ${({ theme }) => theme.global.colors.white};
     `}
 `;
 
-export const TabContent = styled(ContentDescription)`
-  span {
-    display: block;
-    margin-top: 1rem;
+export const TabContent = styled.article`
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  max-width: 430px;
+  position: relative;
+  width: 46%;
+
+  h4 {
+    margin-bottom: 1em;
+  }
+
+  p:last-of-type {
+    margin-bottom: 1.625em;
+  }
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    display: none;
   }
 `;
 
-export const TabCTAButton = styled(Button)`
-  width: 50%;
-  margin-top: 2rem;
-  white-space: nowrap;
-  padding: 0.75rem 2.5rem;
-
-  @media (max-width: 767px) {
-    margin-top: 0;
-  }
-`;
-
-export const TabMobileContentBox = styled.div`
-  display: none;
-
-  @media (max-width: 767px) {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    max-height: 0;
-    transition: height 0.5s, max-height 0.5s, margin-bottom 0.5s;
-    height: 0;
-    overflow: hidden;
-    ${(props) =>
-      props.active &&
-      css`
-        margin-bottom: 2rem;
-        max-height: 1200px;
-        height: 100%;
-        transition: height 0.5s, max-height 0.5s, margin-bottom 0.5s;
-        overflow: visible;
-      `}
-  }
+export const Count = styled.span`
+  font-size: 1.555555em;
+  margin: 0 0.857em 0 0;
+  opacity: 0.5;
 `;

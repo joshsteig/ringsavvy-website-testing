@@ -11,7 +11,7 @@ export const StyledLink = styled(Link)`
   font-size: ${({ theme }) => theme.global.fontSizes.base};
   font-weight: bold;
   line-height: 1;
-  padding: 1em 3.25em;
+  padding: 0.75em 3.25em;
   text-align: center;
   text-decoration: none;
   transition: all 0.2s ease-in-out;

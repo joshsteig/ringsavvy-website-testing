@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '../button';
 import { Wrapper } from '../wrapper';
+import EmailForm from '../emailForm';
 import * as Styled from './style';
 
 const MarketingCampaign = () => {
@@ -26,20 +26,7 @@ const MarketingCampaign = () => {
           </p>
         </Styled.Content>
 
-        <Styled.EmailCTA>
-          <Styled.HalfWrapper>
-            <h3>Want to revisit this later?</h3>
-            <p>Let us send you our company brochure.</p>
-          </Styled.HalfWrapper>
-          <Styled.HalfWrapper>
-            <Styled.FormWrapper>
-              <Styled.Input type='email' placeholder='Email Address' />
-              <Button padding='medium' $primary to='/'>
-                Send
-              </Button>
-            </Styled.FormWrapper>
-          </Styled.HalfWrapper>
-        </Styled.EmailCTA>
+        <EmailForm />
       </Wrapper>
     </Styled.WatermarkSection>
   );

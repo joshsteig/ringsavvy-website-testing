@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { StyledLink } from '../button';
 
 export const TabList = styled.ul`
   display: block;
@@ -49,7 +48,7 @@ export const TabContent = styled.article`
   margin-left: auto;
   max-width: 430px;
   position: relative;
-  width: 46%;
+  width: 50%;
 
   h4 {
     margin-bottom: 1em;

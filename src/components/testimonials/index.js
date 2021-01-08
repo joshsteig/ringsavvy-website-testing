@@ -17,7 +17,7 @@ import {
   WriterWrapper,
 } from './style';
 
-//TODO: needs adjustments
+//TODO: needs refactoring and adjustments
 const Testimonials = () => {
   const [swiper, setSwiper] = useState(null);
   const params = {

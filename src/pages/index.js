@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-
 import Layout from '../components/layout';
 import Hero from '../components/hero';
 import Tabs from '../components/tabs';
@@ -10,6 +9,24 @@ import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
   const { location, data } = props;
+  const contentData = [
+    {
+      heading: 'Why businesses trust Ring Savvy for their lead capturing needs',
+      content: [
+        'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York.',
+
+        'We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
+      ],
+    },
+    {
+      heading: 'How does our live answering service work?',
+      content: [
+        'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine.',
+
+        'Here’s how we keep new leads from passing your company by:',
+      ],
+    },
+  ];
   const tabData = [
     [
       {
@@ -78,25 +95,6 @@ export default function RootIndex(props) {
     ],
   ];
 
-  const leadContent = [
-    {
-      heading: 'Why businesses trust Ring Savvy for their lead capturing needs',
-      content: [
-        'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York.',
-
-        'We know that your business isn’t just concerned about answering calls quickly, but also providing customers with a pleasant and enjoyable phone call experience. Ring Savvy takes the time to get to know and carefully train all of our virtual receptionists. We can say with confidence that we’re providing the very best people to engage with your customers.',
-      ],
-    },
-    {
-      heading: 'How does our live answering service work?',
-      content: [
-        'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine.',
-
-        'Here’s how we keep new leads from passing your company by:',
-      ],
-    },
-  ];
-
   return (
     <Layout location={location}>
       <Helmet>
@@ -109,10 +107,10 @@ export default function RootIndex(props) {
         />
       </Helmet>
       <Hero />
-      <Tabs leadContent={leadContent[0]} tabData={tabData[0]} />
+      <Tabs contentData={contentData[0]} tabData={tabData[0]} primary />
       <Testimonials />
       <MarketingCampaign />
-      <Tabs horizontal leadContent={leadContent[1]} tabData={tabData[1]} />
+      <Tabs contentData={contentData[1]} tabData={tabData[1]} horizontal />
     </Layout>
   );
 }

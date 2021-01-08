@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LeadContentSection from '../leadContentSection';
+import Content from '../content';
 import Accordion from '../accordion';
 import { Section } from '../section';
 import { Wrapper } from '../wrapper';
@@ -7,14 +7,23 @@ import { FlexRow } from '../globals';
 import { StyledLink } from '../button';
 import * as Styled from './style';
 
-const Tabs = ({ tabData, leadContent, horizontal = false }) => {
+const Tabs = ({
+  tabData,
+  contentData,
+  horizontal = false,
+  primary = false,
+}) => {
   const [isActive, setActive] = useState(tabData[0]);
 
   return (
     <Section>
       <Wrapper>
-        <LeadContentSection leadContent={leadContent} horizontal={horizontal} />
-        <FlexRow>
+        <Content
+          contentData={contentData}
+          horizontal={horizontal}
+          primary={primary}
+        />
+        <FlexRow alignCenter>
           <Styled.TabList>
             {tabData.map((tab, index) => (
               <Styled.Tab
@@ -37,7 +46,9 @@ const Tabs = ({ tabData, leadContent, horizontal = false }) => {
               <p>{isActive.content}</p>
             )}
 
-            <StyledLink to={isActive.ctaLink}>{isActive.ctaText}</StyledLink>
+            {isActive.ctaLink && isActive.ctaText ? (
+              <StyledLink to={isActive.ctaLink}>{isActive.ctaText}</StyledLink>
+            ) : null}
           </Styled.TabContent>
         </FlexRow>
         <Accordion tabData={tabData} />

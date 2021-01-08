@@ -41,7 +41,6 @@ export const SliderItem = styled.div`
 `;
 
 export const Title = styled.div`
-  padding: 0 1.5rem;
   position: absolute;
   left: 0%;
   top: -50px;

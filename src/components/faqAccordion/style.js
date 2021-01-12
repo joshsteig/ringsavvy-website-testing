@@ -22,7 +22,7 @@ export const FaqList = styled.ul`
   }
 `;
 
-// TODO: refactor reused styles from tabs/accordions, etc
+// TODO: refactor reused styles from tabs/accordions/card, etc
 export const Faq = styled.li`
   align-items: center;
   background: ${({ theme }) => theme.global.colors.white};

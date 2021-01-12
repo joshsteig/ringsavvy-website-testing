@@ -6,6 +6,7 @@ import ContentSection from '../components/contentSection';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
+import CardGrid from '../components/cardGrid';
 
 export default function VirtualReceptionist({ location }) {
   const contentData = [
@@ -47,6 +48,33 @@ export default function VirtualReceptionist({ location }) {
     },
   ];
 
+  const cardData = [
+    {
+      heading: 'Always live, 24/7/365',
+      content:
+        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
+      linkUrl: '/services/24-7-live-answering-service',
+    },
+    {
+      heading: 'Industry leading message taking',
+      content:
+        'Get the most accurate and organized messages from our receptionists sent directly to your mobile device via text and/or email.',
+      linkUrl: '/services/message-taking',
+    },
+    {
+      heading: 'Customizable to fit your business',
+      content:
+        'Personalize everything from the questions we ask first-time callers to your company, to the way we go about transferring your calls.',
+      linkUrl: '/services/customizable',
+    },
+    {
+      heading: 'State of the art call forwarding',
+      content:
+        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
+      linkUrl: '/services/overflow-call-handling',
+    },
+  ];
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -61,6 +89,10 @@ export default function VirtualReceptionist({ location }) {
       <Hero />
       <ContentSection contentData={contentData.find((data) => data.id === 2)} />
       <Testimonials />
+      <CardGrid
+        contentData={contentData.find((data) => data.id === 3)}
+        cardData={cardData}
+      />
       <ContentSection contentData={contentData.find((data) => data.id === 4)} />
       <EmailSection />
       <FaqAccordion contentData={contentData.find((data) => data.id === 5)} />

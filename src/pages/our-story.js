@@ -5,6 +5,9 @@ import Hero from '../components/hero';
 import ContentSection from '../components/contentSection';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
+import CardGrid from '../components/cardGrid';
+import Brooke from '../assets/images/brooke-shatles.jpg';
+import Rob from '../assets/images/rob-shatles.jpg';
 
 export default function OurStoryIndex({ location }) {
   const contentData = [
@@ -39,6 +42,19 @@ export default function OurStoryIndex({ location }) {
     },
   ];
 
+  const employeeData = [
+    {
+      name: 'Brooke Shatles',
+      title: 'CEO/Co-Founder',
+      gravatarUrl: `${Brooke}`,
+    },
+    {
+      name: 'Rob Shatles',
+      title: 'President/Co-Founder',
+      gravatarUrl: `${Rob}`,
+    },
+  ];
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -49,6 +65,12 @@ export default function OurStoryIndex({ location }) {
         />
       </Helmet>
       <Hero />
+      <CardGrid
+        centered={false}
+        hasDiag={false}
+        employeeData={employeeData}
+        contentData={contentData.find((data) => data.id === 1)}
+      />
       <ContentSection contentData={contentData.find((data) => data.id === 2)} />
       <Testimonials />
       <FaqAccordion contentData={contentData.find((data) => data.id === 3)} />

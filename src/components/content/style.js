@@ -13,9 +13,18 @@ export const Container = styled.div`
         flex-direction: column;
       }
     `}
+
+  ${({ centered }) =>
+    centered &&
+    css`
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    `}
 `;
 
-export const Heading = styled.div`
+export const Heading = styled.h2`
   max-width: 780px;
   width: 100%;
 

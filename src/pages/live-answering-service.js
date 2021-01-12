@@ -5,6 +5,7 @@ import Hero from '../components/hero';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
+import CardGrid from '../components/cardGrid';
 
 export default function LiveAnsweringService({ location }) {
   const contentData = [
@@ -34,6 +35,21 @@ export default function LiveAnsweringService({ location }) {
     },
   ];
 
+  const cardData = [
+    {
+      heading: 'Always live, 24/7/365',
+      content:
+        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
+      linkUrl: '/services/24-7-live-answering-service',
+    },
+    {
+      heading: 'State of the art call forwarding',
+      content:
+        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
+      linkUrl: '/services/overflow-call-handling',
+    },
+  ];
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -47,6 +63,10 @@ export default function LiveAnsweringService({ location }) {
       </Helmet>
       <Hero />
       <Testimonials />
+      <CardGrid
+        cardData={cardData}
+        contentData={contentData.find((data) => data.id === 2)}
+      />
       <EmailSection />
       <FaqAccordion contentData={contentData.find((data) => data.id === 4)} />
     </Layout>

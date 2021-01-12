@@ -12,8 +12,8 @@ export const Description = styled.p`
 
 export const Slider = styled.div`
   width: 100%;
-  padding: 2rem 0;
-  margin: 2rem 0;
+  padding: 60px 0 40px;
+  margin: 50px 0;
   position: relative;
 
   .swiper-wrapper {

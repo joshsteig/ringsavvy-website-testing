@@ -31,6 +31,7 @@ export const Heading = styled.h2`
   ${({ horizontal }) =>
     horizontal &&
     css`
+      margin-right: 20px;
       width: 40%;
     `}
 

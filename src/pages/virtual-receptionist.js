@@ -6,6 +6,7 @@ import ContentSection from '../components/contentSection';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
+import ValueGrid from '../components/valueGrid';
 import CardGrid from '../components/cardGrid';
 
 export default function VirtualReceptionist({ location }) {
@@ -48,6 +49,27 @@ export default function VirtualReceptionist({ location }) {
     },
   ];
 
+  const gridData = [
+    {
+      heading: 'State of the art call forwarding',
+      content:
+        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+    {
+      heading: 'Customizable to fit your business',
+      content:
+        'Personalize everything from the questions we ask first-time callers to your company, to the way we go about transferring your calls.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+    {
+      heading: 'Always live, 24/7/365',
+      content:
+        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+  ];
+
   const cardData = [
     {
       heading: 'Always live, 24/7/365',
@@ -87,6 +109,10 @@ export default function VirtualReceptionist({ location }) {
         />
       </Helmet>
       <Hero />
+      <ValueGrid
+        contentData={contentData.find((data) => data.id === 1)}
+        gridData={gridData}
+      />
       <ContentSection contentData={contentData.find((data) => data.id === 2)} />
       <Testimonials />
       <CardGrid

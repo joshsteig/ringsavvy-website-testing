@@ -30,7 +30,8 @@ export const Hero = styled.div`
 
 export const Content = styled.div`
   padding-bottom: 3rem;
-  width: 60%;
+  max-width: 628px;
+  width: 100%;
 
   h1,
   p {
@@ -38,7 +39,6 @@ export const Content = styled.div`
   }
 
   @media (max-width: 767px) {
-    width: 100%;
     padding-bottom: 0;
   }
 `;

@@ -1,13 +1,35 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
+
 import Layout from '../components/layout';
 import Hero from '../components/hero';
 import Tabs from '../components/tabs';
+import ContentSection from '../components/contentSection';
 import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
+import ValueGrid from '../components/valueGrid';
+import { FlexRow } from '../components/globals';
 
-export default function HowItWorks(props) {
-  const { location, data } = props;
+// TODO: Look into bug: Green tab turns white when 3 column grid link is hovered over
+export default function HowItWorks({ location }) {
+  const data = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "how-it-works-info.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `);
+
+  const heroData = {
+    heading: 'How it works',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -46,6 +68,28 @@ export default function HowItWorks(props) {
       ],
     },
   ];
+
+  const gridData = [
+    {
+      heading: 'State of the art call forwarding',
+      content:
+        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+    {
+      heading: 'Customizable to fit your business',
+      content:
+        'Personalize everything from the questions we ask first-time callers to your company, to the way we go about transferring your calls.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+    {
+      heading: 'Always live, 24/7/365',
+      content:
+        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
+      ctaLink: '/services/overflow-call-handling/',
+    },
+  ];
+
   const tabData = [
     {
       heading: 'Straight call forwarding',
@@ -98,14 +142,32 @@ export default function HowItWorks(props) {
           content='How It Works | Ring Savvy | 24/7 Live Virtual Receptionist Answer Every Call You Miss. Learn More Here and Call Today For a Free Trial!'
         />
       </Helmet>
-      <Hero />
+      <Hero heroData={heroData} />
+      {/* TODO: create feature grid */}
+      <ValueGrid
+        horizontal
+        contentData={contentData.find((data) => data.id === 1)}
+        gridData={gridData}
+      />
       <Tabs
         contentData={contentData.find((data) => data.id === 2)}
         tabData={tabData}
         horizontal
       />
       <EmailSection />
-      <FaqAccordion contentData={contentData.find((data) => data.id === 4)} />
+      <ContentSection
+        horizontal
+        contentData={contentData.find((data) => data.id === 3)}
+      >
+        {/* TODO: Why is this not displaying? */}
+        <FlexRow center>
+          <Img fluid={data.file.childImageSharp.fluid} />
+        </FlexRow>
+      </ContentSection>
+      <FaqAccordion
+        horizontal
+        contentData={contentData.find((data) => data.id === 4)}
+      />
     </Layout>
   );
 }

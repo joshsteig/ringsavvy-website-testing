@@ -46,7 +46,7 @@ export const Card = styled(Link)`
 `;
 
 export const Heading = styled.h4`
-  color: #0abe51;
+  color: ${({ theme }) => theme.global.colors.primary};
   margin: 0 0 1em;
 
   &:after {

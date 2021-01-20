@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
+// TODO: refactor to fix big - uses globalStyles css over this files
 export const GlobalPostStyles = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     margin: 1.125em 0 0.8em;

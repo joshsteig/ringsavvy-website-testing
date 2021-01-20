@@ -2,11 +2,12 @@ import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 
 export const StyledLink = styled(Link)`
+  align-items: center;
   background-color: ${({ theme }) => theme.global.colors.primary};
   border-radius: 100px;
   box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.14);
   color: #ffffff;
-  display: inline-block;
+  display: inline-flex;
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.base};
   font-weight: bold;

@@ -9,6 +9,16 @@ import Testimonials from '../components/testimonials';
 
 export default function RootIndex(props) {
   const { location, data } = props;
+
+  const heroData = {
+    heading:
+      'Our virtual receptionists help optimize the workflow of field service businesses',
+    content:
+      'You’ve got enough on your plate already. Our 24/7 live receptionist service is ready to answer any phone calls you don’t have time for, take highly detailed customer messages and help build a highly organized dispatching system for your company.',
+    primaryCta: '/sign-up/',
+    secondaryCta: '/get-a-quote/',
+  };
+
   const contentData = [
     {
       heading: 'Why businesses trust Ring Savvy for their lead capturing needs',
@@ -27,6 +37,7 @@ export default function RootIndex(props) {
       ],
     },
   ];
+
   const tabData = [
     [
       {
@@ -106,7 +117,7 @@ export default function RootIndex(props) {
           content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-      <Hero />
+      <Hero heroData={heroData} />
       <Tabs contentData={contentData[0]} tabData={tabData[0]} primary />
       <Testimonials />
       <MarketingCampaign />

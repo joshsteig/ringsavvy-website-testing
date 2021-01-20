@@ -20,14 +20,15 @@ const AccordionContent = styled.article`
   }
 `;
 
+// Fix illegal invocation error
 const AccordionItem = ({ tab, index }) => {
   const { heading, content, ctaText, ctaLink } = tab;
   const [isOpen, setOpen] = useState(tab[0]);
 
-  const [bind, { height, top }] = useMeasure();
+  const [bind, bounds] = useMeasure();
   const slide = useSpring({
     overflow: 'hidden',
-    height: isOpen ? height + top + 52 : 0,
+    height: isOpen ? bounds.height + bounds.top + 52 : 0,
     transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -20px, 0)',
   });
 

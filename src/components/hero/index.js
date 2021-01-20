@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { client } from '../../utils/contentful';
-import { Button } from '../button';
+import { StyledLink, Button } from '../button';
 import { Wrapper } from '../wrapper';
 import * as Styled from './style';
 
 const Hero = () => {
-  //TODO: use StaticQuery to pull data? or just grab from assets/images?
+  //TODO: use StaticQuery to pull data (Gatsby Image)? or just grab from assets/images (No Gatsby Image)
   const [heroBg, setBg] = useState('');
   useEffect(() => {
     client
@@ -14,6 +14,7 @@ const Hero = () => {
       .catch(console.error);
   }, []);
 
+  // TODO: refactor to use dynamic content site-wide
   return (
     <Styled.Hero backgroundImage={heroBg}>
       <Wrapper>
@@ -29,9 +30,10 @@ const Hero = () => {
             dispatching system for your company.
           </Styled.Description>
           <Styled.CtaWrapper>
-            <Button $primary padding='large' to='/'>
+            <StyledLink $primary padding='large' to='/'>
               Try free for 7 Days
-            </Button>
+            </StyledLink>
+            {/* TODO: replace button component */}
             <Button
               to='/'
               $transparent

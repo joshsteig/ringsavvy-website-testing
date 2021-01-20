@@ -1,11 +1,14 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+
 import Layout from '../components/layout';
 import Hero from '../components/hero';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
 import CardGrid from '../components/cardGrid';
+import ValueIllustration from '../components/valueIllustration';
+import messageIllustration from '../assets/images/new-message-illustration.svg';
 
 export default function LiveAnsweringService({ location }) {
   const contentData = [
@@ -50,6 +53,34 @@ export default function LiveAnsweringService({ location }) {
     },
   ];
 
+  // TODO: Need content for 2nd set of values
+  const valueData = [
+    [
+      {
+        heading: 'Detailed message taking',
+        content:
+          'You’ll have the opportunity to review messages from sales calls at your own pace, as we’ll send those messages to you via text and/or email message',
+      },
+      {
+        heading: 'Superior call transferring',
+        content:
+          'No need to sweat missing a call. Our receptionists can reach out to a designated line of your choosing, and give you the opportunity to engage with callers in real time.',
+      },
+    ],
+    [
+      {
+        heading: 'Custom call greetings',
+        content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+      {
+        heading: 'Customizable customer intakes',
+        content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      },
+    ],
+  ];
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -62,10 +93,21 @@ export default function LiveAnsweringService({ location }) {
         />
       </Helmet>
       <Hero />
+      <ValueIllustration
+        valueData={valueData[0]}
+        contentData={contentData.find((data) => data.id === 1)}
+        illustration={messageIllustration}
+      />
       <Testimonials />
       <CardGrid
         cardData={cardData}
         contentData={contentData.find((data) => data.id === 2)}
+      />
+      {/* TODO: change illustration image */}
+      <ValueIllustration
+        valueData={valueData[1]}
+        contentData={contentData.find((data) => data.id === 1)}
+        illustration={messageIllustration}
       />
       <EmailSection />
       <FaqAccordion contentData={contentData.find((data) => data.id === 4)} />

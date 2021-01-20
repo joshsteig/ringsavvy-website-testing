@@ -2,13 +2,14 @@ import React from 'react';
 import { Wrapper } from '../wrapper';
 import { Section } from '../section';
 import EmailForm from '../emailForm';
+import * as Styled from './style';
 
 const EmailSection = () => (
-  <Section>
+  <Styled.SectionWithBG>
     <Wrapper>
       <EmailForm />
     </Wrapper>
-  </Section>
+  </Styled.SectionWithBG>
 );
 
 export default EmailSection;

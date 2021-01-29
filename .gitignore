@@ -55,9 +55,6 @@ typings/
 .env
 .env.*
 
-# build folder
-public
-
 # gatsby cache folder
 .cache
 

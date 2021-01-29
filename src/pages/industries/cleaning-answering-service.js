@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function CleaningService({ location }) {
+  const heroData = {
+    heading: 'Cleaning Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function CleaningService({ location }) {
           content='Cleaning Answering Service - Ring Savvy - Premium 24/7 Live Answering - Learn More About Our Answering Services for Cleaning Companies Here!'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           Companies that provide cleaning services to clients can often have

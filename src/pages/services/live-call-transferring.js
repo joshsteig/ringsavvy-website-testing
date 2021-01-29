@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function LiveCallTransferring({ location }) {
+  const heroData = {
+    heading: 'Live Call Transferring',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function LiveCallTransferring({ location }) {
           content="Live Call Transferring | You Tell Us Which Calls You Want to Take, We'll Announce the Calls to You. Ring Savvy | Try Us Free For 7 Days!"
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           If you want to stop wasting valuable time during your work days

@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function AdvancedScreening({ location }) {
+  const heroData = {
+    heading: 'Advanced Call Screening',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function AdvancedScreening({ location }) {
           content="Advanced Call Screening | We'll Find Out All The Important Information | We Follow Your Instructions, and Can Patch Calls Into You. Learn More Here:"
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           Tired of telemarketers and robocalls disrupting your day? Advanced

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import { ContentContainer } from '../../components/globals';
 
 // TODO: first child of Content to have margin-top: 0 (not working)
-export const Content = styled.article`
-  max-width: 580px;
+export const Content = styled(ContentContainer)`
+  h2,
+  h3 {
+    margin: 1.4em 0 1em;
+  }
 
   h2 {
     font-size: ${({ theme }) => theme.global.fontSizes.xl};
-    margin: 1.4em 0 1em;
   }
 
   ul {

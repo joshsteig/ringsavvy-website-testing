@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function RealEstateService({ location }) {
+  const heroData = {
+    heading: 'Real Estate Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function RealEstateService({ location }) {
           content='Real Estate Answering Service | Ring Savvy | Provide Better Customer Service to Your Clientele | Providing the Best Virtual Receptionists, Learn More Here:'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           As a real estate agent or property manager, some of the most important

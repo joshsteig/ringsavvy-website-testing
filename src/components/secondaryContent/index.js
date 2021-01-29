@@ -4,11 +4,16 @@ import { Wrapper } from '../wrapper';
 import Sidebar from '../sidebar';
 import * as Styled from './style';
 
-const SecondaryContent = ({ children, hasSidebar, learnMoreData }) => {
+const SecondaryContent = ({
+  children,
+  hasSidebar,
+  learnMoreData,
+  maxWidth,
+}) => {
   return (
     <Section>
       <Wrapper flex>
-        <Styled.Content>{children}</Styled.Content>
+        <Styled.Content maxWidth={maxWidth}>{children}</Styled.Content>
         {hasSidebar && <Sidebar learnMoreData={learnMoreData} />}
       </Wrapper>
     </Section>

@@ -3,8 +3,10 @@ import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
-import PostPreview from '../components/postPreview/index';
+import PostPreview from '../components/postPreview';
 import Pagination from '../components/pagination';
+import Hero from '../components/hero';
+import { Section } from '../components/section';
 import { Wrapper } from '../components/wrapper';
 import { PostPreviewList } from '../components/postPreviewList';
 
@@ -17,6 +19,10 @@ export default function BlogIndex({ pageContext, data, location }) {
 
   const posts = data.allContentfulPost.edges;
 
+  const heroData = {
+    heading: 'Blog',
+  };
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -26,26 +32,28 @@ export default function BlogIndex({ pageContext, data, location }) {
           content='Ring Savvy - Answering Service Innovators! Serving Industries and Small Businesses - Unparalleled Customer Service and Support - Call Now To Try It Free!'
         />
       </Helmet>
-      <Wrapper>
-        <h2>Blog</h2>
-        <PostPreviewList>
-          {posts.map(({ node }) => {
-            return (
-              <li key={node.slug}>
-                <PostPreview post={node} />
-              </li>
-            );
-          })}
-        </PostPreviewList>
-        <Pagination
-          currentPage={currentPage}
-          numPages={numPages}
-          isFirst={isFirst}
-          isLast={isLast}
-          nextPage={nextPage}
-          prevPage={prevPage}
-        />
-      </Wrapper>
+      <Hero heading={heroData.heading} />
+      <Section>
+        <Wrapper>
+          <PostPreviewList>
+            {posts.map(({ node }) => {
+              return (
+                <li key={node.slug}>
+                  <PostPreview post={node} />
+                </li>
+              );
+            })}
+          </PostPreviewList>
+          <Pagination
+            currentPage={currentPage}
+            numPages={numPages}
+            isFirst={isFirst}
+            isLast={isLast}
+            nextPage={nextPage}
+            prevPage={prevPage}
+          />
+        </Wrapper>
+      </Section>
     </Layout>
   );
 }

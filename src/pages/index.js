@@ -13,14 +13,15 @@ export default function RootIndex(props) {
   const heroData = {
     heading:
       'Our virtual receptionists help optimize the workflow of field service businesses',
-    content:
+    subHeading:
       'You’ve got enough on your plate already. Our 24/7 live receptionist service is ready to answer any phone calls you don’t have time for, take highly detailed customer messages and help build a highly organized dispatching system for your company.',
-    primaryCta: '/sign-up/',
-    secondaryCta: '/get-a-quote/',
+    primaryCtaText: 'Try free for 7 days',
+    primaryCtaLink: '/sign-up/',
   };
 
   const contentData = [
     {
+      id: 1,
       heading: 'Why businesses trust Ring Savvy for their lead capturing needs',
       content: [
         'Our virtual receptionist team is U.S. based, and we’ll never outsource your calls. All our staff is local to our call centerlocated in Long Island, New York.',
@@ -29,6 +30,7 @@ export default function RootIndex(props) {
       ],
     },
     {
+      id: 2,
       heading: 'How does our live answering service work?',
       content: [
         'Ring Savvy will serve as the ultimate lead capturing safety net for your business. Never again will you miss out on a potential customer, because you failed to provide them with a live voice or offered subpar phone answering assistance. Our virtual receptionist team will always get to your calls well before the beep of your voicemail machine.',
@@ -117,11 +119,25 @@ export default function RootIndex(props) {
           content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-      <Hero heroData={heroData} />
-      <Tabs contentData={contentData[0]} tabData={tabData[0]} primary />
+      <Hero
+        heading={heroData.heading}
+        subHeading={heroData.subHeading}
+        primaryCtaText={heroData.primaryCtaText}
+        primaryCtaLink={heroData.primaryCtaLink}
+        // TODO: add secondary link
+      />
+      <Tabs
+        contentData={contentData.find((data) => data.id === 1)}
+        tabData={tabData[0]}
+        primary
+      />
       <Testimonials />
       <MarketingCampaign />
-      <Tabs contentData={contentData[1]} tabData={tabData[1]} horizontal />
+      <Tabs
+        contentData={contentData.find((data) => data.id === 2)}
+        tabData={tabData[1]}
+        horizontal
+      />
     </Layout>
   );
 }

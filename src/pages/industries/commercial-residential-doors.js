@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function DoorService({ location }) {
+  const heroData = {
+    heading: 'Door Companies Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function DoorService({ location }) {
           content='Door Companies Answering Service | Ring Savvy | Live Answering For Commercial Door Companies | Providing Sophisticated Dispatching, Learn More Here:'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           If you run a commercial/residential door company, you know that the

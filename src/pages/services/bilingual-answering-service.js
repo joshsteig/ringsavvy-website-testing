@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function BilingualAnsweringService({ location }) {
+  const heroData = {
+    heading: 'Bilingual Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function BilingualAnsweringService({ location }) {
           content='Bilingual Answering Service | Ring Savvy | Fully Bilingual 24/7 Ensuring You Capture Even More New Business - Read About Our Bilingual Services Here.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <h2>
           Ring Savvy helps businesses engage with both English and Spanish

@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function FinanceService({ location }) {
+  const heroData = {
+    heading: 'Finance/Mortgage Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -46,7 +50,7 @@ export default function FinanceService({ location }) {
           content="Finance/Mortgage Answering Service | Ring Savvy | We Provide the Highest Quality Virtual Receptionist Services Available | Don't Settle For Less."
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           When people have a lot of money on the line, it is only natural for

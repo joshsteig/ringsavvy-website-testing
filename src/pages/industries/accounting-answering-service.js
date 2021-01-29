@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function AccountingService({ location }) {
+  const heroData = {
+    heading: 'Accounting Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function AccountingService({ location }) {
           content='Accounting Answering Service | Ring Savvy | We Tailor Our Service to Answer For Accounting Firms | Try Us Free For 7 Days'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           If you’re an accountant that hates being interrupted by calls or just

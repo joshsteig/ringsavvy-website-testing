@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function AutomotiveService({ location }) {
+  const heroData = {
+    heading: 'Automotive Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function AutomotiveService({ location }) {
           content='Automotive Answering Service | Ring Savvy | Live Answering For Automotive Businesses | Read More About Our Features Here and Try Free For 7 Days.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           For those running automotive repair shops, the day starts early, but

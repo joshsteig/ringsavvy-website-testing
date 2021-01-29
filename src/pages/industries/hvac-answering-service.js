@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function HVACService({ location }) {
+  const heroData = {
+    heading: 'HVAC Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function HVACService({ location }) {
           content="HVAC Answering Service | Live Answering Service for HVAC Companies | Ring Savvy | 24/7 Live Answering To Keep Your Callers' Climates Comfortable."
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           If you’re running an HVAC company, you typically won’t get a second

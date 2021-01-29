@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function DentalService({ location }) {
+  const heroData = {
+    heading: 'Dental Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function DentalService({ location }) {
           content='Dental Answering Service | Live Answering Service for Dentists | Ring Savvy | Learn More About Our Services Here and Try Free For 7 Days!'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           At dental offices the phones seemingly never stop ringing. People will

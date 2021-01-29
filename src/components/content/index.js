@@ -19,13 +19,15 @@ const Content = ({
       <Styled.Heading horizontal={horizontal} primary={primary}>
         {heading}
       </Styled.Heading>
-      <Styled.Content horizontal={horizontal} primary={primary}>
-        {content.length > 1 && Array.isArray(content) ? (
-          content.map((p, index) => <p key={index}>{p}</p>)
-        ) : (
-          <p>{content}</p>
-        )}
-      </Styled.Content>
+      {content && (
+        <Styled.Content horizontal={horizontal} primary={primary}>
+          {content.length > 1 && Array.isArray(content) ? (
+            content.map((p, index) => <p key={index}>{p}</p>)
+          ) : (
+            <p>{content}</p>
+          )}
+        </Styled.Content>
+      )}
     </Styled.Container>
   );
 };

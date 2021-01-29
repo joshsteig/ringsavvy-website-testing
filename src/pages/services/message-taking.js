@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function MessageTaking({ location }) {
+  const heroData = {
+    heading: 'Message Taking',
+  };
+
   const contentData = [
     {
       id: 1,

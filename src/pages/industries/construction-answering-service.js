@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function ConstructionService({ location }) {
+  const heroData = {
+    heading: 'Construction Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function ConstructionService({ location }) {
           content='Construction Answering Service | Answering Service For Construction Companies | Sophisticated Dispatching Protocols Keep You Organized! Learn More Here.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           When you’re at a work site, you need to give your full attention to

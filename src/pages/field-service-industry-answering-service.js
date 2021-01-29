@@ -5,9 +5,14 @@ import Hero from '../components/hero';
 import BulletSection from '../components/bulletSection';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
+import { Card } from '../components/card/style';
+import CardGrid from '../components/cardGrid';
 
 export default function FieldServiceIndustry({ location }) {
   // TODO: StaticQuery img assets for bullet section
+  const heroData = {
+    heading: 'Answering Service for the Field Service Industry',
+  };
 
   const contentData = [
     {
@@ -15,6 +20,10 @@ export default function FieldServiceIndustry({ location }) {
       heading: 'Why Ring Savvy is the best live answering service for you',
       content:
         'Our 24/7 virtual receptionist team is committed to not just answering your business’ phones, but helping your company convert its new leads into paying customers. Providing a live answer to customers during their time of need means everything these days, and utilizing Ring Savvy will guarantee you’re always able to offer a high quality customer service experience to new prospects.',
+    },
+    {
+      id: 2,
+      heading: 'Why do field services trust Ring Savvy?',
     },
   ];
 
@@ -45,6 +54,33 @@ export default function FieldServiceIndustry({ location }) {
     },
   ];
 
+  const cardData = [
+    {
+      heading: 'Always live, 24/7/365',
+      content:
+        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
+      linkUrl: '/services/24-7-live-answering-service',
+    },
+    {
+      heading: 'Industry leading message taking',
+      content:
+        'Get the most accurate and organized messages from our receptionists sent directly to your mobile device via text and/or email.',
+      linkUrl: '/services/message-taking',
+    },
+    {
+      heading: 'Customizable to fit your business',
+      content:
+        'Personalize everything from the questions we ask first-time callers to your company, to the way we go about transferring your calls.',
+      linkUrl: '/services/customizable',
+    },
+    {
+      heading: 'State of the art call forwarding',
+      content:
+        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
+      linkUrl: '/services/overflow-call-handling',
+    },
+  ];
+
   return (
     <Layout location={location}>
       <Helmet>
@@ -52,10 +88,14 @@ export default function FieldServiceIndustry({ location }) {
           Answering Service for the Field Service Industry - RingSavvy, Inc.
         </title>
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <BulletSection bulletData={bulletData[0]} />
       <BulletSection isFlipped bulletData={bulletData[1]} />
       <BulletSection bulletData={bulletData[2]} />
+      <CardGrid
+        contentData={contentData.find((data) => data.id === 2)}
+        cardData={cardData}
+      />
       <Testimonials />
       <FaqAccordion contentData={contentData.find((data) => data.id === 1)} />
     </Layout>

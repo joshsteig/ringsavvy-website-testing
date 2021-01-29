@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function PlumbingService({ location }) {
+  const heroData = {
+    heading: 'Plumbing Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function PlumbingService({ location }) {
           content='Plumbing Answering Service | Live Answering Service for Plumbers | Ring Savvy | We Provide Intelligent Dispatching, Live Call Transferring, and More!'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           While plumbers aren’t typically thought of as emergency workers, they

@@ -9,6 +9,10 @@ import EmailSection from '../../components/emailSection';
 import ValueGrid from '../../components/valueGrid';
 
 export default function LongIslandAnsweringService({ location }) {
+  const heroData = {
+    heading: 'Long Island Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -95,7 +99,7 @@ export default function LongIslandAnsweringService({ location }) {
           content='Long Island Answering Service | Need an Answering Service on LI? Choose Ring Savvy | 24/7 Virtual Receptionists, Customizable Features. Try Free For 7 Days!'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <ValueGrid
         contentData={contentData.find((data) => data.id === 1)}
         gridData={gridData}

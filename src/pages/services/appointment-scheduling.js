@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function AppointmentScheduling({ location }) {
+  const heroData = {
+    heading: 'Appointment Scheduling',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function AppointmentScheduling({ location }) {
           content='Appointment Scheduling | We Schedule Appointments With Your Callers | Ring Savvy | Your Calendar Will Be Full Soon, Just Give Ring Savvy a Try.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           At Ring Savvy, we’re in the business of making life easier for you and

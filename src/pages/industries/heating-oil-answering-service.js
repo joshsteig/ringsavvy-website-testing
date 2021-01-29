@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function HeatingAndOilService({ location }) {
+  const heroData = {
+    heading: 'Heating/Oil Companies Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -46,7 +50,7 @@ export default function HeatingAndOilService({ location }) {
           content="Heating/Oil Companies Answering Service | Ring Savvy | Don't Leave Your Customers Out in the Cold. Provide the Best Customer Service With Ring Savvy."
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           When temperatures reach freezing conditions, the calls will always

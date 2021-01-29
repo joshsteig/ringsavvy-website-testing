@@ -10,6 +10,10 @@ import Brooke from '../assets/images/brooke-shatles.jpg';
 import Rob from '../assets/images/rob-shatles.jpg';
 
 export default function OurStoryIndex({ location }) {
+  const heroData = {
+    heading: 'Our Story- Ring Savvy',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -64,7 +68,7 @@ export default function OurStoryIndex({ location }) {
           content='Our Story - Ring Savvy - We Come From Humble Beginnings. Read Here About How Ring Savvy Got Started and Where Our Vision Brought Us Today!'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <CardGrid
         centered={false}
         hasDiag={false}

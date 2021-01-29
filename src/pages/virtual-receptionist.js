@@ -10,6 +10,13 @@ import ValueGrid from '../components/valueGrid';
 import CardGrid from '../components/cardGrid';
 
 export default function VirtualReceptionist({ location }) {
+  const heroData = {
+    heading: 'What is a Virtual Receptionist?',
+    subHeading:
+      'To put it simply, a virtual receptionist is a person answering phone calls for your business in a location outside of your office. When you and your staff are unable to pick up an incoming call to your business, a virtual receptionist will be ready to pick up the call on your behalf.',
+    primaryCta: '/sign-up/',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -108,7 +115,11 @@ export default function VirtualReceptionist({ location }) {
           content='Virtual Receptionist | Our Team of 100+ Real Human Beings Will Answer Your Calls 24 Hours a Day. Try Us Free For 7 Days, No Credit Card Down!'
         />
       </Helmet>
-      <Hero />
+      <Hero
+        heading={heroData.heading}
+        subHeading={heroData.subHeading}
+        primaryCta={heroData.primaryCta}
+      />
       <ValueGrid
         contentData={contentData.find((data) => data.id === 1)}
         gridData={gridData}

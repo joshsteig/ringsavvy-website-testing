@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function ITService({ location }) {
+  const heroData = {
+    heading: 'IT Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -46,7 +50,7 @@ export default function ITService({ location }) {
           content='IT Answering Service | Live Answering For IT Companies | Ring Savvy | Provide Quick Customer Solutions With 24/7 Live Answering From Ring Savvy.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           Today, just about every office and place of work relies on computers

@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function TwentyFourSevenService({ location }) {
+  const heroData = {
+    heading: '24/7 Live Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function TwentyFourSevenService({ location }) {
           content="24/7 Live Answering Service | Ring Savvy | Real Humans, 24 Hours a Day. Don't Leave Your Callers Hanging, Provide Better Customer Service. Learn More Here:"
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           The only way to guarantee that your business never misses out on new

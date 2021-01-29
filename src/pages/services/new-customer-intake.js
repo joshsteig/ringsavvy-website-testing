@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function NewCustomerIntake({ location }) {
+  const heroData = {
+    heading: 'New Customer Intake',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function NewCustomerIntake({ location }) {
           content='New Customer Intake | Capture Leads and Convert Them to Customers! Ring Savvy | Increase Your Bottom Line, Try Us Free For 7 Days.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           For those unfamiliar with the term, new customer intake is the

@@ -11,6 +11,14 @@ import ValueIllustration from '../components/valueIllustration';
 import messageIllustration from '../assets/images/new-message-illustration.svg';
 
 export default function LiveAnsweringService({ location }) {
+  const heroData = {
+    heading: 'Live answering service for small businesses and entrepreneurs',
+    subHeading:
+      'Why hire a receptionist? When you can hire a team for less. Ring Savvy has a highly trained virtual receptionist team that is ready to answer calls on behalf of your business at all hours of the day or night.',
+    primaryCtaText: 'Try free for 7 days',
+    primaryCtaLink: '/sign-up/',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -92,7 +100,12 @@ export default function LiveAnsweringService({ location }) {
           content='Live Answering Service | Real Humans, 24 Hours a Day | Ring Savvy | The Largest and Fastest Answering Service Available, Try Us Free For 7 Days!'
         />
       </Helmet>
-      <Hero />
+      <Hero
+        heading={heroData.heading}
+        subHeading={heroData.subHeading}
+        primaryCtaText={heroData.primaryCtaText}
+        primaryCtaLink={heroData.primaryCtaLink}
+      />
       <ValueIllustration
         valueData={valueData[0]}
         contentData={contentData.find((data) => data.id === 1)}

@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function PetService({ location }) {
+  const heroData = {
+    heading: 'Pet Grooming Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function PetService({ location }) {
           content='Pet Grooming Answering Service | Live Answering for Pet Groomers | Ring Savvy | Our Appointment Scheduling Will Keep You Busy and Making More Money.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           Dogs and cats never seem to stay clean for too long, which is why if

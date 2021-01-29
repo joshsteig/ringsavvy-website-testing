@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function OverflowCallHandling({ location }) {
+  const heroData = {
+    heading: 'Overflow Call Handling',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function OverflowCallHandling({ location }) {
           content="Overflow Call Handling | Even If You Have a Receptionist, We Can Help. Ring Savvy | Don't Miss New Business, Make Sure You Always Have Someone Answering!"
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           With Ring Savvy, your business will never have to stress over the way

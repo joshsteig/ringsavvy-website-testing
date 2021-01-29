@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function TwentyFourSevenService({ location }) {
+  const heroData = {
+    heading: 'Service Customization',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function TwentyFourSevenService({ location }) {
           content='Service Customization | Customize Every Service We Have to Offer | Ring Savvy | We Tailor Our Service to Your Business, Try Us Free For 7 Days.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           At Ring Savvy, we offer all of our customers a highly personalized

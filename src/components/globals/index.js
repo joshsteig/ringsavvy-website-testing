@@ -101,3 +101,7 @@ export const BaseUnorderedList = styled.ul`
   margin: 0;
   padding: 0;
 `;
+
+export const ContentContainer = styled.div`
+  max-width: ${(props) => props.maxWidth || '580px'};
+`;

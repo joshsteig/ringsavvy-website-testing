@@ -7,6 +7,10 @@ import Testimonials from '../../components/testimonials';
 import FaqAccordion from '../../components/faqAccordion';
 
 export default function LandscapingService({ location }) {
+  const heroData = {
+    heading: 'Landscaping Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function LandscapingService({ location }) {
           content='Landscaping Answering Service | Live Answering for Landscaping | Capture More Leads and New Business With New Customer Intake. Learn More Here:'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           If you run a landscaping business, chances are you aren’t sitting

@@ -8,6 +8,10 @@ import FaqAccordion from '../components/faqAccordion';
 import CardGrid from '../components/cardGrid';
 
 export default function PricingPlans({ location }) {
+  const heroData = {
+    heading: 'Ring Savvy’s Monthly Plans & Pricing',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -62,7 +66,7 @@ export default function PricingPlans({ location }) {
           content="Ring Savvy's Monthly Plans & Pricing - View Our Pricing Packages and Learn More About How Paying With Ring Savvy Works. Get a Free Trial Today!"
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <Pricing />
       <FaqAccordion
         horizontal

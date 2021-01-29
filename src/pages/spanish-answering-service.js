@@ -7,6 +7,10 @@ import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
 
 export default function TwentyFourSevenService({ location }) {
+  const heroData = {
+    heading: 'Spanish Answering Service',
+  };
+
   const contentData = [
     {
       id: 1,
@@ -48,7 +52,7 @@ export default function TwentyFourSevenService({ location }) {
           content='Spanish Answering Service | Our Answering Service is Fully Bilingual in English and Spanish | Give Ring Savvy a Try With Our 7 Day Free Trial.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <h2>
           There is no better Spanish answering service to use than Ring Savvy

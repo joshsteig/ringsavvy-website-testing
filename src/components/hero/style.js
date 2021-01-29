@@ -1,13 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Hero = styled.div`
   background-image: url(${(props) => props.backgroundImage});
   background-position: 0 34%;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 130px;
+  padding: 130px 0 80px;
   position: relative;
   color: white;
+
+  ${({ isSecondary }) =>
+    isSecondary &&
+    css`
+      padding: 180px 0 80px;
+
+      h1 {
+        margin: 0;
+      }
+    `}
 
   &::before {
     content: '';
@@ -29,7 +39,7 @@ export const Hero = styled.div`
 `;
 
 export const Content = styled.div`
-  padding-bottom: 3rem;
+  /* padding-bottom: 3rem; */
   max-width: 628px;
   width: 100%;
 
@@ -57,7 +67,6 @@ export const Description = styled.p`
 
 export const CtaWrapper = styled.div`
   display: flex;
-  margin: 2rem 0;
 
   @media (max-width: 767px) {
     flex-wrap: wrap;

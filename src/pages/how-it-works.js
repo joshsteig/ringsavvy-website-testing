@@ -142,7 +142,7 @@ export default function HowItWorks({ location }) {
           content='How It Works | Ring Savvy | 24/7 Live Virtual Receptionist Answer Every Call You Miss. Learn More Here and Call Today For a Free Trial!'
         />
       </Helmet>
-      <Hero heroData={heroData} />
+      <Hero heading={heroData.heading} />
       {/* TODO: create feature grid */}
       <ValueGrid
         horizontal

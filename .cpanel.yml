@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ringsavvy/dev2.ringsavvy.com/
+    - /bin/cp -R public/* $DEPLOYPATH

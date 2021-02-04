@@ -12,6 +12,15 @@ export const FooterNavigation = styled.ul`
   margin: 0;
   padding: 48px 0;
 
+  a {
+    color: ${({ theme }) => theme.global.colors.grey};
+    text-decoration: none;
+
+    &:hover {
+      color: ${({ theme }) => theme.global.colors.primary};
+    }
+  }
+
   li {
     flex: 1;
   }

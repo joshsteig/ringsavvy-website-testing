@@ -20,6 +20,11 @@ export const Slider = styled.div`
     margin-top: 100px;
   }
 
+  .swiper-container {
+    max-width: 980px;
+    overflow: visible;
+  }
+
   @media (max-width: 767px) {
     margin-top: 100px;
 
@@ -37,7 +42,6 @@ export const SliderItem = styled.div`
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.08);
   padding: 3rem;
   text-align: left;
-  margin: 10px 0;
 `;
 
 export const Title = styled.div`

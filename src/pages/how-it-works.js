@@ -71,22 +71,19 @@ export default function HowItWorks({ location }) {
 
   const gridData = [
     {
-      heading: 'State of the art call forwarding',
+      heading: 'Custom call greeting',
       content:
-        'Choose when you’d like to answer calls for your business, and when you’d like calls to be automatically forwarded to our team.',
-      ctaLink: '/services/overflow-call-handling/',
+        'Your greeting is always customized for your business, to provide a superior experience for your callers.',
     },
     {
-      heading: 'Customizable to fit your business',
+      heading: 'New client protocol',
       content:
-        'Personalize everything from the questions we ask first-time callers to your company, to the way we go about transferring your calls.',
-      ctaLink: '/services/overflow-call-handling/',
+        'If the person calling is a potentially new client, typically our clients like to speak to them right away.',
     },
     {
-      heading: 'Always live, 24/7/365',
+      heading: 'Existing client protocol',
       content:
-        'Our call center is always up and running, and fully staffed with both English and Spanish speaking receptionists. We don’t even take holidays off.',
-      ctaLink: '/services/overflow-call-handling/',
+        'Our Savvy Receptionists capture the existing callers information, so that you can call them back ASAP.',
     },
   ];
 
@@ -143,7 +140,6 @@ export default function HowItWorks({ location }) {
         />
       </Helmet>
       <Hero heading={heroData.heading} />
-      {/* TODO: create feature grid */}
       <ValueGrid
         horizontal
         contentData={contentData.find((data) => data.id === 1)}

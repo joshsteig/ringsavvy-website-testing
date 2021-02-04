@@ -6,7 +6,13 @@ const Value = ({ value, isFirst }) => {
   const { heading, content, ctaLink } = value;
   return (
     <OneThird isFirst={isFirst}>
-      <Styled.ValueLink to={ctaLink}>{heading}</Styled.ValueLink>
+      {ctaLink ? (
+        <Styled.ValueLink isLink to={ctaLink}>
+          {heading}
+        </Styled.ValueLink>
+      ) : (
+        <Styled.ValueLink as='p'>{heading}</Styled.ValueLink>
+      )}
       <p>{content}</p>
     </OneThird>
   );

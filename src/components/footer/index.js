@@ -34,7 +34,7 @@ const Footer = () => (
           <SupportMenu />
         </NavigationCol>
       </Styled.FooterNavigation>
-      <p>©&nbsp;2020 Ring Savvy, Inc.</p>
+      <span>©&nbsp;2020 Ring Savvy, Inc.</span>
     </Wrapper>
   </Styled.Footer>
 );

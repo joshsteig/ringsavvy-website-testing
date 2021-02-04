@@ -21,21 +21,19 @@ import {
 const Testimonials = () => {
   const [swiper, setSwiper] = useState(null);
   const params = {
-    slidesPerView: 1.1,
+    slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
-    centeredSlides: true,
     centeredSlidesBounds: true,
     breakpoints: {
       768: {
-        spaceBetween: 40,
+        spaceBetween: 100,
         slidesPerView: 'auto',
       },
     },
     on: {
       init(e) {
         setSwiper(e);
-        e.slideTo(1, 1000);
       },
     },
   };
@@ -51,7 +49,7 @@ const Testimonials = () => {
         </HeadingWrapper>
       </Wrapper>
       <Swiper {...params}>
-        {[1, 2, 3].map((item, i) => (
+        {[0, 1, 2].map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SliderItem key={i}>
             <h3>Dont think twice about hiring Ring Savy, they are the one!</h3>

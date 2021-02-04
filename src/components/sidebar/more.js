@@ -1,21 +1,19 @@
 import React from 'react';
 import * as Styled from './style';
 
-const More = ({ learnMoreData }) => {
-  const { heading, content, ctaLink } = learnMoreData;
-  return (
-    <Styled.Section hasShadow>
-      <Styled.Title>Try Ring Savvy for free</Styled.Title>
-      <Styled.MoreList>
-        {learnMoreData.map((data, index) => (
-          <Styled.ListItem key={index}>
-            <a href={data.ctaLink}>{data.heading}</a>
-            <Styled.P>{data.content}</Styled.P>
-          </Styled.ListItem>
-        ))}
-      </Styled.MoreList>
-    </Styled.Section>
-  );
-};
+const More = ({ learnMoreData }) => (
+  <Styled.Section hasShadow>
+    <Styled.Title hasLine>More about Ring Savvy</Styled.Title>
+    <Styled.List>
+      {learnMoreData.map((data, index) => (
+        <Styled.ListItem key={index}>
+          <Styled.Heading>{data.heading}</Styled.Heading>
+          <Styled.P>{data.content}</Styled.P>
+          <Styled.CtaLink to={data.ctaLink}>{data.ctaText}</Styled.CtaLink>
+        </Styled.ListItem>
+      ))}
+    </Styled.List>
+  </Styled.Section>
+);
 
 export default More;

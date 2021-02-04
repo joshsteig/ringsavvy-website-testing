@@ -22,21 +22,24 @@ export default function AdvancedScreening({ location }) {
 
   const learnMoreData = [
     {
-      heading: 'See how our service works',
+      heading: 'How our service works',
       content:
         'You’ll have full control of how our receptionist team manages your phone lines and engages with your callers.',
+      ctaText: 'Learn how our service works',
       ctaLink: '/how-it-works/',
     },
     {
-      heading: 'See our pricing structure',
+      heading: 'Competitive Pricing',
       content:
         'Use our price estimator tool to find out how much you’ll be spending on our service each month.',
+      ctaText: 'View our pricing structure',
       ctaLink: '/pricing/',
     },
     {
-      heading: 'Try free for 7 days',
+      heading: 'Try the service free for 7 days',
       content:
         'Experience all Ring Savvy has to offer, without paying a cent. All business owners are encouraged to sign up for a free trial with our company.',
+      ctaText: 'Start your free trial',
       ctaLink: '/sign-up/',
     },
   ];

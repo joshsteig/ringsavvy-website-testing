@@ -21,6 +21,27 @@ export const StyledLink = styled(Link)`
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
     transform: translateY(0.16em);
   }
+
+  ${({ borderPrimary }) =>
+    borderPrimary &&
+    css`
+      background: none;
+      border: 2px solid ${({ theme }) => theme.global.colors.primary};
+      box-shadow: none;
+      color: ${({ theme }) => theme.global.colors.primary};
+
+      &:hover {
+        background: ${({ theme }) => theme.global.colors.primary};
+        box-shadow: none;
+        color: ${({ theme }) => theme.global.colors.white};
+      }
+    `}
+
+  ${({ xs }) =>
+    xs &&
+    css`
+      font-size: ${({ theme }) => theme.global.fontSizes.sm};
+    `}
 `;
 
 export const StyledOutlineLink = styled(StyledLink)`

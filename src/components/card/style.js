@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
 import arrow from '../../assets/images/has-arrow.svg';
+import { hasArrow } from '../globals';
 
 export const Card = styled(Link)`
   background: ${({ theme }) => theme.global.colors.white};
@@ -49,13 +49,7 @@ export const Heading = styled.h4`
   color: ${({ theme }) => theme.global.colors.primary};
   margin: 0 0 1em;
 
-  &:after {
-    content: url(${arrow});
-    left: 16px;
-    position: relative;
-    top: 2px;
-    transition: all 0.2s ease-in-out;
-  }
+  ${hasArrow};
 `;
 
 export const EmployeeCard = styled(Card)`

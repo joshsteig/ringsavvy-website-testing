@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Section } from '../section';
 import { Wrapper } from '../wrapper';
 import { FlexRow } from '../globals';
 import PricingPlan from '../pricingPlan';
+import PricingTable from '../pricingTable';
 
 const Pricing = () => {
   const planDisplay = [
@@ -95,6 +96,7 @@ const Pricing = () => {
           <PricingPlan plan={medium} position='center' />
           <PricingPlan plan={custom} position='right' />
         </FlexRow>
+        <PricingTable tableData={tableData} />
       </Wrapper>
     </Section>
   );

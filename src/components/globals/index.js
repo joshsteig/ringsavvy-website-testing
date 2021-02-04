@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import arrow from '../../assets/images/has-arrow.svg';
 
 // TODO: create flex components: https://medium.com/swlh/create-a-responsive-grid-with-react-flexbox-styled-components-f7a55f607480
 export const FlexRow = styled.div`
@@ -81,7 +82,17 @@ export const OneThird = styled.div`
   }
 `;
 
-export const BackgroundBox = () => css`
+export const BaseUnorderedList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export const ContentContainer = styled.div`
+  max-width: ${(props) => props.maxWidth || '580px'};
+`;
+
+export const hasBackgroundBox = () => css`
   &:before {
     background: #0abe51;
     border-radius: 10px 0 0 10px;
@@ -96,12 +107,20 @@ export const BackgroundBox = () => css`
   }
 `;
 
-export const BaseUnorderedList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
+export const hasArrow = () => css`
+  position: relative;
 
-export const ContentContainer = styled.div`
-  max-width: ${(props) => props.maxWidth || '580px'};
+  &:after {
+    content: url(${arrow});
+    left: 16px;
+    position: relative;
+    top: 2px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    &:after {
+      left: 22px;
+    }
+  }
 `;

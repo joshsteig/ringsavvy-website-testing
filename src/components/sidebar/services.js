@@ -35,13 +35,13 @@ const Services = () => {
   return (
     <Styled.Section>
       <Styled.Title>All our services</Styled.Title>
-      <ul>
+      <Styled.List>
         {services.map(({ name, url }) => (
-          <li key={url}>
+          <Styled.serviceLink key={url}>
             <a href={url}>{name}</a>
-          </li>
+          </Styled.serviceLink>
         ))}
-      </ul>
+      </Styled.List>
     </Styled.Section>
   );
 };

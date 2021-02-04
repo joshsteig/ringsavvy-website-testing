@@ -52,7 +52,7 @@ module.exports = {
       options: {
         https: true,
         www: true,
-        host: 'www.ringsavvy.com',
+        host: 'dev2.ringsavvy.com',
         ErrorDocument: `
           ErrorDocument 401 /error_pages/401.html
           ErrorDocument 403 /error_pages/403.html

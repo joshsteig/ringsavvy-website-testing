@@ -61,7 +61,7 @@ const Testimonials = () => {
               receive my messages after missing the call.
             </Description>
             <WriterWrapper>
-              <h4>Tood Brickhouse({item})</h4>
+              <h4>Tood Brickhouse({`0${item}`})</h4>
               <span>Brickhouse Design Group, ltd</span>
             </WriterWrapper>
           </SliderItem>

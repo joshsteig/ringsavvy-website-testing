@@ -4,20 +4,8 @@ import Google from '../../assets/images/google-logo.svg';
 import ArrowPrev from '../../assets/images/reviews-prev.svg';
 import ArrowNext from '../../assets/images/reviews-next.svg';
 import { Wrapper } from '../wrapper';
-import {
-  Description,
-  ArrowsWrapper,
-  Bottom,
-  GoogleReviews,
-  GreenContainer,
-  HeadingWrapper,
-  SliderItem,
-  Slider,
-  Title,
-  WriterWrapper,
-} from './style';
+import * as Styled from './style';
 
-//TODO: needs refactoring and adjustments
 const Testimonials = () => {
   const [swiper, setSwiper] = useState(null);
   const params = {
@@ -38,44 +26,70 @@ const Testimonials = () => {
     },
   };
 
+  const testimonials = [
+    {
+      heading:
+        'Ring Savvy goes beyond what other answering services will offer.',
+      review:
+        'Excellent service which allows me to be with my clients or in meetings while Ring Savvy operators pick up and request information that is either texted or emailed to me within minutes. Their service is always reliable and the information allows me to do my follow up when I’m not available.',
+      author: {
+        name: 'Todd Brickhouse',
+        title: 'Brickhouse Design Group, Ltd.',
+      },
+    },
+    {
+      heading: 'Don’t think twice about hiring Ring Savvy, they are the one!',
+      review:
+        'Great answering service! You don’t realize how many business calls your actually missing from not having this service! Ring savvy taking over my business calls allowed me to triple my new clients! They are very polite, professional and knowledgeable. I instantly receive my messages after missing the call.',
+      author: {
+        name: 'Kristy Castagna',
+        title: 'Lawyer',
+      },
+    },
+    {
+      heading: 'Stress less about missing a call with Ring Savvy.',
+      review:
+        'We have been using Ring Savvy for the past 3 years, for our OT/PT clients. Ring Savvy is professional and trustworthy. When we can’t answer our calls I know everything is being handled and don’t stress about missing anything because all of our clients are treated well!',
+      author: {
+        name: 'Christine Engel',
+        title: 'Physical Therapist',
+      },
+    },
+  ];
+
   return (
-    <Slider>
-      <GreenContainer />
+    <Styled.Slider>
+      <Styled.GreenContainer />
       <Wrapper>
-        <HeadingWrapper>
-          <Title>
+        <Styled.HeadingWrapper>
+          <Styled.Title>
             <h2>What our clients are saying</h2>
-          </Title>
-        </HeadingWrapper>
+          </Styled.Title>
+        </Styled.HeadingWrapper>
       </Wrapper>
       <Swiper {...params}>
-        {[0, 1, 2].map((item, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <SliderItem key={i}>
-            <h3>Dont think twice about hiring Ring Savy, they are the one!</h3>
-            <Description marginTop={1}>
-              Great answering service! You don’t realize how many business calls
-              your actually missing from not having this service! Ring savvy
-              taking over my business calls allowed me to triple my new clients!
-              They are very polite, professional and knowledgeable. I instantly
-              receive my messages after missing the call.
-            </Description>
-            <WriterWrapper>
-              <h4>Tood Brickhouse({`0${item}`})</h4>
-              <span>Brickhouse Design Group, ltd</span>
-            </WriterWrapper>
-          </SliderItem>
+        {testimonials.map((testimonial, i) => (
+          <Styled.SliderItem key={i}>
+            <h4>{testimonial.heading}</h4>
+            <Styled.Description marginTop={1}>
+              {testimonial.review}
+            </Styled.Description>
+            <Styled.Author>
+              <Styled.AuthorName>{testimonial.author.name}</Styled.AuthorName>
+              <p>{testimonial.author.title}</p>
+            </Styled.Author>
+          </Styled.SliderItem>
         ))}
       </Swiper>
       <Wrapper>
-        <Bottom>
-          <GoogleReviews>
+        <Styled.Bottom>
+          <Styled.GoogleReviews>
             <img src={Google} alt='Google Logo' />
             <p>
-              <strong>4.1/5 stars</strong> based on <u>27 Google reviews</u>
+              <strong>4.5/5 stars</strong> based on 79 Google reviews
             </p>
-          </GoogleReviews>
-          <ArrowsWrapper>
+          </Styled.GoogleReviews>
+          <Styled.ArrowsWrapper>
             <img
               src={ArrowPrev}
               alt='Prev'
@@ -86,10 +100,10 @@ const Testimonials = () => {
               alt='Next'
               onClick={() => swiper.slideNext()}
             />
-          </ArrowsWrapper>
-        </Bottom>
+          </Styled.ArrowsWrapper>
+        </Styled.Bottom>
       </Wrapper>
-    </Slider>
+    </Styled.Slider>
   );
 };
 

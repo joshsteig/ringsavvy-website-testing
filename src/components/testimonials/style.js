@@ -35,7 +35,7 @@ export const Slider = styled.div`
 `;
 
 export const SliderItem = styled.div`
-  min-height: 300px;
+  min-height: 280px;
   max-width: 880px;
   background-color: #fff;
   border-radius: 5px;
@@ -73,9 +73,19 @@ export const GreenContainer = styled.div`
   left: 60%;
 `;
 
-export const WriterWrapper = styled.div`
+export const Author = styled.div`
   display: flex;
   flex-direction: column;
+
+  * {
+    margin: 0;
+  }
+`;
+
+export const AuthorName = styled.p`
+  color: ${({ theme }) => theme.global.colors.black};
+  font-family: ${({ theme }) => theme.global.fonts.serif};
+  font-size: ${({ theme }) => theme.global.fonts.base};
 `;
 
 export const Bottom = styled.div`
@@ -93,7 +103,7 @@ export const Bottom = styled.div`
 export const GoogleReviews = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 2rem;
+  margin-top: 2rem;
 
   img {
     width: 25px;
@@ -113,7 +123,7 @@ export const GoogleReviews = styled.div`
 export const ArrowsWrapper = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 2rem;
+  margin-top: 2rem;
 
   img {
     width: 30px;

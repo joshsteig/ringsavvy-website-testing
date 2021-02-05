@@ -16,7 +16,7 @@ const Layout = ({ children, postLayout }) => (
     <GlobalStyles />
     {postLayout ? <GlobalPostStyles /> : null}
     <Container>
-      <Navigation />
+      <Navigation postLayout={postLayout} />
       {children}
       <Footer />
     </Container>

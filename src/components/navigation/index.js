@@ -7,7 +7,7 @@ import * as Styled from './style';
 const links = [
   {
     name: 'How It works',
-    path: '/',
+    path: '/how-it-works',
   },
   {
     name: 'Services',
@@ -19,7 +19,7 @@ const links = [
   },
   {
     name: 'FAQs',
-    path: '/faqs',
+    path: '/faq',
   },
   {
     name: 'Pricing',
@@ -27,18 +27,19 @@ const links = [
   },
 ];
 
-const Navigation = () => {
+// TODO: Make better mobile menu design
+const Navigation = ({ postLayout }) => {
   const [isToggled, setToggle] = useState(false);
 
   return (
     <Wrapper>
-      <Styled.Navigation>
+      <Styled.Navigation postLayout={postLayout}>
         <Styled.LogoLink to='/'>
           <Logo />
         </Styled.LogoLink>
 
         <Styled.ToggleButton onClick={() => setToggle(!isToggled)}>
-          <span>&#9776;</span> Menu
+          <span>&#9776;</span>
         </Styled.ToggleButton>
 
         <Styled.NavigationList active={isToggled}>
@@ -49,7 +50,7 @@ const Navigation = () => {
           ))}
 
           <Styled.ListItem>
-            <Styled.NavigationCTA $transparent $whiteBorder to='/'>
+            <Styled.NavigationCTA to='/sign-up'>
               Try for Free
             </Styled.NavigationCTA>
           </Styled.ListItem>

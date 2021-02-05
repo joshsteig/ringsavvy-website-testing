@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import styled, { css } from 'styled-components';
 import { StyledOutlineLink } from '../button';
 
+// TODO: Refactor; Add theme props
 export const Navigation = styled.header`
   display: flex;
   align-items: center;
@@ -13,7 +14,27 @@ export const Navigation = styled.header`
   color: white;
   padding-top: 3rem;
 
-  @media (max-width: 767px) {
+  ${({ postLayout }) =>
+    postLayout &&
+    css`
+      margin-bottom: 80px;
+      position: relative;
+
+      a {
+        color: ${({ theme }) => theme.global.colors.black};
+      }
+
+      ${NavigationCTA} {
+        border: 2px solid ${({ theme }) => theme.global.colors.primary};
+        color: ${({ theme }) => theme.global.colors.primary};
+
+        &:hover {
+          color: ${({ theme }) => theme.global.colors.white};
+        }
+      }
+    `}
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     justify-content: space-between;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -28,7 +49,7 @@ export const NavigationList = styled.ul`
   margin: 0;
   padding: 0;
 
-  @media (max-width: 767px) {
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     width: 100%;
     flex-direction: column;
     background: grey;
@@ -71,7 +92,7 @@ export const ListItem = styled.li`
     margin-right: 0;
   }
 
-  @media (max-width: 767px) {
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     padding: 15px 20px;
     width: 100%;
     margin: 0;
@@ -83,17 +104,17 @@ export const NavigationCTA = styled(StyledOutlineLink)`
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-weight: 600;
 
-  @media (max-width: 767px) {
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     border: none;
     padding: 0;
   }
 `;
 
-export const ToggleButton = styled.button`
-  font-size: ${({ theme }) => theme.global.fontSizes.xl};
+export const ToggleButton = styled.div`
   color: ${({ theme }) => theme.global.colors.white};
-  font-weight: 600;
   display: none;
+  font-size: ${({ theme }) => theme.global.fontSizes.xl};
+  font-weight: 600;
 
   span {
     margin-right: 5px;
@@ -103,7 +124,7 @@ export const ToggleButton = styled.button`
     color: ${({ theme }) => theme.global.colors.primary};
   }
 
-  @media (max-width: 767px) {
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
     display: block;
   }
 `;

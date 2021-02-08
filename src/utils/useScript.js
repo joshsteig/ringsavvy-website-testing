@@ -7,6 +7,8 @@ export default function useScript(url) {
 
     script.type = 'text/javascript';
     script.src = url;
+    script.async = false;
+
     console.log(container);
     console.log(script);
 

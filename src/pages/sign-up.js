@@ -2,12 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '../components/layout';
 import { Wrapper } from '../components/wrapper';
-
-function renderForm() {
-  return {
-    __html: `<script type="text/javascript" src="https://answeringlegal.formstack.com/forms/js.php/sign_up_copy_7"></script><noscript><a href="https://answeringlegal.formstack.com/forms/sign_up_copy_7" title="Online Form">Online Form - RS Sign Up</a></noscript><div style="text-align:right; font-size:x-small;"><a href="http://www.formstack.com?utm_source=jsembed&utm_medium=product&utm_campaign=product+branding&fa=h,3664144" title="Powered by Formstack">Powered by Formstack</a></div>`,
-  };
-}
+import renderForm, { signUp } from '../utils/renderForm';
 
 export default function SignUpPage({ location }) {
   return (
@@ -20,7 +15,7 @@ export default function SignUpPage({ location }) {
         />
       </Helmet>
       <Wrapper>
-        <div dangerouslySetInnerHTML={renderForm()} />
+        <div dangerouslySetInnerHTML={renderForm(signUp)} />
       </Wrapper>
     </Layout>
   );

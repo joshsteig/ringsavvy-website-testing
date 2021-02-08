@@ -55,6 +55,8 @@ exports.createPages = ({ graphql, actions }) => {
             },
           });
         });
+
+        // TODO: create pages for blog categories
       })
     );
   });

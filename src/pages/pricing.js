@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import Hero from '../components/hero';
 import { Wrapper } from '../components/wrapper';
 import { Section } from '../components/section';
-import renderForm, { getPricing } from '../utils/renderForm';
+import { getPricing } from '../utils/renderForm';
 
 export default function Pricing({ location }) {
   const heroData = {
@@ -25,7 +25,7 @@ export default function Pricing({ location }) {
       <Hero heading={heroData.heading} />
       <Section>
         <Wrapper>
-          <div dangerouslySetInnerHTML={renderForm(getPricing)} />
+          <div dangerouslySetInnerHTML={{ __html: getPricing }} />
         </Wrapper>
       </Section>
     </Layout>

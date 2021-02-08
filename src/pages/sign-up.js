@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '../components/layout';
 import { Wrapper } from '../components/wrapper';
-import renderForm, { signUp } from '../utils/renderForm';
+import { signUp } from '../utils/renderForm';
 
 export default function SignUpPage({ location }) {
   return (
@@ -15,7 +15,7 @@ export default function SignUpPage({ location }) {
         />
       </Helmet>
       <Wrapper>
-        <div dangerouslySetInnerHTML={renderForm(signUp)} />
+        <div dangerouslySetInnerHTML={{ __html: signUp }} />
       </Wrapper>
     </Layout>
   );

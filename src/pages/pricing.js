@@ -4,12 +4,15 @@ import Layout from '../components/layout';
 import Hero from '../components/hero';
 import { Wrapper } from '../components/wrapper';
 import { Section } from '../components/section';
-import { getPricing } from '../utils/renderForm';
+import { getPricing } from '../utils/forms';
+import useScript from '../utils/useScript';
 
 export default function Pricing({ location }) {
   const heroData = {
     heading: 'See Ring Savvy Plans & Pricing',
   };
+
+  useScript(getPricing);
 
   return (
     <Layout location={location}>
@@ -25,7 +28,7 @@ export default function Pricing({ location }) {
       <Hero heading={heroData.heading} />
       <Section>
         <Wrapper>
-          <div dangerouslySetInnerHTML={{ __html: getPricing }} />
+          <div id='script'></div>
         </Wrapper>
       </Section>
     </Layout>

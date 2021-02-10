@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { pdfDownload } from '../../utils/embedScripts';
+import postscribe from 'postscribe';
 import * as Styled from './style';
 
 export default class EmailForm extends Component {

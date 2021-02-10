@@ -4,15 +4,12 @@ import Layout from '../components/layout';
 import Hero from '../components/hero';
 import { Wrapper } from '../components/wrapper';
 import { Section } from '../components/section';
-import { getPricing } from '../utils/forms';
-import useScript from '../utils/useScript';
+import { getPricing } from '../utils/embedScripts';
 
 export default function Pricing({ location }) {
   const heroData = {
     heading: 'See Ring Savvy Plans & Pricing',
   };
-
-  useScript(getPricing);
 
   return (
     <Layout location={location}>

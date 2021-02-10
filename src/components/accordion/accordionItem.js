@@ -48,8 +48,8 @@ const AccordionItem = ({ tab, index }) => {
             <p>{content}</p>
           )}
 
-          {content.ctaLink && content.ctaText ? (
-            <StyledLink to={content.ctaLink}>{content.ctaText}</StyledLink>
+          {ctaLink && ctaText ? (
+            <StyledLink to={ctaLink}>{ctaText}</StyledLink>
           ) : null}
         </AccordionContent>
       </animated.div>

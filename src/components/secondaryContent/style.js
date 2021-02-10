@@ -22,7 +22,6 @@ export const Content = styled(ContentContainer)`
   }
 
   @media ${({ theme }) => theme.global.mediaQueries.lg} {
-    margin-bottom: 80px;
     max-width: none;
     width: 100%;
   }

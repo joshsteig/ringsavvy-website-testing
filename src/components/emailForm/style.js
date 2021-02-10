@@ -54,31 +54,3 @@ export const HalfWrapper = styled.div`
     }
   }
 `;
-
-export const FormWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-radius: 100px;
-  position: relative;
-  background-color: white;
-  padding: 0.5rem 0.75rem 0.5rem 1.5rem;
-
-  @media (max-width: 767px) {
-    padding: 0.5rem 1rem;
-
-    button {
-      padding: 0.75rem 2rem;
-    }
-  }
-`;
-
-export const Input = styled.input`
-  width: 100%;
-  outline: none;
-  border: none;
-
-  &:focus {
-    outline: none;
-    border: none;
-  }
-`;

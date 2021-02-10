@@ -1,45 +1,24 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+// import postscribe from 'postscribe';
+import { signUp } from '../utils/embedScripts';
 import Layout from '../components/layout';
-import { Wrapper } from '../components/wrapper';
-import { signUp } from '../utils/forms';
-import useScript from '../utils/useScript';
+import { FlexRow, FlexCol } from '../components/globals';
+import GreenHalf from '../components/greenHalf';
 
-// export default function SignUpPage({ location }) {
-//   useScript(signUp);
-
-//   return (
-//     <Layout location={location}>
-//       <Helmet>
-//         <title>Sign Up | Ring Savvy | Get Our 7 Day Free Trial Now!</title>
-//         <meta
-//           name='description'
-//           content='Sign Up | Ring Savvy | Get Our 7 Day Free Trial With Access to Every Feature We Offer. No Credit Card Down to Try, So Sign Up Now!'
-//         />
-//       </Helmet>
-//       <Wrapper>
-//         <div id='script' />
-//       </Wrapper>
-//     </Layout>
-//   );
-// }
-
-export class SignUp extends Component {
+export default class SignUp extends Component {
   componentDidMount() {
-    const loadScript = function (src) {
-      const tag = document.createElement('script');
-      tag.async = false;
-      tag.src = src;
+    const module = typeof window !== `undefined` ? require('postscribe') : null;
 
-      const tgt = document.getElementById('script');
-      tgt.appendChild(tag);
-    };
-
-    loadScript(signUp);
+    postscribe('#formEmbed', signUp);
   }
+
   render() {
+    const freeTrial =
+      'Ring Savvy’s free trial is 100% free. No credit card required.';
+
     return (
-      <Layout location={this.location}>
+      <Layout navHidden footerHidden location={this.location}>
         <Helmet>
           <title>Sign Up | Ring Savvy | Get Our 7 Day Free Trial Now!</title>
           <meta
@@ -47,12 +26,13 @@ export class SignUp extends Component {
             content='Sign Up | Ring Savvy | Get Our 7 Day Free Trial With Access to Every Feature We Offer. No Credit Card Down to Try, So Sign Up Now!'
           />
         </Helmet>
-        <Wrapper>
-          <div id='script' />
-        </Wrapper>
+        <FlexRow>
+          <GreenHalf text={freeTrial} />
+          <FlexCol center>
+            <div id='formEmbed' />
+          </FlexCol>
+        </FlexRow>
       </Layout>
     );
   }
 }
-
-export default SignUp;

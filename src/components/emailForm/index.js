@@ -1,22 +1,32 @@
-import React from 'react';
-import { StyledLink } from '../button';
+import React, { Component } from 'react';
+// import postscribe from 'postscribe';
+import { pdfDownload } from '../../utils/embedScripts';
 import * as Styled from './style';
 
-const EmailForm = () => (
-  <Styled.EmailCTA>
-    <Styled.HalfWrapper>
-      <h3>Want to revisit this later?</h3>
-      <p>Let us send you our company brochure.</p>
-    </Styled.HalfWrapper>
-    <Styled.HalfWrapper>
-      <Styled.FormWrapper>
-        <Styled.Input type='email' placeholder='Email Address' />
-        <StyledLink padding='medium' $primary to='/'>
-          Send
-        </StyledLink>
-      </Styled.FormWrapper>
-    </Styled.HalfWrapper>
-  </Styled.EmailCTA>
-);
+export default class EmailForm extends Component {
+  componentDidMount() {
+    const module = typeof window !== `undefined` ? require('postscribe') : null;
 
-export default EmailForm;
+    postscribe('#formEmbed', pdfDownload, {
+      done: async function () {
+        const input = await document.getElementById('field82569298');
+
+        input.setAttribute('placeholder', 'Email Address');
+      },
+    });
+  }
+
+  render() {
+    return (
+      <Styled.EmailCTA>
+        <Styled.HalfWrapper>
+          <h3>Want to revisit this later?</h3>
+          <p>Let us send you our company brochure.</p>
+        </Styled.HalfWrapper>
+        <Styled.HalfWrapper className='pdf-form'>
+          <div id='formEmbed' />
+        </Styled.HalfWrapper>
+      </Styled.EmailCTA>
+    );
+  }
+}

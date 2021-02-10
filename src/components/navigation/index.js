@@ -28,14 +28,14 @@ const links = [
 ];
 
 // TODO: Make better mobile menu design
-const Navigation = ({ postLayout }) => {
+const Navigation = ({ isReverse }) => {
   const [isToggled, setToggle] = useState(false);
 
   return (
     <Wrapper>
-      <Styled.Navigation postLayout={postLayout}>
+      <Styled.Navigation isReverse={isReverse}>
         <Styled.LogoLink to='/'>
-          <Logo />
+          <Logo isReverse={isReverse} />
         </Styled.LogoLink>
 
         <Styled.ToggleButton onClick={() => setToggle(!isToggled)}>

@@ -37,15 +37,6 @@ export const GlobalPostStyles = createGlobalStyle`
     margin: 0 0 .666666em
   }
 
-  a {
-    color: ${({ theme }) => theme.global.colors.primary}
-  }
-
-  a:hover {
-    text-decoration: none;
-    color: ${({ theme }) => theme.global.colors.black}
-  }
-
   @media ${({ theme }) => theme.global.mediaQueries.sm} {
     h1 {
       font-size: ${({ theme }) => theme.post.fontSizes.xl}

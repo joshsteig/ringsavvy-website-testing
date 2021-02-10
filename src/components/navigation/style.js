@@ -14,8 +14,8 @@ export const Navigation = styled.header`
   color: white;
   padding-top: 3rem;
 
-  ${({ postLayout }) =>
-    postLayout &&
+  ${({ isReverse }) =>
+    isReverse &&
     css`
       margin-bottom: 80px;
       position: relative;
@@ -82,6 +82,11 @@ export const NavigationLink = styled(Link)`
 export const LogoLink = styled(Link)`
   line-height: 0;
   margin-right: auto;
+
+  img {
+    height: auto;
+    width: 201px;
+  }
 `;
 
 export const ListItem = styled.li`

@@ -33,8 +33,16 @@ export const FlexRow = styled.div`
 
 export const FlexCol = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: flex-start;
+
+  ${({ center }) =>
+    center &&
+    css`
+      align-items: center;
+      justify-content: center;
+    `}
 
   ${({ justifyBetween }) =>
     justifyBetween &&

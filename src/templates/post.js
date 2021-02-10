@@ -11,7 +11,7 @@ export default function BlogPostTemplate({ data }) {
   const post = data.contentfulPost;
 
   return (
-    <Layout postLayout location={post.location}>
+    <Layout isReverse location={post.location}>
       <Helmet>
         <title>{`${post.title} - Ring Savvy, Inc.`}</title>
         <meta name='description' content={post.description.description} />

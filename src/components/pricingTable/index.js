@@ -32,7 +32,7 @@ const PricingTable = ({ tableData }) => {
               </Styled.TableCell>
               <Styled.TableCell>{data.price}</Styled.TableCell>
               <Styled.TableCell style={{ textAlign: 'right' }}>
-                <StyledLink xs borderPrimary>
+                <StyledLink to='/sign-up' xs borderPrimary>
                   Try for free
                 </StyledLink>
               </Styled.TableCell>

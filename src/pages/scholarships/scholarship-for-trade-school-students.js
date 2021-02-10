@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-// import postscribe from 'postscribe';
+import postscribe from 'postscribe';
 import { tradeSchools } from '../../utils/embedScripts';
 import Layout from '../../components/layout';
 import Hero from '../../components/hero';
@@ -12,8 +12,6 @@ import { Content } from '../../components/secondaryContent/style';
 
 export default class ScholarshipTradeSchools extends Component {
   componentDidMount() {
-    const module = typeof window !== `undefined` ? require('postscribe') : null;
-
     postscribe('#formEmbed', tradeSchools);
   }
 

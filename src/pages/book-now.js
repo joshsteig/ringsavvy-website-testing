@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-// import postscribe from 'postscribe';
+import postscribe from 'postscribe';
 import { calendly } from '../utils/embedScripts';
 import Layout from '../components/layout';
 import { FlexRow, FlexCol } from '../components/globals';
@@ -18,8 +18,6 @@ const EmbedContainer = styled.div`
 
 export default class BookNow extends Component {
   componentDidMount() {
-    const module = typeof window !== `undefined` ? require('postscribe') : null;
-
     postscribe('#formEmbed', calendly);
   }
 

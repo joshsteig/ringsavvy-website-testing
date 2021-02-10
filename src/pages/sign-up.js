@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-// import postscribe from 'postscribe';
+import postscribe from 'postscribe';
 import { signUp } from '../utils/embedScripts';
 import Layout from '../components/layout';
 import { FlexRow, FlexCol } from '../components/globals';
@@ -8,8 +8,6 @@ import GreenHalf from '../components/greenHalf';
 
 export default class SignUp extends Component {
   componentDidMount() {
-    const module = typeof window !== `undefined` ? require('postscribe') : null;
-
     postscribe('#formEmbed', signUp);
   }
 

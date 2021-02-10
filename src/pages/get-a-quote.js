@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-// import postscribe from 'postscribe';
 import { getQuote } from '../utils/embedScripts';
+import postscribe from 'postscribe';
 import Layout from '../components/layout';
 import { FlexRow, FlexCol } from '../components/globals';
 import GreenHalf from '../components/greenHalf';

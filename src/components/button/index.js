@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
+import { hasWhiteArrow } from '../globals';
 
 export const StyledLink = styled(Link)`
   align-items: center;
@@ -11,6 +12,7 @@ export const StyledLink = styled(Link)`
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.base};
   font-weight: bold;
+  justify-content: center;
   line-height: 1;
   padding: 0.75em 3.25em;
   text-align: center;
@@ -21,6 +23,24 @@ export const StyledLink = styled(Link)`
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
     transform: translateY(0.16em);
   }
+
+  ${({ secondary }) =>
+    secondary &&
+    css`
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+      color: ${({ theme }) => theme.global.colors.white};
+      margin-left: 30px;
+      padding: 1em 0;
+
+      ${hasWhiteArrow}
+
+      &:hover {
+        box-shadow: none;
+        transform: translateY(0);
+      }
+    `}
 
   ${({ borderPrimary }) =>
     borderPrimary &&
@@ -58,74 +78,4 @@ export const StyledOutlineLink = styled(StyledLink)`
     color: #fff;
     transform: none;
   }
-`;
-
-//TODO: Refactor Button into StyledLink component above - use throughout the website links
-export const Button = styled(Link)`
-  font-weight: 600;
-  padding: 0.5rem 3rem;
-  border-radius: 100px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  line-height: 1;
-  text-align: center;
-  font-family: ${({ theme }) => theme.global.fonts.serif};
-
-  a {
-    color: inherit;
-    text-decoration: inherit;
-  }
-
-  ${(props) =>
-    props.padding === 'large' &&
-    css`
-      background: transparent;
-      padding: 1rem 3rem;
-    `}
-  ${(props) =>
-    props.padding === 'medium' &&
-    css`
-      background: transparent;
-      padding: 0.75rem 2.75rem;
-    `}
-  ${(props) =>
-    props.$transparent &&
-    css`
-      background: transparent;
-      color: white;
-      &:hover {
-        background-color: #0abe51;
-        border-color: #0abe51;
-      }
-    `}
-  ${(props) =>
-    props.$hoverColor &&
-    css`
-      &:hover {
-        background: transparent;
-        border: none;
-        color: #0abe51;
-      }
-    `}
-  ${(props) =>
-    props.$whiteBorder &&
-    css`
-      border: 2px solid white;
-    `}
-  ${(props) =>
-    props.greenBorder &&
-    css`
-      border: 1px solid #0abe51;
-    `}
-  ${(props) =>
-    props.$primary &&
-    css`
-      background: #0abe51;
-      color: white;
-    `}
-  ${(props) =>
-    props.fontSize &&
-    css`
-      font-size: ${props.fontSize};
-    `}
 `;

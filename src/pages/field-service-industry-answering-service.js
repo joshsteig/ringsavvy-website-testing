@@ -5,8 +5,11 @@ import Hero from '../components/hero';
 import BulletSection from '../components/bulletSection';
 import Testimonials from '../components/testimonials';
 import FaqAccordion from '../components/faqAccordion';
-import { Card } from '../components/card/style';
 import CardGrid from '../components/cardGrid';
+
+import businessWoman from '../assets/images/business-woman-taking-call.jpg';
+import intakeReceptionist from '../assets/images/receptionist-talking-intake.jpg';
+import liveReceptionist from '../assets/images/receptionist-always-live.jpg';
 
 export default function FieldServiceIndustry({ location }) {
   // TODO: StaticQuery img assets for bullet section
@@ -35,6 +38,7 @@ export default function FieldServiceIndustry({ location }) {
         'Potential new clients hang up on voicemail and call your competitors when they don’t speak to someone immediately. Ring Savvy helps you capitalize on every call.',
         'Your business hours just went from 9-5, to 24 hours a day, 7 days a week, 365 days a year. That’s right, we’ll answer your calls on Christmas morning.',
       ],
+      img: businessWoman,
     },
     {
       heading: 'Industry leading new customer intake',
@@ -43,6 +47,7 @@ export default function FieldServiceIndustry({ location }) {
         'We’ll ask your specific questions that will help you get the best understanding of the problem the customer needs help with, and send you all of the pertinent information in real time.',
         'We can have different intakes for different types of industries you handle. If you handle plumbing and HVAC, you’ll need two different scripts. Customize your script for each industry you handle.',
       ],
+      img: intakeReceptionist,
     },
     {
       heading: 'Intelligent field service dispatching',
@@ -51,6 +56,7 @@ export default function FieldServiceIndustry({ location }) {
         'Want us to patch your technicians into the call and send them to the site? We’ll create a customized schedule of on call technicians and contact the on-call tech when they’re needed.',
         'Depending on the type of call that comes in, we can follow your protocol to make sure we contact the person in charge of that matter. Just let us know who to contact.',
       ],
+      img: liveReceptionist,
     },
   ];
 

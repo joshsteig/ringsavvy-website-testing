@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import arrow from '../../assets/images/has-arrow.svg';
+import whiteArrow from '../../assets/images/has-white-arrow.svg';
 
 // TODO: create flex components: https://medium.com/swlh/create-a-responsive-grid-with-react-flexbox-styled-components-f7a55f607480
 export const FlexRow = styled.div`
@@ -124,6 +125,28 @@ export const hasArrow = () => css`
     position: relative;
     top: 2px;
     transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    &:after {
+      left: 22px;
+    }
+  }
+`;
+
+export const hasWhiteArrow = () => css`
+  position: relative;
+
+  &:after {
+    content: url(${whiteArrow});
+    left: 16px;
+    position: relative;
+    top: 2px;
+    transition: all 0.2s ease-in-out;
+
+    .arrow {
+      stroke: pink;
+    }
   }
 
   &:hover {

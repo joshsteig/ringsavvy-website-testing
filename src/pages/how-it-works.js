@@ -1,7 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
 
 import Layout from '../components/layout';
 import Hero from '../components/hero';
@@ -11,8 +10,8 @@ import FaqAccordion from '../components/faqAccordion';
 import EmailSection from '../components/emailSection';
 import ValueGrid from '../components/valueGrid';
 import { FlexRow } from '../components/globals';
+import illustration from '../assets/images/how-it-works-info.jpg';
 
-// TODO: Look into bug: Green tab turns white when 3 column grid link is hovered over
 export default function HowItWorks({ location }) {
   const data = useStaticQuery(graphql`
     query {
@@ -155,9 +154,9 @@ export default function HowItWorks({ location }) {
         horizontal
         contentData={contentData.find((data) => data.id === 3)}
       >
-        {/* TODO: Why is this not displaying? */}
+        {/* TODO: Pull using Gatsby Image - bug prevented */}
         <FlexRow center>
-          <Img fluid={data.file.childImageSharp.fluid} />
+          <img src={illustration} />
         </FlexRow>
       </ContentSection>
       <FaqAccordion

@@ -17,6 +17,8 @@ export default function RootIndex(props) {
       'You’ve got enough on your plate already. Our 24/7 live receptionist service is ready to answer any phone calls you don’t have time for, take highly detailed customer messages and help build a highly organized dispatching system for your company.',
     primaryCtaText: 'Try free for 7 days',
     primaryCtaLink: '/sign-up/',
+    secondaryCtaText: 'Get a custom quote',
+    secondaryCtaLink: '/get-a-quote/',
   };
 
   const contentData = [
@@ -124,7 +126,8 @@ export default function RootIndex(props) {
         subHeading={heroData.subHeading}
         primaryCtaText={heroData.primaryCtaText}
         primaryCtaLink={heroData.primaryCtaLink}
-        // TODO: add secondary link
+        secondaryCtaText={heroData.secondaryCtaText}
+        secondaryCtaLink={heroData.secondaryCtaLink}
       />
       <Tabs
         contentData={contentData.find((data) => data.id === 1)}

@@ -6,7 +6,7 @@ import * as Styled from './style';
 import bulletPoint from '../../assets/images/bullet-point.svg';
 
 const BulletSection = ({ bulletData, isFlipped }) => {
-  const { heading, bullets } = bulletData;
+  const { heading, bullets, img } = bulletData;
 
   return (
     <Section>
@@ -14,7 +14,9 @@ const BulletSection = ({ bulletData, isFlipped }) => {
         <FlexRow alignCenter>
           <OneHalf isFirst>
             {isFlipped ? (
-              <FlexRow center>img</FlexRow>
+              <FlexRow center>
+                <Styled.Image src={img} alt={heading} />
+              </FlexRow>
             ) : (
               <>
                 <h2>{heading}</h2>
@@ -43,7 +45,9 @@ const BulletSection = ({ bulletData, isFlipped }) => {
                 </Styled.UnorderedList>
               </>
             ) : (
-              <FlexRow center>img</FlexRow>
+              <FlexRow center>
+                <Styled.Image src={img} alt={heading} />
+              </FlexRow>
             )}
           </OneHalf>
         </FlexRow>

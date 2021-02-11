@@ -2,9 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Layout from '../components/layout';
 import Hero from '../components/hero';
-import { Wrapper } from '../components/wrapper';
-import { Section } from '../components/section';
-import { getPricing } from '../utils/embedScripts';
+import GetPricing from '../components/getPricing';
 
 export default function Pricing({ location }) {
   const heroData = {
@@ -23,11 +21,7 @@ export default function Pricing({ location }) {
         />
       </Helmet>
       <Hero heading={heroData.heading} />
-      <Section>
-        <Wrapper>
-          <div id='script'></div>
-        </Wrapper>
-      </Section>
+      <GetPricing />
     </Layout>
   );
 }

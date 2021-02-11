@@ -33,6 +33,7 @@ const options = {
   },
 };
 
+// TODO: refactor to useEffect
 export default class Body extends Component {
   componentDidMount() {
     const sections = document.querySelectorAll('h2');

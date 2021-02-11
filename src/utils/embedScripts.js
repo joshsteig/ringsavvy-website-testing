@@ -5,7 +5,7 @@ export const getQuote =
   '<script type="text/javascript" src="https://answeringlegal.formstack.com/forms/js.php/sign_up_copy_7_copy?nomodernizr=1&no_style=1&no_style_strict=1"></script><noscript><a href="https://answeringlegal.formstack.com/forms/sign_up_copy_7_copy" title="Online Form">Online Form - RS Get a Quote</a></noscript>';
 
 export const getPricing =
-  'https://answeringlegal.formstack.com/forms/js.php/rs_get_plans_and_pricing?nomodernizr=1&no_style=1&no_style_strict=1';
+  '<script type="text/javascript" src="https://answeringlegal.formstack.com/forms/js.php/rs_get_plans_and_pricing?nomodernizr=1&no_style=1&no_style_strict=1"></script><noscript><a href="https://answeringlegal.formstack.com/forms/rs_get_plans_and_pricing" title="Online Form">Online Form - RS Get Pricing Form</a></noscript>';
 
 export const pdfDownload =
   '<script type="text/javascript" src="https://answeringlegal.formstack.com/forms/js.php/ebook_download?nomodernizr=1&no_style=1&no_style_strict=1"></script><noscript><a href="https://answeringlegal.formstack.com/forms/ebook_download" title="Online Form">Online Form - PDF Download</a></noscript>';

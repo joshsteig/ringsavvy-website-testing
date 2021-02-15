@@ -55,7 +55,7 @@ export default function MessageTaking({ location }) {
           content='Message Taking | Get The Information You Need From Your Callers | Ring Savvy | We Ask the Questions You Pre Determine | Try Us Free For 7 Days.'
         />
       </Helmet>
-      <Hero />
+      <Hero heading={heroData.heading} />
       <SecondaryContent hasSidebar learnMoreData={learnMoreData}>
         <p>
           Our Message Taking services have been designed with both reliability

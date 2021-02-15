@@ -61,11 +61,7 @@ const Testimonials = () => {
     <Styled.Slider>
       <Styled.GreenContainer />
       <Wrapper>
-        <Styled.HeadingWrapper>
-          <Styled.Title>
-            <h2>What our clients are saying</h2>
-          </Styled.Title>
-        </Styled.HeadingWrapper>
+        <h2 style={{ maxWidth: '480px' }}>What our clients are saying</h2>
       </Wrapper>
       <Swiper {...params}>
         {testimonials.map((testimonial, i) => (
@@ -83,6 +79,7 @@ const Testimonials = () => {
       </Swiper>
       <Wrapper>
         <Styled.Bottom>
+          {/* TODO: Pull review data from Google API */}
           <Styled.GoogleReviews>
             <img src={Google} alt='Google Logo' />
             <p>

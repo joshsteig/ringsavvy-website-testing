@@ -6,8 +6,8 @@ import * as Styled from './style';
 const EmailForm = () => {
   useEffect(() => {
     postscribe('#formEmbed', pdfDownload, {
-      done: async function () {
-        const input = await document.getElementById('field82569298');
+      done: function () {
+        const input = document.getElementById('field82569298');
 
         input.setAttribute('placeholder', 'Email Address');
       },

@@ -133,6 +133,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #formEmbed .fsSubFieldGroup {
+    align-items: baseline;
     display: flex;
     flex-wrap: wrap;
   }

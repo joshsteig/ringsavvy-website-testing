@@ -23,7 +23,7 @@ export default function SignUp({ location }) {
           content='Sign Up | Ring Savvy | Get Our 7 Day Free Trial With Access to Every Feature We Offer. No Credit Card Down to Try, So Sign Up Now!'
         />
       </Helmet>
-      <FlexRow>
+      <FlexRow wrap>
         <GreenHalf text={freeTrial} />
         <FlexCol center>
           <div id='formEmbed' />

@@ -11,6 +11,21 @@ export const FormContainer = styled(FlexRow)`
 
   .fsSubmitButton {
     width: auto;
+
+    @media ${({ theme }) => theme.global.mediaQueries.md} {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  @media ${({ theme }) => theme.global.mediaQueries.lg} {
+    box-shadow: none;
+    border-radius: 0;
+    top: 0;
+  }
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    padding: 30px 5%;
   }
 `;
 
@@ -18,6 +33,11 @@ export const Form = styled.div`
   border-right: 1px solid #707070;
   flex: 1 100%;
   padding-right: 3.5rem;
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    border-right: none;
+    padding: 0;
+  }
 `;
 
 export const AboutPricing = styled.div`
@@ -32,6 +52,10 @@ export const AboutPricing = styled.div`
 
   ul > li {
     margin-bottom: 0.75em;
+  }
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    display: none;
   }
 `;
 

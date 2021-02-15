@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Section } from '../section';
 
 export const Description = styled.p`
   ${(props) =>
@@ -10,27 +11,16 @@ export const Description = styled.p`
     `}
 `;
 
-export const Slider = styled.div`
-  width: 100%;
-  padding: 60px 0 40px;
-  margin: 50px 0;
-  position: relative;
+export const Slider = styled(Section)`
+  margin-bottom: 50px;
 
   .swiper-wrapper {
-    margin-top: 100px;
+    margin-top: 50px;
   }
 
   .swiper-container {
     max-width: 980px;
     overflow: visible;
-  }
-
-  @media (max-width: 767px) {
-    margin-top: 100px;
-
-    .swiper-wrapper {
-      margin-top: 0;
-    }
   }
 `;
 
@@ -44,33 +34,22 @@ export const SliderItem = styled.div`
   text-align: left;
 `;
 
-export const Title = styled.div`
-  position: absolute;
-  left: 0%;
-  top: -50px;
-  width: 50%;
-
-  @media (max-width: 767px) {
-    width: 100%;
-    top: -100px;
-  }
-`;
-
 export const HeadingWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
 
 export const GreenContainer = styled.div`
-  background: #0abe51;
-  position: absolute;
-  right: 0;
-  top: 0;
+  background: ${({ theme }) => theme.global.colors.primary};
   border-radius: 10px 0 0 10px;
   bottom: 0;
   max-width: 40%;
   min-width: 0;
   left: 60%;
+  padding: 45px 45px 45px;
+  position: absolute;
+  right: 0;
+  top: 100px;
 `;
 
 export const Author = styled.div`

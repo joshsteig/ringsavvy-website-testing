@@ -32,6 +32,14 @@ export const Navigation = styled.header`
           color: ${({ theme }) => theme.global.colors.white};
         }
       }
+
+      ${ToggleButton} {
+        color: ${({ theme }) => theme.global.colors.black};
+      }
+
+      @media ${({ theme }) => theme.global.mediaQueries.lg} {
+        margin-bottom: 40px;
+      }
     `}
 
   @media ${({ theme }) => theme.global.mediaQueries.md} {

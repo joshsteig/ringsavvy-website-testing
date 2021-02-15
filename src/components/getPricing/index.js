@@ -34,7 +34,7 @@ const GetPricing = () => {
           </p>
         </Styled.AboutPricing>
       </Styled.FormContainer>
-      <p>
+      <p style={{ textAlign: 'center' }}>
         Call us right now at <a href='tel:6312502794'>631-250-2794</a> and we
         will explain all Ring Savvy benefits and pricing.
       </p>

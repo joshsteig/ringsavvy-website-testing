@@ -63,7 +63,8 @@ exports.createPages = ({ graphql, actions }) => {
 };
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html') {
+  console.log(stage);
+  if (stage === 'build-html' || 'develop-html') {
     actions.setWebpackConfig({
       module: {
         rules: [

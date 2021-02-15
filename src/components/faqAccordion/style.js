@@ -8,6 +8,10 @@ export const Cta = styled(TabContent)`
   max-width: 430px;
   position: relative;
   top: 32px;
+
+  @media ${({ theme }) => theme.global.mediaQueries.lg} {
+    display: none;
+  }
 `;
 
 export const FaqList = styled.ul`
@@ -45,13 +49,21 @@ export const Faq = styled.li`
   &:before {
     position: absolute;
     content: '${(props) => (props.isOpen ? '-' : '+')}';
-    color: #0abe51;
+    color: ${({ theme }) => theme.global.colors.primary};
     right: 40px;
     font-size: 32px;
+
+    @media ${({ theme }) => theme.global.mediaQueries.lg} {
+      right: 20px;
+    }
   }
 
   &:hover {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  @media ${({ theme }) => theme.global.mediaQueries.lg} {
+    padding: 26px 50px 26px 26px;
   }
 `;
 

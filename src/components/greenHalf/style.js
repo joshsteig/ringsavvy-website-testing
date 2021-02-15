@@ -8,10 +8,17 @@ export const GreenBg = styled(FlexRow)`
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.lg};
   height: 100vh;
-  padding: 0 18%;
+  max-width: 43%;
+  padding: 0 8%;
   position: relative;
   text-align: center;
-  width: 100%;
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    flex: 1 100%;
+    margin-bottom: 40px;
+    max-height: 96px;
+    max-width: none;
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -23,5 +30,18 @@ export const LogoContainer = styled.div`
   img {
     height: auto;
     width: 201px;
+  }
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    left: 0;
+    position: relative;
+    transform: none;
+  }
+`;
+
+export const Text = styled.span`
+  width: 100%;
+
+  @media ${({ theme }) => theme.global.mediaQueries.md} {
+    display: none;
   }
 `;

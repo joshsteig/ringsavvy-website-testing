@@ -1,12 +1,34 @@
 @font-face {
-  font-family: 'Open Sans';
-  src: url(../../static/fonts/OpenSans-Regular.woff),
-    url(../../static/fonts/OpenSans-Italic.woff),
-    url(../../static/fonts/OpenSans-Bold.woff);
+  font-family: 'Merriweather';
+  src: url(../../static/fonts/Merriweather-Regular.woff), format('WOFF');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Merriweather';
-  src: url(../../static/fonts/Merriweather-Bold.woff),
-    url(../../static/fonts/Merriweather-Regular.woff);
+  src: url(../../static/fonts/Merriweather-Bold.woff), format('WOFF');
+  font-weight: Bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(../../static/fonts/OpenSans-Regular.woff), format('WOFF');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(../../static/fonts/OpenSans-Bold.woff), format('WOFF');
+  font-weight: Bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(../../static/fonts/OpenSans-Italic.woff), format('WOFF');
+  font-weight: inherit;
+  font-style: italic;
 }

@@ -27,7 +27,6 @@
     "gatsby-transformer-remark": "^2.16.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "lodash": "^4.17.20",
-    "node-sass": "^4.14.1",
     "postscribe": "^2.0.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -49,7 +48,8 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "sass": "^1.32.7"
   },
   "homepage": "https://github.com/answeringLegal/ringsavvy-website#readme",
   "keywords": [

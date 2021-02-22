@@ -65,6 +65,7 @@ export const AuthorName = styled.p`
   color: ${({ theme }) => theme.global.colors.black};
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fonts.base};
+  font-weight: bold;
 `;
 
 export const Bottom = styled.div`

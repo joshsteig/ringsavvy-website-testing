@@ -7,7 +7,7 @@ export const ValueLink = styled(Link)`
   display: block;
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.lg};
-  font-weight: 700;
+  font-weight: bold;
   margin-bottom: 1em;
 
   ${({ isLink }) =>

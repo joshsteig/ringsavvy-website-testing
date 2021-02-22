@@ -23,7 +23,7 @@ export const AccordionTab = styled.div`
   display: flex;
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.md};
-  font-weight: 700;
+  font-weight: bold;
   line-height: 1.3em;
   margin: 0 0 20px;
   max-width: 480px;

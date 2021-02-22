@@ -31,6 +31,7 @@ export const Name = styled.p`
   color: ${({ theme }) => theme.global.colors.black};
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.lg};
+  font-weight: bold;
   margin-bottom: 0.6em;
 `;
 

@@ -37,9 +37,9 @@ const Services = () => {
       <Styled.Title>All our services</Styled.Title>
       <Styled.List>
         {services.map(({ name, url }) => (
-          <Styled.serviceLink key={url}>
+          <Styled.ServiceLink key={url}>
             <a href={url}>{name}</a>
-          </Styled.serviceLink>
+          </Styled.ServiceLink>
         ))}
       </Styled.List>
     </Styled.Section>

@@ -117,6 +117,7 @@ export const GlobalStyles = createGlobalStyle`
   #formEmbed .fsBody .fsForm .fsSectionHeading {
     color: ${({ theme }) => theme.global.colors.black};
     font-size: ${({ theme }) => theme.global.fontSizes.lg};
+    font-weight: bold;
     margin: 0;
     text-align: center;
   }
@@ -229,6 +230,7 @@ export const GlobalStyles = createGlobalStyle`
   .scholarship-form-page #formEmbed .fsBody .fsForm .fsSectionHeading {
     color: ${({ theme }) => theme.global.colors.primary}!important;
     font-size: ${({ theme }) => theme.global.fontSizes.base}!important;
+    font-weight: bold;
     text-align: left;
   }
 

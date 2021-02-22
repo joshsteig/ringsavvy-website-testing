@@ -7,6 +7,7 @@ export const GreenBg = styled(FlexRow)`
   flex: 1;
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.lg};
+  font-weight: bold;
   height: 100vh;
   max-width: 43%;
   padding: 0 8%;

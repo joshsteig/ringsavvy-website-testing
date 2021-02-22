@@ -59,7 +59,7 @@ export const Price = styled.span`
   color: ${({ theme }) => theme.global.colors.black};
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.lg};
-  font-weight: 700;
+  font-weight: bold;
   margin: 1.2em 0;
 `;
 

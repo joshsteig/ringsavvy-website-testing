@@ -37,7 +37,7 @@ export const Faq = styled.li`
   display: block;
   font-family: ${({ theme }) => theme.global.fonts.serif};
   font-size: ${({ theme }) => theme.global.fontSizes.base};
-  font-weight: 700;
+  font-weight: bold;
   line-height: 1.3em;
   margin: 0 0 20px;
   max-width: 480px;

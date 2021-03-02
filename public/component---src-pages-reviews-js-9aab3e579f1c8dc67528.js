@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[44],{tcRl:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return o}));var a=t("q1tI"),c=t.n(a),i=t("qhky"),r=t("I/Ru"),l=t("0YEp");function o(e){var n=e.location;return c.a.createElement(r.a,{location:n},c.a.createElement(i.a,null,c.a.createElement("title",null,"Our Reviews - RingSavvy, Inc."),c.a.createElement("meta",{name:"description",content:"Ring Savvy Reviews"})),c.a.createElement(l.a,{heading:"Our Reviews"}))}}}]);
-//# sourceMappingURL=component---src-pages-reviews-js-9aab3e579f1c8dc67528.js.map

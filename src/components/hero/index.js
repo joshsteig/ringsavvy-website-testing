@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { client } from '../../utils/contentful';
+import React from 'react';
 import { StyledLink } from '../button';
 import { Wrapper } from '../wrapper';
 import * as Styled from './style';
+import heroBg from '../../assets/images/receptionist-hero-overlay.jpg';
 
 const Hero = ({
   heading,
@@ -13,15 +13,8 @@ const Hero = ({
   secondaryCtaText,
 }) => {
   const isSecondary = !subHeading;
-  //TODO: use StaticQuery to pull data (Gatsby Image)? or just grab from assets/images (No Gatsby Image)
-  const [heroBg, setBg] = useState('');
-  useEffect(() => {
-    client
-      .getAsset('4UAfv2hN8DUQFyCinSQIfJ')
-      .then((asset) => setBg(asset.fields.file.url))
-      .catch(console.error);
-  }, []);
 
+  //TODO: use StaticQuery to pull data (Gatsby Image)? or just grab from assets/images (No Gatsby Image)
   return (
     <Styled.Hero isSecondary={isSecondary} backgroundImage={heroBg}>
       <Wrapper>

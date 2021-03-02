@@ -276,8 +276,8 @@ AddDefaultCharset utf-8
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} !=dev2.ringsavvy.com
-  RewriteRule (.*) %{ENV:PROTO}://dev2.ringsavvy.com/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} !=www.ringsavvy.com
+  RewriteRule (.*) %{ENV:PROTO}://www.ringsavvy.com/$1 [R=301,L]
 </IfModule>
 
 

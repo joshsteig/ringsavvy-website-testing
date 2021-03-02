@@ -6,7 +6,7 @@ import * as Styled from './style';
 //TODO: add to menus array component when that is refactored
 const links = [
   {
-    name: 'How It works',
+    name: 'How It Works',
     path: '/how-it-works',
   },
   {

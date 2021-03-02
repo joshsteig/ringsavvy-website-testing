@@ -59,7 +59,7 @@ const FaqAccordion = ({ contentData, horizontal = false, primary = false }) => {
             {faqData.map((faq, index) => (
               <Faq faq={faq} index={index} key={index} />
             ))}
-            <Link to='/faqs/'>Read more FAQs</Link>
+            <Link to='/faq/'>Read more FAQs</Link>
           </Styled.FaqList>
         </FlexRow>
       </Wrapper>

@@ -111,7 +111,11 @@ return /******/ (function(modules) { // webpackBootstrap
 exports.ssrComponents = {
   "component---cache-dev-404-page-js": (preferDefault(__webpack_require__(/*! ./.cache/dev-404-page.js */ "./.cache/dev-404-page.js"))),
   "component---src-pages-404-js": (preferDefault(__webpack_require__(/*! ./src/pages/404.js */ "./src/pages/404.js"))),
-  "component---src-pages-index-js": (preferDefault(__webpack_require__(/*! ./src/pages/index.js */ "./src/pages/index.js")))
+  "component---src-pages-faq-js": (preferDefault(__webpack_require__(/*! ./src/pages/faq.js */ "./src/pages/faq.js"))),
+  "component---src-pages-how-it-works-js": (preferDefault(__webpack_require__(/*! ./src/pages/how-it-works.js */ "./src/pages/how-it-works.js"))),
+  "component---src-pages-index-js": (preferDefault(__webpack_require__(/*! ./src/pages/index.js */ "./src/pages/index.js"))),
+  "component---src-pages-services-index-js": (preferDefault(__webpack_require__(/*! ./src/pages/services/index.js */ "./src/pages/services/index.js"))),
+  "component---src-templates-blog-js": (preferDefault(__webpack_require__(/*! ./src/templates/blog.js */ "./src/templates/blog.js")))
   }
 
 
@@ -11000,6 +11004,751 @@ function createErrorType(code, defaultMessage) {
 module.exports = wrap({ http: http, https: https });
 module.exports.wrap = wrap;
 
+
+/***/ }),
+
+/***/ "./node_modules/gatsby-image/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/gatsby-image/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+
+var _inheritsLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"));
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var logDeprecationNotice = function logDeprecationNotice(prop, replacement) {
+  if (false) {}
+
+  console.log("\n    The \"" + prop + "\" prop is now deprecated and will be removed in the next major version\n    of \"gatsby-image\".\n    ");
+
+  if (replacement) {
+    console.log("Please use " + replacement + " instead of \"" + prop + "\".");
+  }
+}; // Handle legacy props during their deprecation phase
+
+
+var convertProps = function convertProps(props) {
+  var convertedProps = (0, _extends2.default)({}, props);
+  var resolutions = convertedProps.resolutions,
+      sizes = convertedProps.sizes,
+      critical = convertedProps.critical;
+
+  if (resolutions) {
+    convertedProps.fixed = resolutions;
+    logDeprecationNotice("resolutions", "the gatsby-image v2 prop \"fixed\"");
+    delete convertedProps.resolutions;
+  }
+
+  if (sizes) {
+    convertedProps.fluid = sizes;
+    logDeprecationNotice("sizes", "the gatsby-image v2 prop \"fluid\"");
+    delete convertedProps.sizes;
+  }
+
+  if (critical) {
+    logDeprecationNotice("critical", "the native \"loading\" attribute");
+    convertedProps.loading = "eager";
+  } // convert fluid & fixed to arrays so we only have to work with arrays
+
+
+  if (convertedProps.fluid) {
+    convertedProps.fluid = groupByMedia([].concat(convertedProps.fluid));
+  }
+
+  if (convertedProps.fixed) {
+    convertedProps.fixed = groupByMedia([].concat(convertedProps.fixed));
+  }
+
+  return convertedProps;
+};
+/**
+ * Checks if fluid or fixed are art-direction arrays.
+ *
+ * @param currentData  {{media?: string}[]}   The props to check for images.
+ * @return {boolean}
+ */
+
+
+var hasArtDirectionSupport = function hasArtDirectionSupport(currentData) {
+  return !!currentData && Array.isArray(currentData) && currentData.some(function (image) {
+    return typeof image.media !== "undefined";
+  });
+};
+/**
+ * Tries to detect if a media query matches the current viewport.
+ * @property media   {{media?: string}}  A media query string.
+ * @return {boolean}
+ */
+
+
+var matchesMedia = function matchesMedia(_ref) {
+  var media = _ref.media;
+  return media ? isBrowser && !!window.matchMedia(media).matches : false;
+};
+/**
+ * Find the source of an image to use as a key in the image cache.
+ * Use `the first image in either `fixed` or `fluid`
+ * @param {{fluid: {src: string, media?: string}[], fixed: {src: string, media?: string}[]}} args
+ * @return {string?} Returns image src or undefined it not given.
+ */
+
+
+var getImageCacheKey = function getImageCacheKey(_ref2) {
+  var fluid = _ref2.fluid,
+      fixed = _ref2.fixed;
+  var srcData = getCurrentSrcData(fluid || fixed || []);
+  return srcData && srcData.src;
+};
+/**
+ * Returns the current src - Preferably with art-direction support.
+ * @param currentData  {{media?: string}[], maxWidth?: Number, maxHeight?: Number}   The fluid or fixed image array.
+ * @return {{src: string, media?: string, maxWidth?: Number, maxHeight?: Number}}
+ */
+
+
+var getCurrentSrcData = function getCurrentSrcData(currentData) {
+  if (isBrowser && hasArtDirectionSupport(currentData)) {
+    // Do we have an image for the current Viewport?
+    var foundMedia = currentData.findIndex(matchesMedia);
+
+    if (foundMedia !== -1) {
+      return currentData[foundMedia];
+    } // No media matches, select first element without a media condition
+
+
+    var noMedia = currentData.findIndex(function (image) {
+      return typeof image.media === "undefined";
+    });
+
+    if (noMedia !== -1) {
+      return currentData[noMedia];
+    }
+  } // Else return the first image.
+
+
+  return currentData[0];
+}; // Cache if we've seen an image before so we don't bother with
+// lazy-loading & fading in on subsequent mounts.
+
+
+var imageCache = Object.create({});
+
+var inImageCache = function inImageCache(props) {
+  var convertedProps = convertProps(props);
+  var cacheKey = getImageCacheKey(convertedProps);
+  return imageCache[cacheKey] || false;
+};
+
+var activateCacheForImage = function activateCacheForImage(props) {
+  var convertedProps = convertProps(props);
+  var cacheKey = getImageCacheKey(convertedProps);
+
+  if (cacheKey) {
+    imageCache[cacheKey] = true;
+  }
+}; // Native lazy-loading support: https://addyosmani.com/blog/lazy-loading/
+
+
+var hasNativeLazyLoadSupport = typeof HTMLImageElement !== "undefined" && "loading" in HTMLImageElement.prototype;
+var isBrowser = typeof window !== "undefined";
+var hasIOSupport = isBrowser && window.IntersectionObserver;
+var io;
+var listeners = new WeakMap();
+
+function getIO() {
+  if (typeof io === "undefined" && typeof window !== "undefined" && window.IntersectionObserver) {
+    io = new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (listeners.has(entry.target)) {
+          var cb = listeners.get(entry.target); // Edge doesn't currently support isIntersecting, so also test for an intersectionRatio > 0
+
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            io.unobserve(entry.target);
+            listeners.delete(entry.target);
+            cb();
+          }
+        }
+      });
+    }, {
+      rootMargin: "200px"
+    });
+  }
+
+  return io;
+}
+
+function generateImageSources(imageVariants) {
+  return imageVariants.map(function (_ref3) {
+    var src = _ref3.src,
+        srcSet = _ref3.srcSet,
+        srcSetWebp = _ref3.srcSetWebp,
+        media = _ref3.media,
+        sizes = _ref3.sizes;
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: src
+    }, srcSetWebp && /*#__PURE__*/_react.default.createElement("source", {
+      type: "image/webp",
+      media: media,
+      srcSet: srcSetWebp,
+      sizes: sizes
+    }), srcSet && /*#__PURE__*/_react.default.createElement("source", {
+      media: media,
+      srcSet: srcSet,
+      sizes: sizes
+    }));
+  });
+} // Return an array ordered by elements having a media prop, does not use
+// native sort, as a stable sort is not guaranteed by all browsers/versions
+
+
+function groupByMedia(imageVariants) {
+  var withMedia = [];
+  var without = [];
+  imageVariants.forEach(function (variant) {
+    return (variant.media ? withMedia : without).push(variant);
+  });
+
+  if (without.length > 1 && "development" !== "production") {
+    console.warn("We've found " + without.length + " sources without a media property. They might be ignored by the browser, see: https://www.gatsbyjs.org/packages/gatsby-image/#art-directing-multiple-images");
+  }
+
+  return [].concat(withMedia, without);
+}
+
+function generateTracedSVGSources(imageVariants) {
+  return imageVariants.map(function (_ref4) {
+    var src = _ref4.src,
+        media = _ref4.media,
+        tracedSVG = _ref4.tracedSVG;
+    return /*#__PURE__*/_react.default.createElement("source", {
+      key: src,
+      media: media,
+      srcSet: tracedSVG
+    });
+  });
+}
+
+function generateBase64Sources(imageVariants) {
+  return imageVariants.map(function (_ref5) {
+    var src = _ref5.src,
+        media = _ref5.media,
+        base64 = _ref5.base64;
+    return /*#__PURE__*/_react.default.createElement("source", {
+      key: src,
+      media: media,
+      srcSet: base64
+    });
+  });
+}
+
+function generateNoscriptSource(_ref6, isWebp) {
+  var srcSet = _ref6.srcSet,
+      srcSetWebp = _ref6.srcSetWebp,
+      media = _ref6.media,
+      sizes = _ref6.sizes;
+  var src = isWebp ? srcSetWebp : srcSet;
+  var mediaAttr = media ? "media=\"" + media + "\" " : "";
+  var typeAttr = isWebp ? "type='image/webp' " : "";
+  var sizesAttr = sizes ? "sizes=\"" + sizes + "\" " : "";
+  return "<source " + typeAttr + mediaAttr + "srcset=\"" + src + "\" " + sizesAttr + "/>";
+}
+
+function generateNoscriptSources(imageVariants) {
+  return imageVariants.map(function (variant) {
+    return (variant.srcSetWebp ? generateNoscriptSource(variant, true) : "") + generateNoscriptSource(variant);
+  }).join("");
+}
+
+var listenToIntersections = function listenToIntersections(el, cb) {
+  var observer = getIO();
+
+  if (observer) {
+    observer.observe(el);
+    listeners.set(el, cb);
+  }
+
+  return function () {
+    observer.unobserve(el);
+    listeners.delete(el);
+  };
+};
+
+var noscriptImg = function noscriptImg(props) {
+  // Check if prop exists before adding each attribute to the string output below to prevent
+  // HTML validation issues caused by empty values like width="" and height=""
+  var src = props.src ? "src=\"" + props.src + "\" " : "src=\"\" "; // required attribute
+
+  var sizes = props.sizes ? "sizes=\"" + props.sizes + "\" " : "";
+  var srcSet = props.srcSet ? "srcset=\"" + props.srcSet + "\" " : "";
+  var title = props.title ? "title=\"" + props.title + "\" " : "";
+  var alt = props.alt ? "alt=\"" + props.alt + "\" " : "alt=\"\" "; // required attribute
+
+  var width = props.width ? "width=\"" + props.width + "\" " : "";
+  var height = props.height ? "height=\"" + props.height + "\" " : "";
+  var crossOrigin = props.crossOrigin ? "crossorigin=\"" + props.crossOrigin + "\" " : "";
+  var loading = props.loading ? "loading=\"" + props.loading + "\" " : "";
+  var draggable = props.draggable ? "draggable=\"" + props.draggable + "\" " : "";
+  var sources = generateNoscriptSources(props.imageVariants);
+  return "<picture>" + sources + "<img " + loading + width + height + sizes + srcSet + src + alt + title + crossOrigin + draggable + "style=\"position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center\"/></picture>";
+}; // Earlier versions of gatsby-image during the 2.x cycle did not wrap
+// the `Img` component in a `picture` element. This maintains compatibility
+// until a breaking change can be introduced in the next major release
+
+
+var Placeholder = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+  var src = props.src,
+      imageVariants = props.imageVariants,
+      generateSources = props.generateSources,
+      spreadProps = props.spreadProps,
+      ariaHidden = props.ariaHidden;
+
+  var baseImage = /*#__PURE__*/_react.default.createElement(Img, (0, _extends2.default)({
+    ref: ref,
+    src: src
+  }, spreadProps, {
+    ariaHidden: ariaHidden
+  }));
+
+  return imageVariants.length > 1 ? /*#__PURE__*/_react.default.createElement("picture", null, generateSources(imageVariants), baseImage) : baseImage;
+});
+
+var Img = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+  var sizes = props.sizes,
+      srcSet = props.srcSet,
+      src = props.src,
+      style = props.style,
+      onLoad = props.onLoad,
+      onError = props.onError,
+      loading = props.loading,
+      draggable = props.draggable,
+      ariaHidden = props.ariaHidden,
+      otherProps = (0, _objectWithoutPropertiesLoose2.default)(props, ["sizes", "srcSet", "src", "style", "onLoad", "onError", "loading", "draggable", "ariaHidden"]);
+  return /*#__PURE__*/_react.default.createElement("img", (0, _extends2.default)({
+    "aria-hidden": ariaHidden,
+    sizes: sizes,
+    srcSet: srcSet,
+    src: src
+  }, otherProps, {
+    onLoad: onLoad,
+    onError: onError,
+    ref: ref,
+    loading: loading,
+    draggable: draggable,
+    style: (0, _extends2.default)({
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "center"
+    }, style)
+  }));
+});
+
+Img.propTypes = {
+  style: _propTypes.default.object,
+  onError: _propTypes.default.func,
+  onLoad: _propTypes.default.func
+};
+
+var Image = /*#__PURE__*/function (_React$Component) {
+  (0, _inheritsLoose2.default)(Image, _React$Component);
+
+  function Image(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this; // If this image has already been loaded before then we can assume it's
+    // already in the browser cache so it's cheap to just show directly.
+
+    _this.seenBefore = isBrowser && inImageCache(props);
+    _this.isCritical = props.loading === "eager" || props.critical;
+    _this.addNoScript = !(_this.isCritical && !props.fadeIn);
+    _this.useIOSupport = !hasNativeLazyLoadSupport && hasIOSupport && !_this.isCritical && !_this.seenBefore;
+    var isVisible = _this.isCritical || isBrowser && (hasNativeLazyLoadSupport || !_this.useIOSupport);
+    _this.state = {
+      isVisible: isVisible,
+      imgLoaded: false,
+      imgCached: false,
+      fadeIn: !_this.seenBefore && props.fadeIn,
+      isHydrated: false
+    };
+    _this.imageRef = /*#__PURE__*/_react.default.createRef();
+    _this.placeholderRef = props.placeholderRef || /*#__PURE__*/_react.default.createRef();
+    _this.handleImageLoaded = _this.handleImageLoaded.bind((0, _assertThisInitialized2.default)(_this));
+    _this.handleRef = _this.handleRef.bind((0, _assertThisInitialized2.default)(_this));
+    return _this;
+  }
+
+  var _proto = Image.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.setState({
+      isHydrated: isBrowser
+    });
+
+    if (this.state.isVisible && typeof this.props.onStartLoad === "function") {
+      this.props.onStartLoad({
+        wasCached: inImageCache(this.props)
+      });
+    }
+
+    if (this.isCritical) {
+      var img = this.imageRef.current;
+
+      if (img && img.complete) {
+        this.handleImageLoaded();
+      }
+    }
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    if (this.cleanUpListeners) {
+      this.cleanUpListeners();
+    }
+  } // Specific to IntersectionObserver based lazy-load support
+  ;
+
+  _proto.handleRef = function handleRef(ref) {
+    var _this2 = this;
+
+    if (this.useIOSupport && ref) {
+      this.cleanUpListeners = listenToIntersections(ref, function () {
+        var imageInCache = inImageCache(_this2.props);
+
+        if (!_this2.state.isVisible && typeof _this2.props.onStartLoad === "function") {
+          _this2.props.onStartLoad({
+            wasCached: imageInCache
+          });
+        } // imgCached and imgLoaded must update after isVisible,
+        // Once isVisible is true, imageRef becomes accessible, which imgCached needs access to.
+        // imgLoaded and imgCached are in a 2nd setState call to be changed together,
+        // avoiding initiating unnecessary animation frames from style changes.
+
+
+        _this2.setState({
+          isVisible: true
+        }, function () {
+          _this2.setState({
+            imgLoaded: imageInCache,
+            // `currentSrc` should be a string, but can be `undefined` in IE,
+            // !! operator validates the value is not undefined/null/""
+            // for lazyloaded components this might be null
+            // TODO fix imgCached behaviour as it's now false when it's lazyloaded
+            imgCached: !!(_this2.imageRef.current && _this2.imageRef.current.currentSrc)
+          });
+        });
+      });
+    }
+  };
+
+  _proto.handleImageLoaded = function handleImageLoaded() {
+    activateCacheForImage(this.props);
+    this.setState({
+      imgLoaded: true
+    });
+
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
+  };
+
+  _proto.render = function render() {
+    var _convertProps = convertProps(this.props),
+        title = _convertProps.title,
+        alt = _convertProps.alt,
+        className = _convertProps.className,
+        _convertProps$style = _convertProps.style,
+        style = _convertProps$style === void 0 ? {} : _convertProps$style,
+        _convertProps$imgStyl = _convertProps.imgStyle,
+        imgStyle = _convertProps$imgStyl === void 0 ? {} : _convertProps$imgStyl,
+        _convertProps$placeho = _convertProps.placeholderStyle,
+        placeholderStyle = _convertProps$placeho === void 0 ? {} : _convertProps$placeho,
+        placeholderClassName = _convertProps.placeholderClassName,
+        fluid = _convertProps.fluid,
+        fixed = _convertProps.fixed,
+        backgroundColor = _convertProps.backgroundColor,
+        durationFadeIn = _convertProps.durationFadeIn,
+        Tag = _convertProps.Tag,
+        itemProp = _convertProps.itemProp,
+        loading = _convertProps.loading,
+        draggable = _convertProps.draggable;
+
+    var imageVariants = fluid || fixed; // Abort early if missing image data (#25371)
+
+    if (!imageVariants) {
+      return null;
+    }
+
+    var shouldReveal = this.state.fadeIn === false || this.state.imgLoaded;
+    var shouldFadeIn = this.state.fadeIn === true && !this.state.imgCached;
+    var imageStyle = (0, _extends2.default)({
+      opacity: shouldReveal ? 1 : 0,
+      transition: shouldFadeIn ? "opacity " + durationFadeIn + "ms" : "none"
+    }, imgStyle);
+    var bgColor = typeof backgroundColor === "boolean" ? "lightgray" : backgroundColor;
+    var delayHideStyle = {
+      transitionDelay: durationFadeIn + "ms"
+    };
+    var imagePlaceholderStyle = (0, _extends2.default)({
+      opacity: this.state.imgLoaded ? 0 : 1
+    }, shouldFadeIn && delayHideStyle, imgStyle, placeholderStyle);
+    var placeholderImageProps = {
+      title: title,
+      alt: !this.state.isVisible ? alt : "",
+      style: imagePlaceholderStyle,
+      className: placeholderClassName,
+      itemProp: itemProp
+    }; // Initial client render state needs to match SSR until hydration finishes.
+    // Once hydration completes, render again to update to the correct image.
+    // `imageVariants` is always an Array type at this point due to `convertProps()`
+
+    var image = !this.state.isHydrated ? imageVariants[0] : getCurrentSrcData(imageVariants);
+
+    if (fluid) {
+      return /*#__PURE__*/_react.default.createElement(Tag, {
+        className: (className ? className : "") + " gatsby-image-wrapper",
+        style: (0, _extends2.default)({
+          position: "relative",
+          overflow: "hidden",
+          maxWidth: image.maxWidth ? image.maxWidth + "px" : null,
+          maxHeight: image.maxHeight ? image.maxHeight + "px" : null
+        }, style),
+        ref: this.handleRef,
+        key: "fluid-" + JSON.stringify(image.srcSet)
+      }, /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        style: {
+          width: "100%",
+          paddingBottom: 100 / image.aspectRatio + "%"
+        }
+      }), bgColor && /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        title: title,
+        style: (0, _extends2.default)({
+          backgroundColor: bgColor,
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          opacity: !this.state.imgLoaded ? 1 : 0,
+          right: 0,
+          left: 0
+        }, shouldFadeIn && delayHideStyle)
+      }), image.base64 && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.base64,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateBase64Sources
+      }), image.tracedSVG && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.tracedSVG,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateTracedSVGSources
+      }), this.state.isVisible && /*#__PURE__*/_react.default.createElement("picture", null, generateImageSources(imageVariants), /*#__PURE__*/_react.default.createElement(Img, {
+        alt: alt,
+        title: title,
+        sizes: image.sizes,
+        src: image.src,
+        crossOrigin: this.props.crossOrigin,
+        srcSet: image.srcSet,
+        style: imageStyle,
+        ref: this.imageRef,
+        onLoad: this.handleImageLoaded,
+        onError: this.props.onError,
+        itemProp: itemProp,
+        loading: loading,
+        draggable: draggable
+      })), this.addNoScript && /*#__PURE__*/_react.default.createElement("noscript", {
+        dangerouslySetInnerHTML: {
+          __html: noscriptImg((0, _extends2.default)({
+            alt: alt,
+            title: title,
+            loading: loading
+          }, image, {
+            imageVariants: imageVariants
+          }))
+        }
+      }));
+    }
+
+    if (fixed) {
+      var divStyle = (0, _extends2.default)({
+        position: "relative",
+        overflow: "hidden",
+        display: "inline-block",
+        width: image.width,
+        height: image.height
+      }, style);
+
+      if (style.display === "inherit") {
+        delete divStyle.display;
+      }
+
+      return /*#__PURE__*/_react.default.createElement(Tag, {
+        className: (className ? className : "") + " gatsby-image-wrapper",
+        style: divStyle,
+        ref: this.handleRef,
+        key: "fixed-" + JSON.stringify(image.srcSet)
+      }, bgColor && /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        title: title,
+        style: (0, _extends2.default)({
+          backgroundColor: bgColor,
+          width: image.width,
+          opacity: !this.state.imgLoaded ? 1 : 0,
+          height: image.height
+        }, shouldFadeIn && delayHideStyle)
+      }), image.base64 && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.base64,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateBase64Sources
+      }), image.tracedSVG && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.tracedSVG,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateTracedSVGSources
+      }), this.state.isVisible && /*#__PURE__*/_react.default.createElement("picture", null, generateImageSources(imageVariants), /*#__PURE__*/_react.default.createElement(Img, {
+        alt: alt,
+        title: title,
+        width: image.width,
+        height: image.height,
+        sizes: image.sizes,
+        src: image.src,
+        crossOrigin: this.props.crossOrigin,
+        srcSet: image.srcSet,
+        style: imageStyle,
+        ref: this.imageRef,
+        onLoad: this.handleImageLoaded,
+        onError: this.props.onError,
+        itemProp: itemProp,
+        loading: loading,
+        draggable: draggable
+      })), this.addNoScript && /*#__PURE__*/_react.default.createElement("noscript", {
+        dangerouslySetInnerHTML: {
+          __html: noscriptImg((0, _extends2.default)({
+            alt: alt,
+            title: title,
+            loading: loading
+          }, image, {
+            imageVariants: imageVariants
+          }))
+        }
+      }));
+    }
+
+    return null;
+  };
+
+  return Image;
+}(_react.default.Component);
+
+Image.defaultProps = {
+  fadeIn: true,
+  durationFadeIn: 500,
+  alt: "",
+  Tag: "div",
+  // We set it to `lazy` by default because it's best to default to a performant
+  // setting and let the user "opt out" to `eager`
+  loading: "lazy"
+};
+
+var fixedObject = _propTypes.default.shape({
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  src: _propTypes.default.string.isRequired,
+  srcSet: _propTypes.default.string.isRequired,
+  base64: _propTypes.default.string,
+  tracedSVG: _propTypes.default.string,
+  srcWebp: _propTypes.default.string,
+  srcSetWebp: _propTypes.default.string,
+  media: _propTypes.default.string
+});
+
+var fluidObject = _propTypes.default.shape({
+  aspectRatio: _propTypes.default.number.isRequired,
+  src: _propTypes.default.string.isRequired,
+  srcSet: _propTypes.default.string.isRequired,
+  sizes: _propTypes.default.string.isRequired,
+  base64: _propTypes.default.string,
+  tracedSVG: _propTypes.default.string,
+  srcWebp: _propTypes.default.string,
+  srcSetWebp: _propTypes.default.string,
+  media: _propTypes.default.string,
+  maxWidth: _propTypes.default.number,
+  maxHeight: _propTypes.default.number
+});
+
+function requireFixedOrFluid(originalPropTypes) {
+  return function (props, propName, componentName) {
+    var _PropTypes$checkPropT;
+
+    if (!props.fixed && !props.fluid) {
+      throw new Error("The prop `fluid` or `fixed` is marked as required in `" + componentName + "`, but their values are both `undefined`.");
+    }
+
+    _propTypes.default.checkPropTypes((_PropTypes$checkPropT = {}, _PropTypes$checkPropT[propName] = originalPropTypes, _PropTypes$checkPropT), props, "prop", componentName);
+  };
+} // If you modify these propTypes, please don't forget to update following files as well:
+// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-image/index.d.ts
+// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-image/README.md#gatsby-image-props
+// https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/gatsby-image.md#gatsby-image-props
+
+
+Image.propTypes = {
+  resolutions: fixedObject,
+  sizes: fluidObject,
+  fixed: requireFixedOrFluid(_propTypes.default.oneOfType([fixedObject, _propTypes.default.arrayOf(fixedObject)])),
+  fluid: requireFixedOrFluid(_propTypes.default.oneOfType([fluidObject, _propTypes.default.arrayOf(fluidObject)])),
+  fadeIn: _propTypes.default.bool,
+  durationFadeIn: _propTypes.default.number,
+  title: _propTypes.default.string,
+  alt: _propTypes.default.string,
+  className: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]),
+  // Support Glamor's css prop.
+  critical: _propTypes.default.bool,
+  crossOrigin: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.bool]),
+  style: _propTypes.default.object,
+  imgStyle: _propTypes.default.object,
+  placeholderStyle: _propTypes.default.object,
+  placeholderClassName: _propTypes.default.string,
+  backgroundColor: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.bool]),
+  onLoad: _propTypes.default.func,
+  onError: _propTypes.default.func,
+  onStartLoad: _propTypes.default.func,
+  Tag: _propTypes.default.string,
+  itemProp: _propTypes.default.string,
+  loading: _propTypes.default.oneOf(["auto", "lazy", "eager"]),
+  draggable: _propTypes.default.bool
+};
+var _default = Image;
+exports.default = _default;
 
 /***/ }),
 
@@ -55540,6 +56289,155 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./public/page-data/sq/d/1407725978.json":
+/*!***********************************************!*\
+  !*** ./public/page-data/sq/d/1407725978.json ***!
+  \***********************************************/
+/*! exports provided: data, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"data\":{\"file\":{\"childImageSharp\":{\"fluid\":{\"base64\":\"data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAMABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAd9SyhB//8QAFhABAQEAAAAAAAAAAAAAAAAAEAFB/9oACAEBAAEFAnaf/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAIP/aAAgBAQAGPwJf/8QAGhAAAQUBAAAAAAAAAAAAAAAAAAEQITFxEf/aAAgBAQABPyEntxjaYlH/2gAMAwEAAgADAAAAELPP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPxA//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAGxAAAgIDAQAAAAAAAAAAAAAAAREAITFBUaH/2gAIAQEAAT8QKdi4QogBZg5cuX3yM7I6omPs5//Z\",\"aspectRatio\":1.694915254237288,\"src\":\"/static/9be3ad25a31c560a01d4c0dfa6eb6c1b/14b42/how-it-works-info.jpg\",\"srcSet\":\"/static/9be3ad25a31c560a01d4c0dfa6eb6c1b/f836f/how-it-works-info.jpg 200w,\\n/static/9be3ad25a31c560a01d4c0dfa6eb6c1b/2244e/how-it-works-info.jpg 400w,\\n/static/9be3ad25a31c560a01d4c0dfa6eb6c1b/14b42/how-it-works-info.jpg 800w,\\n/static/9be3ad25a31c560a01d4c0dfa6eb6c1b/0694e/how-it-works-info.jpg 941w\",\"sizes\":\"(max-width: 800px) 100vw, 800px\"}}}}}");
+
+/***/ }),
+
+/***/ "./src/assets/images sync recursive ^\\.\\/.*$":
+/*!*****************************************!*\
+  !*** ./src/assets/images sync ^\.\/.*$ ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./appointment-sched-icon.svg": "./src/assets/images/appointment-sched-icon.svg",
+	"./bilingual-answering-icon.svg": "./src/assets/images/bilingual-answering-icon.svg",
+	"./brooke-shatles.jpg": "./src/assets/images/brooke-shatles.jpg",
+	"./bullet-point.svg": "./src/assets/images/bullet-point.svg",
+	"./business-woman-taking-call.jpg": "./src/assets/images/business-woman-taking-call.jpg",
+	"./call-filtering-icon.svg": "./src/assets/images/call-filtering-icon.svg",
+	"./call-forwarding-icon.svg": "./src/assets/images/call-forwarding-icon.svg",
+	"./corporate-office-bg-overlay.jpg": "./src/assets/images/corporate-office-bg-overlay.jpg",
+	"./customizable-icon.svg": "./src/assets/images/customizable-icon.svg",
+	"./google-logo.svg": "./src/assets/images/google-logo.svg",
+	"./has-arrow.svg": "./src/assets/images/has-arrow.svg",
+	"./has-white-arrow.svg": "./src/assets/images/has-white-arrow.svg",
+	"./how-it-works-info.jpg": "./src/assets/images/how-it-works-info.jpg",
+	"./live-answering-icon.svg": "./src/assets/images/live-answering-icon.svg",
+	"./live-call-transferring-icon.svg": "./src/assets/images/live-call-transferring-icon.svg",
+	"./logo-watermark.svg": "./src/assets/images/logo-watermark.svg",
+	"./message-taking-icon.svg": "./src/assets/images/message-taking-icon.svg",
+	"./new-customer-intake-icon.svg": "./src/assets/images/new-customer-intake-icon.svg",
+	"./new-message-illustration.svg": "./src/assets/images/new-message-illustration.svg",
+	"./overflow-handling-icon.svg": "./src/assets/images/overflow-handling-icon.svg",
+	"./receptionist-always-live.jpg": "./src/assets/images/receptionist-always-live.jpg",
+	"./receptionist-talking-intake.jpg": "./src/assets/images/receptionist-talking-intake.jpg",
+	"./reviews-next.svg": "./src/assets/images/reviews-next.svg",
+	"./reviews-prev.svg": "./src/assets/images/reviews-prev.svg",
+	"./ringsavvy-logo.svg": "./src/assets/images/ringsavvy-logo.svg",
+	"./ringsavvy-logo_reverse.svg": "./src/assets/images/ringsavvy-logo_reverse.svg",
+	"./ringsavvy-logo_white.svg": "./src/assets/images/ringsavvy-logo_white.svg",
+	"./ringsavvy_favicon.png": "./src/assets/images/ringsavvy_favicon.png",
+	"./rob-shatles.jpg": "./src/assets/images/rob-shatles.jpg"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./src/assets/images sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./src/assets/images/appointment-sched-icon.svg":
+/*!******************************************************!*\
+  !*** ./src/assets/images/appointment-sched-icon.svg ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjQ4MykiPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI0OS40OTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjQ4MyAwLjA3OCkiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNNTc4LjEzNCwzMzAuNTgzaC0zLjg0OVYzMTkuMTI1QTMuMTEzLDMuMTEzLDAsMCwwLDU3MS4xOTEsMzE2aC0zMC45NGEzLjExMywzLjExMywwLDAsMC0zLjA5NCwzLjEyNXYxMS40NThINTM1LjM3YTMuMzkxLDMuMzkxLDAsMCwwLTMuMzcsMy40djE0LjAyNWEzLjM5MSwzLjM5MSwwLDAsMCwzLjM3LDMuNGguNzU1djExLjQ1OEEzLjExMywzLjExMywwLDAsMCw1MzkuMjE5LDM2NmgzM2EzLjExMywzLjExMywwLDAsMCwzLjA5NC0zLjEyNVYzNTEuNDE3aDIuODE4YTMuMzkxLDMuMzkxLDAsMCwwLDMuMzctMy40VjMzMy45ODhBMy4zOTEsMy4zOTEsMCwwLDAsNTc4LjEzNCwzMzAuNTgzWm0tMzguOTE1LTExLjQ1OGExLjAzNywxLjAzNywwLDAsMSwxLjAzMS0xLjA0MmgzMC45NGExLjAzNywxLjAzNywwLDAsMSwxLjAzMSwxLjA0MnYxMS40NThoLTMzWm0zNC4wMzQsNDMuNzVhMS4wMzcsMS4wMzcsMCwwLDEtMS4wMzEsMS4wNDJoLTMzYTEuMDM3LDEuMDM3LDAsMCwxLTEuMDMxLTEuMDQyVjM1MS40MTdoMzUuMDY2Wm02LjE4OC0xNC44NjJhMS4zMTUsMS4zMTUsMCwwLDEtMS4zMDgsMS4zMjFINTM1LjM3YTEuMzE1LDEuMzE1LDAsMCwxLTEuMzA4LTEuMzIxVjMzMy45ODhhMS4zMTUsMS4zMTUsMCwwLDEsMS4zMDgtMS4zMjFoNDIuNzYzYTEuMzE1LDEuMzE1LDAsMCwxLDEuMzA4LDEuMzIxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUzMi4yMjMgLTMxNikiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTM5LjU5NCwzMTguNWEzLjA5NCwzLjA5NCwwLDEsMCwzLjA5NCwzLjA5NEEzLjEsMy4xLDAsMCwwLDUzOS41OTQsMzE4LjVabTAsNC4xMjVhMS4wMzEsMS4wMzEsMCwxLDEsMS4wMzEtMS4wMzFBMS4wMzIsMS4wMzIsMCwwLDEsNTM5LjU5NCwzMjIuNjI1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyNy40NDEgLTMxMy4zNDMpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTUzOS4wOTQsMzQwLjY4OEEzLjA5NCwzLjA5NCwwLDEsMCw1MzYsMzM3LjU5NCwzLjEsMy4xLDAsMCwwLDUzOS4wOTQsMzQwLjY4OFptMC00LjEyNWExLjAzMSwxLjAzMSwwLDEsMS0xLjAzMSwxLjAzMUExLjAzMiwxLjAzMiwwLDAsMSw1MzkuMDk0LDMzNi41NjNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTI3Ljk3MyAtMjk1Ljg0NSkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTM4LjEyNSwzMjZhNC4xMjUsNC4xMjUsMCwxLDAsNC4xMjUsNC4xMjVBNC4xMyw0LjEzLDAsMCwwLDUzOC4xMjUsMzI2Wm0wLDYuMTg4YTIuMDYzLDIuMDYzLDAsMSwxLDIuMDYzLTIuMDYzQTIuMDY2LDIuMDY2LDAsMCwxLDUzOC4xMjUsMzMyLjE4OFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MzAuMDk4IC0zMDUuMTI1KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NTgsMzE5LjVoLTE1LjQ3YTEuMDMxLDEuMDMxLDAsMCwwLDAsMi4wNjNINTU4YTEuMDMxLDEuMDMxLDAsMSwwLDAtMi4wNjNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIyLjEyOCAtMzEyLjI4MSkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTY1Ljc4NCwzMjcuNUg1NDEuMDMxYTEuMDMxLDEuMDMxLDAsMSwwLDAsMi4wNjNoMjQuNzUyYTEuMDMxLDEuMDMxLDAsMCwwLDAtMi4wNjNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIzLjcyMiAtMzAzLjUzMSkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTQyLjAzMSwzMzcuNTYzaDE2LjVhMS4wMzEsMS4wMzEsMCwxLDAsMC0yLjA2M2gtMTYuNWExLjAzMSwxLjAzMSwwLDAsMCwwLDIuMDYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyMi42NTkgLTI5NC43ODIpIiBmaWxsPSIjMGFiZTUxIi8+PC9nPjwvc3ZnPg=="
+
+/***/ }),
+
+/***/ "./src/assets/images/bilingual-answering-icon.svg":
+/*!********************************************************!*\
+  !*** ./src/assets/images/bilingual-answering-icon.svg ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjQ4MykiPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI0OS42MyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuNDgzIDAuMzcpIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTY5OC43OTMsOTY0aC0xMi44NUExLjk0NiwxLjk0NiwwLDAsMCw2ODQsOTY1Ljk0NFY5NzYuN2ExLjk0NywxLjk0NywwLDAsMCwxLjk0NCwxLjk0NEg2ODkuMmwyLjM3NywyLjc3MmExLjA0NiwxLjA0NiwwLDAsMCwxLjU5LDBsMi4zNzctMi43NzJoMy4yNTNhMS45NDcsMS45NDcsMCwwLDAsMS45NDQtMS45NDRWOTY1Ljk0NEExLjk0NiwxLjk0NiwwLDAsMCw2OTguNzkzLDk2NFptLS4xNDgsMTIuNTUzaC0zLjU4NmExLjA0MSwxLjA0MSwwLDAsMC0uOC4zNjZsLTEuOSwyLjIwOS0xLjktMi4yMDlhMS4wNCwxLjA0LDAsMCwwLS43OTUtLjM2NmgtMy41ODZWOTY2LjA5MmgxMi41NTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjY3Ljk3OSAtOTY0KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik02ODcuMDQ2LDk2OC4wOTJoNi4yNzZhMS4wNDYsMS4wNDYsMCwwLDAsMC0yLjA5MmgtNi4yNzZhMS4wNDYsMS4wNDYsMCwxLDAsMCwyLjA5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NjUuNzk1IC05NjEuODE2KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik02ODcuMDQ2LDk3MC4wOTJoNC4xODRhMS4wNDYsMS4wNDYsMCwwLDAsMC0yLjA5MmgtNC4xODRhMS4wNDYsMS4wNDYsMCwxLDAsMCwyLjA5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NjUuNzcyIC05NTkuNjk2KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik03MDYuNTUzLDk4MS4yNzZhNi4yNzcsNi4yNzcsMCwxLDAtMTAuMjUxLDQuODE2LDQuNTY2LDQuNTY2LDAsMCwwLTIuMywzLjk1djExLjEwOWExLjA0NywxLjA0NywwLDAsMCwxLjA0NiwxLjA0NmgxMC40NjFhMS4wNDYsMS4wNDYsMCwwLDAsMS4wNDYtMS4wNDZWOTkwLjA0MmE0LjU2Niw0LjU2NiwwLDAsMC0yLjMtMy45NUE2LjIzOCw2LjIzOCwwLDAsMCw3MDYuNTUzLDk4MS4yNzZabS00LjU4Miw2LjI3NmEyLjQ5MywyLjQ5MywwLDAsMSwyLjQ5LDIuNDl2MTAuMDYzaC04LjM2OVY5OTAuMDQyYTIuNDkzLDIuNDkzLDAsMCwxLDIuNDktMi40OVptLTEuNjk1LTIuMDkyYTQuMTg0LDQuMTg0LDAsMSwxLDQuMTg0LTQuMTg0QTQuMTg4LDQuMTg4LDAsMCwxLDcwMC4yNzYsOTg1LjQ2MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NTcuNTYxIC05NTIuMzU3KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik02ODguNTUzLDk4MS4yNzZhNi4yNzcsNi4yNzcsMCwxLDAtMTAuMjUxLDQuODE2LDQuNTY2LDQuNTY2LDAsMCwwLTIuMywzLjk1djExLjEwOWExLjA0NiwxLjA0NiwwLDAsMCwxLjA0NiwxLjA0NmgxMC40NjFhMS4wNDYsMS4wNDYsMCwwLDAsMS4wNDYtMS4wNDZWOTkwLjA0MmE0LjU2Niw0LjU2NiwwLDAsMC0yLjMtMy45NUE2LjIzOCw2LjIzOCwwLDAsMCw2ODguNTUzLDk4MS4yNzZabS00LjU4Miw2LjI3NmEyLjQ5MywyLjQ5MywwLDAsMSwyLjQ5LDIuNDl2MTAuMDYzaC04LjM2OFY5OTAuMDQyYTIuNDkzLDIuNDkzLDAsMCwxLDIuNDktMi40OVptLTEuNjk1LTIuMDkyYTQuMTg0LDQuMTg0LDAsMSwxLDQuMTg0LTQuMTg0QTQuMTg4LDQuMTg4LDAsMCwxLDY4Mi4yNzYsOTg1LjQ2MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NzYuMjE5IC05NTIuMzU3KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik02OTYuODUsOTg0LjY1N2E2LjI3Niw2LjI3NiwwLDEsMC04Ljk2MywwQTUuMjI0LDUuMjI0LDAsMCwwLDY4NCw5ODkuNjkxdjEyLjU1M2ExLjA0NiwxLjA0NiwwLDAsMCwxLjA0NiwxLjA0NmgxNC42NDVhMS4wNDYsMS4wNDYsMCwwLDAsMS4wNDYtMS4wNDZWOTg5LjY5MUE1LjIyNCw1LjIyNCwwLDAsMCw2OTYuODUsOTg0LjY1N1ptLTQuNDgxLTguNTY1YTQuMTg0LDQuMTg0LDAsMSwxLTQuMTg0LDQuMTg0QTQuMTg4LDQuMTg4LDAsMCwxLDY5Mi4zNjksOTc2LjA5MlptNi4yNzYsMjUuMTA1SDY4Ni4wOTJWOTg5LjY5MWEzLjE0MiwzLjE0MiwwLDAsMSwzLjEzOC0zLjEzOGgyLjA5MlY5ODcuNmExLjA0NiwxLjA0NiwwLDAsMCwyLjA5Miwwdi0xLjA0NmgyLjA5MmEzLjE0MiwzLjE0MiwwLDAsMSwzLjEzOCwzLjEzOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NjcuOTc5IC05NTMuNDQ5KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik02ODguNTQ2LDk4MS41YTEuMDQ2LDEuMDQ2LDAsMCwwLTEuMDQ2LDEuMDQ2djcuMzIzYTEuMDQ2LDEuMDQ2LDAsMCwwLDIuMDkyLDB2LTcuMzIzQTEuMDQ2LDEuMDQ2LDAsMCwwLDY4OC41NDYsOTgxLjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjY0LjE1NyAtOTQ1LjI1OCkiIGZpbGw9IiMwYWJlNTEiLz48L2c+PC9zdmc+"
+
+/***/ }),
+
+/***/ "./src/assets/images/brooke-shatles.jpg":
+/*!**********************************************!*\
+  !*** ./src/assets/images/brooke-shatles.jpg ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,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"
+
+/***/ }),
+
+/***/ "./src/assets/images/bullet-point.svg":
+/*!********************************************!*\
+  !*** ./src/assets/images/bullet-point.svg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTkzIC03NDQuODQ3KSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYwMCAtOTM0LjE1MykiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3OTMgMTY3OSkiIGZpbGw9IiMwYWJlNTEiLz48L2c+PHBhdGggZD0iTTY2MDkuNjYtMTI3MDIuMjQzbDUuMjExLTYuMjc2LTUuMjExLTYuMjc0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjM5OS4wMzEgMTM0NzMuMTcpIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMyIvPjwvZz48L3N2Zz4="
+
+/***/ }),
+
+/***/ "./src/assets/images/business-woman-taking-call.jpg":
+/*!**********************************************************!*\
+  !*** ./src/assets/images/business-woman-taking-call.jpg ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/business-woman-taking-call-8c5f9abda79c1b6c92bf9065639844b2.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/images/call-filtering-icon.svg":
+/*!***************************************************!*\
+  !*** ./src/assets/images/call-filtering-icon.svg ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjQ4MyAwLjI3NikiPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI0OS4zNDciIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0wLjQ4MyAtMC4yNzYpIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwOS4wMzQsMTc4LjIzMUgyMDUuOTR2LTMuMTE2QTMuMTA5LDMuMTA5LDAsMCwwLDIwMi44NDYsMTcySDE3OC4wOTRBMy4xMDksMy4xMDksMCwwLDAsMTc1LDE3NS4xMTZWMjEyLjVhMy4xMDksMy4xMDksMCwwLDAsMy4wOTQsMy4xMTZoMy4wOTR2My4xMTZhMy4xMDksMy4xMDksMCwwLDAsMy4wOTQsMy4xMTZoMjQuNzUyYTMuMTA5LDMuMTA5LDAsMCwwLDMuMDk0LTMuMTE2VjE4MS4zNDdBMy4xMDksMy4xMDksMCwwLDAsMjA5LjAzNCwxNzguMjMxWm0wLDIuMDc3YTEuMDM1LDEuMDM1LDAsMCwxLDEuMDMxLDEuMDM5VjE5OUgyMDUuOTRWMTgwLjMwOVptLTMwLjk0LTYuMjMxaDI0Ljc1MmExLjAzNSwxLjAzNSwwLDAsMSwxLjAzMSwxLjAzOXYxNy42NTZIMTk3LjZhNy41NTcsNy41NTcsMCwwLDAsLjA4Ny0xLjAzOSw3LjI2Nyw3LjI2NywwLDAsMC00LjE3NS02LjU2OCw0LjEyNSw0LjEyNSwwLDEsMC02LjA4OSwwLDcuMjY3LDcuMjY3LDAsMCwwLTQuMTc1LDYuNTY4LDcuNTU0LDcuNTU0LDAsMCwwLC4wODcsMS4wMzloLTYuMjc1VjE3NS4xMTZBMS4wMzUsMS4wMzUsMCwwLDEsMTc4LjA5NCwxNzQuMDc3Wm03LjMzMywxOC42OTRhNS4zLDUuMywwLDAsMS0uMTEzLTEuMDM5LDUuMTU3LDUuMTU3LDAsMSwxLDEwLjMxMywwLDUuMjg4LDUuMjg4LDAsMCwxLS4xMTMsMS4wMzlabTIuOTgxLTEwLjM4NmEyLjA2MywyLjA2MywwLDEsMSwyLjA2MywyLjA3N0EyLjA3MywyLjA3MywwLDAsMSwxODguNDA3LDE4Mi4zODZaTTE3Ny4wNjMsMjEyLjVWMTk0Ljg0OWg3LjU2NGwuMDA4LDAsLjAxOSwwaDE5LjIyNFYyMTIuNWExLjAzNSwxLjAzNSwwLDAsMS0xLjAzMSwxLjAzOUgxNzguMDk0QTEuMDM1LDEuMDM1LDAsMCwxLDE3Ny4wNjMsMjEyLjVabTMxLjk3MSw3LjI3SDE4NC4yODJhMS4wMzUsMS4wMzUsMCwwLDEtMS4wMzEtMS4wMzlWMjE1LjYyaDE5LjZhMy4xMDksMy4xMDksMCwwLDAsMy4wOTQtMy4xMTZWMjAxLjA4aDQuMTI1djE3LjY1NkExLjAzNSwxLjAzNSwwLDAsMSwyMDkuMDM0LDIxOS43NzVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTY5LjAzNSAtMTcyLjEyOCkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNMTc4LjAzMSwxOTAuMTg4aDQuMTI1YTEuMDMyLDEuMDMyLDAsMCwwLDEuMDMxLTEuMDMxdi00LjEyNUExLjAzMiwxLjAzMiwwLDAsMCwxODIuMTU3LDE4NGgtNC4xMjVBMS4wMzIsMS4wMzIsMCwwLDAsMTc3LDE4NS4wMzF2NC4xMjVBMS4wMzIsMS4wMzIsMCwwLDAsMTc4LjAzMSwxOTAuMTg4Wm0xLjAzMS00LjEyNWgyLjA2M3YyLjA2M2gtMi4wNjNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTY2LjkxIC0xNTkuMTc2KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik0xODIuMDMxLDE4Ni4wNjNoMTIuMzc2YTEuMDMxLDEuMDMxLDAsMCwwLDAtMi4wNjNIMTgyLjAzMWExLjAzMSwxLjAzMSwwLDEsMCwwLDIuMDYzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2Mi42NTkgLTE1OS4xOTQpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTE4Mi4wMzEsMTg4LjA2M2gxMi4zNzZhMS4wMzEsMS4wMzEsMCwwLDAsMC0yLjA2M0gxODIuMDMxYTEuMDMxLDEuMDMxLDAsMSwwLDAsMi4wNjNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTYyLjY1OSAtMTU3LjAzOCkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNMTk5LjY4OSwxODkuMDMxQTEuMDMyLDEuMDMyLDAsMCwwLDE5OC42NTgsMTg4SDE3OC4wMzFhMS4wMzEsMS4wMzEsMCwxLDAsMCwyLjA2M2gyMC42MjdBMS4wMzIsMS4wMzIsMCwwLDAsMTk5LjY4OSwxODkuMDMxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2Ni45MSAtMTU0Ljg4MykiIGZpbGw9IiMwYWJlNTEiLz48L2c+PC9zdmc+"
+
+/***/ }),
+
+/***/ "./src/assets/images/call-forwarding-icon.svg":
+/*!****************************************************!*\
+  !*** ./src/assets/images/call-forwarding-icon.svg ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMy4zMDUiIGhlaWdodD0iMzMuMzA1IiB2aWV3Qm94PSIwIDAgMzMuMzA1IDMzLjMwNSI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMxNiAtMjQ0KSI+PHJlY3Qgd2lkdGg9IjMzLjMwNSIgaGVpZ2h0PSIzMy4zMDUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMxNiAyNDQpIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMzMS4wNzgsMjYwLjkzNmgyLjZhMi4wMjMsMi4wMjMsMCwwLDAsMS4wNjktMy43NEEyLjAyMiwyLjAyMiwwLDAsMCwzMzMuMSwyNTRoLTIuMDIzYS41NzguNTc4LDAsMCwwLS41NzguNTc4djUuNzhBLjU3OC41NzgsMCwwLDAsMzMxLjA3OCwyNjAuOTM2Wm0uNTc4LTUuNzhIMzMzLjFhLjg2Ny44NjcsMCwwLDEsMCwxLjczNGgtMS40NDVabTAsMi44OWgyLjAyM2EuODY3Ljg2NywwLDEsMSwwLDEuNzM0aC0yLjAyM1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuMzk3IDQuNjQ5KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik0zMjYuNzM5LDI1Ny4xMzlsLTIuMzEyLTUuNzhhLjYuNiwwLDAsMC0xLjA3MywwbC0yLjMxMiw1Ljc4YS41NzguNTc4LDAsMCwwLDEuMDczLjQzbC41NTQtMS4zODRhLjY2LjY2LDAsMCwwLC4wNjYuMDEzaDIuMzEyYS42Ni42NiwwLDAsMCwuMDY2LS4wMTNsLjU1NCwxLjM4NGEuNTc4LjU3OCwwLDAsMCwuNTM2LjM2My41NjQuNTY0LDAsMCwwLC4yMTUtLjA0MkEuNTc3LjU3NywwLDAsMCwzMjYuNzM5LDI1Ny4xMzlabS0zLjYxMy0yLjEuNzY0LTEuOTEyLjc2NCwxLjkxMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuMjQzIDMuMjY1KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik0zNDMuMzU2LDI0OS4yMjZoLTkuNTgydi0uOTcyQTMuMjkzLDMuMjkzLDAsMCwwLDMzMC40NSwyNDVoLTkuMTI2QTMuMjkzLDMuMjkzLDAsMCwwLDMxOCwyNDguMjU0djIwLjI1OGEzLjI5MywzLjI5MywwLDAsMCwzLjMyNCwzLjI1NGg5LjEyNmMuMSwwLC4yLS4wMjEuMy0uMDNhLjY3Ni42NzYsMCwwLDAsLjE1Mi4wM3YuOTcyYTMuMjkzLDMuMjkzLDAsMCwwLDMuMzI0LDMuMjU0aDkuMTI2YTMuMjkzLDMuMjkzLDAsMCwwLDMuMzI0LTMuMjU0VjI1Mi40OEEzLjI5MywzLjI5MywwLDAsMCwzNDMuMzU2LDI0OS4yMjZabTEuODksMy4yNTR2Ljk3MkgzMzMuNzc0di0yLjgxOGg5LjU4MkExLjg2OSwxLjg2OSwwLDAsMSwzNDUuMjQ2LDI1Mi40OFptMCwxNy44NzdIMzMzLjE4M2EzLjE5MywzLjE5MywwLDAsMCwuNTkxLTEuODQ1VjI1NC44NjFoMTEuNDcyWm0tMjUuODEyLTE5LjcyM0gzMzIuMzR2MTUuNUgzMTkuNDM0Wm0xLjg5LTQuMjI2aDkuMTI2YTEuODY5LDEuODY5LDAsMCwxLDEuODksMS44NDV2Ljk3MkgzMTkuNDM0di0uOTcyQTEuODY5LDEuODY5LDAsMCwxLDMyMS4zMjQsMjQ2LjQwOVptLTEuODksMjIuMXYtLjk3MkgzMzIuMzR2Ljk3MmExLjg2OSwxLjg2OSwwLDAsMS0xLjg5LDEuODQ1aC05LjEyNkExLjg2OSwxLjg2OSwwLDAsMSwzMTkuNDM0LDI2OC41MTJabTI1LjgxMiw0LjIyNmExLjg2OSwxLjg2OSwwLDAsMS0xLjg5LDEuODQ1SDMzNC4yM2ExLjg2OSwxLjg2OSwwLDAsMS0xLjg5LTEuODQ1di0uOTcyaDEyLjkwNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuMzEyIDAuMTU2KSIgZmlsbD0iIzBhYmU1MSIvPjwvZz48L3N2Zz4="
+
+/***/ }),
+
 /***/ "./src/assets/images/corporate-office-bg-overlay.jpg":
 /*!***********************************************************!*\
   !*** ./src/assets/images/corporate-office-bg-overlay.jpg ***!
@@ -55548,6 +56446,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/corporate-office-bg-overlay-cb598170e2fa93d81c414e31aa9acbab.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/images/customizable-icon.svg":
+/*!*************************************************!*\
+  !*** ./src/assets/images/customizable-icon.svg ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDM2IDM2Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNzQ3LjkwNiAtNzQ3LjkwNikiPjxyZWN0IHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQ3LjkwNiA3NDcuOTA2KSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03NjIuNDgsNzU1YTcuNDgsNy40OCwwLDEsMCw3LjQ4LDcuNDhBNy40ODksNy40ODksMCwwLDAsNzYyLjQ4LDc1NVptMCwxMy40NjVhNS45ODQsNS45ODQsMCwxLDEsNS45ODQtNS45ODRBNS45OSw1Ljk5LDAsMCwxLDc2Mi40OCw3NjguNDY1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMy40NzIgMy40NzMpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTc4MC4xMTgsNzY5LjQ2OGExNC41NDUsMTQuNTQ1LDAsMCwwLDAtNy4wMjhMNzgyLjIsNzYwLjVhLjc0NS43NDUsMCwwLDAsLjE5Mi0uODA5LDE2Ljc0NywxNi43NDcsMCwwLDAtMi45ODItNS4xNjYuNzQxLjc0MSwwLDAsMC0uOC0uMjM4bC0yLjcxMS44MzZhMTQuOTM1LDE0LjkzNSwwLDAsMC02LjA5NS0zLjUxbC0uNjM0LTIuNzc1YS43NDYuNzQ2LDAsMCwwLS42LS41NzIsMTYuNTg5LDE2LjU4OSwwLDAsMC01Ljk2NiwwLC43NDYuNzQ2LDAsMCwwLS42LjU3MmwtLjYzNCwyLjc3NWExNC45MzYsMTQuOTM2LDAsMCwwLTYuMDk1LDMuNTFsLTIuNzExLS44MzZhLjczNS43MzUsMCwwLDAtLjguMjM4LDE2Ljc0NywxNi43NDcsMCwwLDAtMi45ODIsNS4xNjYuNzQ1Ljc0NSwwLDAsMCwuMTkyLjgwOWwyLjA4NiwxLjkzNmExNC41NTcsMTQuNTU3LDAsMCwwLDAsNy4wMzFsLTIuMDg2LDEuOTM2YS43NDUuNzQ1LDAsMCwwLS4xOTIuODA5LDE2Ljc0NywxNi43NDcsMCwwLDAsMi45ODIsNS4xNjYuNzQxLjc0MSwwLDAsMCwuOC4yMzhsMi43MTEtLjgzNmExNC45MzgsMTQuOTM4LDAsMCwwLDYuMDk1LDMuNTFsLjYzNCwyLjc3NWEuNzQ2Ljc0NiwwLDAsMCwuNi41NzEsMTYuNzQ5LDE2Ljc0OSwwLDAsMCw1Ljk2NiwwLC43NDYuNzQ2LDAsMCwwLC42LS41NzFsLjYzNC0yLjc3NWExNC45MzgsMTQuOTM4LDAsMCwwLDYuMDk1LTMuNTFsMi43MTEuODM2YS43NDUuNzQ1LDAsMCwwLC44LS4yMzgsMTYuNzQ3LDE2Ljc0NywwLDAsMCwyLjk4Mi01LjE2Ni43NDUuNzQ1LDAsMCwwLS4xOTItLjgwOVptLS4yNzgsNC43MTRhMTUuNTI2LDE1LjUyNiwwLDAsMS0xLjI2NywxLjg1N2wtMi42NTMtLjgxN2EuNzQyLjc0MiwwLDAsMC0uNzU0LjE4OCwxMy40MzMsMTMuNDMzLDAsMCwxLTYuMTc0LDMuNTU2Ljc1MS43NTEsMCwwLDAtLjU0LjU1N2wtLjYyMSwyLjcxOGExNC44MjksMTQuODI5LDAsMCwxLTQuNDg1LDBsLS42MjEtMi43MThhLjc1MS43NTEsMCwwLDAtLjU0LS41NTcsMTMuNDMzLDEzLjQzMywwLDAsMS02LjE3NC0zLjU1Ni43NC43NCwwLDAsMC0uNzU0LS4xODhsLTIuNjUyLjgxN2ExNC45MjUsMTQuOTI1LDAsMCwxLTIuMjQxLTMuODgybDIuMDQxLTEuOWEuNzQ5Ljc0OSwwLDAsMCwuMjEyLS43NDUsMTMuMTM2LDEzLjEzNiwwLDAsMSwwLTcuMTI0Ljc0OS43NDksMCwwLDAtLjIxMi0uNzQ1bC0yLjA0MS0xLjlhMTQuOTI1LDE0LjkyNSwwLDAsMSwyLjI0MS0zLjg4MmwyLjY1Mi44MTdhLjc0Mi43NDIsMCwwLDAsLjc1NC0uMTg4LDEzLjQzNCwxMy40MzQsMCwwLDEsNi4xNzQtMy41NTYuNzUxLjc1MSwwLDAsMCwuNTQtLjU1N2wuNjIxLTIuNzE4YTE0LjgyOSwxNC44MjksMCwwLDEsNC40ODUsMGwuNjIxLDIuNzE4YS43NTEuNzUxLDAsMCwwLC41NC41NTcsMTMuNDM0LDEzLjQzNCwwLDAsMSw2LjE3NCwzLjU1Ni43NDQuNzQ0LDAsMCwwLC43NTQuMTg4bDIuNjUzLS44MTdhMTQuOTM1LDE0LjkzNSwwLDAsMSwyLjI0MSwzLjg4MmwtMi4wNDEsMS45YS43NDkuNzQ5LDAsMCwwLS4yMTIuNzQ1LDEzLjEyNSwxMy4xMjUsMCwwLDEsMCw3LjEyMS43NDkuNzQ5LDAsMCwwLC4yMTIuNzQ1bDIuMDQxLDEuOUExNS42NTQsMTUuNjU0LDAsMCwxLDc3OS44NCw3NzQuMTgyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4zNjQgMCkiIGZpbGw9IiMwYWJlNTEiLz48L2c+PC9zdmc+"
 
 /***/ }),
 
@@ -55584,6 +56493,39 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iYXJyb3ciIHhtbG5zPSJo
 
 /***/ }),
 
+/***/ "./src/assets/images/how-it-works-info.jpg":
+/*!*************************************************!*\
+  !*** ./src/assets/images/how-it-works-info.jpg ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/how-it-works-info-9be3ad25a31c560a01d4c0dfa6eb6c1b.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/images/live-answering-icon.svg":
+/*!***************************************************!*\
+  !*** ./src/assets/images/live-answering-icon.svg ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNyIgaGVpZ2h0PSIzNyIgdmlld0JveD0iMCAwIDM3IDM3Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNzQ3LjczMyAtNjAzLjczMykiPjxyZWN0IHdpZHRoPSIzNyIgaGVpZ2h0PSIzNyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQ3LjczMyA2MDMuNzMzKSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik03NjYuMzUyLDYwNEExOC4zNTIsMTguMzUyLDAsMSwwLDc4NC43LDYyMi4zNTIsMTguMzcyLDE4LjM3MiwwLDAsMCw3NjYuMzUyLDYwNFptMCwzNS4xNzRhMTYuODIzLDE2LjgyMywwLDEsMSwxNi44MjMtMTYuODIzQTE2Ljg0MiwxNi44NDIsMCwwLDEsNzY2LjM1Miw2MzkuMTc0WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMjkgMC4wMjkpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTc2NS4wMjksNjA2LjVhMTQuNTI5LDE0LjUyOSwwLDEsMCwxNC41MjksMTQuNTI4QTE0LjU0NiwxNC41NDYsMCwwLDAsNzY1LjAyOSw2MDYuNVptMCwyNy41MjhhMTMsMTMsMCwxLDEsMTMtMTNBMTMuMDE0LDEzLjAxNCwwLDAsMSw3NjUuMDI5LDYzNC4wMjhaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjM1MiAxLjM1MikiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNzYyLjY0Nyw2MDlhLjc2NS43NjUsMCwwLDAtLjc2NC43NjV2OS4xNzZoLTYuMTE3YS43NjUuNzY1LDAsMSwwLDAsMS41MjloNi44ODJhLjc2NS43NjUsMCwwLDAsLjc2NS0uNzY0di05Ljk0MUEuNzY1Ljc2NSwwLDAsMCw3NjIuNjQ3LDYwOVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMuNzM0IDIuNjc2KSIgZmlsbD0iIzBhYmU1MSIvPjwvZz48L3N2Zz4="
+
+/***/ }),
+
+/***/ "./src/assets/images/live-call-transferring-icon.svg":
+/*!***********************************************************!*\
+  !*** ./src/assets/images/live-call-transferring-icon.svg ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDAuMjc2KSI+PHBhdGggZD0iTTUzNy4wMzgsOTczLjU3NmgxMS45NGExLjAzOCwxLjAzOCwwLDEsMCwwLTIuMDc2aC0xMS45NGExLjAzOCwxLjAzOCwwLDAsMCwwLDIuMDc2WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyNy42OTMgLTk1Ni4wNTMpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU0NS4zNDQsOTczLjVoLTguMzA2YTEuMDM4LDEuMDM4LDAsMCwwLDAsMi4wNzdoOC4zMDZhMS4wMzgsMS4wMzgsMCwxLDAsMC0yLjA3N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MjcuNjkzIC05NTMuOSkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTU4LjQ3OCw5NzhoLTExLjk0YTEuMDM4LDEuMDM4LDAsMCwwLDAsMi4wNzdoMTEuOTRhMS4wMzgsMS4wMzgsMCwwLDAsMC0yLjA3N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MTcuNDY2IC05NDkuMDU1KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NTQuODQ0LDk4MGgtOC4zMDZhMS4wMzgsMS4wMzgsMCwwLDAsMCwyLjA3N2g4LjMwNmExLjAzOCwxLjAzOCwwLDEsMCwwLTIuMDc3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUxNy40NjYgLTk0Ni45MDIpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU2Ni4yNjMsOTc3Ljk1OWExNS40NzEsMTUuNDcxLDAsMCwwLTMuMzY2LjQxMywxNS41NjUsMTUuNTY1LDAsMSwwLTI4Ljk1OSwxMC4ybC0xLjgzOCw1LjUxNWExLjk0NCwxLjk0NCwwLDAsMCwuNDY3LDEuOTg5bDAsMGEyLjAwNywyLjAwNywwLDAsMCwxLjk5MS40NjdsNS41MTMtMS44MzhhMTUuNDE3LDE1LjQxNywwLDAsMCwxMC44NjYsMS41NjEsMTUuNTQyLDE1LjU0MiwwLDAsMCwyMi44MTksMTAuOWw1LjUsMS44MzRhMS45NDYsMS45NDYsMCwwLDAsMi40NzUtMi40NTlsLTEuODM4LTUuNTEzYTE1LjU1NSwxNS41NTUsMCwwLDAtMTMuNjM2LTIzLjA3MlptLTI1LjU0NywxNC43MjdhMS4wNDMsMS4wNDMsMCwwLDAtLjUzLS4xNDUsMS4wNTQsMS4wNTQsMCwwLDAtLjMyOC4wNTRsLTUuNzA4LDEuOTExLDEuOS01LjcxNWExLjAzNywxLjAzNywwLDAsMC0uMDkxLS44NTgsMTMuNDkzLDEzLjQ5MywwLDEsMSwyNS4xMDktNi44NTksMTMuMTcsMTMuMTcsMCwwLDEtLjE2NiwyLjAxYy0uMDE1LjA5My0uMDI3LjE4OS0uMDQ0LjI4YTEzLjY2OSwxMy42NjksMCwwLDEtNS40ODQsOC43bC0uMDEuMDA2YTEzLjQxNiwxMy40MTYsMCwwLDEtMS43NTEsMS4wNTNjLS4wNzEuMDM1LS4xNDEuMDY4LS4yMTIuMWExMy4yMjQsMTMuMjI0LDAsMCwxLTEuOTA2Ljc1OGgwYTEzLjQyMiwxMy40MjIsMCwwLDEtMTAuNzgxLTEuM1ptMzcuMDY4LDguNTY0LDEuOSw1LjcwNi01LjcwNi0xLjlhMS4wNDQsMS4wNDQsMCwwLDAtLjg1OC4wOTEsMTMuNDc5LDEzLjQ3OSwwLDAsMS0yMC4xODQtOS40NTRjLjA1Ni0uMDIxLjEtLjA1Mi4xNi0uMDczYTE1LjU0NywxNS41NDcsMCwwLDAsMy45NzItMi4yMjhsLjAyNy0uMDE5YTE1LjU2NywxNS41NjcsMCwwLDAsNS44Mi05LjcyOWMuMDIxLS4xMi4wMzctLjI0MS4wNTYtLjM2M2ExNS43NDcsMTUuNzQ3LDAsMCwwLC4xNzQtMi4yMDVjMC0uMjI0LDAtLjQ0Ny0uMDE1LS42NjlhMTMuNDgyLDEzLjQ4MiwwLDAsMSwxNC43NDEsMTkuOTg3QTEuMDM3LDEuMDM3LDAsMCwwLDU3Ny43ODMsMTAwMS4yNDlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTMyIC05NjIuNTEyKSIgZmlsbD0iIzBhYmU1MSIvPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMC4yNzYpIiBmaWxsPSJub25lIi8+PC9nPjwvc3ZnPg=="
+
+/***/ }),
+
 /***/ "./src/assets/images/logo-watermark.svg":
 /*!**********************************************!*\
   !*** ./src/assets/images/logo-watermark.svg ***!
@@ -55592,6 +56534,72 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iYXJyb3ciIHhtbG5zPSJo
 /***/ (function(module, exports) {
 
 module.exports = "data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzQuMDMgNTM3LjM5Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2Y3ZjdmNzt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNC44OCwyNTAuMDljMCw0My41NCw0MC4yMyw3OC44NCw4OS44Niw3OC44NHM1NC43NS0zNS44MSw1NC43NS03OS4zNi01LjExLTc4LjMzLTU0Ljc1LTc4LjMzUzQuODgsMjA2LjU0LDQuODgsMjUwLjA5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU2OS4xNSwyNTAuMDljMCw0My41NC00MC4yMyw3OC44NC04OS44Niw3OC44NHMtNTQuNzUtMzUuODEtNTQuNzUtNzkuMzYsNS4xMS03OC4zMyw1NC43NS03OC4zM1M1NjkuMTUsMjA2LjU0LDU2OS4xNSwyNTAuMDlaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTE2LjgzLDUzMi44MywzMjEuMjQsNDg3Ljk0YTI4LjA5LDI4LjA5LDAsMCwxLDE3LjE4LTUzLjQ4bDg4LjI1LDI1TDM5NywzOTEuNjZsMTIuNDktMTEuOTFjMTguMTgtMTguMTYsNjAuMzMtNjcuNjYsNTkuMjYtMTM0Ljc1QzQ2Ni45NCwxMzQuNzgsMzcyLjI0LDYwLjc0LDI4NC44OSw2MC43NFMxMDIuODMsMTM0Ljc4LDEwMS4wNywyNDVjLTEuMDcsNjcuMDgsNDEuMDgsMTE2LjU4LDU5LjI1LDEzNC43NWEyOC4wOSwyOC4wOSwwLDEsMS0zOS43MSwzOS43M2MtMjMuMjMtMjMuMjMtNzcuMTItODYuODItNzUuNy0xNzUuMzgsMS44NC0xMTUuNjgsOTguNzEtMjM5LjU0LDI0MC0yMzkuNTRTNTIzLDEyOC40Miw1MjQuODcsMjQ0LjFjMS4yLDc0Ljc5LTM3LjA1LDEzMS43Ny02MywxNjEuNjdaIi8+PGVsbGlwc2UgY2xhc3M9ImNscy0xIiBjeD0iMTY5LjQ1IiBjeT0iNDE2LjgzIiByeD0iMzYuNDciIHJ5PSI1Mi42NyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI3OS42MSAzODguNDgpIHJvdGF0ZSgtNjQuMjcpIi8+PC9zdmc+"
+
+/***/ }),
+
+/***/ "./src/assets/images/message-taking-icon.svg":
+/*!***************************************************!*\
+  !*** ./src/assets/images/message-taking-icon.svg ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNCIgaGVpZ2h0PSIzNCIgdmlld0JveD0iMCAwIDM0IDM0Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTMyIC0xNzIpIj48cmVjdCB3aWR0aD0iMzQiIGhlaWdodD0iMzQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUzMiAxNzIpIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTUzOC40NTgsMTcyYTQuOTU4LDQuOTU4LDAsMSwwLDQuOTU4LDQuOTU4QTQuOTY0LDQuOTY0LDAsMCwwLDUzOC40NTgsMTcyWm0wLDguNUEzLjU0MiwzLjU0MiwwLDEsMSw1NDIsMTc2Ljk1OCwzLjU0NywzLjU0NywwLDAsMSw1MzguNDU4LDE4MC41WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC42MjUpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTUzOC41NCwxNzQuNzA3bC0xLjYyNCwxLjYyNS0uMjA3LS4yMDhhLjcwOS43MDksMCwxLDAtMSwxbC43MDguNzA4YS43MTEuNzExLDAsMCwwLDEsMGwyLjEyNS0yLjEyNWEuNzA5LjcwOSwwLDAsMC0xLTFaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLjQ1OCAxLjA0MikiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTM4LjQ1OCwxODlhNC45NTgsNC45NTgsMCwxLDAsNC45NTgsNC45NThBNC45NjQsNC45NjQsMCwwLDAsNTM4LjQ1OCwxODlabTAsMS40MTdhMy41LDMuNSwwLDAsMSwxLjk0OS41OTFsLTQuOSw0LjlhMy41LDMuNSwwLDAsMS0uNTkxLTEuOTQ5QTMuNTQ3LDMuNTQ3LDAsMCwxLDUzOC40NTgsMTkwLjQxN1ptMCw3LjA4M2EzLjUsMy41LDAsMCwxLTEuOTQ5LS41OTFsNC45LTQuOWEzLjUsMy41LDAsMCwxLC41OTEsMS45NDlBMy41NDcsMy41NDcsMCwwLDEsNTM4LjQ1OCwxOTcuNVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuNjI1IDcuMDgzKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01MzguNDU4LDE4MC41YTQuOTU4LDQuOTU4LDAsMSwwLDQuOTU4LDQuOTU4QTQuOTY0LDQuOTY0LDAsMCwwLDUzOC40NTgsMTgwLjVabTAsMS40MTdhMy41LDMuNSwwLDAsMSwxLjk0OS41OTFsLTQuOSw0LjlhMy41LDMuNSwwLDAsMS0uNTkxLTEuOTQ5QTMuNTQ3LDMuNTQ3LDAsMCwxLDUzOC40NTgsMTgxLjkxN1ptMCw3LjA4M2EzLjUsMy41LDAsMCwxLTEuOTQ5LS41OTFsNC45LTQuOWEzLjUsMy41LDAsMCwxLC41OTEsMS45NDlBMy41NDcsMy41NDcsMCwwLDEsNTM4LjQ1OCwxODlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjYyNSAzLjU0MikiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTU4Ljc5MiwxNzNINTQzLjIwOGEuNzA4LjcwOCwwLDEsMCwwLDEuNDE3aDE1LjU4M2EuNzA4LjcwOCwwLDAsMCwwLTEuNDE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNC4zNzUgMC40MTcpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU1OC43OTIsMTc1SDU0My4yMDhhLjcwOC43MDgsMCwxLDAsMCwxLjQxN2gxNS41ODNhLjcwOC43MDgsMCwwLDAsMC0xLjQxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuMzc1IDEuMjUpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU0My4yMDgsMTc4LjQxN2g3LjA4M2EuNzA4LjcwOCwwLDAsMCwwLTEuNDE3aC03LjA4M2EuNzA4LjcwOCwwLDEsMCwwLDEuNDE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNC4zNzUgMi4wODMpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU1OC43OTIsMTgxSDU0My4yMDhhLjcwOC43MDgsMCwxLDAsMCwxLjQxN2gxNS41ODNhLjcwOC43MDgsMCwwLDAsMC0xLjQxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuMzc1IDMuNzUpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU1OC43OTIsMTgzSDU0My4yMDhhLjcwOC43MDgsMCwxLDAsMCwxLjQxN2gxNS41ODNhLjcwOC43MDgsMCwwLDAsMC0xLjQxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuMzc1IDQuNTgzKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NTYuMjkyLDE4NWgtNy4wODNhLjcwOC43MDgsMCwxLDAsMCwxLjQxN2g3LjA4M2EuNzA4LjcwOCwwLDAsMCwwLTEuNDE3WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNi44NzUgNS40MTcpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU1OC43OTIsMTg5SDU0My4yMDhhLjcwOC43MDgsMCwxLDAsMCwxLjQxN2gxNS41ODNhLjcwOC43MDgsMCwwLDAsMC0xLjQxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQuMzc1IDcuMDgzKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NTguNzkyLDE5MUg1NDMuMjA4YS43MDguNzA4LDAsMSwwLDAsMS40MTdoMTUuNTgzYS43MDguNzA4LDAsMCwwLDAtMS40MTdaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0LjM3NSA3LjkxNykiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTUzLjI5MiwxOTNoLTcuMDgzYS43MDguNzA4LDAsMSwwLDAsMS40MTdoNy4wODNhLjcwOC43MDgsMCwwLDAsMC0xLjQxN1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUuNjI1IDguNzUpIiBmaWxsPSIjMGFiZTUxIi8+PC9nPjwvc3ZnPg=="
+
+/***/ }),
+
+/***/ "./src/assets/images/new-customer-intake-icon.svg":
+/*!********************************************************!*\
+  !*** ./src/assets/images/new-customer-intake-icon.svg ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjEyOSkiPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI0OS42MyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuMTI5IDAuMzcpIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTU0MC44MjIsMTcyYTcuMzIyLDcuMzIyLDAsMSwwLDcuMzIzLDcuMzIyQTcuMzMsNy4zMywwLDAsMCw1NDAuODIyLDE3MlptMCwxMi41NTNhNS4yMyw1LjIzLDAsMSwxLDUuMjMtNS4yM0E1LjIzOCw1LjIzOCwwLDAsMSw1NDAuODIyLDE4NC41NTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTMwLjQyIC0xNzIpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTUzOS45OSwxNzQuODA2bC0yLjQsMi40LS4zMDUtLjMwOGExLjA0NywxLjA0NywwLDEsMC0xLjQ4MSwxLjQ4MWwxLjA0NiwxLjA0NmExLjA1MSwxLjA1MSwwLDAsMCwxLjQ4MSwwbDMuMTM4LTMuMTM4YTEuMDQ3LDEuMDQ3LDAsMCwwLTEuNDgxLTEuNDgxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyOC4yMzYgLTE2OS4yNykiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTQwLjgyMiwxODlhNy4zMjIsNy4zMjIsMCwxLDAsNy4zMjMsNy4zMjJBNy4zMyw3LjMzLDAsMCwwLDU0MC44MjIsMTg5Wm0wLDIuMDkyYTUuMTcyLDUuMTcyLDAsMCwxLDIuODc5Ljg3MmwtNy4yMzcsNy4yMzdhNS4xNzMsNS4xNzMsMCwwLDEtLjg3Mi0yLjg3OUE1LjIzOCw1LjIzOCwwLDAsMSw1NDAuODIyLDE5MS4wOTJabTAsMTAuNDYxYTUuMTczLDUuMTczLDAsMCwxLTIuODc5LS44NzJsNy4yMzctNy4yMzdhNS4xNzMsNS4xNzMsMCwwLDEsLjg3MiwyLjg3OUE1LjIzOCw1LjIzOCwwLDAsMSw1NDAuODIyLDIwMS41NTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTMwLjQyIC0xNTMuODA0KSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NDAuODIyLDE4MC41YTcuMzIyLDcuMzIyLDAsMSwwLDcuMzIzLDcuMzIyQTcuMzMsNy4zMywwLDAsMCw1NDAuODIyLDE4MC41Wm0wLDIuMDkyYTUuMTcyLDUuMTcyLDAsMCwxLDIuODc5Ljg3MmwtNy4yMzcsNy4yMzdhNS4xNzMsNS4xNzMsMCwwLDEtLjg3Mi0yLjg3OUE1LjIzOCw1LjIzOCwwLDAsMSw1NDAuODIyLDE4Mi41OTJabTAsMTAuNDYxYTUuMTczLDUuMTczLDAsMCwxLTIuODc5LS44NzJsNy4yMzctNy4yMzdhNS4xNzMsNS4xNzMsMCwwLDEsLjg3MiwyLjg3OUE1LjIzOCw1LjIzOCwwLDAsMSw1NDAuODIyLDE5My4wNTNaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTMwLjQyIC0xNjIuOTAxKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NjYuNTU5LDE3M0g1NDMuNTQ2YTEuMDQ2LDEuMDQ2LDAsMCwwLDAsMi4wOTJoMjMuMDEzYTEuMDQ2LDEuMDQ2LDAsMCwwLDAtMi4wOTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIwLjU5MSAtMTcwLjkwOCkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTY2LjU1OSwxNzVINTQzLjU0NmExLjA0NiwxLjA0NiwwLDAsMCwwLDIuMDkyaDIzLjAxM2ExLjA0NiwxLjA0NiwwLDAsMCwwLTIuMDkyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyMC41OTEgLTE2OC43MjQpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU0My41NDYsMTc5LjA5MmgxMC40NjFhMS4wNDYsMS4wNDYsMCwxLDAsMC0yLjA5Mkg1NDMuNTQ2YTEuMDQ2LDEuMDQ2LDAsMCwwLDAsMi4wOTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIwLjU5MSAtMTY2LjYyKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NjYuNTU5LDE4MUg1NDMuNTQ2YTEuMDQ2LDEuMDQ2LDAsMCwwLDAsMi4wOTJoMjMuMDEzYTEuMDQ2LDEuMDQ2LDAsMCwwLDAtMi4wOTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIwLjU5MSAtMTYyLjMxNSkiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTY2LjU1OSwxODNINTQzLjU0NmExLjA0NiwxLjA0NiwwLDAsMCwwLDIuMDkyaDIzLjAxM2ExLjA0NiwxLjA0NiwwLDAsMCwwLTIuMDkyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyMC41OTEgLTE2MC4xNjMpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU2MC4wMDcsMTg1SDU0OS41NDZhMS4wNDYsMS4wNDYsMCwwLDAsMCwyLjA5MmgxMC40NjFhMS4wNDYsMS4wNDYsMCwwLDAsMC0yLjA5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MTQuMDM5IC0xNTguMDExKSIgZmlsbD0iIzBhYmU1MSIvPjxwYXRoIGQ9Ik01NjYuNTU5LDE4OUg1NDMuNTQ2YTEuMDQ2LDEuMDQ2LDAsMCwwLDAsMi4wOTJoMjMuMDEzYTEuMDQ2LDEuMDQ2LDAsMCwwLDAtMi4wOTJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTIwLjU5MSAtMTUzLjcwNykiIGZpbGw9IiMwYWJlNTEiLz48cGF0aCBkPSJNNTY2LjU1OSwxOTFINTQzLjU0NmExLjA0NiwxLjA0NiwwLDAsMCwwLDIuMDkyaDIzLjAxM2ExLjA0NiwxLjA0NiwwLDAsMCwwLTIuMDkyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUyMC41OTEgLTE1MS41NTUpIiBmaWxsPSIjMGFiZTUxIi8+PHBhdGggZD0iTTU1Ny4wMDcsMTkzSDU0Ni41NDZhMS4wNDYsMS4wNDYsMCwwLDAsMCwyLjA5MmgxMC40NjFhMS4wNDYsMS4wNDYsMCwwLDAsMC0yLjA5MloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01MTcuMzE1IC0xNDkuNDM2KSIgZmlsbD0iIzBhYmU1MSIvPjwvZz48L3N2Zz4="
+
+/***/ }),
+
+/***/ "./src/assets/images/new-message-illustration.svg":
+/*!********************************************************!*\
+  !*** ./src/assets/images/new-message-illustration.svg ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NzAiIGhlaWdodD0iMjcyLjA2MSIgdmlld0JveD0iMCAwIDQ3MCAyNzIuMDYxIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNzAzIC0xNTkyLjY2NikiPjxyZWN0IHdpZHRoPSI0NzAiIGhlaWdodD0iMjcyLjA2MSIgcng9IjUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcwMyAxNTkyLjY2NikiIGZpbGw9IiNmZmYiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDIpIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDMgLTUzKSI+PGNpcmNsZSBjeD0iMjciIGN5PSIyNyIgcj0iMjciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc5MyAxNjc5KSIgZmlsbD0iI2ZmYzAyMSIvPjx0ZXh0IHRyYW5zZm9ybT0idHJhbnNsYXRlKDgxNCAxNzIyKSIgZmlsbD0iI2ZmZiIgZm9udC1zaXplPSIzNiIgZm9udC1mYW1pbHk9Ik1lcnJpd2VhdGhlci1Cb2xkLCBNZXJyaXdlYXRoZXIiIGZvbnQtd2VpZ2h0PSI3MDAiPjx0c3BhbiB4PSIwIiB5PSIwIj4hPC90c3Bhbj48L3RleHQ+PC9nPjx0ZXh0IHRyYW5zZm9ybT0idHJhbnNsYXRlKDgzMCAxNjQ4KSIgZmlsbD0iIzRkNGQ0ZCIgZm9udC1zaXplPSIyMCIgZm9udC1mYW1pbHk9Ik1lcnJpd2VhdGhlci1Cb2xkLCBNZXJyaXdlYXRoZXIiIGZvbnQtd2VpZ2h0PSI3MDAiPjx0c3BhbiB4PSIwIiB5PSIwIj5OZXcgTWVzc2FnZSE8L3RzcGFuPjwvdGV4dD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDcgMjcuNjY2KSI+PHRleHQgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjIzIDE2NDUpIiBmaWxsPSIjNjY2IiBmb250LXNpemU9IjE2IiBmb250LWZhbWlseT0iT3BlblNhbnMsIE9wZW4gU2FucyI+PHRzcGFuIHg9IjAiIHk9IjAiPk1heSAyNSwgMjAxOTwvdHNwYW4+PC90ZXh0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMikiPjxyZWN0IHdpZHRoPSIzNzYiIGhlaWdodD0iMTIiIHJ4PSI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NTAgMTcxMCkiIGZpbGw9InJnYmEoMTAyLDEwMiwxMDIsMC4xKSIvPjxyZWN0IHdpZHRoPSIzNzYiIGhlaWdodD0iMTIiIHJ4PSI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NTAgMTczNykiIGZpbGw9InJnYmEoMTAyLDEwMiwxMDIsMC4xKSIvPjxyZWN0IHdpZHRoPSIzNzYiIGhlaWdodD0iMTIiIHJ4PSI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NTAgMTc2MykiIGZpbGw9InJnYmEoMTAyLDEwMiwxMDIsMC4xKSIvPjxyZWN0IHdpZHRoPSIzNzYiIGhlaWdodD0iMTIiIHJ4PSI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NTAgMTc5MCkiIGZpbGw9InJnYmEoMTAyLDEwMiwxMDIsMC4xKSIvPjxyZWN0IHdpZHRoPSIxNTEiIGhlaWdodD0iMTIiIHJ4PSI2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NTAgMTgxNikiIGZpbGw9InJnYmEoMTAyLDEwMiwxMDIsMC4xKSIvPjwvZz48L2c+PC9zdmc+"
+
+/***/ }),
+
+/***/ "./src/assets/images/overflow-handling-icon.svg":
+/*!******************************************************!*\
+  !*** ./src/assets/images/overflow-handling-icon.svg ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjEyOSAwLjI3NikiPjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTAuMTI5IC0wLjI3NikiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTQ2LjgzOCwxOTcuMzg2YTEuMjA4LDEuMjA4LDAsMCwwLS4wMjMtLjEyNSwxLjAzNiwxLjAzNiwwLDAsMC0uMjU0LS40NzdsLTQuMTctNC4xN2ExLjA0NCwxLjA0NCwwLDAsMC0xLjQ3NiwxLjQ3NmwyLjM5MiwyLjM5aC03Ljk2MWExMS40OTEsMTEuNDkxLDAsMCwwLTcuMTgxLTkuNjA2LDcuODE5LDcuODE5LDAsMSwwLTguNDcsMCwxMS40OTEsMTEuNDkxLDAsMCwwLTcuMTgxLDkuNjA2aC03Ljk2MWwyLjM5Mi0yLjM5YTEuMDQ0LDEuMDQ0LDAsMCwwLTEuNDc2LTEuNDc2bC00LjE3LDQuMTdhMS4wMzYsMS4wMzYsMCwwLDAtLjI1NC40NzcsMS4yMDgsMS4yMDgsMCwwLDAtLjAyMy4xMjUsMS4wMDYsMS4wMDYsMCwwLDAsLjA1Mi41MzJ2MGwuMDA4LjAxYTEuMDUsMS4wNSwwLDAsMCwuMjE3LjMyOWw0LjE3LDQuMTdhMS4wNDQsMS4wNDQsMCwxLDAsMS40NzYtMS40NzZsLTIuMzkyLTIuMzg5SDExMy41YTkuMzk0LDkuMzk0LDAsMCwxLDkuMzgzLDkuMzgzdjExLjQ2OGExLjA0MywxLjA0MywwLDAsMCwyLjA4NSwwVjIwNy45NDdhOS4zOTQsOS4zOTQsMCwwLDEsOS4zODMtOS4zODNoOC45NTFsLTIuMzkyLDIuMzg5YTEuMDQ0LDEuMDQ0LDAsMCwwLDEuNDc2LDEuNDc2bDQuMTctNC4xN2ExLjA1MSwxLjA1MSwwLDAsMCwuMjE3LS4zMjlsLjAwOC0uMDF2MEExLjAwNiwxLjAwNiwwLDAsMCwxNDYuODM4LDE5Ny4zODZabS0yOC42NDMtMTcuMDY3YTUuNzM0LDUuNzM0LDAsMSwxLDUuNzM0LDUuNzM0QTUuNzM5LDUuNzM5LDAsMCwxLDExOC4xOTUsMTgwLjMxOVptNS43MzQsMjIuODc4YTExLjQ4MSwxMS40ODEsMCwwLDAtOS4yODMtNi42Niw5LjMyOSw5LjMyOSwwLDAsMSwxOC41NjYsMEExMS40ODEsMTEuNDgxLDAsMCwwLDEyMy45MjksMjAzLjJaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtOTguOTY3IC0xNzEuNTgzKSIgZmlsbD0iIzBhYmU1MSIvPjwvZz48L3N2Zz4="
+
+/***/ }),
+
+/***/ "./src/assets/images/receptionist-always-live.jpg":
+/*!********************************************************!*\
+  !*** ./src/assets/images/receptionist-always-live.jpg ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/receptionist-always-live-732b2578048520fed7549bf6d7913a8d.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/images/receptionist-talking-intake.jpg":
+/*!***********************************************************!*\
+  !*** ./src/assets/images/receptionist-talking-intake.jpg ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/receptionist-talking-intake-55235d26a96fae5efe042684306cd211.jpg";
 
 /***/ }),
 
@@ -55658,6 +56666,17 @@ module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGlu
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAAACXBIWXMAAAsSAAALEgHS3X78AAABMklEQVQ4ja1Ty23CQBB9sVIAqQB3gC97Dpx9cbQFYEpIBYQKgAqAAiy47J27D6GDUIJLQANvomFtgyLlXXZXs/PmzQ//gZc+Dhd8CiDVd51Xx76/LRIXfAZgCWAcmRoA6zqvvh6SuOBLABs+zwB2vA8BlLyfAEzqvGrU77VDgeCzzqtVFGABYA8gY6APtSXmnxAMughwq4kom1BJ4YIf35G44AtTg3NMYIgaY19SPRIy7s3faR8JUfDM1C/p6MLgCYlFqiTbyNA8dLvH6UpiCqbO6yeOGvRIv1thOY3qPOe0tsBClgw401mxLV5RntTohx2LMed7wQyu+B02YXXBi7xvFkyiHqhKhksCqOPIkncuoLRdF46K7Ago3jSd3i2OSKXtkqaoe+ddUmot45+g0woAF6swY9NcsXs/AAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ "./src/assets/images/rob-shatles.jpg":
+/*!*******************************************!*\
+  !*** ./src/assets/images/rob-shatles.jpg ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,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"
 
 /***/ }),
 
@@ -56006,6 +57025,40 @@ var Content = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.with
 
 /***/ }),
 
+/***/ "./src/components/contentSection/index.js":
+/*!************************************************!*\
+  !*** ./src/components/contentSection/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../section */ "./src/components/section/index.js");
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../content */ "./src/components/content/index.js");
+
+
+
+
+
+var ContentSection = function ContentSection(_ref) {
+  var contentData = _ref.contentData,
+      children = _ref.children,
+      _ref$horizontal = _ref.horizontal,
+      horizontal = _ref$horizontal === void 0 ? false : _ref$horizontal;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_section__WEBPACK_IMPORTED_MODULE_1__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_2__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    contentData: contentData,
+    horizontal: horizontal
+  }), children));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ContentSection);
+
+/***/ }),
+
 /***/ "./src/components/emailForm/index.js":
 /*!*******************************************!*\
   !*** ./src/components/emailForm/index.js ***!
@@ -56068,6 +57121,373 @@ var EmailCTA = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.wit
 var HalfWrapper = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
   displayName: "style__HalfWrapper"
 })(["color:white;position:relative;width:50%;h3{margin:0 0 0.5rem;color:white;}p{color:white;margin:0;}@media (max-width:767px){width:100%;margin-bottom:10px;text-align:center;h2{font-size:1.5rem;}}"]);
+
+/***/ }),
+
+/***/ "./src/components/emailSection/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/emailSection/index.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../section */ "./src/components/section/index.js");
+/* harmony import */ var _emailForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../emailForm */ "./src/components/emailForm/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style */ "./src/components/emailSection/style.js");
+
+
+
+
+
+
+var EmailSection = function EmailSection() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_4__["SectionWithBG"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_1__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (EmailSection);
+
+/***/ }),
+
+/***/ "./src/components/emailSection/style.js":
+/*!**********************************************!*\
+  !*** ./src/components/emailSection/style.js ***!
+  \**********************************************/
+/*! exports provided: SectionWithBG */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SectionWithBG", function() { return SectionWithBG; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../section */ "./src/components/section/index.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+
+
+
+var SectionWithBG = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_section__WEBPACK_IMPORTED_MODULE_1__["Section"]).withConfig({
+  displayName: "style__SectionWithBG"
+})(["margin:60px 0;", ""], _globals__WEBPACK_IMPORTED_MODULE_2__["hasBackgroundBox"]);
+
+/***/ }),
+
+/***/ "./src/components/faq/index.js":
+/*!*************************************!*\
+  !*** ./src/components/faq/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./src/components/faq/style.js");
+
+
+
+var Faq = function Faq(_ref) {
+  var faq = _ref.faq;
+  var question = faq.question,
+      answer = faq.answer;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["Faq"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["Question"], null, question), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, answer));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Faq);
+
+/***/ }),
+
+/***/ "./src/components/faq/style.js":
+/*!*************************************!*\
+  !*** ./src/components/faq/style.js ***!
+  \*************************************/
+/*! exports provided: Faq, Question, Aside, IndexTitle, Category */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Faq", function() { return Faq; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Question", function() { return Question; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Aside", function() { return Aside; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IndexTitle", function() { return IndexTitle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Category", function() { return Category; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+
+var Faq = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
+  displayName: "style__Faq"
+})(["margin-bottom:2.25rem;"]);
+var Question = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p.withConfig({
+  displayName: "style__Question"
+})(["color:", ";font-family:", ";font-size:", ";font-weight:bold;margin-bottom:0.666666em;"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.colors.black;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.fonts.serif;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.global.fontSizes.md;
+});
+var Aside = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].aside.withConfig({
+  displayName: "style__Aside"
+})(["font-family:", ";font-weight:normal;margin-right:auto;@media ", "{display:none;}"], function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.fonts.serif;
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.global.mediaQueries.lg;
+});
+var IndexTitle = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p.withConfig({
+  displayName: "style__IndexTitle"
+})(["color:", ";font-family:", ";font-size:", ";font-weight:bold;"], function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.global.colors.black;
+}, function (_ref7) {
+  var theme = _ref7.theme;
+  return theme.global.fonts.serif;
+}, function (_ref8) {
+  var theme = _ref8.theme;
+  return theme.global.fontSizes.md;
+});
+var Category = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].li.withConfig({
+  displayName: "style__Category"
+})(["cursor:pointer;font-weight:normal;margin-bottom:1em;transition:all 0.2s;", " &:hover{color:", ";}"], function (_ref9) {
+  var isActive = _ref9.isActive;
+  return isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["color:pink;"]);
+}, function (_ref10) {
+  var theme = _ref10.theme;
+  return theme.global.colors.primary;
+});
+
+/***/ }),
+
+/***/ "./src/components/faqAccordion/cta.js":
+/*!********************************************!*\
+  !*** ./src/components/faqAccordion/cta.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../button */ "./src/components/button/index.js");
+
+ // TODO: Refactor into own component? use with tabs also
+
+var Cta = function Cta(_ref) {
+  var data = _ref.data;
+  var heading = data.heading,
+      content = data.content,
+      ctaLink = data.ctaLink,
+      ctaText = data.ctaText;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, heading), content.length > 1 && Array.isArray(content) ? content.map(function (p, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      key: index
+    }, p);
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button__WEBPACK_IMPORTED_MODULE_1__["StyledLink"], {
+    to: ctaLink
+  }, ctaText));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Cta);
+
+/***/ }),
+
+/***/ "./src/components/faqAccordion/faq.js":
+/*!********************************************!*\
+  !*** ./src/components/faqAccordion/faq.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_useMeasure__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/useMeasure */ "./src/utils/useMeasure.js");
+/* harmony import */ var react_spring__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-spring */ "./node_modules/react-spring/web.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style */ "./src/components/faqAccordion/style.js");
+
+
+
+
+
+var Faq = function Faq(_ref) {
+  var faq = _ref.faq,
+      index = _ref.index;
+  var question = faq.question,
+      answer = faq.answer;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      isOpen = _useState[0],
+      setOpen = _useState[1];
+
+  var _useMeasure = Object(_utils_useMeasure__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+      bind = _useMeasure[0],
+      _useMeasure$ = _useMeasure[1],
+      height = _useMeasure$.height,
+      top = _useMeasure$.top;
+
+  var slide = Object(react_spring__WEBPACK_IMPORTED_MODULE_2__["useSpring"])({
+    overflow: 'hidden',
+    height: isOpen ? height + top : 0,
+    transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -10px, 0)'
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_3__["Faq"], {
+    onClick: function onClick() {
+      return setOpen(!isOpen);
+    },
+    isOpen: isOpen
+  }, question, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_spring__WEBPACK_IMPORTED_MODULE_2__["animated"].div, {
+    style: slide
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_3__["FaqAnswer"], bind, answer.length > 1 && Array.isArray(answer) ? answer.map(function (p, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      key: index
+    }, p);
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, answer))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Faq);
+
+/***/ }),
+
+/***/ "./src/components/faqAccordion/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/faqAccordion/index.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content/index.js");
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../section */ "./src/components/section/index.js");
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+/* harmony import */ var _cta__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cta */ "./src/components/faqAccordion/cta.js");
+/* harmony import */ var _faq__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./faq */ "./src/components/faqAccordion/faq.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style */ "./src/components/faqAccordion/style.js");
+
+
+
+
+
+
+
+
+
+
+var FaqAccordion = function FaqAccordion(_ref) {
+  var contentData = _ref.contentData,
+      _ref$horizontal = _ref.horizontal,
+      horizontal = _ref$horizontal === void 0 ? false : _ref$horizontal,
+      _ref$primary = _ref.primary,
+      primary = _ref$primary === void 0 ? false : _ref$primary;
+  var CtaData = {
+    heading: 'Try Ring Savvy free for 7 days',
+    content: ['Experience all our phone answering service has to offer without any risk or financial commitment.', 'All business owners are given the opportunity to test out our receptionist team for over a week, and see for themselves whether or not Ring Savvy will be beneficial to their business.'],
+    ctaText: 'Get started',
+    ctaLink: '/sign-up/'
+  };
+  var faqData = [{
+    question: 'What happens during my free trial?',
+    answer: 'During your free trial period, you’ll have access to just about all of our features, allowing you to take in the full Ring Savvy experience. The only feature we don’t offer to those in trial is appointment scheduling.'
+  }, {
+    question: 'Do I need to put a credit card down?',
+    answer: 'Not until your free trial concludes. We’ll only need your credit card information if you choose to become a Ring Savvy customer.'
+  }, {
+    question: 'How long will it take to set up my free trial?',
+    answer: 'Make sure new leads that come in during the overnight and weekends never pass you by.'
+  }, {
+    question: 'What happens at the end of my free trial?',
+    answer: 'A member of our team will reach out to you and go over the results of your trial period. If you’d like to continue using our service, we’ll get you started right away as a paying customer. If you decide the service is not for you, you can walk away at no cost.'
+  }];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_section__WEBPACK_IMPORTED_MODULE_3__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_4__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    contentData: contentData,
+    horizontal: horizontal,
+    primary: primary
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globals__WEBPACK_IMPORTED_MODULE_5__["FlexRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_8__["Cta"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cta__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    data: CtaData
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_8__["FaqList"], null, faqData.map(function (faq, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_faq__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      faq: faq,
+      index: index,
+      key: index
+    });
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/faq/"
+  }, "Read more FAQs")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FaqAccordion);
+
+/***/ }),
+
+/***/ "./src/components/faqAccordion/style.js":
+/*!**********************************************!*\
+  !*** ./src/components/faqAccordion/style.js ***!
+  \**********************************************/
+/*! exports provided: Cta, FaqList, Faq, FaqAnswer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cta", function() { return Cta; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FaqList", function() { return FaqList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Faq", function() { return Faq; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FaqAnswer", function() { return FaqAnswer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var _tabs_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tabs/style */ "./src/components/tabs/style.js");
+
+
+var Cta = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_tabs_style__WEBPACK_IMPORTED_MODULE_1__["TabContent"]).withConfig({
+  displayName: "style__Cta"
+})(["display:block;flex-wrap:wrap;margin:0 auto 0 0;max-width:430px;position:relative;top:32px;@media ", "{display:none;}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.mediaQueries.lg;
+});
+var FaqList = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].ul.withConfig({
+  displayName: "style__FaqList"
+})(["display:block;list-style:none;margin:0;padding:0;width:49%;@media ", "{width:100%;}"], function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.mediaQueries.md;
+}); // TODO: refactor reused styles from tabs/accordions/card, etc
+
+var Faq = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].li.withConfig({
+  displayName: "style__Faq"
+})(["align-items:center;background:", ";border-radius:5px;box-shadow:0 0 15px rgba(0,0,0,0.12);color:#4d4d4d;cursor:pointer;display:block;font-family:", ";font-size:", ";font-weight:bold;line-height:1.3em;margin:0 0 20px;max-width:480px;padding:1.444444em;transition:all 0.2s;user-select:none;width:100%;&:before{position:absolute;content:'", "';color:", ";right:40px;font-size:32px;@media ", "{right:20px;}}&:hover{box-shadow:0 0 12px rgba(0,0,0,0.12);}@media ", "{padding:26px 50px 26px 26px;}"], function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.global.colors.white;
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.fonts.serif;
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.global.fontSizes.base;
+}, function (props) {
+  return props.isOpen ? '-' : '+';
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.global.colors.primary;
+}, function (_ref7) {
+  var theme = _ref7.theme;
+  return theme.global.mediaQueries.lg;
+}, function (_ref8) {
+  var theme = _ref8.theme;
+  return theme.global.mediaQueries.lg;
+});
+var FaqAnswer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
+  displayName: "style__FaqAnswer"
+})(["color:#666;font-family:'Open Sans',sans-serif;font-size:0.9em;font-weight:normal;padding:0.83333em 0 0 0;p{margin:0;}"]);
 
 /***/ }),
 
@@ -56852,6 +58272,210 @@ var ToggleButton = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div
 
 /***/ }),
 
+/***/ "./src/components/pagination/index.js":
+/*!********************************************!*\
+  !*** ./src/components/pagination/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style */ "./src/components/pagination/style.js");
+
+
+
+var Pagination = function Pagination(_ref) {
+  var currentPage = _ref.currentPage,
+      numPages = _ref.numPages,
+      isFirst = _ref.isFirst,
+      isLast = _ref.isLast,
+      nextPage = _ref.nextPage,
+      prevPage = _ref.prevPage;
+  var pageNumbers = [];
+
+  for (var i = 1; i <= currentPage + 3 && i <= numPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["PaginationList"], null, isFirst ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["PaginationLink"], {
+    to: "/blog" + prevPage
+  }, "\xAB Previous Page")), pageNumbers.map(function (number) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: number
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["PaginationLink"], {
+      $isActive: currentPage === number ? true : false,
+      to: "/blog/" + (number === 1 ? '' : number)
+    }, number));
+  }), isLast ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_1__["PaginationLink"], {
+    to: "/blog" + nextPage
+  }, "Next Page \xBB")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Pagination);
+
+/***/ }),
+
+/***/ "./src/components/pagination/style.js":
+/*!********************************************!*\
+  !*** ./src/components/pagination/style.js ***!
+  \********************************************/
+/*! exports provided: PaginationList, PaginationLink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaginationList", function() { return PaginationList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaginationLink", function() { return PaginationLink; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+
+var PaginationList = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].ul.withConfig({
+  displayName: "style__PaginationList"
+})(["display:flex;flex-wrap:wrap;justify-content:center;list-style:none;margin:0 0 80px;padding:0;"]);
+var PaginationLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(gatsby__WEBPACK_IMPORTED_MODULE_1__["Link"]).withConfig({
+  displayName: "style__PaginationLink"
+})(["background-color:", ";border-radius:100px;border:", ";color:", ";display:inline-block;font-size:", ";font-weight:bold;line-height:1;margin:2px;outline-offset:3px;padding:1em 1.25em;text-align:center;text-decoration:none;&:hover{background-color:", ";color:#fff;}"], function (props) {
+  return props.$isActive ? props.theme.global.colors.primary : '#fff';
+}, function (props) {
+  return props.$isActive ? "1px solid " + props.theme.global.colors.primary : '1px solid #ddd';
+}, function (props) {
+  return props.$isActive ? '#fff' : '#222';
+}, function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.fontSizes.base;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.colors.primary;
+});
+
+/***/ }),
+
+/***/ "./src/components/postPreview/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/postPreview/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./src/components/postPreview/style.js");
+
+
+
+
+var PostPreview = function PostPreview(_ref) {
+  var post = _ref.post;
+  var title = post.title,
+      description = post.description,
+      featuredImage = post.featuredImage,
+      slug = post.slug;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["PostContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/blog/" + post.slug
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["PostThumbnail"], {
+    alt: title,
+    fluid: featuredImage.fluid
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["PostLink"], {
+    style: {
+      textDecoration: 'none'
+    },
+    to: "/blog/" + slug
+  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    dangerouslySetInnerHTML: {
+      __html: description.childMarkdownRemark.html
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["MoreLink"], {
+    to: "/blog/" + slug
+  }, "Continue Reading \u2192"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostPreview);
+
+/***/ }),
+
+/***/ "./src/components/postPreview/style.js":
+/*!*********************************************!*\
+  !*** ./src/components/postPreview/style.js ***!
+  \*********************************************/
+/*! exports provided: PostContainer, PostThumbnail, StyledLink, PostLink, MoreLink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostContainer", function() { return PostContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostThumbnail", function() { return PostThumbnail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StyledLink", function() { return StyledLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostLink", function() { return PostLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MoreLink", function() { return MoreLink; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var gatsby_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby-image */ "./node_modules/gatsby-image/index.js");
+/* harmony import */ var gatsby_image__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(gatsby_image__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+
+
+var PostContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.withConfig({
+  displayName: "style__PostContainer"
+})(["margin-bottom:60px;"]);
+var PostThumbnail = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(gatsby_image__WEBPACK_IMPORTED_MODULE_1___default.a).withConfig({
+  displayName: "style__PostThumbnail"
+})(["border-radius:10px;box-shadow:0 19px 70px 0 rgba(0,0,0,0.12);height:230px;margin-bottom:32px;"]);
+var StyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(gatsby__WEBPACK_IMPORTED_MODULE_2__["Link"]).withConfig({
+  displayName: "style__StyledLink"
+})(["color:", ";font-family:", ";font-weight:bold;&:hover{color:", ";}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.colors.black;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.fonts.serif;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.global.colors.primary;
+});
+var PostLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(StyledLink).withConfig({
+  displayName: "style__PostLink"
+})(["font-size:25px;"]);
+var MoreLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(StyledLink).withConfig({
+  displayName: "style__MoreLink"
+})(["color:", ";font-family:", ";font-size:18px;font-weight:bold;"], function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.colors.black;
+}, function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.global.fonts.serif;
+});
+
+/***/ }),
+
+/***/ "./src/components/postPreviewList/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/postPreviewList/index.js ***!
+  \*************************************************/
+/*! exports provided: PostPreviewList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostPreviewList", function() { return PostPreviewList; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+ //TODO: Refactor to use differrent grids. Ex. 3 column grid on home page vs blog 2 column page
+
+var PostPreviewList = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].ul.withConfig({
+  displayName: "postPreviewList__PostPreviewList"
+})(["display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;margin:0;padding:0;li{flex-basis:48%;@media ", "{flex-basis:100%;}}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.mediaQueries.md;
+});
+
+/***/ }),
+
 /***/ "./src/components/section/index.js":
 /*!*****************************************!*\
   !*** ./src/components/section/index.js ***!
@@ -56869,6 +58493,101 @@ var Section = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div.with
 })(["padding:60px 0;position:relative;:last-of-type{padding-bottom:0;}@media only screen and (max-width:860px){padding:30px 5%;}@media only screen and (max-width:980px){padding:30px 5%;}", ""], function (_ref) {
   var hasDiag = _ref.hasDiag;
   return hasDiag && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])([":after{content:'';background-color:#f9f9f9;height:62%;position:absolute;transform:skewY(8deg);top:120px;width:100%;z-index:-1;}"]);
+});
+
+/***/ }),
+
+/***/ "./src/components/service/index.js":
+/*!*****************************************!*\
+  !*** ./src/components/service/index.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./src/components/service/style.js");
+
+
+
+
+var Service = function Service(_ref) {
+  var service = _ref.service,
+      isFirst = _ref.isFirst;
+  var name = service.name,
+      icon = service.icon,
+      description = service.description,
+      slug = service.slug;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["Service"], {
+    isFirst: isFirst,
+    as: gatsby__WEBPACK_IMPORTED_MODULE_1__["Link"],
+    to: "/services/" + slug
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["Icon"], {
+    src: __webpack_require__("./src/assets/images sync recursive ^\\.\\/.*$")("./" + icon),
+    alt: name
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["Name"], null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["P"], null, description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["CtaLink"], {
+    to: "/services/" + slug,
+    borderPrimary: true,
+    xs: true
+  }, "Read more"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Service);
+
+/***/ }),
+
+/***/ "./src/components/service/style.js":
+/*!*****************************************!*\
+  !*** ./src/components/service/style.js ***!
+  \*****************************************/
+/*! exports provided: Icon, Service, P, Name, CtaLink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Icon", function() { return Icon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Service", function() { return Service; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return P; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Name", function() { return Name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CtaLink", function() { return CtaLink; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../button */ "./src/components/button/index.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+
+
+
+var Icon = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].img.withConfig({
+  displayName: "style__Icon"
+})(["height:50px;margin-bottom:12px;width:auto;"]);
+var Service = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_globals__WEBPACK_IMPORTED_MODULE_2__["OneThird"]).withConfig({
+  displayName: "style__Service"
+})(["border-radius:5px;box-shadow:0 0 15px rgb(0,0,0,0.12);margin-bottom:2.25em;padding:2.25em 0.625em;text-align:center;text-decoration:none;transition:all 0.2s ease-in-out;&:hover{box-shadow:0 2px 6px 0 rgb(0,0,0,0.14);transform:translateY(0.16em);}"]);
+var P = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p.withConfig({
+  displayName: "style__P"
+})(["font-size:", ";"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.fontSizes.sm;
+});
+var Name = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p.withConfig({
+  displayName: "style__Name"
+})(["color:", ";font-family:", ";font-size:", ";font-weight:bold;margin-bottom:0.6em;"], function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.colors.black;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.global.fonts.serif;
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.fontSizes.lg;
+});
+var CtaLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_button__WEBPACK_IMPORTED_MODULE_1__["StyledLink"]).withConfig({
+  displayName: "style__CtaLink"
+})(["font-size:", ";"], function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.global.fontSizes.sm;
 });
 
 /***/ }),
@@ -57174,6 +58893,128 @@ var ArrowsWrapper = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].di
 
 /***/ }),
 
+/***/ "./src/components/valueGrid/index.js":
+/*!*******************************************!*\
+  !*** ./src/components/valueGrid/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _section__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../section */ "./src/components/section/index.js");
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../content */ "./src/components/content/index.js");
+/* harmony import */ var _value__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./value */ "./src/components/valueGrid/value.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+
+
+
+
+
+
+
+var ValueGrid = function ValueGrid(_ref) {
+  var gridData = _ref.gridData,
+      contentData = _ref.contentData,
+      _ref$horizontal = _ref.horizontal,
+      horizontal = _ref$horizontal === void 0 ? false : _ref$horizontal;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_section__WEBPACK_IMPORTED_MODULE_1__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_2__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    contentData: contentData,
+    horizontal: horizontal
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globals__WEBPACK_IMPORTED_MODULE_5__["FlexRow"], null, gridData.map(function (value, index) {
+    var isFirst = index === 0 ? true : false;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_value__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: value,
+      key: index,
+      isFirst: isFirst
+    });
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ValueGrid);
+
+/***/ }),
+
+/***/ "./src/components/valueGrid/style.js":
+/*!*******************************************!*\
+  !*** ./src/components/valueGrid/style.js ***!
+  \*******************************************/
+/*! exports provided: ValueLink */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValueLink", function() { return ValueLink; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+
+
+
+var ValueLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(gatsby__WEBPACK_IMPORTED_MODULE_1__["Link"]).withConfig({
+  displayName: "style__ValueLink"
+})(["color:", ";display:block;font-family:", ";font-size:", ";font-weight:bold;margin-bottom:1em;", ""], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.colors.black;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.fonts.serif;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.global.fontSizes.lg;
+}, function (_ref4) {
+  var isLink = _ref4.isLink;
+  return isLink && Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(["color:", ";font-size:", ";text-decoration:none;", ""], function (_ref5) {
+    var theme = _ref5.theme;
+    return theme.global.colors.primary;
+  }, function (_ref6) {
+    var theme = _ref6.theme;
+    return theme.global.fontSizes.base;
+  }, _globals__WEBPACK_IMPORTED_MODULE_2__["hasArrow"]);
+});
+
+/***/ }),
+
+/***/ "./src/components/valueGrid/value.js":
+/*!*******************************************!*\
+  !*** ./src/components/valueGrid/value.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globals */ "./src/components/globals/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style */ "./src/components/valueGrid/style.js");
+
+
+
+
+var Value = function Value(_ref) {
+  var value = _ref.value,
+      isFirst = _ref.isFirst;
+  var heading = value.heading,
+      content = value.content,
+      ctaLink = value.ctaLink;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globals__WEBPACK_IMPORTED_MODULE_1__["OneThird"], {
+    isFirst: isFirst
+  }, ctaLink ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["ValueLink"], {
+    isLink: true,
+    to: ctaLink
+  }, heading) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_2__["ValueLink"], {
+    as: "p"
+  }, heading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, content));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Value);
+
+/***/ }),
+
 /***/ "./src/components/wrapper/index.js":
 /*!*****************************************!*\
   !*** ./src/components/wrapper/index.js ***!
@@ -57230,6 +59071,368 @@ function Error404(_ref) {
     location: location
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_1__["Helmet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Page not found - RingSavvy, Inc.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_hero__WEBPACK_IMPORTED_MODULE_3__["default"], {
     heading: heroData.heading
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/pages/faq.js":
+/*!**************************!*\
+  !*** ./src/pages/faq.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FAQ; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet */ "react-helmet");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layout */ "./src/components/layout/index.js");
+/* harmony import */ var _components_hero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/hero */ "./src/components/hero/index.js");
+/* harmony import */ var _components_section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/section */ "./src/components/section/index.js");
+/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _components_faq__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/faq */ "./src/components/faq/index.js");
+/* harmony import */ var _components_faq_style__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/faq/style */ "./src/components/faq/style.js");
+/* harmony import */ var _components_globals__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/globals */ "./src/components/globals/index.js");
+
+
+
+
+
+
+
+
+ // TODO: Refactor when possible. Move constants to sep file, etc.
+
+function FAQ(_ref) {
+  var location = _ref.location;
+  var heroData = {
+    heading: 'Frequently Asked Questions'
+  };
+  var ourCompany = [{
+    question: 'Where is Ring Savvy located?',
+    answer: 'Our main offices and call center are located at 120 Lake Avenue S, Suite 11, Nesconset, New York, 11767.'
+  }, {
+    question: 'How long has Ring Savvy been in business?',
+    answer: 'Ring Savvy has been answering phone calls on behalf of businesses since 2013.'
+  }, {
+    question: 'Is Ring Savvy a franchise?',
+    answer: 'No, we’re an individually owned company, run out of a single location in Nesconset, New York.'
+  }, {
+    question: 'Does Ring Savvy answer calls 24/7?',
+    answer: 'Yes. Our call center remains active in answering phone calls 24 hours a day, seven days a week, 365 days a year (366 during leap years).'
+  }, {
+    question: 'How often does Ring Savvy’s call center experience technical issues?',
+    answer: 'In the rare event that technical issues do arise, we’re typically able to resolve them in a matter of minutes. Our service also never experiences outages. Ring Savvy has multiple backup generators and failsafes in place to keep us up and running during storms.'
+  }, {
+    question: 'Why would I use a live answering service when I have voicemail?',
+    answer: 'Ring Savvy provides businesses with 24/7/365 live phone answering coverage, and ensures that their customers never have to deal with the frustration of being sent to voicemail during their time of need. We help companies in all industries turn more of their new leads into paying customers, by providing their callers a live, caring and knowledgeable voice.'
+  }, {
+    question: 'Why would I use a live answering service when I have staff?',
+    answer: 'Ring Savvy provides support on the 3rd and 4th ring when your office fails to answer a call. This is great insurance for any business, as your in-office staff may not always be able to pick up a call during the day, and will very rarely be available to answer calls during after hours, weekends, and holidays. Ring Savvy can help you on a rollover basis by answering only the calls that you miss, giving you the ability to capture new business at a fraction of the cost!'
+  }];
+  var howItWorks = [{
+    question: 'How does Ring Savvy work?',
+    answer: 'Ring Savvy uses conditional call forwarding in order to answer calls that you and your staff can’t get to. This means that 24/7, Ring Savvy is available to field calls on behalf of your business. Every phone call will ring 3-4 times in your office, and, if unanswered, the call forwards over to our service. If you would like to call forward your calls with no delay, Ring Savvy can easily accommodate as well.'
+  }, {
+    question: 'How is Ring Savvy different than getting a message from my voicemail?',
+    answer: 'When using Ring Savvy, you’ll always be giving your callers a live trained receptionist to speak with. Our receptionist can make your customers feel cared for, answer any basic questions they might have about your business, and work to get the customer in touch with you right away. A voicemail machine cannot do any of this.'
+  }, {
+    question: 'How do I forward my calls to Ring Savvy?',
+    answer: 'When signing up with Ring Savvy, one of the first things you’ll do is let us know exactly how you’d like us to handle and direct your business’ incoming calls. To learn about the many call forwarding options you have with our service, we recommend checking out this page.'
+  }, {
+    question: 'How are my calls answered?',
+    answer: 'The way that our virtual receptionists answer your phone calls is entirely up to you, although our most preferred greetings usually sound like, “Good morning, you’ve reach (insert name of business), how may I help you?” This is a brief, polite way to exert professionalism and let the caller know that the person answering the phone is a part of your business.'
+  }, {
+    question: 'If I am on a call and another call is coming in, will it go to Ring Savvy?',
+    answer: 'Yes. Conditional call forwarding from Ring Savvy gives you the option to utilize call waiting or let the call ring and forward it over to our service to be answered by one of our trained virtual receptionists.'
+  }, {
+    question: 'Can I still answer my own phone calls even though I have Ring Savvy?',
+    answer: 'Yes. Unless you specifically request all of your incoming calls to be immediately directed to our service (a request that might be useful during after hours, weekend or vacation time), your office will always be given an opportunity to answer incoming calls first.'
+  }, {
+    question: 'Can I forward all of my calls to Ring Savvy so that I don’t have to answer my own phone?',
+    answer: 'Yes. Utilizing our straight call forwarding protocol will send all of your inbound calls to our answering service. You can turn straight call forwarding on and off whenever you’d like.'
+  }];
+  var virtualReceptionists = [{
+    question: 'Where are Ring Savvy’s operators located?',
+    answer: 'All of our operators work out of our call center in Nesconset, New York.'
+  }, {
+    question: 'Does Ring Savvy outsource their calls to different countries?',
+    answer: 'Ring Savvy never outsources calls. All of our calls are answered by receptionists that are working inside of our call center facility.'
+  }, {
+    question: 'Does Ring Savvy offer fully bilingual receptionists?',
+    answer: 'Yes! Ring Savvy employs both English and Spanish speaking receptionists. We always have bilingual receptionists working and ready to answer calls on behalf of all the businesses we serve.'
+  }];
+  var services = [{
+    question: 'Can I customize the information that I receive in my messages?',
+    answer: 'Absolutely. Just let our support team know what information you’d like our virtual receptionists to gather and passing along to you via message. To reach our support team, simply submit a support ticket here or give us a call at 631-600-1111!'
+  }, {
+    question: 'Does Ring Savvy schedule appointments?',
+    answer: 'Yes. Appointment scheduling is an optional Ring Savvy service, available upon request.'
+  }, {
+    question: 'Does Ring Savvy handle new customer intake?',
+    answer: 'We do. Once our virtual receptionist identifies someone as a first time caller to your business, they will begin asking them intake questions, that have been approved by you and customized to your business’ liking.'
+  }, {
+    question: 'Can Ring Savvy send messages to multiple people at my company?',
+    answer: 'Yes! Our virtual receptionist team is available to pick up the phone and take messages from your callers at any time, and once they are finished transcribing a new message from a caller, they can send that message to any staff members you’d like.'
+  }, {
+    question: 'Can Ring Savvy transfer potential new customer callers to me?',
+    answer: 'Absolutely. When a Ring Savvy virtual receptionist answers one of your calls, we can attempt to contact you, and give you the option to have the call transferred over to a direct line of your choosing.'
+  }];
+  var pricingAndBilling = [{
+    question: 'Ring Savvy’s pricing page says it’s pay as you go — what does that mean?',
+    answer: 'It means the amount you pay each month will depend on your business’ monthly call volume. Our monthly minimum is $100, which will get you 50 minutes of live phone answering. Once you get past your first 50 minutes, your per minute cost will change, as you begin to exceed certain minute benchmarks.'
+  }, {
+    question: 'Does Ring Savvy charge extra for anything?',
+    answer: 'The only feature we charge extra for is new customer intake. All of our other features come at no additional cost.'
+  }, {
+    question: 'Is there a contract if I want to use Ring Savvy?',
+    answer: 'With Ring Savvy you never have to sign any contracts. You can cancel our service at any time with zero financial penalty.'
+  }, {
+    question: 'How much does Ring Savvy cost?',
+    answer: 'This will depend on how many minutes you end up using. Remember that the amount you pay can vary from month-to-month. If there is a month where your business requires a lower than usual amount of phone coverage, your monthly bill will end up being lower as well. It all depends on your call volume.'
+  }, {
+    question: 'How is my monthly price determined?',
+    answer: 'You’ll only be charged for the amount of minutes our virtual receptionist staff spends talking with your callers on the phone. We never round minutes up, and our receptionists have been trained to handle your calls with a high level of efficiency. We also won’t charge you for calls from telemarketers or for calls unrelated to your business. Our goal is to make sure you always get the most bang for your buck!'
+  }, {
+    question: 'Does Ring Savvy charge by the minute or by the call?',
+    answer: 'Ring Savvy charges per minute, and you only pay for what you use!'
+  }, {
+    question: 'Is there a monthly minimum?',
+    answer: 'Yes. Our monthly minimum is $100, which gets you 50 minutes of service.'
+  }];
+  var freeTrial = [{
+    question: 'How do I start my free trial?',
+    answer: 'Fill out a form on our sign-up page or call us now at 631-600-1111. If you fill out a form, you’ll be contacted by one of our Savvy customer support managers shortly. If you decide to call in, we’ll always have a live person for you to speak with.'
+  }, {
+    question: 'Can I use all of Ring Savvy’s features during the free trial?',
+    answer: 'During your free trial period, you’ll have access to just about all of our features, allowing you to take in the full Ring Savvy experience. The only feature we don’t offer to those in trial is appointment scheduling. '
+  }, {
+    question: 'How much does the free trial cost?',
+    answer: 'Our trial is absolutely free. We promise we won’t charge you a penny for the first 10 days you use our service.'
+  }, {
+    question: 'What happens during my free trial?',
+    answer: 'During your free trial, our virtual receptionist team will be available 24/7 to handle your incoming calls, following all of the directions you give us during the setup process. You’ll get 10 days to see if our service is beneficial to your business, and make sure that everything is working properly.'
+  }, {
+    question: 'Can I make changes to my account during the free trial?',
+    answer: 'Absolutely. You can always make changes to your account on the fly. Just submit a support ticket here or give us a call at 631-600-1111.'
+  }, {
+    question: 'What happens at the end of my free trial?',
+    answer: 'A member of our team will reach out to you and go over the results of your trial period. If you’d like to continue using our service, we’ll get you started right away as a paying customer. If you decide the service is not for you, you can walk away at no cost.'
+  }];
+  var troubleshooting = [{
+    question: 'What if I work off of a landline and a cell phone?',
+    answer: 'You have nothing to worry about. We can forward calls from both your landline and your cell phone to the same dedicated telephone number in our system. When calls come through on that line, our team will know that they came from your phone.'
+  }, {
+    question: 'What if I have multiple business locations?',
+    answer: 'Not a problem. We can answer calls on behalf of all your businesses and even help customers trying to find your office! Utilizing call forwarding, we can easily determine which office your callers are attempting to visit.'
+  }, {
+    question: 'How do I make adjustments to my account?',
+    answer: 'Simple! Just submit a support ticket here or give us a call at 631-600-1111! Customer support is available 24/7/365.'
+  }, {
+    question: 'Can I change how my calls are answered?',
+    answer: 'Yes. Your greetings and protocol are always customizable, and can be changed instantly when you call in. Simply, submit a support ticket here or give us a call at 631-600-1111, and let us know how you would like your calls handled going forward.'
+  }, {
+    question: 'My landline calls are not being picked up at all!',
+    answer: 'This could be because your phone provider has dropped your call forwarding feature. This sometimes happens when your phone provider experiences outages, or upgrades their system. This also happens when you add/remove features from your account. In order to reactivate service, our customer success team will place a ticket with your carrier or log into your portal. This change may be instantaneous or may take up to 48 hours.'
+  }, {
+    question: 'My cell phone calls are not being picked up at all!',
+    answer: 'If you’ve changed/upgraded your cell phone, your call forwarding may no longer be active. You must enter a code and your dedicated ten digit phone number to reactivate your service. This code depends on your phone carrier. Here are some of our quick tutorials on forwarding your cell phone to Ring Savvy.'
+  }, {
+    question: 'My cell phone rings too many times before Ring Savvy picks up the call! What is wrong?',
+    answer: 'This may have been caused by an update your cell phone provider has implemented, but the default amount of rings on a cell phone before forwarding is 6. If attempts to decrease the amount of rings is unsuccessful, dialing 611 from the cell phone and speaking to a representative usually helps. If a representative claims they can not make this fix, ask for a supervisor.'
+  }, {
+    question: 'My landline rings too many times before Ring Savvy picks up the call! What is wrong?',
+    answer: 'Normally, this is an issue with your phone provider. Just let us know that you are hearing too many rings before the calls are answered and we still start running diagnostics on your lines. We will also get in contact with your provider to remedy the issue. Depending on your phone provider, this can be an instant fix or can take up to 48 hours.'
+  }, {
+    question: 'I’m receiving voicemails, are my calls not forwarding?',
+    answer: 'Normally, this is an issue with your phone provider. Our technical support will run diagnostics on your line and contact your provider to reinstate your call forwarding features.'
+  }, {
+    question: 'Where can I find the caller ID for all patched and missed calls?',
+    answer: 'The caller ID of the person who called is automatically attached at the bottom of every email that is sent to you from the answering service. The number that the person leaves as a callback number is always sent to you via text as well.'
+  }];
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(ourCompany),
+      isActive = _useState[0],
+      setActive = _useState[1];
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    location: location
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_1__["Helmet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Ring Savvy | Frequently Asked Questions | Answering Service FAQs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    name: "description",
+    content: "Ring Savvy | Frequently Asked Questions | Answering Service FAQs | Contact Our Support Team For Personal Account Questions."
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_hero__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    heading: heroData.heading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_section__WEBPACK_IMPORTED_MODULE_4__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_wrapper__WEBPACK_IMPORTED_MODULE_5__["Wrapper"], {
+    flex: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Aside"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["IndexTitle"], null, "Categories"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globals__WEBPACK_IMPORTED_MODULE_8__["BaseUnorderedList"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(ourCompany);
+    }
+  }, "Our Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(howItWorks);
+    }
+  }, "How It Works"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(virtualReceptionists);
+    }
+  }, "Virtual Receptionists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(services);
+    }
+  }, "Services"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(pricingAndBilling);
+    }
+  }, "Pricing and Billing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(freeTrial);
+    }
+  }, "Free Trial"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq_style__WEBPACK_IMPORTED_MODULE_7__["Category"], {
+    onClick: function onClick() {
+      return setActive(troubleshooting);
+    }
+  }, "Troubleshooting"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globals__WEBPACK_IMPORTED_MODULE_8__["ContentContainer"], {
+    maxWidth: "680px"
+  }, isActive.map(function (faq, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_faq__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      faq: faq,
+      key: index
+    });
+  })))));
+}
+
+/***/ }),
+
+/***/ "./src/pages/how-it-works.js":
+/*!***********************************!*\
+  !*** ./src/pages/how-it-works.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HowItWorks; });
+/* harmony import */ var _public_page_data_sq_d_1407725978_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../public/page-data/sq/d/1407725978.json */ "./public/page-data/sq/d/1407725978.json");
+var _public_page_data_sq_d_1407725978_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../public/page-data/sq/d/1407725978.json */ "./public/page-data/sq/d/1407725978.json", 1);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "react-helmet");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/layout */ "./src/components/layout/index.js");
+/* harmony import */ var _components_hero__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/hero */ "./src/components/hero/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_contentSection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/contentSection */ "./src/components/contentSection/index.js");
+/* harmony import */ var _components_faqAccordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/faqAccordion */ "./src/components/faqAccordion/index.js");
+/* harmony import */ var _components_emailSection__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/emailSection */ "./src/components/emailSection/index.js");
+/* harmony import */ var _components_valueGrid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/valueGrid */ "./src/components/valueGrid/index.js");
+/* harmony import */ var _components_globals__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/globals */ "./src/components/globals/index.js");
+/* harmony import */ var _assets_images_how_it_works_info_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../assets/images/how-it-works-info.jpg */ "./src/assets/images/how-it-works-info.jpg");
+/* harmony import */ var _assets_images_how_it_works_info_jpg__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_images_how_it_works_info_jpg__WEBPACK_IMPORTED_MODULE_11__);
+
+
+
+
+
+
+
+
+
+
+
+
+function HowItWorks(_ref) {
+  var location = _ref.location;
+  var data = _public_page_data_sq_d_1407725978_json__WEBPACK_IMPORTED_MODULE_0__.data;
+  var heroData = {
+    heading: 'How it works'
+  };
+  var contentData = [{
+    id: 1,
+    heading: 'How we’ll set up your service',
+    content: ['Before your free trial officially begins, we’ll work with you and your phone provider to set up call forwarding protocols for your phone systems.', 'This typically takes a short period of time, and requires very little effort on your end. Just let our Savvy representative know what you’d like from our service, and our top notch support team will take care of the rest.']
+  }, {
+    id: 2,
+    heading: 'How we’ll forward your calls',
+    content: ['One of the most important things you’ll do with your Savvy representative is decide on a preferred call forwarding method for your business.', 'Having one of these methods in place guarantees that all calls to your company get answered by a live voice, whether it’s from your office or our service. Keep in mind, that you can change your preferred call forwarding method at any time.']
+  }, {
+    id: 3,
+    heading: 'How we’ll engage with your customers',
+    content: ['Worried about how our answering service will greet your customers. You’ll be glad to know that one of the first things we do when setting up your account with Ring Savvy is establish a customized greeting for our receptionists to say to all of your business’ callers.', 'This greeting will always be polite, personalized, and help get conversations with new customers off on the right foot.']
+  }, {
+    id: 4,
+    heading: 'How our 7 day free trial works',
+    content: ['Once our service is setup with your phone systems, our virtual receptionist team can immediately begin answering calls on behalf of your business.', 'During the trial period, you’ll get 24/7/365 coverage from our receptionist team, as well as access to additional features, such as live call transferring and new customer intake.']
+  }];
+  var gridData = [{
+    heading: 'Custom call greeting',
+    content: 'Your greeting is always customized for your business, to provide a superior experience for your callers.'
+  }, {
+    heading: 'New client protocol',
+    content: 'If the person calling is a potentially new client, typically our clients like to speak to them right away.'
+  }, {
+    heading: 'Existing client protocol',
+    content: 'Our Savvy Receptionists capture the existing callers information, so that you can call them back ASAP.'
+  }];
+  var tabData = [{
+    heading: 'Straight call forwarding',
+    content: ['Under this option, Ring Savvy customers are able to manually forward and unforward their calls to our virtual receptionist team. You’ll get to decide when you and your staff should be handling calls, and when calls should be directly sent to our service.', 'This is the simplest type of call forwarding we offer, and for many business owners will be the best method.'],
+    ctaText: 'Get started',
+    ctaLink: '/sign-up/'
+  }, {
+    heading: 'Rollover call forwarding',
+    content: ['This method of call forwarding, allows business owners to forward calls to Ring Savvy on a conditional basis.', 'Conditions can include: Our service picking up after a certain number of rings, picking up when there are no other lines available for a call to ring on or picking up when your cell phone is without service.'],
+    ctaText: 'Get started',
+    ctaLink: '/sign-up/'
+  }, {
+    heading: 'Time of day call forwarding',
+    content: ['This type of call forwarding is exactly what it sounds like. You tell us which hours of the day you’d like to answer business calls yourself (for example, during normal business hours), and let us know which hours you’d like our service to take over.', 'Make sure new leads that come in during the overnight and weekends never pass you by.'],
+    ctaText: 'Get started',
+    ctaLink: '/sign-up/'
+  }, {
+    heading: 'Full time call forwarding',
+    content: ['Sometimes you just need a complete break from answering the phones and we can accommodate. Turn on this type of call forwarding, and we’ll answer every single one of your calls on the first ring.', 'This is a great option to have during extra busy work weeks, or when it’s time to go on vacation.'],
+    ctaText: 'Get started',
+    ctaLink: '/sign-up/'
+  }];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_layout__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    location: location
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "How It Works - Ring Savvy, Inc. Virtual Receptionists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("meta", {
+    name: "description",
+    content: "How It Works | Ring Savvy | 24/7 Live Virtual Receptionist Answer Every Call You Miss. Learn More Here and Call Today For a Free Trial!"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_hero__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    heading: heroData.heading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_valueGrid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    horizontal: true,
+    contentData: contentData.find(function (data) {
+      return data.id === 1;
+    }),
+    gridData: gridData
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    contentData: contentData.find(function (data) {
+      return data.id === 2;
+    }),
+    tabData: tabData,
+    horizontal: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_emailSection__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_contentSection__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    horizontal: true,
+    contentData: contentData.find(function (data) {
+      return data.id === 3;
+    })
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_globals__WEBPACK_IMPORTED_MODULE_10__["FlexRow"], {
+    center: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    src: _assets_images_how_it_works_info_jpg__WEBPACK_IMPORTED_MODULE_11___default.a
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_faqAccordion__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    horizontal: true,
+    contentData: contentData.find(function (data) {
+      return data.id === 4;
+    })
   }));
 }
 
@@ -57347,6 +59550,106 @@ var pageQuery = "1776535162";
 
 /***/ }),
 
+/***/ "./src/pages/services/index.js":
+/*!*************************************!*\
+  !*** ./src/pages/services/index.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ServicesIndex; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet */ "react-helmet");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/layout */ "./src/components/layout/index.js");
+/* harmony import */ var _components_hero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/hero */ "./src/components/hero/index.js");
+/* harmony import */ var _components_section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/section */ "./src/components/section/index.js");
+/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _components_globals__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/globals */ "./src/components/globals/index.js");
+/* harmony import */ var _components_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/service */ "./src/components/service/index.js");
+
+
+
+
+
+
+
+
+function ServicesIndex(_ref) {
+  var location = _ref.location;
+  var heroData = {
+    heading: 'Services'
+  };
+  var services = [{
+    name: '24/7 Live Answering',
+    icon: 'live-answering-icon.svg',
+    description: 'At any hour of the day or night, our virtual receptionist team will be ready to answer calls for your business. Weekends and holidays included!',
+    slug: '24-7-live-answering-service'
+  }, {
+    name: 'Bilingual Answering',
+    icon: 'bilingual-answering-icon.svg',
+    description: 'We employ Spanish speaking receptionist staff that are ready to help your business engage with Spanish speaking consumers.',
+    slug: 'bilingual-answering-service'
+  }, {
+    name: 'New Customer Intake',
+    icon: 'new-customer-intake-icon.svg',
+    description: 'Our virtual receptionists take all first-time callers through a series of questions about their personal information and reason for reaching out to your business.',
+    slug: 'new-customer-intake'
+  }, {
+    name: 'Live Call Transferring',
+    icon: 'live-call-transferring-icon.svg',
+    description: 'With Ring Savvy, you get to decide whether you want to be transferred in on a call, or have our receptionist staff take a message on your behalf.',
+    slug: 'live-call-transferring'
+  }, {
+    name: 'Advanced Call Screening',
+    icon: 'call-filtering-icon.svg',
+    description: 'Let Ring Savvy be your first line of defense to pesky telemarketers. Our receptionists will keep calls that are unrelated to your business from disrupting your day.',
+    slug: 'advanced-call-screening'
+  }, {
+    name: 'Overflow Call Handling',
+    icon: 'overflow-handling-icon.svg',
+    description: 'Our receptionist team can answer any of the calls you can’t get to or don’t want to get to. We’ll help you take a breather, while ensuring you never miss the new customer.',
+    slug: 'overflow-call-handling'
+  }, {
+    name: 'Message Taking',
+    icon: 'message-taking-icon.svg',
+    description: 'Everytime our receptionists speak with one of your customers, you’ll receive a message via text and/or email with the important information from the call.',
+    slug: 'message-taking'
+  }, {
+    name: 'Appointment Scheduling',
+    icon: 'appointment-sched-icon.svg',
+    description: 'Save your business from scheduling disasters! Let Ring Savvy’s virtual receptionists book appointments directly into your favorite scheduling software.',
+    slug: 'appointment-scheduling'
+  }, {
+    name: '100% Customizable',
+    icon: 'customizable-icon.svg',
+    description: 'Our team will work with you to set up customized scripts and protocols, ensuring that our receptionists truly come off as a seamless extension of your company.',
+    slug: 'customizable'
+  }];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    location: location
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_1__["Helmet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Ring Savvy Services: Learn Everything We Have to Offer Here"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    name: "description",
+    content: "Ring Savvy Services - Here's Everything We Can Do, and How You Can Customize it for Your Business. Learn More and Try Our Service Free for 7 Days."
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_hero__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    heading: heroData.heading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_section__WEBPACK_IMPORTED_MODULE_4__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_wrapper__WEBPACK_IMPORTED_MODULE_5__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globals__WEBPACK_IMPORTED_MODULE_6__["FlexRow"], {
+    wrap: true
+  }, services.map(function (service, index) {
+    var isFirst = index == 0 || index % 3 == 0 ? true : false;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_service__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      key: service.slug,
+      service: service,
+      isFirst: isFirst
+    });
+  })))));
+}
+
+/***/ }),
+
 /***/ "./src/shared/globalPostStyles.js":
 /*!****************************************!*\
   !*** ./src/shared/globalPostStyles.js ***!
@@ -57422,7 +59725,7 @@ var _templateObject;
 
 
 
-var GlobalStyles = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject || (_templateObject = Object(_babel_runtime_helpers_esm_taggedTemplateLiteralLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  ", "\n\n  * {\n    box-sizing: border-box;\n  }\n\n  \n  html, body {\n    overflow-x: hidden;\n    width: 100vw;\n  }\n  \n  html {\n    font-size: 16px;\n    scroll-behavior: smooth;\n  }\n  \n  body {\n    font-family: 'Open Sans', sans-serif;\n    font-size: 1rem;\n    line-height: 1.5;\n    margin: 0;\n    -webkit-font-smoothing: antialiased;\n  }\n  \n  a {\n    transition: all 0.2s ease-in-out;\n    cursor: pointer;\n  }\n  \n  p {\n    margin: 0 0 1em;\n  }\n  \n  figure {\n    margin: 0;\n    width: 100%;\n  }\n  \n  p,\n  ul,\n  ol {\n    color: ", ";\n  }\n\n  a {\n    color: ", "\n  }\n\n  a:hover {\n    text-decoration: none;\n  }\n\n  h1,\n  h2,\n  h3,\n  h4,\n  h5,\n  h6 {   \n    font-family: ", ";\n    color: ", ";\n    font-weight: bold;\n    line-height: 1.2;\n    margin : 0 0 24px;\n  }\n\n  h1 {\n    font-size: ", "\n  }\n\n  h2 {\n    font-size: ", "\n  }\n\n  h3 {\n    font-size: ", "\n  }\n\n  h4 {\n    font-size: ", "\n  }\n\n  @media ", " {\n    h1 {\n      font-size: ", "\n    }\n\n    h2 {\n      font-size: ", "\n    }\n\n    h3 {\n      font-size: ", "\n    }\n\n    h4 {\n      font-size: ", "\n    }\n  }\n\n  /* Form Styles */\n  form :focus {\n    outline: none;\n  }\n\n  #formEmbed .fsBody,\n  #formEmbed .fsBody .fsForm {\n    margin: 0;\n    padding: 0;\n  }\n\n  #formEmbed .fsBody .fsForm .fsSectionHeading {\n    color: ", ";\n    font-size: ", ";\n    font-weight: bold;\n    margin: 0;\n    text-align: center;\n  }\n\n  #formEmbed .fsBody .fsRowBody,\n  #formEmbed .fsBody .fsFieldRow {\n    margin-bottom: 0!important;\n  }\n\n  #formEmbed .fsBody .fsLabel,\n  #formEmbed .fsBody label {\n      display: block;\n      font-size: 12px;\n      margin: 0 0 .5em;\n  }\n\n  #formEmbed .fsSubFieldGroup {\n    align-items: baseline;\n    display: flex;\n    flex-wrap: wrap;\n  }\n\n  #formEmbed .fsBody .fsSubField {\n    display: flex;\n    flex-direction: column-reverse;\n    flex: 1;\n  }\n\n  #formEmbed .fsRowBody input[type=\"text\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"email\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"number\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"tel\"].fsRequired,\n  #formEmbed .fsForm select.fsRequired,\n  #formEmbed .fsForm textarea.fsRequired {\n      border: 1px solid #707070;\n      border-radius: 3px;\n      color: #4D4D4D;\n      height: 36px;\n      margin-bottom: 20px;\n      padding: 0 12px;\n      width: 100%;\n  }\n\n  #formEmbed .fsLastCell,\n  #formEmbed .fsLastField {\n      margin-bottom: 0;\n  }\n\n  #formEmbed .fsForm select:not([multiple=\"multiple\"]) {\n    background-image: none;\n  }\n\n  #formEmbed button,\n  #formEmbed input[type=\"submit\"],\n  #formEmbed .button {\n    align-items: center;\n    background: ", "!important;\n    border-radius: 100px!important;\n    box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.14);\n    color: #ffffff;\n    cursor: pointer;\n    display: inline-flex;\n    font-family: ", ";\n    font-size: ", "!important;\n    font-weight: bold;\n    line-height: 1;\n    margin-top: 16px;\n    padding: 0.75em 3.25em;\n    text-align: center;\n    text-decoration: none;\n    transition: all 0.2s ease-in-out;\n  }\n\n  #formEmbed button:hover,\n  #formEmbed input[type=\"submit\"]:hover,\n  #formEmbed .button:hover {\n    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);\n    transform: translateY(0.16em);\n  }\n\n  #formEmbed .fsForm .fsSubmit,\n  #formEmbed .fsPagination {\n    margin: 0;\n    padding: 0;\n  }\n\n  .fsHidden {\n      display: none;\n  }\n\n  .fsSubmitButton {\n      width: 100%;\n  }\n\n  #formEmbed [fs-field-type=\"name\"] .fsLabel,\n  #formEmbed [fs-field-type=\"address\"] .fsLabel {\n    display: none;\n  }\n\n  #formEmbed .fsSupporting > span.hidden {\n    position: relative;\n    overflow: visible;\n    left: 0;\n    margin-left: 2.5px;\n    font-size: 16px;\n    color: #595d64;\n  }\n\n  /* Scholarship form styles */\n  .scholarship-form-page #formEmbed .fsBody .fsForm .fsSectionHeading {\n    color: ", "!important;\n    font-size: ", "!important;\n    font-weight: bold;\n    text-align: left;\n  }\n\n  .scholarship-form-page #formEmbed .fsBody .fsForm .fsSectionHeader {\n    margin-top: 20px;\n  }\n  \n  .scholarship-form-page #formEmbed .fsSubField.fsFieldAddress {\n    flex: 100%;\n  }\n\n  /* PDF download form styles */\n  #formEmbed #fsForm3592576 {\n    width: 100%;\n    align-items: center;\n    background: #fff;\n    border-radius: 50px;\n    display: flex;\n    height: 58px;\n    padding: 0 12px 0 16px;\n    position: relative;\n  }\n\n  #formEmbed .fsBody #label82569298 {\n    display: none;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm input {\n    border: none;\n    height: 100%;\n    width: 100%;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsField {\n    padding: 0 12px;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsField::placeholder {\n    color: #999999;\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: normal;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsSubmit {\n    position: absolute;\n    right: 10px;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsSubmitButton {\n    margin: 0;\n  }\n"])), styled_normalize__WEBPACK_IMPORTED_MODULE_2__["normalize"], function (_ref) {
+var GlobalStyles = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"])(_templateObject || (_templateObject = Object(_babel_runtime_helpers_esm_taggedTemplateLiteralLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  ", "\n\n  * {\n    box-sizing: border-box;\n  }\n\n  \n  html, body {\n    overflow-x: hidden;\n    width: 100vw;\n  }\n  \n  html {\n    font-size: 16px;\n  }\n  \n  body {\n    font-family: 'Open Sans', sans-serif;\n    font-size: 1rem;\n    line-height: 1.5;\n    margin: 0;\n    -webkit-font-smoothing: antialiased;\n  }\n  \n  a {\n    transition: all 0.2s ease-in-out;\n    cursor: pointer;\n  }\n  \n  p {\n    margin: 0 0 1em;\n  }\n  \n  figure {\n    margin: 0;\n    width: 100%;\n  }\n  \n  p,\n  ul,\n  ol {\n    color: ", ";\n  }\n\n  a {\n    color: ", "\n  }\n\n  a:hover {\n    text-decoration: none;\n  }\n\n  h1,\n  h2,\n  h3,\n  h4,\n  h5,\n  h6 {   \n    font-family: ", ";\n    color: ", ";\n    font-weight: bold;\n    line-height: 1.2;\n    margin : 0 0 24px;\n  }\n\n  h1 {\n    font-size: ", "\n  }\n\n  h2 {\n    font-size: ", "\n  }\n\n  h3 {\n    font-size: ", "\n  }\n\n  h4 {\n    font-size: ", "\n  }\n\n  @media ", " {\n    h1 {\n      font-size: ", "\n    }\n\n    h2 {\n      font-size: ", "\n    }\n\n    h3 {\n      font-size: ", "\n    }\n\n    h4 {\n      font-size: ", "\n    }\n  }\n\n  /* Form Styles */\n  form :focus {\n    outline: none;\n  }\n\n  #formEmbed .fsBody,\n  #formEmbed .fsBody .fsForm {\n    margin: 0;\n    padding: 0;\n  }\n\n  #formEmbed .fsBody .fsForm .fsSectionHeading {\n    color: ", ";\n    font-size: ", ";\n    font-weight: bold;\n    margin: 0;\n    text-align: center;\n  }\n\n  #formEmbed .fsBody .fsRowBody,\n  #formEmbed .fsBody .fsFieldRow {\n    margin-bottom: 0!important;\n  }\n\n  #formEmbed .fsBody .fsLabel,\n  #formEmbed .fsBody label {\n      display: block;\n      font-size: 12px;\n      margin: 0 0 .5em;\n  }\n\n  #formEmbed .fsSubFieldGroup {\n    align-items: baseline;\n    display: flex;\n    flex-wrap: wrap;\n  }\n\n  #formEmbed .fsBody .fsSubField {\n    display: flex;\n    flex-direction: column-reverse;\n    flex: 1;\n  }\n\n  #formEmbed .fsRowBody input[type=\"text\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"email\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"number\"].fsRequired,\n  #formEmbed .fsRowBody input[type=\"tel\"].fsRequired,\n  #formEmbed .fsForm select.fsRequired,\n  #formEmbed .fsForm textarea.fsRequired {\n      border: 1px solid #707070;\n      border-radius: 3px;\n      color: #4D4D4D;\n      height: 36px;\n      margin-bottom: 20px;\n      padding: 0 12px;\n      width: 100%;\n  }\n\n  #formEmbed .fsLastCell,\n  #formEmbed .fsLastField {\n      margin-bottom: 0;\n  }\n\n  #formEmbed .fsForm select:not([multiple=\"multiple\"]) {\n    background-image: none;\n  }\n\n  #formEmbed button,\n  #formEmbed input[type=\"submit\"],\n  #formEmbed .button {\n    align-items: center;\n    background: ", "!important;\n    border-radius: 100px!important;\n    box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.14);\n    color: #ffffff;\n    cursor: pointer;\n    display: inline-flex;\n    font-family: ", ";\n    font-size: ", "!important;\n    font-weight: bold;\n    line-height: 1;\n    margin-top: 16px;\n    padding: 0.75em 3.25em;\n    text-align: center;\n    text-decoration: none;\n    transition: all 0.2s ease-in-out;\n  }\n\n  #formEmbed button:hover,\n  #formEmbed input[type=\"submit\"]:hover,\n  #formEmbed .button:hover {\n    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);\n    transform: translateY(0.16em);\n  }\n\n  #formEmbed .fsForm .fsSubmit,\n  #formEmbed .fsPagination {\n    margin: 0;\n    padding: 0;\n  }\n\n  .fsHidden {\n      display: none;\n  }\n\n  .fsSubmitButton {\n      width: 100%;\n  }\n\n  #formEmbed [fs-field-type=\"name\"] .fsLabel,\n  #formEmbed [fs-field-type=\"address\"] .fsLabel {\n    display: none;\n  }\n\n  #formEmbed .fsSupporting > span.hidden {\n    position: relative;\n    overflow: visible;\n    left: 0;\n    margin-left: 2.5px;\n    font-size: 16px;\n    color: #595d64;\n  }\n\n  /* Scholarship form styles */\n  .scholarship-form-page #formEmbed .fsBody .fsForm .fsSectionHeading {\n    color: ", "!important;\n    font-size: ", "!important;\n    font-weight: bold;\n    text-align: left;\n  }\n\n  .scholarship-form-page #formEmbed .fsBody .fsForm .fsSectionHeader {\n    margin-top: 20px;\n  }\n  \n  .scholarship-form-page #formEmbed .fsSubField.fsFieldAddress {\n    flex: 100%;\n  }\n\n  /* PDF download form styles */\n  #formEmbed #fsForm3592576 {\n    width: 100%;\n    align-items: center;\n    background: #fff;\n    border-radius: 50px;\n    display: flex;\n    height: 58px;\n    padding: 0 12px 0 16px;\n    position: relative;\n  }\n\n  #formEmbed .fsBody #label82569298 {\n    display: none;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm input {\n    border: none;\n    height: 100%;\n    width: 100%;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsField {\n    padding: 0 12px;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsField::placeholder {\n    color: #999999;\n    font-family: ", ";\n    font-size: ", ";\n    font-weight: normal;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsSubmit {\n    position: absolute;\n    right: 10px;\n  }\n  \n  .pdf-form #formEmbed .fsBody .fsForm .fsSubmitButton {\n    margin: 0;\n  }\n"])), styled_normalize__WEBPACK_IMPORTED_MODULE_2__["normalize"], function (_ref) {
   var theme = _ref.theme;
   return theme.global.colors.grey;
 }, function (_ref2) {
@@ -57564,6 +59867,77 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./src/templates/blog.js":
+/*!*******************************!*\
+  !*** ./src/templates/blog.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogIndex; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-helmet */ "react-helmet");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layout */ "./src/components/layout/index.js");
+/* harmony import */ var _components_postPreview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/postPreview */ "./src/components/postPreview/index.js");
+/* harmony import */ var _components_pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pagination */ "./src/components/pagination/index.js");
+/* harmony import */ var _components_hero__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/hero */ "./src/components/hero/index.js");
+/* harmony import */ var _components_section__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/section */ "./src/components/section/index.js");
+/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _components_postPreviewList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/postPreviewList */ "./src/components/postPreviewList/index.js");
+
+
+
+
+
+
+
+
+
+function BlogIndex(_ref) {
+  var pageContext = _ref.pageContext,
+      data = _ref.data,
+      location = _ref.location;
+  var currentPage = pageContext.currentPage,
+      numPages = pageContext.numPages;
+  var isFirst = currentPage === 1;
+  var isLast = currentPage === numPages;
+  var prevPage = currentPage - 1 === 1 ? '' : "/" + (currentPage - 1);
+  var nextPage = "/" + (currentPage + 1);
+  var posts = data.allContentfulPost.edges;
+  var heroData = {
+    heading: 'Blog'
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    location: location
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_1__["Helmet"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Blog - Ring Savvy, Inc. - Answering Service Innovators"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
+    name: "description",
+    content: "Ring Savvy - Answering Service Innovators! Serving Industries and Small Businesses - Unparalleled Customer Service and Support - Call Now To Try It Free!"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_hero__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    heading: heroData.heading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_section__WEBPACK_IMPORTED_MODULE_6__["Section"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_wrapper__WEBPACK_IMPORTED_MODULE_7__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_postPreviewList__WEBPACK_IMPORTED_MODULE_8__["PostPreviewList"], null, posts.map(function (_ref2) {
+    var node = _ref2.node;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: node.slug
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_postPreview__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      post: node
+    }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_pagination__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    currentPage: currentPage,
+    numPages: numPages,
+    isFirst: isFirst,
+    isLast: isLast,
+    nextPage: nextPage,
+    prevPage: prevPage
+  }))));
+}
+var pageQuery = "4010345649";
 
 /***/ }),
 

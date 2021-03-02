@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Swiper from 'react-id-swiper';
+import 'swiper/swiper.scss';
 import Google from '../../assets/images/google-logo.svg';
 import ArrowPrev from '../../assets/images/reviews-prev.svg';
 import ArrowNext from '../../assets/images/reviews-next.svg';

@@ -55529,6 +55529,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/swiper/swiper.scss":
+/*!*****************************************!*\
+  !*** ./node_modules/swiper/swiper.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "./src/assets/images/corporate-office-bg-overlay.jpg":
 /*!***********************************************************!*\
   !*** ./src/assets/images/corporate-office-bg-overlay.jpg ***!
@@ -56998,14 +57009,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_id_swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-id-swiper */ "./node_modules/react-id-swiper/lib/index.js");
 /* harmony import */ var react_id_swiper__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_id_swiper__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/images/google-logo.svg */ "./src/assets/images/google-logo.svg");
-/* harmony import */ var _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/images/reviews-prev.svg */ "./src/assets/images/reviews-prev.svg");
-/* harmony import */ var _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/reviews-next.svg */ "./src/assets/images/reviews-next.svg");
-/* harmony import */ var _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
-/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style */ "./src/components/testimonials/style.js");
+/* harmony import */ var swiper_swiper_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/swiper.scss */ "./node_modules/swiper/swiper.scss");
+/* harmony import */ var swiper_swiper_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(swiper_swiper_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/images/google-logo.svg */ "./src/assets/images/google-logo.svg");
+/* harmony import */ var _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/reviews-prev.svg */ "./src/assets/images/reviews-prev.svg");
+/* harmony import */ var _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/images/reviews-next.svg */ "./src/assets/images/reviews-next.svg");
+/* harmony import */ var _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../wrapper */ "./src/components/wrapper/index.js");
+/* harmony import */ var _style__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style */ "./src/components/testimonials/style.js");
+
 
 
 
@@ -57058,27 +57072,27 @@ var Testimonials = function Testimonials() {
       title: 'Physical Therapist'
     }
   }];
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["Slider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["GreenContainer"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_5__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["Slider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["GreenContainer"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_6__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     style: {
       maxWidth: '480px'
     }
   }, "What our clients are saying")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_id_swiper__WEBPACK_IMPORTED_MODULE_1___default.a, params, testimonials.map(function (testimonial, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["SliderItem"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["SliderItem"], {
       key: i
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, testimonial.heading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["Description"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, testimonial.heading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["Description"], {
       marginTop: 1
-    }, testimonial.review), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["Author"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["AuthorName"], null, testimonial.author.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, testimonial.author.title)));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_5__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["Bottom"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["GoogleReviews"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_2___default.a,
+    }, testimonial.review), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["Author"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["AuthorName"], null, testimonial.author.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, testimonial.author.title)));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_wrapper__WEBPACK_IMPORTED_MODULE_6__["Wrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["Bottom"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["GoogleReviews"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _assets_images_google_logo_svg__WEBPACK_IMPORTED_MODULE_3___default.a,
     alt: "Google Logo"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "4.5/5 stars"), " based on 79 Google reviews")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_6__["ArrowsWrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_3___default.a,
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "4.5/5 stars"), " based on 79 Google reviews")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_style__WEBPACK_IMPORTED_MODULE_7__["ArrowsWrapper"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _assets_images_reviews_prev_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
     alt: "Prev",
     onClick: function onClick() {
       return swiper.slidePrev();
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+    src: _assets_images_reviews_next_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
     alt: "Next",
     onClick: function onClick() {
       return swiper.slideNext();
@@ -57399,8 +57413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js");
 /* harmony import */ var styled_normalize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-normalize */ "./node_modules/styled-normalize/dist/index.js");
 /* harmony import */ var styled_normalize__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(styled_normalize__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.scss */ "./src/shared/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.css */ "./src/shared/index.css");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_3__);
 
 
 var _templateObject;
@@ -57478,10 +57492,10 @@ var GlobalStyles = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["create
 
 /***/ }),
 
-/***/ "./src/shared/index.scss":
-/*!*******************************!*\
-  !*** ./src/shared/index.scss ***!
-  \*******************************/
+/***/ "./src/shared/index.css":
+/*!******************************!*\
+  !*** ./src/shared/index.css ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

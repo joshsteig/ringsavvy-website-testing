@@ -28,6 +28,7 @@ if (!spaceId || !accessToken) {
 module.exports = {
   siteMetadata: {
     title: 'Best Quality 24/7 Live Answering Service and Virtual Receptionists',
+    siteUrl: `https://www.ringsavvy.com`,
   },
   plugins: [
     {
@@ -42,6 +43,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-styled-components',
+    `gatsby-plugin-sitemap`,
     'gatsby-plugin-sass',
     {
       resolve: 'gatsby-source-contentful',

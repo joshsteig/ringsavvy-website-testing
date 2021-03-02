@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { pdfDownload } from '../../utils/embedScripts';
 import postscribe from 'postscribe';
+import pdf from '../../assets/downloadables/ringsavvy-company-brochure.pdf';
 import * as Styled from './style';
 
 const EmailForm = () => {

@@ -34,6 +34,7 @@
     "react-id-swiper": "^4.0.0",
     "react-spring": "^8.0.27",
     "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.32.8",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
     "swiper": "^6.4.11"
@@ -48,8 +49,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "prettier": "^2.2.1",
-    "sass": "^1.32.7"
+    "prettier": "^2.2.1"
   },
   "homepage": "https://github.com/answeringLegal/ringsavvy-website#readme",
   "keywords": [

@@ -51,7 +51,7 @@ module.exports = {
       resolve: 'gatsby-plugin-htaccess',
       options: {
         https: true,
-        host: 'dev2.ringsavvy.com',
+        host: 'www.ringsavvy.com',
         ErrorDocument: `
           ErrorDocument 401 /error_pages/401.html
           ErrorDocument 403 /error_pages/403.html

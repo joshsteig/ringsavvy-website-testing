@@ -68,6 +68,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     />,
     <script
       type='text/javascript'
+      key='mouseflow'
       dangerouslySetInnerHTML={{
         __html: `
         window._mfq = window._mfq || [];
@@ -78,6 +79,23 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
           document.getElementsByTagName("head")[0].appendChild(mf);
         })();
         `,
+      }}
+    />,
+    <script
+      type='text/javascript'
+      key='pa'
+      dangerouslySetInnerHTML={{
+        __html: `
+      (function() {
+        window._pa = window._pa || {};
+        // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+        // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+        // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+        var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+        pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.perfectaudience.com/serve/601aae988eb0a83e1100008f.js";
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+      })();
+      `,
       }}
     />,
     <script src='//scripts.iconnode.com/53231.js' />,

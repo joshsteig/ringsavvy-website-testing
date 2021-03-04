@@ -9,11 +9,12 @@ import { Wrapper } from '../components/wrapper';
 
 export default function BlogPostTemplate({ data }) {
   const post = data.contentfulPost;
+  const hasSnippetTitle = post.snippetTitle !== null;
 
   return (
     <Layout isReverse location={post.location}>
       <Helmet>
-        <title>{`${post.title} - Ring Savvy, Inc.`}</title>
+        <title>{hasSnippetTitle ? post.snippetTitle : post.title}</title>
         <meta name='description' content={post.description.description} />
       </Helmet>
       <Wrapper flex>
@@ -50,6 +51,7 @@ export const pageQuery = graphql`
           ...GatsbyContentfulFluid
         }
       }
+      snippetTitle
       body {
         raw
         references {

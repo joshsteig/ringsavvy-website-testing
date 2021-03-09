@@ -50,6 +50,12 @@ module.exports = {
       options: contentfulConfig,
     },
     {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://www.ringsavvy.com`,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-htaccess',
       options: {
         https: true,

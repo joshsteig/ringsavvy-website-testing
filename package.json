@@ -53,11 +53,6 @@
     "prettier": "^2.2.1"
   },
   "homepage": "https://github.com/answeringLegal/ringsavvy-website#readme",
-  "keywords": [
-    "gatsby",
-    "contentful",
-    "starter"
-  ],
   "license": "MIT",
   "main": "n/a",
   "repository": {

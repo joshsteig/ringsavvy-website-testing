@@ -45,7 +45,7 @@ export const pageQuery = graphql`
         name
         contentful_id
       }
-      createdAt(formatString: "MMMM Do, YYYY")
+      publishDate(formatString: "MMMM Do, YYYY")
       featuredImage {
         fluid(maxWidth: 605, background: "rgb:000000") {
           ...GatsbyContentfulFluid
@@ -70,7 +70,7 @@ export const pageQuery = graphql`
                 ...GatsbyContentfulFluid
               }
             }
-            createdAt(formatString: "MMMM Do, YYYY")
+            publishDate(formatString: "MMMM Do, YYYY")
             slug
             author {
               name

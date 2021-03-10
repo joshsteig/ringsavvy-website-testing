@@ -55,9 +55,6 @@ typings/
 .env
 .env.*
 
-# gatsby cache folder
-.cache
-
 # contentful config file
 .contentful.json
 # Local Netlify folder

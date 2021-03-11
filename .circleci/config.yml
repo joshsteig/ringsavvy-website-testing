@@ -21,7 +21,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - 'f4:90:42:a0:45:e5:ef:f9:e0:c0:94:6d:b9:c7:1c:67'
+            - '64:41:f0:77:58:61:05:93:b3:92:81:23:56:33:cc:79'
       - run: git config --global user.email "billy@answeringlegal.com"
       - run: git config --global user.name "answeringLegal"
       - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website

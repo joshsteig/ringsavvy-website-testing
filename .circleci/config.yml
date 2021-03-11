@@ -22,9 +22,8 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - '64:41:f0:77:58:61:05:93:b3:92:81:23:56:33:cc:79'
-      - run: git config --global user.email "billy@answeringlegal.com"
-      - run: git config --global user.name "answeringLegal"
-      - run: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com:2000 ls
+      - run: git config --global user.email "baf62495@aol.com"
+      - run: git config --global user.name "baf62495"
       - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run: git remote -v
       - run: git add public/*

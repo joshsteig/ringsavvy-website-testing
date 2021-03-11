@@ -2,13 +2,26 @@ version: '2.1'
 orbs:
   node: circleci/node@4.2
 jobs:
-  test-working:
-    docker:
-      - image: 'cimg/base:stable'
+  build:
+    machine:
+      enabled: true
     steps:
       - checkout
-      - run: echo Working
+      - run: echo build
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run: echo deploy
+
 workflows:
-  build:
+  build-and-deploy:
     jobs:
-      - test-working
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main

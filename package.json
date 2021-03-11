@@ -60,9 +60,8 @@
     "url": "https://github.com/answeringLegal/ringsavvy-website.git"
   },
   "scripts": {
-    "dev": "gatsby clean && gatsby develop",
-    "build": "gatsby clean && gatsby build",
-    "heroku-postbuild": "gatsby build",
+    "dev": "gatsby develop",
+    "build": "gatsby build",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js"
   }

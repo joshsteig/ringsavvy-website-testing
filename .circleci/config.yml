@@ -8,18 +8,19 @@ jobs:
     steps:
       - checkout
       - run: echo build
-  deploy:
+  setup-and-deploy:
     machine:
       enabled: true
     steps:
       - checkout
+      - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run: git remote -v
 
 workflows:
   build-and-deploy:
     jobs:
       - build
-      - deploy:
+      - setup-and-deploy:
           requires:
             - build
           filters:

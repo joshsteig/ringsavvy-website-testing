@@ -5,11 +5,12 @@ orbs:
 
 jobs:
   build:
+    working_directory: ~/project
     executor: node/default
     steps:
       - checkout
       - node/install-packages:
-          cache-path: ~/ringsavvy-website/node_modules
+          cache-path: ~/project/node_modules
           override-ci-command: npm install
       - run: npm run build
       - store_artifacts:
@@ -22,7 +23,7 @@ jobs:
       - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run: git remote -v
       - run: git add public/*
-      - run: git commit -m 'Deploying CircleCI build $CIRCLE_BUILD_NUM'
+      - run: git commit -m 'CircleCI build deploy'
       - run: git push origin main
 
 workflows:

@@ -13,7 +13,7 @@ jobs:
       enabled: true
     steps:
       - checkout
-      - run: echo deploy
+      - run: git remote -v
 
 workflows:
   build-and-deploy:

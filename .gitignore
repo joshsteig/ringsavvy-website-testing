@@ -1,5 +1,5 @@
-# Gatsby
-public/
+# Gatsby Cache
+.cache/
 
 # Logs
 logs

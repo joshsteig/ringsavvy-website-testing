@@ -2,13 +2,13 @@ version: '2.1'
 orbs:
   node: circleci/node@4.2
 jobs:
-  test:
+  test-working:
     docker:
       - image: 'cimg/base:stable'
     steps:
       - checkout
       - run: console.log('Working')
 workflows:
-  deploy:
+  build:
     jobs:
-      - test
+      - test-working

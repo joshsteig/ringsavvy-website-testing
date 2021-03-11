@@ -8,7 +8,6 @@ const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 };
-console.log(contentfulConfig);
 
 // if you want to use the preview API please define
 // CONTENTFUL_HOST in your environment config

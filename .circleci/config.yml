@@ -25,11 +25,11 @@ jobs:
             - '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23'
       - run: git config --global user.email "billy@answeringlegal.com"
       - run: git config --global user.name "answeringLegal"
+      - run: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
       - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run: git remote -v
       - run: git add public/*
       - run: git commit --allow-empty -m 'CircleCI build deploy'
-      - run: if [ -z "$(ssh-keygen -F $IP)" ]; then ssh-keyscan -H $IP >> ~/.ssh/known_hosts fi
       - run: git push cpanel main
 
 workflows:

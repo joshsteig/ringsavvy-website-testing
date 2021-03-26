@@ -8,6 +8,7 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - run: git pull
       - run: npm install
       - run: npm run build
       - store_artifacts:

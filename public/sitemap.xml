@@ -9,8 +9,8 @@
 <url> <loc>https://www.ringsavvy.com/blog/7</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/8</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/9</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/blog/three-things-to-know-about-using-a-janitorial-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/savvy-business-tips-how-to-combat-the-rising-number-of-spam-calls/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/blog/three-things-to-know-about-using-a-janitorial-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/how-to-get-your-company-setup-with-a-plumbing-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/savvy-business-tips-how-to-reclaim-weekends-without-sacrificing-new-income/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/blog/which-company-provides-the-best-hvac-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -85,10 +85,6 @@
 <url> <loc>https://www.ringsavvy.com/coverage/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/coverage/long-island-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/coverage/new-york-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/scholarships/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-long-island-students/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-trade-school-students/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-young-entrepreneurs/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/industries/accounting-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/industries/automotive-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/industries/cleaning-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -104,6 +100,10 @@
 <url> <loc>https://www.ringsavvy.com/industries/pet-grooming-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/industries/plumbing-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/industries/real-estate-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/scholarships/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-long-island-students/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-trade-school-students/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/scholarships/scholarship-for-young-entrepreneurs/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/services/24-7-live-answering-service/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/services/advanced-call-screening/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/services/appointment-scheduling/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -114,7 +114,6 @@
 <url> <loc>https://www.ringsavvy.com/services/message-taking/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/services/new-customer-intake/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/services/overflow-call-handling/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://www.ringsavvy.com/virtual-receptionist/bilingual-virtual-receptionists/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/tutorials/how-to-set-up-call-forwarding-from-a-verizon-cell-phone/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/tutorials/how-to-set-up-call-forwarding-from-sprint-cell-phone/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/tutorials/how-to-set-up-conditional-call-forwarding-from-a-typical-att-cell-phone/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -123,4 +122,5 @@
 <url> <loc>https://www.ringsavvy.com/tutorials/how-to-set-up-conditional-call-forwarding-sprint-mobile/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/tutorials/how-to-set-up-straight-call-forwarding-from-a-t-mobile-cell-phone/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://www.ringsavvy.com/tutorials/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.ringsavvy.com/virtual-receptionist/bilingual-virtual-receptionists/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>

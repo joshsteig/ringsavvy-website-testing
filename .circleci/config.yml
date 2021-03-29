@@ -28,8 +28,8 @@ jobs:
       - run: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run: git remote -v
       - run: git add public/*
-      - run: git commit --allow-empty -m 'CircleCI build deploy'
-      - run: git push cpanel main
+      - run: git commit --allow-empty -m 'CircleCI build and deploy'
+      - run: git push origin main && git push cpanel main
 
 workflows:
   build-and-deploy:

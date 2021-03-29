@@ -34,7 +34,7 @@ jobs:
           name: Bypass host key checking
           command: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit
       - run:
-          name: Add cpanel remote
+          name: Add cPanel remote
           command: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run:
           name: Verify remotes
@@ -46,10 +46,8 @@ jobs:
           name: Commit public folder
           command: git commit --allow-empty -m 'CircleCI build and deploy'
       - run:
-          name: Deploy
-          command: |
-            git push origin main
-            git push cpanel main
+          name: Deploy to cPanel
+          command: git push cpanel main
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

@@ -30,7 +30,7 @@ jobs:
             git config --global user.name "answeringLegal"
             git config --global user.email "billy@answeringlegal.com"
             git config --global user.name "answeringLegal"
-      - run: 
+      - run:
           name: Bypass host key checking
           command: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit
       - run:
@@ -46,15 +46,7 @@ jobs:
           name: Commit public folder
           command: git commit --allow-empty -m 'CircleCI build and deploy'
       - run:
-      name: Deploy 
-      command: |
-          git push origin main
-          git push cpanel main
-
-workflows:
-  build-and-deploy:
-    jobs:
-      - build
-          filters:
-            branches:
-              only: main
+          name: Deploy
+          command: |
+            git push origin main
+            git push cpanel main

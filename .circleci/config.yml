@@ -20,8 +20,9 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - 'f4:90:42:a0:45:e5:ef:f9:e0:c0:94:6d:b9:c7:1c:67'
+            - '40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f'
             - '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23'
+            - '85:f4:da:ac:6d:72:50:cc:85:e4:5f:c1:db:d7:25:0b'
       - run: git config --global user.email "billy@answeringlegal.com"
       - run: git config --global user.name "answeringLegal"
       - run: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit

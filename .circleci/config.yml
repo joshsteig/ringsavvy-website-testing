@@ -23,7 +23,7 @@ jobs:
           fingerprints:
             - '40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f'
             - '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23'
-            - '85:f4:da:ac:6d:72:50:cc:85:e4:5f:c1:db:d7:25:0b'
+            - '83:1e:ce:f5:22:9c:c2:ef:d2:55:ab:11:54:ca:80:a4'
       - run:
           name: Add user
           command: |

@@ -44,11 +44,11 @@ jobs:
           command: git add public/*
       - run:
           name: Commit public folder
-          command: git commit --allow-empty -m 'CircleCI build and deploy [skip ci]'
+          command: git commit --allow-empty -m 'CircleCI build and deploy'
       - run:
           name: Deploy
           command: |
-            git push origin main
+            git push origin main -o skip-ci
             git push cpanel main
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}

@@ -50,3 +50,7 @@ jobs:
           command: |
             git push origin main
             git push cpanel main
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_moduless

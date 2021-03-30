@@ -11,8 +11,8 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Check if repo is up to date
-          command: git pull
+          name: Pull cPanel remote changes into origin remote
+          command: git pull cpanel main
       - run:
           name: Install node modules
           command: npm install
@@ -48,7 +48,6 @@ jobs:
       - run:
           name: Deploy
           command: |
-            git push origin main -o skip-ci
             git push cpanel main
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}

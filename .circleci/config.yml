@@ -10,15 +10,6 @@ jobs:
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Pull cPanel remote changes into origin remote
-          command: git pull cpanel main
-      - run:
-          name: Install node modules
-          command: npm install
-      - run:
-          name: Run build
-          command: npm run build
       - add_ssh_keys:
           fingerprints:
             - '40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f'
@@ -40,6 +31,15 @@ jobs:
           name: Verify remotes
           command: git remote -v
       - run:
+      - run:
+          name: Pull cPanel remote changes into origin remote
+          command: git pull cpanel main
+      - run:
+          name: Install node modules
+          command: npm install
+      - run:
+          name: Run build
+          command: npm run build
           name: Stage public folder for commit
           command: git add public/*
       - run:

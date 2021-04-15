@@ -7,7 +7,7 @@ import ArrowNext from '../../assets/images/reviews-next.svg';
 import { Wrapper } from '../wrapper';
 import * as Styled from './style';
 
-const Testimonials = () => {
+const Testimonials = ({ style }) => {
   const [swiper, setSwiper] = useState(null);
   const params = {
     slidesPerView: 1,

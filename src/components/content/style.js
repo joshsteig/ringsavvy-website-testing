@@ -50,9 +50,14 @@ export const Heading = styled.h2`
 export const Content = styled.div`
   max-width: 780px;
 
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
   ${({ horizontal }) =>
     horizontal &&
     css`
+      margin-top: 30px;
       width: 60%;
     `}
 

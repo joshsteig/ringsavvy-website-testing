@@ -30,4 +30,17 @@ export const Section = styled.div`
         z-index: -1;
       }
     `}
+
+  ${({ centered }) =>
+    centered &&
+    css`
+      text-align: center;
+    `}
+
+  ${({ hasBackground }) =>
+    hasBackground &&
+    css`
+      background: ${({ theme }) => theme.global.colors.lightGrey};
+      margin-bottom: 50px;
+    `}
 `;

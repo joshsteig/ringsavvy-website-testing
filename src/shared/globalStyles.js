@@ -40,6 +40,13 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     width: 100%;
   }
+
+  hr {
+    background: #e8e8e8;
+    border: none;
+    height: 1px;
+    margin: 60px 0;
+  }
   
   p,
   ul,

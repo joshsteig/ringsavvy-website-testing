@@ -58,8 +58,8 @@ export const pageQuery = graphql`
           ... on ContentfulAsset {
             contentful_id
             title
-            fluid(maxWidth: 605) {
-              ...GatsbyContentfulFluid
+            fixed {
+              ...GatsbyContentfulFixed
             }
           }
           ... on ContentfulPost {

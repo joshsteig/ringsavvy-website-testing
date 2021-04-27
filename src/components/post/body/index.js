@@ -14,9 +14,9 @@ const options = {
       return <Link to={url}>{children}</Link>;
     },
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const { title, fluid } = node.data.target;
+      const { title, fixed } = node.data.target;
 
-      return <Image alt={title} fluid={fluid} />;
+      return <Image alt={title} fixed={fixed} />;
     },
     [BLOCKS.LIST_ITEM]: (node) => {
       const UnTaggedChildren = documentToReactComponents(node, {

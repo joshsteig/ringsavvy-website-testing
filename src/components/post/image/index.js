@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as Styled from './style';
 
-const Image = ({ alt, fluid }) => (
+const Image = ({ alt, fixed }) => (
   <figure>
-    <Styled.Image alt={alt} fluid={fluid} />
+    <Styled.Image alt={alt} fixed={fixed} />
   </figure>
 );
 

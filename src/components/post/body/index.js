@@ -13,10 +13,13 @@ const options = {
 
       return <Link to={url}>{children}</Link>;
     },
-    [INLINES.HYPERLINK]: (node) => {
+    [INLINES.HYPERLINK]: (node, children) => {
       const { uri } = node.data;
+      console.log(uri);
+      const isYoutube = uri.indexOf('youtube.com/embed/') !== -1;
+      const isLocal = uri.indexOf('ringsavvy.com') !== -1;
 
-      if (uri.indexOf('youtube.com/embed/') !== -1) {
+      if (isYoutube) {
         return (
           <figure>
             <iframe
@@ -29,6 +32,16 @@ const options = {
               allowFullScreen
             ></iframe>
           </figure>
+        );
+      } else if (isLocal) {
+        const slug = uri.replace('https://www.ringsavvy.com', '');
+
+        return <Link to={slug}>{children}</Link>;
+      } else {
+        return (
+          <a href={uri} target='_blank'>
+            {children}
+          </a>
         );
       }
     },

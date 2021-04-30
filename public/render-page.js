@@ -55673,10 +55673,13 @@ var options = {
     return /*#__PURE__*/_react.default.createElement(_gatsby.Link, {
       to: url
     }, children);
-  }, _renderNode2[_richTextTypes.INLINES.HYPERLINK] = function (node) {
+  }, _renderNode2[_richTextTypes.INLINES.HYPERLINK] = function (node, children) {
     var uri = node.data.uri;
+    console.log(uri);
+    var isYoutube = uri.indexOf('youtube.com/embed/') !== -1;
+    var isLocal = uri.indexOf('ringsavvy.com') !== -1;
 
-    if (uri.indexOf('youtube.com/embed/') !== -1) {
+    if (isYoutube) {
       return /*#__PURE__*/_react.default.createElement("figure", null, /*#__PURE__*/_react.default.createElement("iframe", {
         width: "560",
         height: "315",
@@ -55686,6 +55689,17 @@ var options = {
         allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
         allowFullScreen: true
       }));
+    } else if (isLocal) {
+      var slug = uri.replace('https://www.ringsavvy.com', '');
+      console.log(uri, slug);
+      return /*#__PURE__*/_react.default.createElement(_gatsby.Link, {
+        to: slug
+      }, children);
+    } else {
+      return /*#__PURE__*/_react.default.createElement("a", {
+        href: uri,
+        target: "_blank"
+      }, children);
     }
   }, _renderNode2[_richTextTypes.BLOCKS.EMBEDDED_ASSET] = function (node) {
     var _node$data$target = node.data.target,
@@ -56883,7 +56897,7 @@ var _styledComponents = __webpack_require__(/*! styled-components */ "./node_mod
 var _templateObject;
 
 // TODO: refactor to fix big - uses globalStyles css over this files
-var GlobalPostStyles = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = (0, _taggedTemplateLiteralLoose2.default)(["\n  h1, h2, h3, h4, h5, h6 {\n    margin: 1.125em 0 0.8em;\n  }\n\n  h1 {\n    font-size: ", "\n  }\n\n  h2 {\n    font-size: ", "\n  }\n\n  h3 {\n    font-size: ", "\n  }\n\n  h4 {\n    font-size: ", "\n  }\n\n  p,\n  ul,\n  ol {\n    font-size: ", ";\n  }\n\n  ul, ol {\n    margin: 1.25em 0;\n  }\n\n  ul > li,\n  ol > li {\n    margin: 0 0 .666666em\n  }\n\n  @media ", " {\n    h1 {\n      font-size: ", "\n    }\n\n    h2 {\n      font-size: ", "\n    }\n\n    h3 {\n      font-size: ", "\n    }\n\n    h4 {\n      font-size: ", "\n    }\n  }\n"])), function (_ref) {
+var GlobalPostStyles = (0, _styledComponents.createGlobalStyle)(_templateObject || (_templateObject = (0, _taggedTemplateLiteralLoose2.default)(["\n  h1, h2, h3, h4, h5, h6 {\n    margin: 1.125em 0 0.8em;\n  }\n\n  h1 {\n    font-size: ", "\n  }\n\n  h2 {\n    font-size: ", "\n  }\n\n  h3 {\n    font-size: ", "\n  }\n\n  h4 {\n    font-size: ", "\n  }\n\n  p,\n  ul,\n  ol {\n    font-size: ", ";\n  }\n\n  ul, ol {\n    margin: 1.25em 0;\n  }\n\n  ul > li,\n  ol > li {\n    margin: 0 0 .666666em\n  }\n\n  figure {\n    margin: 30px 0;\n  }\n\n  @media ", " {\n    h1 {\n      font-size: ", "\n    }\n\n    h2 {\n      font-size: ", "\n    }\n\n    h3 {\n      font-size: ", "\n    }\n\n    h4 {\n      font-size: ", "\n    }\n  }\n"])), function (_ref) {
   var theme = _ref.theme;
   return theme.post.fontSizes.xxl;
 }, function (_ref2) {

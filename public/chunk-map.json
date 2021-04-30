@@ -1,1 +1,4 @@
-{"polyfill":["/polyfill.js"],"commons":["/commons.css","/commons.js","/commons.924910f5d915b4e42ad7.hot-update.js"]}
+{
+  "polyfill": ["/polyfill-62b2bfc6480c443c4118.js"],
+  "app": ["/app-e6e3b0af30519f31e20d.js"]
+}

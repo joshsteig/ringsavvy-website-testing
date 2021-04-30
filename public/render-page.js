@@ -111,7 +111,8 @@ return /******/ (function(modules) { // webpackBootstrap
 exports.ssrComponents = {
   "component---cache-dev-404-page-js": (preferDefault(__webpack_require__(/*! ./.cache/dev-404-page.js */ "./.cache/dev-404-page.js"))),
   "component---src-pages-404-js": (preferDefault(__webpack_require__(/*! ./src/pages/404.js */ "./src/pages/404.js"))),
-  "component---src-pages-index-js": (preferDefault(__webpack_require__(/*! ./src/pages/index.js */ "./src/pages/index.js")))
+  "component---src-pages-index-js": (preferDefault(__webpack_require__(/*! ./src/pages/index.js */ "./src/pages/index.js"))),
+  "component---src-templates-post-js": (preferDefault(__webpack_require__(/*! ./src/templates/post.js */ "./src/templates/post.js")))
   }
 
 
@@ -2521,6 +2522,1991 @@ module.exports = _typeof;
 
 /***/ }),
 
+/***/ "./node_modules/@contentful/rich-text-react-renderer/dist/rich-text-react-renderer.es5.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/@contentful/rich-text-react-renderer/dist/rich-text-react-renderer.es5.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = __webpack_require__(/*! react */ "react");
+var React__default = _interopDefault(React);
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function unwrapExports (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var richTextTypes_es5 = createCommonjsModule(function (module, exports) {
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var commonjsGlobal$1 = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof commonjsGlobal !== 'undefined' ? commonjsGlobal : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var check = function (it) {
+  return it && it.Math == Math && it;
+};
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global_1 =
+  // eslint-disable-next-line no-undef
+  check(typeof globalThis == 'object' && globalThis) ||
+  check(typeof window == 'object' && window) ||
+  check(typeof self == 'object' && self) ||
+  check(typeof commonjsGlobal$1 == 'object' && commonjsGlobal$1) ||
+  // eslint-disable-next-line no-new-func
+  Function('return this')();
+
+var fails = function (exec) {
+  try {
+    return !!exec();
+  } catch (error) {
+    return true;
+  }
+};
+
+// Thank's IE8 for his funny defineProperty
+var descriptors = !fails(function () {
+  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+});
+
+var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Nashorn ~ JDK8 bug
+var NASHORN_BUG = getOwnPropertyDescriptor && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
+
+// `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
+var f = NASHORN_BUG ? function propertyIsEnumerable(V) {
+  var descriptor = getOwnPropertyDescriptor(this, V);
+  return !!descriptor && descriptor.enumerable;
+} : nativePropertyIsEnumerable;
+
+var objectPropertyIsEnumerable = {
+	f: f
+};
+
+var createPropertyDescriptor = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+var toString = {}.toString;
+
+var classofRaw = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+var split = ''.split;
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var indexedObject = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins
+  return !Object('z').propertyIsEnumerable(0);
+}) ? function (it) {
+  return classofRaw(it) == 'String' ? split.call(it, '') : Object(it);
+} : Object;
+
+// `RequireObjectCoercible` abstract operation
+// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
+var requireObjectCoercible = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on " + it);
+  return it;
+};
+
+// toObject with fallback for non-array-like ES3 strings
+
+
+
+var toIndexedObject = function (it) {
+  return indexedObject(requireObjectCoercible(it));
+};
+
+var isObject = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+// `ToPrimitive` abstract operation
+// https://tc39.github.io/ecma262/#sec-toprimitive
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+var toPrimitive = function (input, PREFERRED_STRING) {
+  if (!isObject(input)) return input;
+  var fn, val;
+  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+var hasOwnProperty = {}.hasOwnProperty;
+
+var has = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+var document$1 = global_1.document;
+// typeof document.createElement is 'object' in old IE
+var EXISTS = isObject(document$1) && isObject(document$1.createElement);
+
+var documentCreateElement = function (it) {
+  return EXISTS ? document$1.createElement(it) : {};
+};
+
+// Thank's IE8 for his funny defineProperty
+var ie8DomDefine = !descriptors && !fails(function () {
+  return Object.defineProperty(documentCreateElement('div'), 'a', {
+    get: function () { return 7; }
+  }).a != 7;
+});
+
+var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// `Object.getOwnPropertyDescriptor` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
+var f$1 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  O = toIndexedObject(O);
+  P = toPrimitive(P, true);
+  if (ie8DomDefine) try {
+    return nativeGetOwnPropertyDescriptor(O, P);
+  } catch (error) { /* empty */ }
+  if (has(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
+};
+
+var objectGetOwnPropertyDescriptor = {
+	f: f$1
+};
+
+var anObject = function (it) {
+  if (!isObject(it)) {
+    throw TypeError(String(it) + ' is not an object');
+  } return it;
+};
+
+var nativeDefineProperty = Object.defineProperty;
+
+// `Object.defineProperty` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperty
+var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (ie8DomDefine) try {
+    return nativeDefineProperty(O, P, Attributes);
+  } catch (error) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+var objectDefineProperty = {
+	f: f$2
+};
+
+var createNonEnumerableProperty = descriptors ? function (object, key, value) {
+  return objectDefineProperty.f(object, key, createPropertyDescriptor(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+var setGlobal = function (key, value) {
+  try {
+    createNonEnumerableProperty(global_1, key, value);
+  } catch (error) {
+    global_1[key] = value;
+  } return value;
+};
+
+var SHARED = '__core-js_shared__';
+var store = global_1[SHARED] || setGlobal(SHARED, {});
+
+var sharedStore = store;
+
+var functionToString = Function.toString;
+
+// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+if (typeof sharedStore.inspectSource != 'function') {
+  sharedStore.inspectSource = function (it) {
+    return functionToString.call(it);
+  };
+}
+
+var inspectSource = sharedStore.inspectSource;
+
+var WeakMap = global_1.WeakMap;
+
+var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+
+var shared = createCommonjsModule(function (module) {
+(module.exports = function (key, value) {
+  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: '3.6.5',
+  mode: 'global',
+  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
+});
+});
+
+var id = 0;
+var postfix = Math.random();
+
+var uid = function (key) {
+  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
+};
+
+var keys = shared('keys');
+
+var sharedKey = function (key) {
+  return keys[key] || (keys[key] = uid(key));
+};
+
+var hiddenKeys = {};
+
+var WeakMap$1 = global_1.WeakMap;
+var set, get, has$1;
+
+var enforce = function (it) {
+  return has$1(it) ? get(it) : set(it, {});
+};
+
+var getterFor = function (TYPE) {
+  return function (it) {
+    var state;
+    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+    } return state;
+  };
+};
+
+if (nativeWeakMap) {
+  var store$1 = new WeakMap$1();
+  var wmget = store$1.get;
+  var wmhas = store$1.has;
+  var wmset = store$1.set;
+  set = function (it, metadata) {
+    wmset.call(store$1, it, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return wmget.call(store$1, it) || {};
+  };
+  has$1 = function (it) {
+    return wmhas.call(store$1, it);
+  };
+} else {
+  var STATE = sharedKey('state');
+  hiddenKeys[STATE] = true;
+  set = function (it, metadata) {
+    createNonEnumerableProperty(it, STATE, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return has(it, STATE) ? it[STATE] : {};
+  };
+  has$1 = function (it) {
+    return has(it, STATE);
+  };
+}
+
+var internalState = {
+  set: set,
+  get: get,
+  has: has$1,
+  enforce: enforce,
+  getterFor: getterFor
+};
+
+var redefine = createCommonjsModule(function (module) {
+var getInternalState = internalState.get;
+var enforceInternalState = internalState.enforce;
+var TEMPLATE = String(String).split('String');
+
+(module.exports = function (O, key, value, options) {
+  var unsafe = options ? !!options.unsafe : false;
+  var simple = options ? !!options.enumerable : false;
+  var noTargetGet = options ? !!options.noTargetGet : false;
+  if (typeof value == 'function') {
+    if (typeof key == 'string' && !has(value, 'name')) createNonEnumerableProperty(value, 'name', key);
+    enforceInternalState(value).source = TEMPLATE.join(typeof key == 'string' ? key : '');
+  }
+  if (O === global_1) {
+    if (simple) O[key] = value;
+    else setGlobal(key, value);
+    return;
+  } else if (!unsafe) {
+    delete O[key];
+  } else if (!noTargetGet && O[key]) {
+    simple = true;
+  }
+  if (simple) O[key] = value;
+  else createNonEnumerableProperty(O, key, value);
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+})(Function.prototype, 'toString', function toString() {
+  return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
+});
+});
+
+var path = global_1;
+
+var aFunction = function (variable) {
+  return typeof variable == 'function' ? variable : undefined;
+};
+
+var getBuiltIn = function (namespace, method) {
+  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global_1[namespace])
+    : path[namespace] && path[namespace][method] || global_1[namespace] && global_1[namespace][method];
+};
+
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `ToInteger` abstract operation
+// https://tc39.github.io/ecma262/#sec-tointeger
+var toInteger = function (argument) {
+  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
+};
+
+var min = Math.min;
+
+// `ToLength` abstract operation
+// https://tc39.github.io/ecma262/#sec-tolength
+var toLength = function (argument) {
+  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+var max = Math.max;
+var min$1 = Math.min;
+
+// Helper for a popular repeating case of the spec:
+// Let integer be ? ToInteger(index).
+// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
+var toAbsoluteIndex = function (index, length) {
+  var integer = toInteger(index);
+  return integer < 0 ? max(integer + length, 0) : min$1(integer, length);
+};
+
+// `Array.prototype.{ indexOf, includes }` methods implementation
+var createMethod = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIndexedObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) {
+      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+var arrayIncludes = {
+  // `Array.prototype.includes` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
+  includes: createMethod(true),
+  // `Array.prototype.indexOf` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod(false)
+};
+
+var indexOf = arrayIncludes.indexOf;
+
+
+var objectKeysInternal = function (object, names) {
+  var O = toIndexedObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~indexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+// IE8- don't enum bug keys
+var enumBugKeys = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
+
+var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype');
+
+// `Object.getOwnPropertyNames` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
+var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return objectKeysInternal(O, hiddenKeys$1);
+};
+
+var objectGetOwnPropertyNames = {
+	f: f$3
+};
+
+var f$4 = Object.getOwnPropertySymbols;
+
+var objectGetOwnPropertySymbols = {
+	f: f$4
+};
+
+// all object keys, includes non-enumerable and symbols
+var ownKeys = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
+  var keys = objectGetOwnPropertyNames.f(anObject(it));
+  var getOwnPropertySymbols = objectGetOwnPropertySymbols.f;
+  return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys;
+};
+
+var copyConstructorProperties = function (target, source) {
+  var keys = ownKeys(source);
+  var defineProperty = objectDefineProperty.f;
+  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (!has(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
+  }
+};
+
+var replacement = /#|\.prototype\./;
+
+var isForced = function (feature, detection) {
+  var value = data[normalize(feature)];
+  return value == POLYFILL ? true
+    : value == NATIVE ? false
+    : typeof detection == 'function' ? fails(detection)
+    : !!detection;
+};
+
+var normalize = isForced.normalize = function (string) {
+  return String(string).replace(replacement, '.').toLowerCase();
+};
+
+var data = isForced.data = {};
+var NATIVE = isForced.NATIVE = 'N';
+var POLYFILL = isForced.POLYFILL = 'P';
+
+var isForced_1 = isForced;
+
+var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
+
+
+
+
+
+
+/*
+  options.target      - name of the target object
+  options.global      - target is the global object
+  options.stat        - export as static methods of target
+  options.proto       - export as prototype methods of target
+  options.real        - real prototype method for the `pure` version
+  options.forced      - export even if the native feature is available
+  options.bind        - bind methods to the target, required for the `pure` version
+  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
+  options.sham        - add a flag to not completely full polyfills
+  options.enumerable  - export as enumerable property
+  options.noTargetGet - prevent calling a getter on target
+*/
+var _export = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
+  if (GLOBAL) {
+    target = global_1;
+  } else if (STATIC) {
+    target = global_1[TARGET] || setGlobal(TARGET, {});
+  } else {
+    target = (global_1[TARGET] || {}).prototype;
+  }
+  if (target) for (key in source) {
+    sourceProperty = source[key];
+    if (options.noTargetGet) {
+      descriptor = getOwnPropertyDescriptor$1(target, key);
+      targetProperty = descriptor && descriptor.value;
+    } else targetProperty = target[key];
+    FORCED = isForced_1(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
+    // contained in target
+    if (!FORCED && targetProperty !== undefined) {
+      if (typeof sourceProperty === typeof targetProperty) continue;
+      copyConstructorProperties(sourceProperty, targetProperty);
+    }
+    // add a flag to not completely full polyfills
+    if (options.sham || (targetProperty && targetProperty.sham)) {
+      createNonEnumerableProperty(sourceProperty, 'sham', true);
+    }
+    // extend global
+    redefine(target, key, sourceProperty, options);
+  }
+};
+
+// `Object.keys` method
+// https://tc39.github.io/ecma262/#sec-object.keys
+var objectKeys = Object.keys || function keys(O) {
+  return objectKeysInternal(O, enumBugKeys);
+};
+
+var propertyIsEnumerable = objectPropertyIsEnumerable.f;
+
+// `Object.{ entries, values }` methods implementation
+var createMethod$1 = function (TO_ENTRIES) {
+  return function (it) {
+    var O = toIndexedObject(it);
+    var keys = objectKeys(O);
+    var length = keys.length;
+    var i = 0;
+    var result = [];
+    var key;
+    while (length > i) {
+      key = keys[i++];
+      if (!descriptors || propertyIsEnumerable.call(O, key)) {
+        result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
+      }
+    }
+    return result;
+  };
+};
+
+var objectToArray = {
+  // `Object.entries` method
+  // https://tc39.github.io/ecma262/#sec-object.entries
+  entries: createMethod$1(true),
+  // `Object.values` method
+  // https://tc39.github.io/ecma262/#sec-object.values
+  values: createMethod$1(false)
+};
+
+var $values = objectToArray.values;
+
+// `Object.values` method
+// https://tc39.github.io/ecma262/#sec-object.values
+_export({ target: 'Object', stat: true }, {
+  values: function values(O) {
+    return $values(O);
+  }
+});
+
+var values = path.Object.values;
+
+var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
+  // Chrome 38 Symbol has incorrect toString conversion
+  // eslint-disable-next-line no-undef
+  return !String(Symbol());
+});
+
+var useSymbolAsUid = nativeSymbol
+  // eslint-disable-next-line no-undef
+  && !Symbol.sham
+  // eslint-disable-next-line no-undef
+  && typeof Symbol.iterator == 'symbol';
+
+var WellKnownSymbolsStore = shared('wks');
+var Symbol$1 = global_1.Symbol;
+var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
+
+var wellKnownSymbol = function (name) {
+  if (!has(WellKnownSymbolsStore, name)) {
+    if (nativeSymbol && has(Symbol$1, name)) WellKnownSymbolsStore[name] = Symbol$1[name];
+    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
+  } return WellKnownSymbolsStore[name];
+};
+
+// `Object.defineProperties` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperties
+var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = objectKeys(Properties);
+  var length = keys.length;
+  var index = 0;
+  var key;
+  while (length > index) objectDefineProperty.f(O, key = keys[index++], Properties[key]);
+  return O;
+};
+
+var html = getBuiltIn('document', 'documentElement');
+
+var GT = '>';
+var LT = '<';
+var PROTOTYPE = 'prototype';
+var SCRIPT = 'script';
+var IE_PROTO = sharedKey('IE_PROTO');
+
+var EmptyConstructor = function () { /* empty */ };
+
+var scriptTag = function (content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
+};
+
+// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+var NullProtoObjectViaActiveX = function (activeXDocument) {
+  activeXDocument.write(scriptTag(''));
+  activeXDocument.close();
+  var temp = activeXDocument.parentWindow.Object;
+  activeXDocument = null; // avoid memory leak
+  return temp;
+};
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var NullProtoObjectViaIFrame = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = documentCreateElement('iframe');
+  var JS = 'java' + SCRIPT + ':';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  html.appendChild(iframe);
+  // https://github.com/zloirock/core-js/issues/475
+  iframe.src = String(JS);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(scriptTag('document.F=Object'));
+  iframeDocument.close();
+  return iframeDocument.F;
+};
+
+// Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
+var activeXDocument;
+var NullProtoObject = function () {
+  try {
+    /* global ActiveXObject */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile');
+  } catch (error) { /* ignore */ }
+  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
+  var length = enumBugKeys.length;
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
+  return NullProtoObject();
+};
+
+hiddenKeys[IE_PROTO] = true;
+
+// `Object.create` method
+// https://tc39.github.io/ecma262/#sec-object.create
+var objectCreate = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    EmptyConstructor[PROTOTYPE] = anObject(O);
+    result = new EmptyConstructor();
+    EmptyConstructor[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = NullProtoObject();
+  return Properties === undefined ? result : objectDefineProperties(result, Properties);
+};
+
+var UNSCOPABLES = wellKnownSymbol('unscopables');
+var ArrayPrototype = Array.prototype;
+
+// Array.prototype[@@unscopables]
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+if (ArrayPrototype[UNSCOPABLES] == undefined) {
+  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
+    configurable: true,
+    value: objectCreate(null)
+  });
+}
+
+// add a key to Array.prototype[@@unscopables]
+var addToUnscopables = function (key) {
+  ArrayPrototype[UNSCOPABLES][key] = true;
+};
+
+var defineProperty = Object.defineProperty;
+var cache = {};
+
+var thrower = function (it) { throw it; };
+
+var arrayMethodUsesToLength = function (METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
+  if (!options) options = {};
+  var method = [][METHOD_NAME];
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
+  var argument0 = has(options, 0) ? options[0] : thrower;
+  var argument1 = has(options, 1) ? options[1] : undefined;
+
+  return cache[METHOD_NAME] = !!method && !fails(function () {
+    if (ACCESSORS && !descriptors) return true;
+    var O = { length: -1 };
+
+    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
+    else O[1] = 1;
+
+    method.call(O, argument0, argument1);
+  });
+};
+
+var $includes = arrayIncludes.includes;
+
+
+
+var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
+
+// `Array.prototype.includes` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.includes
+_export({ target: 'Array', proto: true, forced: !USES_TO_LENGTH }, {
+  includes: function includes(el /* , fromIndex = 0 */) {
+    return $includes(this, el, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables('includes');
+
+var aFunction$1 = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function');
+  } return it;
+};
+
+// optional / simple context binding
+var functionBindContext = function (fn, that, length) {
+  aFunction$1(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 0: return function () {
+      return fn.call(that);
+    };
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+var call = Function.call;
+
+var entryUnbind = function (CONSTRUCTOR, METHOD, length) {
+  return functionBindContext(call, global_1[CONSTRUCTOR].prototype[METHOD], length);
+};
+
+var includes = entryUnbind('Array', 'includes');
+
+/**
+ * Map of all Contentful block types. Blocks contain inline or block nodes.
+ */
+var BLOCKS;
+(function (BLOCKS) {
+    BLOCKS["DOCUMENT"] = "document";
+    BLOCKS["PARAGRAPH"] = "paragraph";
+    BLOCKS["HEADING_1"] = "heading-1";
+    BLOCKS["HEADING_2"] = "heading-2";
+    BLOCKS["HEADING_3"] = "heading-3";
+    BLOCKS["HEADING_4"] = "heading-4";
+    BLOCKS["HEADING_5"] = "heading-5";
+    BLOCKS["HEADING_6"] = "heading-6";
+    BLOCKS["OL_LIST"] = "ordered-list";
+    BLOCKS["UL_LIST"] = "unordered-list";
+    BLOCKS["LIST_ITEM"] = "list-item";
+    BLOCKS["HR"] = "hr";
+    BLOCKS["QUOTE"] = "blockquote";
+    BLOCKS["EMBEDDED_ENTRY"] = "embedded-entry-block";
+    BLOCKS["EMBEDDED_ASSET"] = "embedded-asset-block";
+})(BLOCKS || (BLOCKS = {}));
+var BLOCKS$1 = BLOCKS;
+
+/**
+ * Map of all Contentful inline types. Inline contain inline or text nodes.
+ */
+var INLINES;
+(function (INLINES) {
+    INLINES["HYPERLINK"] = "hyperlink";
+    INLINES["ENTRY_HYPERLINK"] = "entry-hyperlink";
+    INLINES["ASSET_HYPERLINK"] = "asset-hyperlink";
+    INLINES["EMBEDDED_ENTRY"] = "embedded-entry-inline";
+})(INLINES || (INLINES = {}));
+var INLINES$1 = INLINES;
+
+/**
+ * Map of all Contentful marks.
+ */
+var marks = {
+    BOLD: 'bold',
+    ITALIC: 'italic',
+    UNDERLINE: 'underline',
+    CODE: 'code',
+};
+
+var _a;
+/**
+ * Array of all top level block types.
+ * Only these block types can be the direct children of the document.
+ */
+var TOP_LEVEL_BLOCKS = [
+    BLOCKS$1.PARAGRAPH,
+    BLOCKS$1.HEADING_1,
+    BLOCKS$1.HEADING_2,
+    BLOCKS$1.HEADING_3,
+    BLOCKS$1.HEADING_4,
+    BLOCKS$1.HEADING_5,
+    BLOCKS$1.HEADING_6,
+    BLOCKS$1.OL_LIST,
+    BLOCKS$1.UL_LIST,
+    BLOCKS$1.HR,
+    BLOCKS$1.QUOTE,
+    BLOCKS$1.EMBEDDED_ENTRY,
+    BLOCKS$1.EMBEDDED_ASSET,
+];
+/**
+ * Array of all void block types
+ */
+var VOID_BLOCKS = [BLOCKS$1.HR, BLOCKS$1.EMBEDDED_ENTRY, BLOCKS$1.EMBEDDED_ASSET];
+/**
+ * Dictionary of all container block types, and the set block types they accept as children.
+ */
+var CONTAINERS = (_a = {},
+    _a[BLOCKS$1.OL_LIST] = [BLOCKS$1.LIST_ITEM],
+    _a[BLOCKS$1.UL_LIST] = [BLOCKS$1.LIST_ITEM],
+    _a[BLOCKS$1.LIST_ITEM] = TOP_LEVEL_BLOCKS.slice(),
+    _a[BLOCKS$1.QUOTE] = [BLOCKS$1.PARAGRAPH],
+    _a);
+
+/**
+ * A rich text document considered to be empty.
+ * Any other document structure than this is not considered empty.
+ */
+var EMPTY_DOCUMENT = {
+    nodeType: BLOCKS$1.DOCUMENT,
+    data: {},
+    content: [
+        {
+            nodeType: BLOCKS$1.PARAGRAPH,
+            data: {},
+            content: [
+                {
+                    nodeType: 'text',
+                    value: '',
+                    marks: [],
+                    data: {},
+                },
+            ],
+        },
+    ],
+};
+
+/**
+ * Checks if the node is an instance of Inline.
+ */
+function isInline(node) {
+    return Object.values(INLINES$1).includes(node.nodeType);
+}
+/**
+ * Checks if the node is an instance of Block.
+ */
+function isBlock(node) {
+    return Object.values(BLOCKS$1).includes(node.nodeType);
+}
+/**
+ * Checks if the node is an instance of Text.
+ */
+function isText(node) {
+    return node.nodeType === 'text';
+}
+
+var helpers = /*#__PURE__*/Object.freeze({
+	isInline: isInline,
+	isBlock: isBlock,
+	isText: isText
+});
+
+exports.BLOCKS = BLOCKS$1;
+exports.CONTAINERS = CONTAINERS;
+exports.EMPTY_DOCUMENT = EMPTY_DOCUMENT;
+exports.INLINES = INLINES$1;
+exports.MARKS = marks;
+exports.TOP_LEVEL_BLOCKS = TOP_LEVEL_BLOCKS;
+exports.VOID_BLOCKS = VOID_BLOCKS;
+exports.helpers = helpers;
+
+});
+
+unwrapExports(richTextTypes_es5);
+var richTextTypes_es5_1 = richTextTypes_es5.BLOCKS;
+var richTextTypes_es5_2 = richTextTypes_es5.CONTAINERS;
+var richTextTypes_es5_3 = richTextTypes_es5.EMPTY_DOCUMENT;
+var richTextTypes_es5_4 = richTextTypes_es5.INLINES;
+var richTextTypes_es5_5 = richTextTypes_es5.MARKS;
+var richTextTypes_es5_6 = richTextTypes_es5.TOP_LEVEL_BLOCKS;
+var richTextTypes_es5_7 = richTextTypes_es5.VOID_BLOCKS;
+var richTextTypes_es5_8 = richTextTypes_es5.helpers;
+
+function appendKeyToValidElement(element, key) {
+    if (React.isValidElement(element) && element.key === null) {
+        return React.cloneElement(element, { key: key });
+    }
+    return element;
+}
+
+function nodeListToReactComponents(nodes, options) {
+    return nodes.map(function (node, index) {
+        return appendKeyToValidElement(nodeToReactComponent(node, options), index);
+    });
+}
+function nodeToReactComponent(node, options) {
+    var renderNode = options.renderNode, renderMark = options.renderMark, renderText = options.renderText;
+    if (richTextTypes_es5_8.isText(node)) {
+        return node.marks.reduce(function (value, mark) {
+            if (!renderMark[mark.type]) {
+                return value;
+            }
+            return renderMark[mark.type](value);
+        }, renderText ? renderText(node.value) : node.value);
+    }
+    else {
+        var children = nodeListToReactComponents(node.content, options);
+        if (!node.nodeType || !renderNode[node.nodeType]) {
+            return React__default.createElement(React__default.Fragment, null, children);
+        }
+        return renderNode[node.nodeType](node, children);
+    }
+}
+
+var _a, _b;
+var defaultNodeRenderers = (_a = {},
+    _a[richTextTypes_es5_1.DOCUMENT] = function (node, children) { return children; },
+    _a[richTextTypes_es5_1.PARAGRAPH] = function (node, children) { return React__default.createElement("p", null, children); },
+    _a[richTextTypes_es5_1.HEADING_1] = function (node, children) { return React__default.createElement("h1", null, children); },
+    _a[richTextTypes_es5_1.HEADING_2] = function (node, children) { return React__default.createElement("h2", null, children); },
+    _a[richTextTypes_es5_1.HEADING_3] = function (node, children) { return React__default.createElement("h3", null, children); },
+    _a[richTextTypes_es5_1.HEADING_4] = function (node, children) { return React__default.createElement("h4", null, children); },
+    _a[richTextTypes_es5_1.HEADING_5] = function (node, children) { return React__default.createElement("h5", null, children); },
+    _a[richTextTypes_es5_1.HEADING_6] = function (node, children) { return React__default.createElement("h6", null, children); },
+    _a[richTextTypes_es5_1.EMBEDDED_ENTRY] = function (node, children) { return React__default.createElement("div", null, children); },
+    _a[richTextTypes_es5_1.UL_LIST] = function (node, children) { return React__default.createElement("ul", null, children); },
+    _a[richTextTypes_es5_1.OL_LIST] = function (node, children) { return React__default.createElement("ol", null, children); },
+    _a[richTextTypes_es5_1.LIST_ITEM] = function (node, children) { return React__default.createElement("li", null, children); },
+    _a[richTextTypes_es5_1.QUOTE] = function (node, children) { return React__default.createElement("blockquote", null, children); },
+    _a[richTextTypes_es5_1.HR] = function () { return React__default.createElement("hr", null); },
+    _a[richTextTypes_es5_4.ASSET_HYPERLINK] = function (node) { return defaultInline(richTextTypes_es5_4.ASSET_HYPERLINK, node); },
+    _a[richTextTypes_es5_4.ENTRY_HYPERLINK] = function (node) { return defaultInline(richTextTypes_es5_4.ENTRY_HYPERLINK, node); },
+    _a[richTextTypes_es5_4.EMBEDDED_ENTRY] = function (node) { return defaultInline(richTextTypes_es5_4.EMBEDDED_ENTRY, node); },
+    _a[richTextTypes_es5_4.HYPERLINK] = function (node, children) { return React__default.createElement("a", { href: node.data.uri }, children); },
+    _a);
+var defaultMarkRenderers = (_b = {},
+    _b[richTextTypes_es5_5.BOLD] = function (text) { return React__default.createElement("b", null, text); },
+    _b[richTextTypes_es5_5.ITALIC] = function (text) { return React__default.createElement("i", null, text); },
+    _b[richTextTypes_es5_5.UNDERLINE] = function (text) { return React__default.createElement("u", null, text); },
+    _b[richTextTypes_es5_5.CODE] = function (text) { return React__default.createElement("code", null, text); },
+    _b);
+function defaultInline(type, node) {
+    return (React__default.createElement("span", { key: node.data.target.sys.id },
+        "type: ",
+        node.nodeType,
+        " id: ",
+        node.data.target.sys.id));
+}
+/**
+ * Serialize a Contentful Rich Text `document` to React tree
+ */
+function documentToReactComponents(richTextDocument, options) {
+    if (options === void 0) { options = {}; }
+    if (!richTextDocument) {
+        return null;
+    }
+    return nodeToReactComponent(richTextDocument, {
+        renderNode: __assign({}, defaultNodeRenderers, options.renderNode),
+        renderMark: __assign({}, defaultMarkRenderers, options.renderMark),
+        renderText: options.renderText,
+    });
+}
+
+exports.documentToReactComponents = documentToReactComponents;
+//# sourceMappingURL=rich-text-react-renderer.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@contentful/rich-text-types/dist/rich-text-types.es5.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/@contentful/rich-text-types/dist/rich-text-types.es5.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var check = function (it) {
+  return it && it.Math == Math && it;
+};
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global_1 =
+  // eslint-disable-next-line no-undef
+  check(typeof globalThis == 'object' && globalThis) ||
+  check(typeof window == 'object' && window) ||
+  check(typeof self == 'object' && self) ||
+  check(typeof commonjsGlobal == 'object' && commonjsGlobal) ||
+  // eslint-disable-next-line no-new-func
+  Function('return this')();
+
+var fails = function (exec) {
+  try {
+    return !!exec();
+  } catch (error) {
+    return true;
+  }
+};
+
+// Thank's IE8 for his funny defineProperty
+var descriptors = !fails(function () {
+  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+});
+
+var nativePropertyIsEnumerable = {}.propertyIsEnumerable;
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Nashorn ~ JDK8 bug
+var NASHORN_BUG = getOwnPropertyDescriptor && !nativePropertyIsEnumerable.call({ 1: 2 }, 1);
+
+// `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
+var f = NASHORN_BUG ? function propertyIsEnumerable(V) {
+  var descriptor = getOwnPropertyDescriptor(this, V);
+  return !!descriptor && descriptor.enumerable;
+} : nativePropertyIsEnumerable;
+
+var objectPropertyIsEnumerable = {
+	f: f
+};
+
+var createPropertyDescriptor = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+var toString = {}.toString;
+
+var classofRaw = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+var split = ''.split;
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var indexedObject = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins
+  return !Object('z').propertyIsEnumerable(0);
+}) ? function (it) {
+  return classofRaw(it) == 'String' ? split.call(it, '') : Object(it);
+} : Object;
+
+// `RequireObjectCoercible` abstract operation
+// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
+var requireObjectCoercible = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on " + it);
+  return it;
+};
+
+// toObject with fallback for non-array-like ES3 strings
+
+
+
+var toIndexedObject = function (it) {
+  return indexedObject(requireObjectCoercible(it));
+};
+
+var isObject = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+// `ToPrimitive` abstract operation
+// https://tc39.github.io/ecma262/#sec-toprimitive
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+var toPrimitive = function (input, PREFERRED_STRING) {
+  if (!isObject(input)) return input;
+  var fn, val;
+  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+var hasOwnProperty = {}.hasOwnProperty;
+
+var has = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+var document$1 = global_1.document;
+// typeof document.createElement is 'object' in old IE
+var EXISTS = isObject(document$1) && isObject(document$1.createElement);
+
+var documentCreateElement = function (it) {
+  return EXISTS ? document$1.createElement(it) : {};
+};
+
+// Thank's IE8 for his funny defineProperty
+var ie8DomDefine = !descriptors && !fails(function () {
+  return Object.defineProperty(documentCreateElement('div'), 'a', {
+    get: function () { return 7; }
+  }).a != 7;
+});
+
+var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// `Object.getOwnPropertyDescriptor` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
+var f$1 = descriptors ? nativeGetOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  O = toIndexedObject(O);
+  P = toPrimitive(P, true);
+  if (ie8DomDefine) try {
+    return nativeGetOwnPropertyDescriptor(O, P);
+  } catch (error) { /* empty */ }
+  if (has(O, P)) return createPropertyDescriptor(!objectPropertyIsEnumerable.f.call(O, P), O[P]);
+};
+
+var objectGetOwnPropertyDescriptor = {
+	f: f$1
+};
+
+var anObject = function (it) {
+  if (!isObject(it)) {
+    throw TypeError(String(it) + ' is not an object');
+  } return it;
+};
+
+var nativeDefineProperty = Object.defineProperty;
+
+// `Object.defineProperty` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperty
+var f$2 = descriptors ? nativeDefineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (ie8DomDefine) try {
+    return nativeDefineProperty(O, P, Attributes);
+  } catch (error) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+var objectDefineProperty = {
+	f: f$2
+};
+
+var createNonEnumerableProperty = descriptors ? function (object, key, value) {
+  return objectDefineProperty.f(object, key, createPropertyDescriptor(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+var setGlobal = function (key, value) {
+  try {
+    createNonEnumerableProperty(global_1, key, value);
+  } catch (error) {
+    global_1[key] = value;
+  } return value;
+};
+
+var SHARED = '__core-js_shared__';
+var store = global_1[SHARED] || setGlobal(SHARED, {});
+
+var sharedStore = store;
+
+var functionToString = Function.toString;
+
+// this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+if (typeof sharedStore.inspectSource != 'function') {
+  sharedStore.inspectSource = function (it) {
+    return functionToString.call(it);
+  };
+}
+
+var inspectSource = sharedStore.inspectSource;
+
+var WeakMap = global_1.WeakMap;
+
+var nativeWeakMap = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+
+var shared = createCommonjsModule(function (module) {
+(module.exports = function (key, value) {
+  return sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: '3.6.5',
+  mode: 'global',
+  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
+});
+});
+
+var id = 0;
+var postfix = Math.random();
+
+var uid = function (key) {
+  return 'Symbol(' + String(key === undefined ? '' : key) + ')_' + (++id + postfix).toString(36);
+};
+
+var keys = shared('keys');
+
+var sharedKey = function (key) {
+  return keys[key] || (keys[key] = uid(key));
+};
+
+var hiddenKeys = {};
+
+var WeakMap$1 = global_1.WeakMap;
+var set, get, has$1;
+
+var enforce = function (it) {
+  return has$1(it) ? get(it) : set(it, {});
+};
+
+var getterFor = function (TYPE) {
+  return function (it) {
+    var state;
+    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+    } return state;
+  };
+};
+
+if (nativeWeakMap) {
+  var store$1 = new WeakMap$1();
+  var wmget = store$1.get;
+  var wmhas = store$1.has;
+  var wmset = store$1.set;
+  set = function (it, metadata) {
+    wmset.call(store$1, it, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return wmget.call(store$1, it) || {};
+  };
+  has$1 = function (it) {
+    return wmhas.call(store$1, it);
+  };
+} else {
+  var STATE = sharedKey('state');
+  hiddenKeys[STATE] = true;
+  set = function (it, metadata) {
+    createNonEnumerableProperty(it, STATE, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return has(it, STATE) ? it[STATE] : {};
+  };
+  has$1 = function (it) {
+    return has(it, STATE);
+  };
+}
+
+var internalState = {
+  set: set,
+  get: get,
+  has: has$1,
+  enforce: enforce,
+  getterFor: getterFor
+};
+
+var redefine = createCommonjsModule(function (module) {
+var getInternalState = internalState.get;
+var enforceInternalState = internalState.enforce;
+var TEMPLATE = String(String).split('String');
+
+(module.exports = function (O, key, value, options) {
+  var unsafe = options ? !!options.unsafe : false;
+  var simple = options ? !!options.enumerable : false;
+  var noTargetGet = options ? !!options.noTargetGet : false;
+  if (typeof value == 'function') {
+    if (typeof key == 'string' && !has(value, 'name')) createNonEnumerableProperty(value, 'name', key);
+    enforceInternalState(value).source = TEMPLATE.join(typeof key == 'string' ? key : '');
+  }
+  if (O === global_1) {
+    if (simple) O[key] = value;
+    else setGlobal(key, value);
+    return;
+  } else if (!unsafe) {
+    delete O[key];
+  } else if (!noTargetGet && O[key]) {
+    simple = true;
+  }
+  if (simple) O[key] = value;
+  else createNonEnumerableProperty(O, key, value);
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+})(Function.prototype, 'toString', function toString() {
+  return typeof this == 'function' && getInternalState(this).source || inspectSource(this);
+});
+});
+
+var path = global_1;
+
+var aFunction = function (variable) {
+  return typeof variable == 'function' ? variable : undefined;
+};
+
+var getBuiltIn = function (namespace, method) {
+  return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global_1[namespace])
+    : path[namespace] && path[namespace][method] || global_1[namespace] && global_1[namespace][method];
+};
+
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `ToInteger` abstract operation
+// https://tc39.github.io/ecma262/#sec-tointeger
+var toInteger = function (argument) {
+  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
+};
+
+var min = Math.min;
+
+// `ToLength` abstract operation
+// https://tc39.github.io/ecma262/#sec-tolength
+var toLength = function (argument) {
+  return argument > 0 ? min(toInteger(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+var max = Math.max;
+var min$1 = Math.min;
+
+// Helper for a popular repeating case of the spec:
+// Let integer be ? ToInteger(index).
+// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
+var toAbsoluteIndex = function (index, length) {
+  var integer = toInteger(index);
+  return integer < 0 ? max(integer + length, 0) : min$1(integer, length);
+};
+
+// `Array.prototype.{ indexOf, includes }` methods implementation
+var createMethod = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIndexedObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) {
+      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+var arrayIncludes = {
+  // `Array.prototype.includes` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
+  includes: createMethod(true),
+  // `Array.prototype.indexOf` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod(false)
+};
+
+var indexOf = arrayIncludes.indexOf;
+
+
+var objectKeysInternal = function (object, names) {
+  var O = toIndexedObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~indexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+// IE8- don't enum bug keys
+var enumBugKeys = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
+
+var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype');
+
+// `Object.getOwnPropertyNames` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
+var f$3 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return objectKeysInternal(O, hiddenKeys$1);
+};
+
+var objectGetOwnPropertyNames = {
+	f: f$3
+};
+
+var f$4 = Object.getOwnPropertySymbols;
+
+var objectGetOwnPropertySymbols = {
+	f: f$4
+};
+
+// all object keys, includes non-enumerable and symbols
+var ownKeys = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
+  var keys = objectGetOwnPropertyNames.f(anObject(it));
+  var getOwnPropertySymbols = objectGetOwnPropertySymbols.f;
+  return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys;
+};
+
+var copyConstructorProperties = function (target, source) {
+  var keys = ownKeys(source);
+  var defineProperty = objectDefineProperty.f;
+  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f;
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (!has(target, key)) defineProperty(target, key, getOwnPropertyDescriptor(source, key));
+  }
+};
+
+var replacement = /#|\.prototype\./;
+
+var isForced = function (feature, detection) {
+  var value = data[normalize(feature)];
+  return value == POLYFILL ? true
+    : value == NATIVE ? false
+    : typeof detection == 'function' ? fails(detection)
+    : !!detection;
+};
+
+var normalize = isForced.normalize = function (string) {
+  return String(string).replace(replacement, '.').toLowerCase();
+};
+
+var data = isForced.data = {};
+var NATIVE = isForced.NATIVE = 'N';
+var POLYFILL = isForced.POLYFILL = 'P';
+
+var isForced_1 = isForced;
+
+var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f;
+
+
+
+
+
+
+/*
+  options.target      - name of the target object
+  options.global      - target is the global object
+  options.stat        - export as static methods of target
+  options.proto       - export as prototype methods of target
+  options.real        - real prototype method for the `pure` version
+  options.forced      - export even if the native feature is available
+  options.bind        - bind methods to the target, required for the `pure` version
+  options.wrap        - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe      - use the simple assignment of property instead of delete + defineProperty
+  options.sham        - add a flag to not completely full polyfills
+  options.enumerable  - export as enumerable property
+  options.noTargetGet - prevent calling a getter on target
+*/
+var _export = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
+  if (GLOBAL) {
+    target = global_1;
+  } else if (STATIC) {
+    target = global_1[TARGET] || setGlobal(TARGET, {});
+  } else {
+    target = (global_1[TARGET] || {}).prototype;
+  }
+  if (target) for (key in source) {
+    sourceProperty = source[key];
+    if (options.noTargetGet) {
+      descriptor = getOwnPropertyDescriptor$1(target, key);
+      targetProperty = descriptor && descriptor.value;
+    } else targetProperty = target[key];
+    FORCED = isForced_1(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
+    // contained in target
+    if (!FORCED && targetProperty !== undefined) {
+      if (typeof sourceProperty === typeof targetProperty) continue;
+      copyConstructorProperties(sourceProperty, targetProperty);
+    }
+    // add a flag to not completely full polyfills
+    if (options.sham || (targetProperty && targetProperty.sham)) {
+      createNonEnumerableProperty(sourceProperty, 'sham', true);
+    }
+    // extend global
+    redefine(target, key, sourceProperty, options);
+  }
+};
+
+// `Object.keys` method
+// https://tc39.github.io/ecma262/#sec-object.keys
+var objectKeys = Object.keys || function keys(O) {
+  return objectKeysInternal(O, enumBugKeys);
+};
+
+var propertyIsEnumerable = objectPropertyIsEnumerable.f;
+
+// `Object.{ entries, values }` methods implementation
+var createMethod$1 = function (TO_ENTRIES) {
+  return function (it) {
+    var O = toIndexedObject(it);
+    var keys = objectKeys(O);
+    var length = keys.length;
+    var i = 0;
+    var result = [];
+    var key;
+    while (length > i) {
+      key = keys[i++];
+      if (!descriptors || propertyIsEnumerable.call(O, key)) {
+        result.push(TO_ENTRIES ? [key, O[key]] : O[key]);
+      }
+    }
+    return result;
+  };
+};
+
+var objectToArray = {
+  // `Object.entries` method
+  // https://tc39.github.io/ecma262/#sec-object.entries
+  entries: createMethod$1(true),
+  // `Object.values` method
+  // https://tc39.github.io/ecma262/#sec-object.values
+  values: createMethod$1(false)
+};
+
+var $values = objectToArray.values;
+
+// `Object.values` method
+// https://tc39.github.io/ecma262/#sec-object.values
+_export({ target: 'Object', stat: true }, {
+  values: function values(O) {
+    return $values(O);
+  }
+});
+
+var values = path.Object.values;
+
+var nativeSymbol = !!Object.getOwnPropertySymbols && !fails(function () {
+  // Chrome 38 Symbol has incorrect toString conversion
+  // eslint-disable-next-line no-undef
+  return !String(Symbol());
+});
+
+var useSymbolAsUid = nativeSymbol
+  // eslint-disable-next-line no-undef
+  && !Symbol.sham
+  // eslint-disable-next-line no-undef
+  && typeof Symbol.iterator == 'symbol';
+
+var WellKnownSymbolsStore = shared('wks');
+var Symbol$1 = global_1.Symbol;
+var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : Symbol$1 && Symbol$1.withoutSetter || uid;
+
+var wellKnownSymbol = function (name) {
+  if (!has(WellKnownSymbolsStore, name)) {
+    if (nativeSymbol && has(Symbol$1, name)) WellKnownSymbolsStore[name] = Symbol$1[name];
+    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
+  } return WellKnownSymbolsStore[name];
+};
+
+// `Object.defineProperties` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperties
+var objectDefineProperties = descriptors ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = objectKeys(Properties);
+  var length = keys.length;
+  var index = 0;
+  var key;
+  while (length > index) objectDefineProperty.f(O, key = keys[index++], Properties[key]);
+  return O;
+};
+
+var html = getBuiltIn('document', 'documentElement');
+
+var GT = '>';
+var LT = '<';
+var PROTOTYPE = 'prototype';
+var SCRIPT = 'script';
+var IE_PROTO = sharedKey('IE_PROTO');
+
+var EmptyConstructor = function () { /* empty */ };
+
+var scriptTag = function (content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT;
+};
+
+// Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+var NullProtoObjectViaActiveX = function (activeXDocument) {
+  activeXDocument.write(scriptTag(''));
+  activeXDocument.close();
+  var temp = activeXDocument.parentWindow.Object;
+  activeXDocument = null; // avoid memory leak
+  return temp;
+};
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var NullProtoObjectViaIFrame = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = documentCreateElement('iframe');
+  var JS = 'java' + SCRIPT + ':';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  html.appendChild(iframe);
+  // https://github.com/zloirock/core-js/issues/475
+  iframe.src = String(JS);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(scriptTag('document.F=Object'));
+  iframeDocument.close();
+  return iframeDocument.F;
+};
+
+// Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
+var activeXDocument;
+var NullProtoObject = function () {
+  try {
+    /* global ActiveXObject */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile');
+  } catch (error) { /* ignore */ }
+  NullProtoObject = activeXDocument ? NullProtoObjectViaActiveX(activeXDocument) : NullProtoObjectViaIFrame();
+  var length = enumBugKeys.length;
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]];
+  return NullProtoObject();
+};
+
+hiddenKeys[IE_PROTO] = true;
+
+// `Object.create` method
+// https://tc39.github.io/ecma262/#sec-object.create
+var objectCreate = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    EmptyConstructor[PROTOTYPE] = anObject(O);
+    result = new EmptyConstructor();
+    EmptyConstructor[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = NullProtoObject();
+  return Properties === undefined ? result : objectDefineProperties(result, Properties);
+};
+
+var UNSCOPABLES = wellKnownSymbol('unscopables');
+var ArrayPrototype = Array.prototype;
+
+// Array.prototype[@@unscopables]
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+if (ArrayPrototype[UNSCOPABLES] == undefined) {
+  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
+    configurable: true,
+    value: objectCreate(null)
+  });
+}
+
+// add a key to Array.prototype[@@unscopables]
+var addToUnscopables = function (key) {
+  ArrayPrototype[UNSCOPABLES][key] = true;
+};
+
+var defineProperty = Object.defineProperty;
+var cache = {};
+
+var thrower = function (it) { throw it; };
+
+var arrayMethodUsesToLength = function (METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
+  if (!options) options = {};
+  var method = [][METHOD_NAME];
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
+  var argument0 = has(options, 0) ? options[0] : thrower;
+  var argument1 = has(options, 1) ? options[1] : undefined;
+
+  return cache[METHOD_NAME] = !!method && !fails(function () {
+    if (ACCESSORS && !descriptors) return true;
+    var O = { length: -1 };
+
+    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
+    else O[1] = 1;
+
+    method.call(O, argument0, argument1);
+  });
+};
+
+var $includes = arrayIncludes.includes;
+
+
+
+var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
+
+// `Array.prototype.includes` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.includes
+_export({ target: 'Array', proto: true, forced: !USES_TO_LENGTH }, {
+  includes: function includes(el /* , fromIndex = 0 */) {
+    return $includes(this, el, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables('includes');
+
+var aFunction$1 = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function');
+  } return it;
+};
+
+// optional / simple context binding
+var functionBindContext = function (fn, that, length) {
+  aFunction$1(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 0: return function () {
+      return fn.call(that);
+    };
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+var call = Function.call;
+
+var entryUnbind = function (CONSTRUCTOR, METHOD, length) {
+  return functionBindContext(call, global_1[CONSTRUCTOR].prototype[METHOD], length);
+};
+
+var includes = entryUnbind('Array', 'includes');
+
+/**
+ * Map of all Contentful block types. Blocks contain inline or block nodes.
+ */
+var BLOCKS;
+(function (BLOCKS) {
+    BLOCKS["DOCUMENT"] = "document";
+    BLOCKS["PARAGRAPH"] = "paragraph";
+    BLOCKS["HEADING_1"] = "heading-1";
+    BLOCKS["HEADING_2"] = "heading-2";
+    BLOCKS["HEADING_3"] = "heading-3";
+    BLOCKS["HEADING_4"] = "heading-4";
+    BLOCKS["HEADING_5"] = "heading-5";
+    BLOCKS["HEADING_6"] = "heading-6";
+    BLOCKS["OL_LIST"] = "ordered-list";
+    BLOCKS["UL_LIST"] = "unordered-list";
+    BLOCKS["LIST_ITEM"] = "list-item";
+    BLOCKS["HR"] = "hr";
+    BLOCKS["QUOTE"] = "blockquote";
+    BLOCKS["EMBEDDED_ENTRY"] = "embedded-entry-block";
+    BLOCKS["EMBEDDED_ASSET"] = "embedded-asset-block";
+})(BLOCKS || (BLOCKS = {}));
+var BLOCKS$1 = BLOCKS;
+
+/**
+ * Map of all Contentful inline types. Inline contain inline or text nodes.
+ */
+var INLINES;
+(function (INLINES) {
+    INLINES["HYPERLINK"] = "hyperlink";
+    INLINES["ENTRY_HYPERLINK"] = "entry-hyperlink";
+    INLINES["ASSET_HYPERLINK"] = "asset-hyperlink";
+    INLINES["EMBEDDED_ENTRY"] = "embedded-entry-inline";
+})(INLINES || (INLINES = {}));
+var INLINES$1 = INLINES;
+
+/**
+ * Map of all Contentful marks.
+ */
+var marks = {
+    BOLD: 'bold',
+    ITALIC: 'italic',
+    UNDERLINE: 'underline',
+    CODE: 'code',
+};
+
+var _a;
+/**
+ * Array of all top level block types.
+ * Only these block types can be the direct children of the document.
+ */
+var TOP_LEVEL_BLOCKS = [
+    BLOCKS$1.PARAGRAPH,
+    BLOCKS$1.HEADING_1,
+    BLOCKS$1.HEADING_2,
+    BLOCKS$1.HEADING_3,
+    BLOCKS$1.HEADING_4,
+    BLOCKS$1.HEADING_5,
+    BLOCKS$1.HEADING_6,
+    BLOCKS$1.OL_LIST,
+    BLOCKS$1.UL_LIST,
+    BLOCKS$1.HR,
+    BLOCKS$1.QUOTE,
+    BLOCKS$1.EMBEDDED_ENTRY,
+    BLOCKS$1.EMBEDDED_ASSET,
+];
+/**
+ * Array of all void block types
+ */
+var VOID_BLOCKS = [BLOCKS$1.HR, BLOCKS$1.EMBEDDED_ENTRY, BLOCKS$1.EMBEDDED_ASSET];
+/**
+ * Dictionary of all container block types, and the set block types they accept as children.
+ */
+var CONTAINERS = (_a = {},
+    _a[BLOCKS$1.OL_LIST] = [BLOCKS$1.LIST_ITEM],
+    _a[BLOCKS$1.UL_LIST] = [BLOCKS$1.LIST_ITEM],
+    _a[BLOCKS$1.LIST_ITEM] = TOP_LEVEL_BLOCKS.slice(),
+    _a[BLOCKS$1.QUOTE] = [BLOCKS$1.PARAGRAPH],
+    _a);
+
+/**
+ * A rich text document considered to be empty.
+ * Any other document structure than this is not considered empty.
+ */
+var EMPTY_DOCUMENT = {
+    nodeType: BLOCKS$1.DOCUMENT,
+    data: {},
+    content: [
+        {
+            nodeType: BLOCKS$1.PARAGRAPH,
+            data: {},
+            content: [
+                {
+                    nodeType: 'text',
+                    value: '',
+                    marks: [],
+                    data: {},
+                },
+            ],
+        },
+    ],
+};
+
+/**
+ * Checks if the node is an instance of Inline.
+ */
+function isInline(node) {
+    return Object.values(INLINES$1).includes(node.nodeType);
+}
+/**
+ * Checks if the node is an instance of Block.
+ */
+function isBlock(node) {
+    return Object.values(BLOCKS$1).includes(node.nodeType);
+}
+/**
+ * Checks if the node is an instance of Text.
+ */
+function isText(node) {
+    return node.nodeType === 'text';
+}
+
+var helpers = /*#__PURE__*/Object.freeze({
+	isInline: isInline,
+	isBlock: isBlock,
+	isText: isText
+});
+
+exports.BLOCKS = BLOCKS$1;
+exports.CONTAINERS = CONTAINERS;
+exports.EMPTY_DOCUMENT = EMPTY_DOCUMENT;
+exports.INLINES = INLINES$1;
+exports.MARKS = marks;
+exports.TOP_LEVEL_BLOCKS = TOP_LEVEL_BLOCKS;
+exports.VOID_BLOCKS = VOID_BLOCKS;
+exports.helpers = helpers;
+//# sourceMappingURL=rich-text-types.es5.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.esm.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.esm.js ***!
@@ -3876,6 +5862,170 @@ var isArray = Array.isArray || function (xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/contentful-resolve-response/dist/esm/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/contentful-resolve-response/dist/esm/index.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var fast_copy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fast-copy */ "./node_modules/fast-copy/dist/fast-copy.esm.js");
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+var UNRESOLVED_LINK = {}; // unique object to avoid polyfill bloat using Symbol()
+
+/**
+ * isLink Function
+ * Checks if the object has sys.type "Link"
+ * @param object
+ */
+var isLink = function isLink(object) {
+  return object && object.sys && object.sys.type === 'Link';
+};
+
+/**
+ * Creates a string key for lookup in entityMap
+ *
+ * @param {*} sys
+ * @param {String} sys.type
+ * @param {String} sys.id
+ * @return {String}
+ */
+var makeLookupKey = function makeLookupKey(sys) {
+  return sys.type + '!' + sys.id;
+};
+
+/**
+ * getLink Function
+ *
+ * @param response
+ * @param link
+ * @return {undefined}
+ */
+var getLink = function getLink(entityMap, link) {
+  var _link$sys = link.sys,
+      type = _link$sys.linkType,
+      id = _link$sys.id;
+
+  var lookupKey = makeLookupKey({ type: type, id: id });
+
+  return entityMap.get(lookupKey) || UNRESOLVED_LINK;
+};
+
+/**
+ * cleanUpLinks Function
+ * - Removes unresolvable links from Arrays and Objects
+ *
+ * @param {Object[]|Object} input
+ */
+var cleanUpLinks = function cleanUpLinks(input) {
+  if (Array.isArray(input)) {
+    return input.filter(function (val) {
+      return val !== UNRESOLVED_LINK;
+    });
+  }
+  for (var key in input) {
+    if (input[key] === UNRESOLVED_LINK) {
+      delete input[key];
+    }
+  }
+  return input;
+};
+
+/**
+ * walkMutate Function
+ * @param input
+ * @param predicate
+ * @param mutator
+ * @return {*}
+ */
+var walkMutate = function walkMutate(input, predicate, mutator, removeUnresolved) {
+  if (predicate(input)) {
+    return mutator(input);
+  }
+
+  if (input && (typeof input === 'undefined' ? 'undefined' : _typeof(input)) === 'object') {
+    for (var key in input) {
+      if (input.hasOwnProperty(key)) {
+        input[key] = walkMutate(input[key], predicate, mutator, removeUnresolved);
+      }
+    }
+    if (removeUnresolved) {
+      input = cleanUpLinks(input);
+    }
+  }
+  return input;
+};
+
+var normalizeLink = function normalizeLink(entityMap, link, removeUnresolved) {
+  var resolvedLink = getLink(entityMap, link);
+  if (resolvedLink === UNRESOLVED_LINK) {
+    return removeUnresolved ? resolvedLink : link;
+  }
+  return resolvedLink;
+};
+
+var makeEntryObject = function makeEntryObject(item, itemEntryPoints) {
+  if (!Array.isArray(itemEntryPoints)) {
+    return item;
+  }
+
+  var entryPoints = Object.keys(item).filter(function (ownKey) {
+    return itemEntryPoints.indexOf(ownKey) !== -1;
+  });
+
+  return entryPoints.reduce(function (entryObj, entryPoint) {
+    entryObj[entryPoint] = item[entryPoint];
+    return entryObj;
+  }, {});
+};
+
+/**
+ * resolveResponse Function
+ * Resolves contentful response to normalized form.
+ * @param {Object} response Contentful response
+ * @param {Object} options
+ * @param {Boolean} options.removeUnresolved - Remove unresolved links default:false
+ * @param {Array<String>} options.itemEntryPoints - Resolve links only in those item properties
+ * @return {Object}
+ */
+var resolveResponse = function resolveResponse(response, options) {
+  options = options || {};
+  if (!response.items) {
+    return [];
+  }
+  var responseClone = Object(fast_copy__WEBPACK_IMPORTED_MODULE_0__["default"])(response);
+  var allIncludes = Object.keys(responseClone.includes || {}).reduce(function (all, type) {
+    return [].concat(_toConsumableArray(all), _toConsumableArray(response.includes[type]));
+  }, []);
+
+  var allEntries = [].concat(_toConsumableArray(responseClone.items), _toConsumableArray(allIncludes));
+
+  var entityMap = new Map(allEntries.map(function (entity) {
+    return [makeLookupKey(entity.sys), entity];
+  }));
+
+  allEntries.forEach(function (item) {
+    var entryObject = makeEntryObject(item, options.itemEntryPoints);
+
+    Object.assign(item, walkMutate(entryObject, isLink, function (link) {
+      return normalizeLink(entityMap, link, options.removeUnresolved);
+    }, options.removeUnresolved));
+  });
+
+  return responseClone.items;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (resolveResponse);
 
 /***/ }),
 
@@ -5774,6 +7924,373 @@ var scroll = shortcut('scroll');
 
 /***/ }),
 
+/***/ "./node_modules/fast-copy/dist/fast-copy.esm.js":
+/*!******************************************************!*\
+  !*** ./node_modules/fast-copy/dist/fast-copy.esm.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var toStringFunction = Function.prototype.toString;
+var create = Object.create, defineProperty = Object.defineProperty, getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor, getOwnPropertyNames = Object.getOwnPropertyNames, getOwnPropertySymbols = Object.getOwnPropertySymbols, getPrototypeOf = Object.getPrototypeOf;
+var _a = Object.prototype, hasOwnProperty = _a.hasOwnProperty, propertyIsEnumerable = _a.propertyIsEnumerable;
+/**
+ * @enum
+ *
+ * @const {Object} SUPPORTS
+ *
+ * @property {boolean} SYMBOL_PROPERTIES are symbol properties supported
+ * @property {boolean} WEAKMAP is WeakMap supported
+ */
+var SUPPORTS = {
+    SYMBOL_PROPERTIES: typeof getOwnPropertySymbols === 'function',
+    WEAKMAP: typeof WeakMap === 'function',
+};
+/**
+ * @function createCache
+ *
+ * @description
+ * get a new cache object to prevent circular references
+ *
+ * @returns the new cache object
+ */
+var createCache = function () {
+    if (SUPPORTS.WEAKMAP) {
+        return new WeakMap();
+    }
+    // tiny implementation of WeakMap
+    var object = create({
+        has: function (key) { return !!~object._keys.indexOf(key); },
+        set: function (key, value) {
+            object._keys.push(key);
+            object._values.push(value);
+        },
+        get: function (key) { return object._values[object._keys.indexOf(key)]; },
+    });
+    object._keys = [];
+    object._values = [];
+    return object;
+};
+/**
+ * @function getCleanClone
+ *
+ * @description
+ * get an empty version of the object with the same prototype it has
+ *
+ * @param object the object to build a clean clone from
+ * @param realm the realm the object resides in
+ * @returns the empty cloned object
+ */
+var getCleanClone = function (object, realm) {
+    if (!object.constructor) {
+        return create(null);
+    }
+    var Constructor = object.constructor;
+    var prototype = object.__proto__ || getPrototypeOf(object);
+    if (Constructor === realm.Object) {
+        return prototype === realm.Object.prototype ? {} : create(prototype);
+    }
+    if (~toStringFunction.call(Constructor).indexOf('[native code]')) {
+        try {
+            return new Constructor();
+        }
+        catch (_a) { }
+    }
+    return create(prototype);
+};
+/**
+ * @function getObjectCloneLoose
+ *
+ * @description
+ * get a copy of the object based on loose rules, meaning all enumerable keys
+ * and symbols are copied, but property descriptors are not considered
+ *
+ * @param object the object to clone
+ * @param realm the realm the object resides in
+ * @param handleCopy the function that handles copying the object
+ * @returns the copied object
+ */
+var getObjectCloneLoose = function (object, realm, handleCopy, cache) {
+    var clone = getCleanClone(object, realm);
+    // set in the cache immediately to be able to reuse the object recursively
+    cache.set(object, clone);
+    for (var key in object) {
+        if (hasOwnProperty.call(object, key)) {
+            clone[key] = handleCopy(object[key], cache);
+        }
+    }
+    if (SUPPORTS.SYMBOL_PROPERTIES) {
+        var symbols = getOwnPropertySymbols(object);
+        var length_1 = symbols.length;
+        if (length_1) {
+            for (var index = 0, symbol = void 0; index < length_1; index++) {
+                symbol = symbols[index];
+                if (propertyIsEnumerable.call(object, symbol)) {
+                    clone[symbol] = handleCopy(object[symbol], cache);
+                }
+            }
+        }
+    }
+    return clone;
+};
+/**
+ * @function getObjectCloneStrict
+ *
+ * @description
+ * get a copy of the object based on strict rules, meaning all keys and symbols
+ * are copied based on the original property descriptors
+ *
+ * @param object the object to clone
+ * @param realm the realm the object resides in
+ * @param handleCopy the function that handles copying the object
+ * @returns the copied object
+ */
+var getObjectCloneStrict = function (object, realm, handleCopy, cache) {
+    var clone = getCleanClone(object, realm);
+    // set in the cache immediately to be able to reuse the object recursively
+    cache.set(object, clone);
+    var properties = SUPPORTS.SYMBOL_PROPERTIES
+        ? getOwnPropertyNames(object).concat(getOwnPropertySymbols(object))
+        : getOwnPropertyNames(object);
+    var length = properties.length;
+    if (length) {
+        for (var index = 0, property = void 0, descriptor = void 0; index < length; index++) {
+            property = properties[index];
+            if (property !== 'callee' && property !== 'caller') {
+                descriptor = getOwnPropertyDescriptor(object, property);
+                if (descriptor) {
+                    // Only clone the value if actually a value, not a getter / setter.
+                    if (!descriptor.get && !descriptor.set) {
+                        descriptor.value = handleCopy(object[property], cache);
+                    }
+                    try {
+                        defineProperty(clone, property, descriptor);
+                    }
+                    catch (error) {
+                        // Tee above can fail on node in edge cases, so fall back to the loose assignment.
+                        clone[property] = descriptor.value;
+                    }
+                }
+                else {
+                    // In extra edge cases where the property descriptor cannot be retrived, fall back to
+                    // the loose assignment.
+                    clone[property] = handleCopy(object[property], cache);
+                }
+            }
+        }
+    }
+    return clone;
+};
+/**
+ * @function getRegExpFlags
+ *
+ * @description
+ * get the flags to apply to the copied regexp
+ *
+ * @param regExp the regexp to get the flags of
+ * @returns the flags for the regexp
+ */
+var getRegExpFlags = function (regExp) {
+    var flags = '';
+    if (regExp.global) {
+        flags += 'g';
+    }
+    if (regExp.ignoreCase) {
+        flags += 'i';
+    }
+    if (regExp.multiline) {
+        flags += 'm';
+    }
+    if (regExp.unicode) {
+        flags += 'u';
+    }
+    if (regExp.sticky) {
+        flags += 'y';
+    }
+    return flags;
+};
+
+// utils
+var isArray = Array.isArray;
+var GLOBAL_THIS = (function () {
+    if (typeof self !== 'undefined') {
+        return self;
+    }
+    if (typeof window !== 'undefined') {
+        return window;
+    }
+    if (typeof global !== 'undefined') {
+        return global;
+    }
+    if (console && console.error) {
+        console.error('Unable to locate global object, returning "this".');
+    }
+})();
+/**
+ * @function copy
+ *
+ * @description
+ * copy an object deeply as much as possible
+ *
+ * If `strict` is applied, then all properties (including non-enumerable ones)
+ * are copied with their original property descriptors on both objects and arrays.
+ *
+ * The object is compared to the global constructors in the `realm` provided,
+ * and the native constructor is always used to ensure that extensions of native
+ * objects (allows in ES2015+) are maintained.
+ *
+ * @param object the object to copy
+ * @param [options] the options for copying with
+ * @param [options.isStrict] should the copy be strict
+ * @param [options.realm] the realm (this) object the object is copied from
+ * @returns the copied object
+ */
+function copy(object, options) {
+    // manually coalesced instead of default parameters for performance
+    var isStrict = !!(options && options.isStrict);
+    var realm = (options && options.realm) || GLOBAL_THIS;
+    var getObjectClone = isStrict
+        ? getObjectCloneStrict
+        : getObjectCloneLoose;
+    /**
+     * @function handleCopy
+     *
+     * @description
+     * copy the object recursively based on its type
+     *
+     * @param object the object to copy
+     * @returns the copied object
+     */
+    var handleCopy = function (object, cache) {
+        if (!object || typeof object !== 'object') {
+            return object;
+        }
+        if (cache.has(object)) {
+            return cache.get(object);
+        }
+        var Constructor = object.constructor;
+        // plain objects
+        if (Constructor === realm.Object) {
+            return getObjectClone(object, realm, handleCopy, cache);
+        }
+        var clone;
+        // arrays
+        if (isArray(object)) {
+            // if strict, include non-standard properties
+            if (isStrict) {
+                return getObjectCloneStrict(object, realm, handleCopy, cache);
+            }
+            var length_1 = object.length;
+            clone = new Constructor();
+            cache.set(object, clone);
+            for (var index = 0; index < length_1; index++) {
+                clone[index] = handleCopy(object[index], cache);
+            }
+            return clone;
+        }
+        // dates
+        if (object instanceof realm.Date) {
+            return new Constructor(object.getTime());
+        }
+        // regexps
+        if (object instanceof realm.RegExp) {
+            clone = new Constructor(object.source, object.flags || getRegExpFlags(object));
+            clone.lastIndex = object.lastIndex;
+            return clone;
+        }
+        // maps
+        if (realm.Map && object instanceof realm.Map) {
+            clone = new Constructor();
+            cache.set(object, clone);
+            object.forEach(function (value, key) {
+                clone.set(key, handleCopy(value, cache));
+            });
+            return clone;
+        }
+        // sets
+        if (realm.Set && object instanceof realm.Set) {
+            clone = new Constructor();
+            cache.set(object, clone);
+            object.forEach(function (value) {
+                clone.add(handleCopy(value, cache));
+            });
+            return clone;
+        }
+        // blobs
+        if (realm.Blob && object instanceof realm.Blob) {
+            return object.slice(0, object.size, object.type);
+        }
+        // buffers (node-only)
+        if (realm.Buffer && realm.Buffer.isBuffer(object)) {
+            clone = realm.Buffer.allocUnsafe
+                ? realm.Buffer.allocUnsafe(object.length)
+                : new Constructor(object.length);
+            cache.set(object, clone);
+            object.copy(clone);
+            return clone;
+        }
+        // arraybuffers / dataviews
+        if (realm.ArrayBuffer) {
+            // dataviews
+            if (realm.ArrayBuffer.isView(object)) {
+                clone = new Constructor(object.buffer.slice(0));
+                cache.set(object, clone);
+                return clone;
+            }
+            // arraybuffers
+            if (object instanceof realm.ArrayBuffer) {
+                clone = object.slice(0);
+                cache.set(object, clone);
+                return clone;
+            }
+        }
+        // if the object cannot / should not be cloned, don't
+        if (
+        // promise-like
+        typeof object.then === 'function' ||
+            // errors
+            object instanceof Error ||
+            // weakmaps
+            (realm.WeakMap && object instanceof realm.WeakMap) ||
+            // weaksets
+            (realm.WeakSet && object instanceof realm.WeakSet)) {
+            return object;
+        }
+        // assume anything left is a custom constructor
+        return getObjectClone(object, realm, handleCopy, cache);
+    };
+    return handleCopy(object, createCache());
+}
+// Adding reference to allow usage in CommonJS libraries compiled using TSC, which
+// expects there to be a default property on the exported object. See
+// [#37](https://github.com/planttheidea/fast-copy/issues/37) for details.
+copy.default = copy;
+/**
+ * @function strictCopy
+ *
+ * @description
+ * copy the object with `strict` option pre-applied
+ *
+ * @param object the object to copy
+ * @param [options] the options for copying with
+ * @param [options.realm] the realm (this) object the object is copied from
+ * @returns the copied object
+ */
+copy.strict = function strictCopy(object, options) {
+    return copy(object, {
+        isStrict: true,
+        realm: options ? options.realm : void 0,
+    });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (copy);
+//# sourceMappingURL=fast-copy.esm.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/filter-obj/index.js":
 /*!******************************************!*\
   !*** ./node_modules/filter-obj/index.js ***!
@@ -5800,6 +8317,751 @@ module.exports = function (obj, predicate) {
 	return ret;
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/gatsby-image/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/gatsby-image/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/assertThisInitialized.js"));
+
+var _inheritsLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"));
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var logDeprecationNotice = function logDeprecationNotice(prop, replacement) {
+  if (false) {}
+
+  console.log("\n    The \"" + prop + "\" prop is now deprecated and will be removed in the next major version\n    of \"gatsby-image\".\n    ");
+
+  if (replacement) {
+    console.log("Please use " + replacement + " instead of \"" + prop + "\".");
+  }
+}; // Handle legacy props during their deprecation phase
+
+
+var convertProps = function convertProps(props) {
+  var convertedProps = (0, _extends2.default)({}, props);
+  var resolutions = convertedProps.resolutions,
+      sizes = convertedProps.sizes,
+      critical = convertedProps.critical;
+
+  if (resolutions) {
+    convertedProps.fixed = resolutions;
+    logDeprecationNotice("resolutions", "the gatsby-image v2 prop \"fixed\"");
+    delete convertedProps.resolutions;
+  }
+
+  if (sizes) {
+    convertedProps.fluid = sizes;
+    logDeprecationNotice("sizes", "the gatsby-image v2 prop \"fluid\"");
+    delete convertedProps.sizes;
+  }
+
+  if (critical) {
+    logDeprecationNotice("critical", "the native \"loading\" attribute");
+    convertedProps.loading = "eager";
+  } // convert fluid & fixed to arrays so we only have to work with arrays
+
+
+  if (convertedProps.fluid) {
+    convertedProps.fluid = groupByMedia([].concat(convertedProps.fluid));
+  }
+
+  if (convertedProps.fixed) {
+    convertedProps.fixed = groupByMedia([].concat(convertedProps.fixed));
+  }
+
+  return convertedProps;
+};
+/**
+ * Checks if fluid or fixed are art-direction arrays.
+ *
+ * @param currentData  {{media?: string}[]}   The props to check for images.
+ * @return {boolean}
+ */
+
+
+var hasArtDirectionSupport = function hasArtDirectionSupport(currentData) {
+  return !!currentData && Array.isArray(currentData) && currentData.some(function (image) {
+    return typeof image.media !== "undefined";
+  });
+};
+/**
+ * Tries to detect if a media query matches the current viewport.
+ * @property media   {{media?: string}}  A media query string.
+ * @return {boolean}
+ */
+
+
+var matchesMedia = function matchesMedia(_ref) {
+  var media = _ref.media;
+  return media ? isBrowser && !!window.matchMedia(media).matches : false;
+};
+/**
+ * Find the source of an image to use as a key in the image cache.
+ * Use `the first image in either `fixed` or `fluid`
+ * @param {{fluid: {src: string, media?: string}[], fixed: {src: string, media?: string}[]}} args
+ * @return {string?} Returns image src or undefined it not given.
+ */
+
+
+var getImageCacheKey = function getImageCacheKey(_ref2) {
+  var fluid = _ref2.fluid,
+      fixed = _ref2.fixed;
+  var srcData = getCurrentSrcData(fluid || fixed || []);
+  return srcData && srcData.src;
+};
+/**
+ * Returns the current src - Preferably with art-direction support.
+ * @param currentData  {{media?: string}[], maxWidth?: Number, maxHeight?: Number}   The fluid or fixed image array.
+ * @return {{src: string, media?: string, maxWidth?: Number, maxHeight?: Number}}
+ */
+
+
+var getCurrentSrcData = function getCurrentSrcData(currentData) {
+  if (isBrowser && hasArtDirectionSupport(currentData)) {
+    // Do we have an image for the current Viewport?
+    var foundMedia = currentData.findIndex(matchesMedia);
+
+    if (foundMedia !== -1) {
+      return currentData[foundMedia];
+    } // No media matches, select first element without a media condition
+
+
+    var noMedia = currentData.findIndex(function (image) {
+      return typeof image.media === "undefined";
+    });
+
+    if (noMedia !== -1) {
+      return currentData[noMedia];
+    }
+  } // Else return the first image.
+
+
+  return currentData[0];
+}; // Cache if we've seen an image before so we don't bother with
+// lazy-loading & fading in on subsequent mounts.
+
+
+var imageCache = Object.create({});
+
+var inImageCache = function inImageCache(props) {
+  var convertedProps = convertProps(props);
+  var cacheKey = getImageCacheKey(convertedProps);
+  return imageCache[cacheKey] || false;
+};
+
+var activateCacheForImage = function activateCacheForImage(props) {
+  var convertedProps = convertProps(props);
+  var cacheKey = getImageCacheKey(convertedProps);
+
+  if (cacheKey) {
+    imageCache[cacheKey] = true;
+  }
+}; // Native lazy-loading support: https://addyosmani.com/blog/lazy-loading/
+
+
+var hasNativeLazyLoadSupport = typeof HTMLImageElement !== "undefined" && "loading" in HTMLImageElement.prototype;
+var isBrowser = typeof window !== "undefined";
+var hasIOSupport = isBrowser && window.IntersectionObserver;
+var io;
+var listeners = new WeakMap();
+
+function getIO() {
+  if (typeof io === "undefined" && typeof window !== "undefined" && window.IntersectionObserver) {
+    io = new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (listeners.has(entry.target)) {
+          var cb = listeners.get(entry.target); // Edge doesn't currently support isIntersecting, so also test for an intersectionRatio > 0
+
+          if (entry.isIntersecting || entry.intersectionRatio > 0) {
+            io.unobserve(entry.target);
+            listeners.delete(entry.target);
+            cb();
+          }
+        }
+      });
+    }, {
+      rootMargin: "200px"
+    });
+  }
+
+  return io;
+}
+
+function generateImageSources(imageVariants) {
+  return imageVariants.map(function (_ref3) {
+    var src = _ref3.src,
+        srcSet = _ref3.srcSet,
+        srcSetWebp = _ref3.srcSetWebp,
+        media = _ref3.media,
+        sizes = _ref3.sizes;
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: src
+    }, srcSetWebp && /*#__PURE__*/_react.default.createElement("source", {
+      type: "image/webp",
+      media: media,
+      srcSet: srcSetWebp,
+      sizes: sizes
+    }), srcSet && /*#__PURE__*/_react.default.createElement("source", {
+      media: media,
+      srcSet: srcSet,
+      sizes: sizes
+    }));
+  });
+} // Return an array ordered by elements having a media prop, does not use
+// native sort, as a stable sort is not guaranteed by all browsers/versions
+
+
+function groupByMedia(imageVariants) {
+  var withMedia = [];
+  var without = [];
+  imageVariants.forEach(function (variant) {
+    return (variant.media ? withMedia : without).push(variant);
+  });
+
+  if (without.length > 1 && "development" !== "production") {
+    console.warn("We've found " + without.length + " sources without a media property. They might be ignored by the browser, see: https://www.gatsbyjs.org/packages/gatsby-image/#art-directing-multiple-images");
+  }
+
+  return [].concat(withMedia, without);
+}
+
+function generateTracedSVGSources(imageVariants) {
+  return imageVariants.map(function (_ref4) {
+    var src = _ref4.src,
+        media = _ref4.media,
+        tracedSVG = _ref4.tracedSVG;
+    return /*#__PURE__*/_react.default.createElement("source", {
+      key: src,
+      media: media,
+      srcSet: tracedSVG
+    });
+  });
+}
+
+function generateBase64Sources(imageVariants) {
+  return imageVariants.map(function (_ref5) {
+    var src = _ref5.src,
+        media = _ref5.media,
+        base64 = _ref5.base64;
+    return /*#__PURE__*/_react.default.createElement("source", {
+      key: src,
+      media: media,
+      srcSet: base64
+    });
+  });
+}
+
+function generateNoscriptSource(_ref6, isWebp) {
+  var srcSet = _ref6.srcSet,
+      srcSetWebp = _ref6.srcSetWebp,
+      media = _ref6.media,
+      sizes = _ref6.sizes;
+  var src = isWebp ? srcSetWebp : srcSet;
+  var mediaAttr = media ? "media=\"" + media + "\" " : "";
+  var typeAttr = isWebp ? "type='image/webp' " : "";
+  var sizesAttr = sizes ? "sizes=\"" + sizes + "\" " : "";
+  return "<source " + typeAttr + mediaAttr + "srcset=\"" + src + "\" " + sizesAttr + "/>";
+}
+
+function generateNoscriptSources(imageVariants) {
+  return imageVariants.map(function (variant) {
+    return (variant.srcSetWebp ? generateNoscriptSource(variant, true) : "") + generateNoscriptSource(variant);
+  }).join("");
+}
+
+var listenToIntersections = function listenToIntersections(el, cb) {
+  var observer = getIO();
+
+  if (observer) {
+    observer.observe(el);
+    listeners.set(el, cb);
+  }
+
+  return function () {
+    observer.unobserve(el);
+    listeners.delete(el);
+  };
+};
+
+var noscriptImg = function noscriptImg(props) {
+  // Check if prop exists before adding each attribute to the string output below to prevent
+  // HTML validation issues caused by empty values like width="" and height=""
+  var src = props.src ? "src=\"" + props.src + "\" " : "src=\"\" "; // required attribute
+
+  var sizes = props.sizes ? "sizes=\"" + props.sizes + "\" " : "";
+  var srcSet = props.srcSet ? "srcset=\"" + props.srcSet + "\" " : "";
+  var title = props.title ? "title=\"" + props.title + "\" " : "";
+  var alt = props.alt ? "alt=\"" + props.alt + "\" " : "alt=\"\" "; // required attribute
+
+  var width = props.width ? "width=\"" + props.width + "\" " : "";
+  var height = props.height ? "height=\"" + props.height + "\" " : "";
+  var crossOrigin = props.crossOrigin ? "crossorigin=\"" + props.crossOrigin + "\" " : "";
+  var loading = props.loading ? "loading=\"" + props.loading + "\" " : "";
+  var draggable = props.draggable ? "draggable=\"" + props.draggable + "\" " : "";
+  var sources = generateNoscriptSources(props.imageVariants);
+  return "<picture>" + sources + "<img " + loading + width + height + sizes + srcSet + src + alt + title + crossOrigin + draggable + "style=\"position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center\"/></picture>";
+}; // Earlier versions of gatsby-image during the 2.x cycle did not wrap
+// the `Img` component in a `picture` element. This maintains compatibility
+// until a breaking change can be introduced in the next major release
+
+
+var Placeholder = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+  var src = props.src,
+      imageVariants = props.imageVariants,
+      generateSources = props.generateSources,
+      spreadProps = props.spreadProps,
+      ariaHidden = props.ariaHidden;
+
+  var baseImage = /*#__PURE__*/_react.default.createElement(Img, (0, _extends2.default)({
+    ref: ref,
+    src: src
+  }, spreadProps, {
+    ariaHidden: ariaHidden
+  }));
+
+  return imageVariants.length > 1 ? /*#__PURE__*/_react.default.createElement("picture", null, generateSources(imageVariants), baseImage) : baseImage;
+});
+
+var Img = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+  var sizes = props.sizes,
+      srcSet = props.srcSet,
+      src = props.src,
+      style = props.style,
+      onLoad = props.onLoad,
+      onError = props.onError,
+      loading = props.loading,
+      draggable = props.draggable,
+      ariaHidden = props.ariaHidden,
+      otherProps = (0, _objectWithoutPropertiesLoose2.default)(props, ["sizes", "srcSet", "src", "style", "onLoad", "onError", "loading", "draggable", "ariaHidden"]);
+  return /*#__PURE__*/_react.default.createElement("img", (0, _extends2.default)({
+    "aria-hidden": ariaHidden,
+    sizes: sizes,
+    srcSet: srcSet,
+    src: src
+  }, otherProps, {
+    onLoad: onLoad,
+    onError: onError,
+    ref: ref,
+    loading: loading,
+    draggable: draggable,
+    style: (0, _extends2.default)({
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      objectPosition: "center"
+    }, style)
+  }));
+});
+
+Img.propTypes = {
+  style: _propTypes.default.object,
+  onError: _propTypes.default.func,
+  onLoad: _propTypes.default.func
+};
+
+var Image = /*#__PURE__*/function (_React$Component) {
+  (0, _inheritsLoose2.default)(Image, _React$Component);
+
+  function Image(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this; // If this image has already been loaded before then we can assume it's
+    // already in the browser cache so it's cheap to just show directly.
+
+    _this.seenBefore = isBrowser && inImageCache(props);
+    _this.isCritical = props.loading === "eager" || props.critical;
+    _this.addNoScript = !(_this.isCritical && !props.fadeIn);
+    _this.useIOSupport = !hasNativeLazyLoadSupport && hasIOSupport && !_this.isCritical && !_this.seenBefore;
+    var isVisible = _this.isCritical || isBrowser && (hasNativeLazyLoadSupport || !_this.useIOSupport);
+    _this.state = {
+      isVisible: isVisible,
+      imgLoaded: false,
+      imgCached: false,
+      fadeIn: !_this.seenBefore && props.fadeIn,
+      isHydrated: false
+    };
+    _this.imageRef = /*#__PURE__*/_react.default.createRef();
+    _this.placeholderRef = props.placeholderRef || /*#__PURE__*/_react.default.createRef();
+    _this.handleImageLoaded = _this.handleImageLoaded.bind((0, _assertThisInitialized2.default)(_this));
+    _this.handleRef = _this.handleRef.bind((0, _assertThisInitialized2.default)(_this));
+    return _this;
+  }
+
+  var _proto = Image.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.setState({
+      isHydrated: isBrowser
+    });
+
+    if (this.state.isVisible && typeof this.props.onStartLoad === "function") {
+      this.props.onStartLoad({
+        wasCached: inImageCache(this.props)
+      });
+    }
+
+    if (this.isCritical) {
+      var img = this.imageRef.current;
+
+      if (img && img.complete) {
+        this.handleImageLoaded();
+      }
+    }
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    if (this.cleanUpListeners) {
+      this.cleanUpListeners();
+    }
+  } // Specific to IntersectionObserver based lazy-load support
+  ;
+
+  _proto.handleRef = function handleRef(ref) {
+    var _this2 = this;
+
+    if (this.useIOSupport && ref) {
+      this.cleanUpListeners = listenToIntersections(ref, function () {
+        var imageInCache = inImageCache(_this2.props);
+
+        if (!_this2.state.isVisible && typeof _this2.props.onStartLoad === "function") {
+          _this2.props.onStartLoad({
+            wasCached: imageInCache
+          });
+        } // imgCached and imgLoaded must update after isVisible,
+        // Once isVisible is true, imageRef becomes accessible, which imgCached needs access to.
+        // imgLoaded and imgCached are in a 2nd setState call to be changed together,
+        // avoiding initiating unnecessary animation frames from style changes.
+
+
+        _this2.setState({
+          isVisible: true
+        }, function () {
+          _this2.setState({
+            imgLoaded: imageInCache,
+            // `currentSrc` should be a string, but can be `undefined` in IE,
+            // !! operator validates the value is not undefined/null/""
+            // for lazyloaded components this might be null
+            // TODO fix imgCached behaviour as it's now false when it's lazyloaded
+            imgCached: !!(_this2.imageRef.current && _this2.imageRef.current.currentSrc)
+          });
+        });
+      });
+    }
+  };
+
+  _proto.handleImageLoaded = function handleImageLoaded() {
+    activateCacheForImage(this.props);
+    this.setState({
+      imgLoaded: true
+    });
+
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
+  };
+
+  _proto.render = function render() {
+    var _convertProps = convertProps(this.props),
+        title = _convertProps.title,
+        alt = _convertProps.alt,
+        className = _convertProps.className,
+        _convertProps$style = _convertProps.style,
+        style = _convertProps$style === void 0 ? {} : _convertProps$style,
+        _convertProps$imgStyl = _convertProps.imgStyle,
+        imgStyle = _convertProps$imgStyl === void 0 ? {} : _convertProps$imgStyl,
+        _convertProps$placeho = _convertProps.placeholderStyle,
+        placeholderStyle = _convertProps$placeho === void 0 ? {} : _convertProps$placeho,
+        placeholderClassName = _convertProps.placeholderClassName,
+        fluid = _convertProps.fluid,
+        fixed = _convertProps.fixed,
+        backgroundColor = _convertProps.backgroundColor,
+        durationFadeIn = _convertProps.durationFadeIn,
+        Tag = _convertProps.Tag,
+        itemProp = _convertProps.itemProp,
+        loading = _convertProps.loading,
+        draggable = _convertProps.draggable;
+
+    var imageVariants = fluid || fixed; // Abort early if missing image data (#25371)
+
+    if (!imageVariants) {
+      return null;
+    }
+
+    var shouldReveal = this.state.fadeIn === false || this.state.imgLoaded;
+    var shouldFadeIn = this.state.fadeIn === true && !this.state.imgCached;
+    var imageStyle = (0, _extends2.default)({
+      opacity: shouldReveal ? 1 : 0,
+      transition: shouldFadeIn ? "opacity " + durationFadeIn + "ms" : "none"
+    }, imgStyle);
+    var bgColor = typeof backgroundColor === "boolean" ? "lightgray" : backgroundColor;
+    var delayHideStyle = {
+      transitionDelay: durationFadeIn + "ms"
+    };
+    var imagePlaceholderStyle = (0, _extends2.default)({
+      opacity: this.state.imgLoaded ? 0 : 1
+    }, shouldFadeIn && delayHideStyle, imgStyle, placeholderStyle);
+    var placeholderImageProps = {
+      title: title,
+      alt: !this.state.isVisible ? alt : "",
+      style: imagePlaceholderStyle,
+      className: placeholderClassName,
+      itemProp: itemProp
+    }; // Initial client render state needs to match SSR until hydration finishes.
+    // Once hydration completes, render again to update to the correct image.
+    // `imageVariants` is always an Array type at this point due to `convertProps()`
+
+    var image = !this.state.isHydrated ? imageVariants[0] : getCurrentSrcData(imageVariants);
+
+    if (fluid) {
+      return /*#__PURE__*/_react.default.createElement(Tag, {
+        className: (className ? className : "") + " gatsby-image-wrapper",
+        style: (0, _extends2.default)({
+          position: "relative",
+          overflow: "hidden",
+          maxWidth: image.maxWidth ? image.maxWidth + "px" : null,
+          maxHeight: image.maxHeight ? image.maxHeight + "px" : null
+        }, style),
+        ref: this.handleRef,
+        key: "fluid-" + JSON.stringify(image.srcSet)
+      }, /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        style: {
+          width: "100%",
+          paddingBottom: 100 / image.aspectRatio + "%"
+        }
+      }), bgColor && /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        title: title,
+        style: (0, _extends2.default)({
+          backgroundColor: bgColor,
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          opacity: !this.state.imgLoaded ? 1 : 0,
+          right: 0,
+          left: 0
+        }, shouldFadeIn && delayHideStyle)
+      }), image.base64 && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.base64,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateBase64Sources
+      }), image.tracedSVG && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.tracedSVG,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateTracedSVGSources
+      }), this.state.isVisible && /*#__PURE__*/_react.default.createElement("picture", null, generateImageSources(imageVariants), /*#__PURE__*/_react.default.createElement(Img, {
+        alt: alt,
+        title: title,
+        sizes: image.sizes,
+        src: image.src,
+        crossOrigin: this.props.crossOrigin,
+        srcSet: image.srcSet,
+        style: imageStyle,
+        ref: this.imageRef,
+        onLoad: this.handleImageLoaded,
+        onError: this.props.onError,
+        itemProp: itemProp,
+        loading: loading,
+        draggable: draggable
+      })), this.addNoScript && /*#__PURE__*/_react.default.createElement("noscript", {
+        dangerouslySetInnerHTML: {
+          __html: noscriptImg((0, _extends2.default)({
+            alt: alt,
+            title: title,
+            loading: loading
+          }, image, {
+            imageVariants: imageVariants
+          }))
+        }
+      }));
+    }
+
+    if (fixed) {
+      var divStyle = (0, _extends2.default)({
+        position: "relative",
+        overflow: "hidden",
+        display: "inline-block",
+        width: image.width,
+        height: image.height
+      }, style);
+
+      if (style.display === "inherit") {
+        delete divStyle.display;
+      }
+
+      return /*#__PURE__*/_react.default.createElement(Tag, {
+        className: (className ? className : "") + " gatsby-image-wrapper",
+        style: divStyle,
+        ref: this.handleRef,
+        key: "fixed-" + JSON.stringify(image.srcSet)
+      }, bgColor && /*#__PURE__*/_react.default.createElement(Tag, {
+        "aria-hidden": true,
+        title: title,
+        style: (0, _extends2.default)({
+          backgroundColor: bgColor,
+          width: image.width,
+          opacity: !this.state.imgLoaded ? 1 : 0,
+          height: image.height
+        }, shouldFadeIn && delayHideStyle)
+      }), image.base64 && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.base64,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateBase64Sources
+      }), image.tracedSVG && /*#__PURE__*/_react.default.createElement(Placeholder, {
+        ariaHidden: true,
+        ref: this.placeholderRef,
+        src: image.tracedSVG,
+        spreadProps: placeholderImageProps,
+        imageVariants: imageVariants,
+        generateSources: generateTracedSVGSources
+      }), this.state.isVisible && /*#__PURE__*/_react.default.createElement("picture", null, generateImageSources(imageVariants), /*#__PURE__*/_react.default.createElement(Img, {
+        alt: alt,
+        title: title,
+        width: image.width,
+        height: image.height,
+        sizes: image.sizes,
+        src: image.src,
+        crossOrigin: this.props.crossOrigin,
+        srcSet: image.srcSet,
+        style: imageStyle,
+        ref: this.imageRef,
+        onLoad: this.handleImageLoaded,
+        onError: this.props.onError,
+        itemProp: itemProp,
+        loading: loading,
+        draggable: draggable
+      })), this.addNoScript && /*#__PURE__*/_react.default.createElement("noscript", {
+        dangerouslySetInnerHTML: {
+          __html: noscriptImg((0, _extends2.default)({
+            alt: alt,
+            title: title,
+            loading: loading
+          }, image, {
+            imageVariants: imageVariants
+          }))
+        }
+      }));
+    }
+
+    return null;
+  };
+
+  return Image;
+}(_react.default.Component);
+
+Image.defaultProps = {
+  fadeIn: true,
+  durationFadeIn: 500,
+  alt: "",
+  Tag: "div",
+  // We set it to `lazy` by default because it's best to default to a performant
+  // setting and let the user "opt out" to `eager`
+  loading: "lazy"
+};
+
+var fixedObject = _propTypes.default.shape({
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  src: _propTypes.default.string.isRequired,
+  srcSet: _propTypes.default.string.isRequired,
+  base64: _propTypes.default.string,
+  tracedSVG: _propTypes.default.string,
+  srcWebp: _propTypes.default.string,
+  srcSetWebp: _propTypes.default.string,
+  media: _propTypes.default.string
+});
+
+var fluidObject = _propTypes.default.shape({
+  aspectRatio: _propTypes.default.number.isRequired,
+  src: _propTypes.default.string.isRequired,
+  srcSet: _propTypes.default.string.isRequired,
+  sizes: _propTypes.default.string.isRequired,
+  base64: _propTypes.default.string,
+  tracedSVG: _propTypes.default.string,
+  srcWebp: _propTypes.default.string,
+  srcSetWebp: _propTypes.default.string,
+  media: _propTypes.default.string,
+  maxWidth: _propTypes.default.number,
+  maxHeight: _propTypes.default.number
+});
+
+function requireFixedOrFluid(originalPropTypes) {
+  return function (props, propName, componentName) {
+    var _PropTypes$checkPropT;
+
+    if (!props.fixed && !props.fluid) {
+      throw new Error("The prop `fluid` or `fixed` is marked as required in `" + componentName + "`, but their values are both `undefined`.");
+    }
+
+    _propTypes.default.checkPropTypes((_PropTypes$checkPropT = {}, _PropTypes$checkPropT[propName] = originalPropTypes, _PropTypes$checkPropT), props, "prop", componentName);
+  };
+} // If you modify these propTypes, please don't forget to update following files as well:
+// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-image/index.d.ts
+// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-image/README.md#gatsby-image-props
+// https://github.com/gatsbyjs/gatsby/blob/master/docs/docs/gatsby-image.md#gatsby-image-props
+
+
+Image.propTypes = {
+  resolutions: fixedObject,
+  sizes: fluidObject,
+  fixed: requireFixedOrFluid(_propTypes.default.oneOfType([fixedObject, _propTypes.default.arrayOf(fixedObject)])),
+  fluid: requireFixedOrFluid(_propTypes.default.oneOfType([fluidObject, _propTypes.default.arrayOf(fluidObject)])),
+  fadeIn: _propTypes.default.bool,
+  durationFadeIn: _propTypes.default.number,
+  title: _propTypes.default.string,
+  alt: _propTypes.default.string,
+  className: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]),
+  // Support Glamor's css prop.
+  critical: _propTypes.default.bool,
+  crossOrigin: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.bool]),
+  style: _propTypes.default.object,
+  imgStyle: _propTypes.default.object,
+  placeholderStyle: _propTypes.default.object,
+  placeholderClassName: _propTypes.default.string,
+  backgroundColor: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.bool]),
+  onLoad: _propTypes.default.func,
+  onError: _propTypes.default.func,
+  onStartLoad: _propTypes.default.func,
+  Tag: _propTypes.default.string,
+  itemProp: _propTypes.default.string,
+  loading: _propTypes.default.oneOf(["auto", "lazy", "eager"]),
+  draggable: _propTypes.default.bool
+};
+var _default = Image;
+exports.default = _default;
 
 /***/ }),
 
@@ -7001,6 +10263,73 @@ function useScrollRestoration(identifier) {
     }
   };
 }
+
+/***/ }),
+
+/***/ "./node_modules/gatsby-source-contentful/rich-text.js":
+/*!************************************************************!*\
+  !*** ./node_modules/gatsby-source-contentful/rich-text.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _richTextReactRenderer = __webpack_require__(/*! @contentful/rich-text-react-renderer */ "./node_modules/@contentful/rich-text-react-renderer/dist/rich-text-react-renderer.es5.js");
+
+var _contentfulResolveResponse = _interopRequireDefault(__webpack_require__(/*! contentful-resolve-response */ "./node_modules/contentful-resolve-response/dist/esm/index.js"));
+
+function renderRichText({
+  raw,
+  references
+}, options = {}) {
+  const richText = JSON.parse(raw); // If no references are given, there is no need to resolve them
+
+  if (!references || !references.length) {
+    return (0, _richTextReactRenderer.documentToReactComponents)(richText, options);
+  } // Create dummy response so we can use official libraries for resolving the entries
+
+
+  const dummyResponse = {
+    items: [{
+      sys: {
+        type: `Entry`
+      },
+      richText
+    }],
+    includes: {
+      Entry: references.filter(({
+        __typename
+      }) => __typename !== `ContentfulAsset`).map(reference => {
+        return { ...reference,
+          sys: {
+            type: `Entry`,
+            id: reference.contentful_id
+          }
+        };
+      }),
+      Asset: references.filter(({
+        __typename
+      }) => __typename === `ContentfulAsset`).map(reference => {
+        return { ...reference,
+          sys: {
+            type: `Asset`,
+            id: reference.contentful_id
+          }
+        };
+      })
+    }
+  };
+  const resolved = (0, _contentfulResolveResponse.default)(dummyResponse, {
+    removeUnresolved: true
+  });
+  return (0, _richTextReactRenderer.documentToReactComponents)(resolved[0].richText, options);
+}
+
+exports.renderRichText = renderRichText;
 
 /***/ }),
 
@@ -50692,6 +54021,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./public/page-data/sq/d/4037415625.json":
+/*!***********************************************!*\
+  !*** ./public/page-data/sq/d/4037415625.json ***!
+  \***********************************************/
+/*! exports provided: data, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"data\":{\"allContentfulPost\":{\"edges\":[{\"node\":{\"title\":\"Webinar Presentation: How To Get Booked & Paid Faster In Your Home Service Business\",\"contentful_id\":\"44MxLgggaDqIYLgeNGfkkt\",\"publishDate\":\"April 30th, 2021\",\"slug\":\"webinars-from-intake-to-invoice-with-workiz\"}},{\"node\":{\"title\":\"Savvy Business Tips: A Closer Look At Why Your Marketing Campaigns May Be Failing\",\"contentful_id\":\"7rwRgKe3B9h6SG6r1Zp8eC\",\"publishDate\":\"April 29th, 2021\",\"slug\":\"savvy-business-tips-closer-look-why-marketing-campaigns-may-be-failing\"}},{\"node\":{\"title\":\"11 Must-Have Apps For HVAC Professionals\",\"contentful_id\":\"5zW9mrl7lZfbEm8xCrDuJO\",\"publishDate\":\"April 27th, 2021\",\"slug\":\"11-must-have-apps-for-hvac-professionals\"}},{\"node\":{\"title\":\"Three Things To Know About Using A Roofing Answering Service \",\"contentful_id\":\"5USBondlNNvV0kDrJkxf3g\",\"publishDate\":\"April 15th, 2021\",\"slug\":\"three-things-to-know-about-using-roofing-answering-service\"}}]}}}");
+
+/***/ }),
+
 /***/ "./src/assets/downloadables/ringsavvy-company-brochure.pdf":
 /*!*****************************************************************!*\
   !*** ./src/assets/downloadables/ringsavvy-company-brochure.pdf ***!
@@ -52214,6 +55554,741 @@ exports.ToggleButton = ToggleButton;
 
 /***/ }),
 
+/***/ "./src/components/post/article/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/post/article/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _header = _interopRequireDefault(__webpack_require__(/*! ../header */ "./src/components/post/header/index.js"));
+
+var _featuredImage = _interopRequireDefault(__webpack_require__(/*! ../featuredImage */ "./src/components/post/featuredImage/index.js"));
+
+var _body = _interopRequireDefault(__webpack_require__(/*! ../body */ "./src/components/post/body/index.js"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/article/style.js"));
+
+var Article = function Article(_ref) {
+  var post = _ref.post;
+  var title = post.title,
+      author = post.author,
+      publishDate = post.publishDate,
+      body = post.body,
+      featuredImage = post.featuredImage;
+  return /*#__PURE__*/_react.default.createElement(Styled.Article, null, /*#__PURE__*/_react.default.createElement(_header.default, {
+    title: title,
+    author: author,
+    date: publishDate
+  }), /*#__PURE__*/_react.default.createElement(_featuredImage.default, {
+    alt: title,
+    fluid: featuredImage.fluid
+  }), /*#__PURE__*/_react.default.createElement(_body.default, {
+    body: body
+  }));
+};
+
+var _default = Article;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/article/style.js":
+/*!**********************************************!*\
+  !*** ./src/components/post/article/style.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Article = void 0;
+
+var _styledComponents = _interopRequireDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js"));
+
+var Article = _styledComponents.default.article.withConfig({
+  displayName: "style__Article"
+})(["max-width:605px;@media ", "{margin-bottom:80px;max-width:none;padding:0 5%;width:100%;}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.global.mediaQueries.lg;
+});
+
+exports.Article = Article;
+
+/***/ }),
+
+/***/ "./src/components/post/body/index.js":
+/*!*******************************************!*\
+  !*** ./src/components/post/body/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _inheritsLoose2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inheritsLoose */ "./node_modules/@babel/runtime/helpers/inheritsLoose.js"));
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+
+var _gatsby = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+var _richText = __webpack_require__(/*! gatsby-source-contentful/rich-text */ "./node_modules/gatsby-source-contentful/rich-text.js");
+
+var _richTextTypes = __webpack_require__(/*! @contentful/rich-text-types */ "./node_modules/@contentful/rich-text-types/dist/rich-text-types.es5.js");
+
+var _richTextReactRenderer = __webpack_require__(/*! @contentful/rich-text-react-renderer */ "./node_modules/@contentful/rich-text-react-renderer/dist/rich-text-react-renderer.es5.js");
+
+var _image = _interopRequireDefault(__webpack_require__(/*! ../image */ "./src/components/post/image/index.js"));
+
+var _renderNode2;
+
+var options = {
+  renderNode: (_renderNode2 = {}, _renderNode2[_richTextTypes.INLINES.ENTRY_HYPERLINK] = function (node, children) {
+    var slug = node.data.target.slug;
+    var url = "/blog/" + slug;
+    return /*#__PURE__*/_react.default.createElement(_gatsby.Link, {
+      to: url
+    }, children);
+  }, _renderNode2[_richTextTypes.INLINES.HYPERLINK] = function (node) {
+    var uri = node.data.uri;
+
+    if (uri.indexOf('youtube.com/embed/') !== -1) {
+      return /*#__PURE__*/_react.default.createElement("figure", null, /*#__PURE__*/_react.default.createElement("iframe", {
+        width: "560",
+        height: "315",
+        src: uri,
+        title: "YouTube video player",
+        frameBorder: "0",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+        allowFullScreen: true
+      }));
+    }
+  }, _renderNode2[_richTextTypes.BLOCKS.EMBEDDED_ASSET] = function (node) {
+    var _node$data$target = node.data.target,
+        title = _node$data$target.title,
+        fixed = _node$data$target.fixed;
+    return /*#__PURE__*/_react.default.createElement(_image.default, {
+      alt: title,
+      fixed: fixed
+    });
+  }, _renderNode2[_richTextTypes.BLOCKS.LIST_ITEM] = function (node) {
+    var _renderNode;
+
+    var UnTaggedChildren = (0, _richTextReactRenderer.documentToReactComponents)(node, {
+      renderNode: (_renderNode = {}, _renderNode[_richTextTypes.BLOCKS.PARAGRAPH] = function (node, children) {
+        return children;
+      }, _renderNode[_richTextTypes.BLOCKS.LIST_ITEM] = function (node, children) {
+        return children;
+      }, _renderNode)
+    });
+    return /*#__PURE__*/_react.default.createElement("li", null, UnTaggedChildren);
+  }, _renderNode2)
+}; // TODO: refactor to useEffect
+
+var Body = /*#__PURE__*/function (_Component) {
+  (0, _inheritsLoose2.default)(Body, _Component);
+
+  function Body() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Body.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    var sections = document.querySelectorAll('h2');
+    var sectionNum = 0;
+    sections.forEach(function (section) {
+      sectionNum += 1;
+      section.setAttribute('id', "section-" + sectionNum);
+    });
+  };
+
+  _proto.render = function render() {
+    var body = this.props.body;
+    return /*#__PURE__*/_react.default.createElement("div", null, (0, _richText.renderRichText)(body, options));
+  };
+
+  return Body;
+}(_react.Component);
+
+exports.default = Body;
+
+/***/ }),
+
+/***/ "./src/components/post/featuredImage/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/post/featuredImage/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _style = __webpack_require__(/*! ./style */ "./src/components/post/featuredImage/style.js");
+
+var FeaturedImage = function FeaturedImage(_ref) {
+  var alt = _ref.alt,
+      fluid = _ref.fluid;
+  return /*#__PURE__*/_react.default.createElement("figure", null, /*#__PURE__*/_react.default.createElement(_style.Image, {
+    alt: alt,
+    fluid: fluid
+  }));
+};
+
+var _default = FeaturedImage;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/featuredImage/style.js":
+/*!****************************************************!*\
+  !*** ./src/components/post/featuredImage/style.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Image = void 0;
+
+var _styledComponents = _interopRequireDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js"));
+
+var _gatsbyImage = _interopRequireDefault(__webpack_require__(/*! gatsby-image */ "./node_modules/gatsby-image/index.js"));
+
+var Image = (0, _styledComponents.default)(_gatsbyImage.default).withConfig({
+  displayName: "style__Image"
+})(["border-radius:10px;box-shadow:0 19px 70px 0 rgba(0,0,0,0.12);margin:50px 0;max-height:374px;"]);
+exports.Image = Image;
+
+/***/ }),
+
+/***/ "./src/components/post/header/author.js":
+/*!**********************************************!*\
+  !*** ./src/components/post/header/author.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _authorGravatar = _interopRequireDefault(__webpack_require__(/*! ./authorGravatar */ "./src/components/post/header/authorGravatar.js"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/header/style.js"));
+
+// AuthorContainer, MetaContainer, Author, Date
+var Author = function Author(_ref) {
+  var author = _ref.author,
+      date = _ref.date;
+  return /*#__PURE__*/_react.default.createElement(Styled.AuthorContainer, null, /*#__PURE__*/_react.default.createElement(_authorGravatar.default, {
+    gravatar: author.gravatar
+  }), /*#__PURE__*/_react.default.createElement(Styled.Meta, null, /*#__PURE__*/_react.default.createElement(Styled.Name, null, author.name), /*#__PURE__*/_react.default.createElement(Styled.Date, null, date)));
+};
+
+var _default = Author;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/header/authorGravatar.js":
+/*!******************************************************!*\
+  !*** ./src/components/post/header/authorGravatar.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/header/style.js"));
+
+var GravatarImage = function GravatarImage(_ref) {
+  var gravatar = _ref.gravatar;
+  return /*#__PURE__*/_react.default.createElement(Styled.GravatarImage, {
+    alt: gravatar.title,
+    fluid: gravatar.fluid
+  });
+};
+
+var _default = GravatarImage;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/header/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/post/header/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _author = _interopRequireDefault(__webpack_require__(/*! ./author */ "./src/components/post/header/author.js"));
+
+var _style = __webpack_require__(/*! ./style */ "./src/components/post/header/style.js");
+
+var Header = function Header(_ref) {
+  var title = _ref.title,
+      author = _ref.author,
+      date = _ref.date;
+  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement(_style.Title, null, title), /*#__PURE__*/_react.default.createElement(_author.default, {
+    author: author,
+    date: date
+  }));
+};
+
+var _default = Header;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/header/style.js":
+/*!*********************************************!*\
+  !*** ./src/components/post/header/style.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Date = exports.Name = exports.Meta = exports.AuthorContainer = exports.GravatarImage = exports.Title = void 0;
+
+var _styledComponents = _interopRequireDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js"));
+
+var _gatsbyImage = _interopRequireDefault(__webpack_require__(/*! gatsby-image */ "./node_modules/gatsby-image/index.js"));
+
+var Title = _styledComponents.default.h1.withConfig({
+  displayName: "style__Title"
+})(["font-size:", ";line-height:1.4;margin:0 0 0.5em;@media ", "{font-size:", ";}"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.post.fontSizes.xxl;
+}, function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.mediaQueries.sm;
+}, function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.post.fontSizes.xl;
+});
+
+exports.Title = Title;
+var GravatarImage = (0, _styledComponents.default)(_gatsbyImage.default).withConfig({
+  displayName: "style__GravatarImage"
+})(["border:3px solid ", ";border-radius:100%;height:auto;margin-right:20px;max-width:none;width:60px;"], function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.colors.primary;
+});
+exports.GravatarImage = GravatarImage;
+
+var AuthorContainer = _styledComponents.default.div.withConfig({
+  displayName: "style__AuthorContainer"
+})(["display:flex;"]);
+
+exports.AuthorContainer = AuthorContainer;
+
+var Meta = _styledComponents.default.div.withConfig({
+  displayName: "style__Meta"
+})(["display:flex;flex-direction:column;justify-content:center;"]);
+
+exports.Meta = Meta;
+
+var Name = _styledComponents.default.span.withConfig({
+  displayName: "style__Name"
+})(["color:", ";font-family:", ";font-size:18px;font-weight:bold;margin-bottom:-2px;"], function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.global.colors.black;
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.global.fonts.serif;
+});
+
+exports.Name = Name;
+
+var Date = _styledComponents.default.span.withConfig({
+  displayName: "style__Date"
+})(["color:", ";font-size:", ";"], function (_ref7) {
+  var theme = _ref7.theme;
+  return theme.global.colors.grey;
+}, function (_ref8) {
+  var theme = _ref8.theme;
+  return theme.global.fontSizes.sm;
+});
+
+exports.Date = Date;
+
+/***/ }),
+
+/***/ "./src/components/post/image/index.js":
+/*!********************************************!*\
+  !*** ./src/components/post/image/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/image/style.js"));
+
+var Image = function Image(_ref) {
+  var alt = _ref.alt,
+      fixed = _ref.fixed;
+  return /*#__PURE__*/_react.default.createElement("figure", null, /*#__PURE__*/_react.default.createElement(Styled.Image, {
+    alt: alt,
+    fixed: fixed
+  }));
+};
+
+var _default = Image;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/image/style.js":
+/*!********************************************!*\
+  !*** ./src/components/post/image/style.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.Image = void 0;
+
+var _styledComponents = _interopRequireDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js"));
+
+var _gatsbyImage = _interopRequireDefault(__webpack_require__(/*! gatsby-image */ "./node_modules/gatsby-image/index.js"));
+
+var Image = (0, _styledComponents.default)(_gatsbyImage.default).withConfig({
+  displayName: "style__Image"
+})(["border-radius:10px;box-shadow:0 19px 70px 0 rgba(0,0,0,0.12);margin:28px 0;max-width:100%;"]);
+exports.Image = Image;
+
+/***/ }),
+
+/***/ "./src/components/post/sidebar/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/post/sidebar/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _recentPosts = _interopRequireDefault(__webpack_require__(/*! ./recentPosts */ "./src/components/post/sidebar/recentPosts.js"));
+
+var _signUp = _interopRequireDefault(__webpack_require__(/*! ./signUp */ "./src/components/post/sidebar/signUp.js"));
+
+var _style = __webpack_require__(/*! ./style */ "./src/components/post/sidebar/style.js");
+
+var Sidebar = function Sidebar() {
+  return /*#__PURE__*/_react.default.createElement(_style.Aside, null, /*#__PURE__*/_react.default.createElement(_signUp.default, null), /*#__PURE__*/_react.default.createElement(_recentPosts.default, null));
+};
+
+var _default = Sidebar;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/sidebar/recentPostItem.js":
+/*!*******************************************************!*\
+  !*** ./src/components/post/sidebar/recentPostItem.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/sidebar/style.js"));
+
+var RecentPostItem = function RecentPostItem(_ref) {
+  var post = _ref.post;
+  var title = post.title,
+      slug = post.slug,
+      publishDate = post.publishDate;
+  return /*#__PURE__*/_react.default.createElement(Styled.RecentPostItem, null, /*#__PURE__*/_react.default.createElement(Styled.ArticleLink, {
+    to: "/blog/" + slug
+  }, title), /*#__PURE__*/_react.default.createElement(Styled.Date, null, publishDate));
+};
+
+var _default = RecentPostItem;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/sidebar/recentPosts.js":
+/*!****************************************************!*\
+  !*** ./src/components/post/sidebar/recentPosts.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _ = _interopRequireDefault(__webpack_require__(/*! ../../../../public/page-data/sq/d/4037415625.json */ "./public/page-data/sq/d/4037415625.json"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _gatsby = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+var _recentPostItem = _interopRequireDefault(__webpack_require__(/*! ./recentPostItem */ "./src/components/post/sidebar/recentPostItem.js"));
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/sidebar/style.js"));
+
+var RecentPosts = function RecentPosts(_ref) {
+  var data = _ref.data;
+  var posts = data.allContentfulPost.edges;
+  return /*#__PURE__*/_react.default.createElement(Styled.Section, null, /*#__PURE__*/_react.default.createElement(Styled.Title, null, "Recent Posts"), /*#__PURE__*/_react.default.createElement(Styled.UnorderedList, null, posts.map(function (_ref2) {
+    var node = _ref2.node;
+    return /*#__PURE__*/_react.default.createElement(_recentPostItem.default, {
+      key: node.contentful_id,
+      post: node
+    });
+  })));
+};
+
+var _default = function _default() {
+  return /*#__PURE__*/_react.default.createElement(_gatsby.StaticQuery, {
+    query: "4037415625",
+    render: function render(data) {
+      return /*#__PURE__*/_react.default.createElement(RecentPosts, {
+        data: data
+      });
+    },
+    data: _.default
+  });
+};
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/sidebar/signUp.js":
+/*!***********************************************!*\
+  !*** ./src/components/post/sidebar/signUp.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _button = __webpack_require__(/*! ../../button */ "./src/components/button/index.js");
+
+var Styled = _interopRequireWildcard(__webpack_require__(/*! ./style */ "./src/components/post/sidebar/style.js"));
+
+var SignUp = function SignUp() {
+  return /*#__PURE__*/_react.default.createElement(Styled.Section, {
+    hasShadow: true
+  }, /*#__PURE__*/_react.default.createElement(Styled.Title, null, "Try Ring Savvy for free"), /*#__PURE__*/_react.default.createElement(Styled.P, null, "All business owners are encouraged to sign up for a free trial with our company."), /*#__PURE__*/_react.default.createElement(_button.StyledLink, {
+    to: "/sign-up"
+  }, "Get Started"));
+};
+
+var _default = SignUp;
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/components/post/sidebar/style.js":
+/*!**********************************************!*\
+  !*** ./src/components/post/sidebar/style.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.ArticleLink = exports.Date = exports.RecentPostItem = exports.UnorderedList = exports.Title = exports.Section = exports.Aside = exports.P = void 0;
+
+var _styledComponents = _interopRequireDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.esm.js"));
+
+var _gatsby = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+var P = _styledComponents.default.p.withConfig({
+  displayName: "style__P"
+})(["font-size:", ";"], function (_ref) {
+  var theme = _ref.theme;
+  return theme.post.fontSizes.sm;
+});
+
+exports.P = P;
+
+var Aside = _styledComponents.default.aside.withConfig({
+  displayName: "style__Aside"
+})(["margin-left:auto;width:335px;@media ", "{margin-right:auto;width:100%;}"], function (_ref2) {
+  var theme = _ref2.theme;
+  return theme.global.mediaQueries.lg;
+});
+
+exports.Aside = Aside;
+
+var Section = _styledComponents.default.section.withConfig({
+  displayName: "style__Section"
+})(["border-radius:", ";box-shadow:", ";margin-bottom:36px;padding:", ";"], function (props) {
+  return props.hasShadow ? '10px' : null;
+}, function (props) {
+  return props.hasShadow ? '0 6px 15px rgba(0, 0, 0, .09)' : null;
+}, function (props) {
+  return props.hasShadow ? '36px 28px' : null;
+});
+
+exports.Section = Section;
+
+var Title = _styledComponents.default.h4.withConfig({
+  displayName: "style__Title"
+})(["margin-top:0;"]);
+
+exports.Title = Title;
+
+var UnorderedList = _styledComponents.default.ul.withConfig({
+  displayName: "style__UnorderedList"
+})(["list-style:none;margin:0;padding:0;"]);
+
+exports.UnorderedList = UnorderedList;
+
+var RecentPostItem = _styledComponents.default.li.withConfig({
+  displayName: "style__RecentPostItem"
+})(["border-bottom:1px solid #e8e8e8;font-size:16px;margin:0;padding:12px 0;&:last-of-type{border-bottom:none;margin-bottom:0;}&:first-of-type{padding-top:0;}"]);
+
+exports.RecentPostItem = RecentPostItem;
+
+var Date = _styledComponents.default.span.withConfig({
+  displayName: "style__Date"
+})(["display:block;font-size:", ";"], function (_ref3) {
+  var theme = _ref3.theme;
+  return theme.post.fontSizes.xs;
+});
+
+exports.Date = Date;
+var ArticleLink = (0, _styledComponents.default)(_gatsby.Link).withConfig({
+  displayName: "style__ArticleLink"
+})(["color:", ";text-decoration:none;"], function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.global.colors.primary;
+});
+exports.ArticleLink = ArticleLink;
+
+/***/ }),
+
 /***/ "./src/components/section/index.js":
 /*!*****************************************!*\
   !*** ./src/components/section/index.js ***!
@@ -53015,6 +57090,54 @@ var _default = {
   }
 };
 exports.default = _default;
+
+/***/ }),
+
+/***/ "./src/templates/post.js":
+/*!*******************************!*\
+  !*** ./src/templates/post.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+exports.__esModule = true;
+exports.default = BlogPostTemplate;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+
+var _reactHelmet = __webpack_require__(/*! react-helmet */ "react-helmet");
+
+var _layout = _interopRequireDefault(__webpack_require__(/*! ../components/layout */ "./src/components/layout/index.js"));
+
+var _article = _interopRequireDefault(__webpack_require__(/*! ../components/post/article */ "./src/components/post/article/index.js"));
+
+var _sidebar = _interopRequireDefault(__webpack_require__(/*! ../components/post/sidebar */ "./src/components/post/sidebar/index.js"));
+
+var _wrapper = __webpack_require__(/*! ../components/wrapper */ "./src/components/wrapper/index.js");
+
+function BlogPostTemplate(_ref) {
+  var data = _ref.data;
+  var post = data.contentfulPost;
+  var hasSnippetTitle = post.snippetTitle !== null;
+  return /*#__PURE__*/_react.default.createElement(_layout.default, {
+    isReverse: true,
+    location: post.location
+  }, /*#__PURE__*/_react.default.createElement(_reactHelmet.Helmet, null, /*#__PURE__*/_react.default.createElement("title", null, hasSnippetTitle ? post.snippetTitle : post.title), /*#__PURE__*/_react.default.createElement("meta", {
+    name: "description",
+    content: post.description.description
+  })), /*#__PURE__*/_react.default.createElement(_wrapper.Wrapper, {
+    flex: true
+  }, /*#__PURE__*/_react.default.createElement(_article.default, {
+    post: post
+  }), /*#__PURE__*/_react.default.createElement(_sidebar.default, null)));
+}
+
+var pageQuery = "1087159968";
 
 /***/ }),
 

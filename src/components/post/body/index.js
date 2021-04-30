@@ -13,6 +13,25 @@ const options = {
 
       return <Link to={url}>{children}</Link>;
     },
+    [INLINES.HYPERLINK]: (node) => {
+      const { uri } = node.data;
+
+      if (uri.indexOf('youtube.com/embed/') !== -1) {
+        return (
+          <figure>
+            <iframe
+              width='560'
+              height='315'
+              src={uri}
+              title='YouTube video player'
+              frameBorder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              allowFullScreen
+            ></iframe>
+          </figure>
+        );
+      }
+    },
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { title, fixed } = node.data.target;
 

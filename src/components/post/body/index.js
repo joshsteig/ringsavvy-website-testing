@@ -15,7 +15,6 @@ const options = {
     },
     [INLINES.HYPERLINK]: (node, children) => {
       const { uri } = node.data;
-      console.log(uri);
       const isYoutube = uri.indexOf('youtube.com/embed/') !== -1;
       const isLocal = uri.indexOf('ringsavvy.com') !== -1;
 

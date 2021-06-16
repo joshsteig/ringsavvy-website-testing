@@ -15,7 +15,7 @@ export default function RootIndex(props) {
       'Our virtual receptionists help optimize the workflow of field service businesses',
     subHeading:
       'You’ve got enough on your plate already. Our 24/7 live receptionist service is ready to answer any phone calls you don’t have time for, take highly detailed customer messages and help build a highly organized dispatching system for your company.',
-    primaryCtaText: 'Try free for 7 days',
+    primaryCtaText: 'Try for free',
     primaryCtaLink: '/sign-up/',
     secondaryCtaText: 'Get a custom quote',
     secondaryCtaLink: '/get-a-quote/',

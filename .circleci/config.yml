@@ -2,54 +2,36 @@ version: '2.1'
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+    - {image: 'circleci/node:latest'}
     steps:
-      - checkout
-      - run:
-          name: Update npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - add_ssh_keys:
-          fingerprints:
-            - '40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f'
-            - '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23'
-            - '83:1e:ce:f5:22:9c:c2:ef:d2:55:ab:11:54:ca:80:a4'
-      - run:
-          name: Add user
-          command: |
-            git config --global user.name "answeringLegal"
-            git config --global user.email "billy@answeringlegal.com"
-            git config --global user.name "answeringLegal"
-      - run:
-          name: Bypass host key checking
-          command: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit
-      - run:
-          name: Add cpanel remote
-          command: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
-      - run:
-          name: Verify remotes
-          command: git remote -v
-      - run:
-          name: Pull cPanel remote changes into origin remote
-          command: git pull cpanel main
-      - run:
-          name: Install node modules
-          command: npm install
-      - run:
-          name: Run build
-          command: npm run build
-      - run:
-          name: Stage public folder for commit
-          command: git add public/*
-      - run:
-          name: Commit public folder
-          command: git commit --allow-empty -m 'CircleCI build and deploy'
-      - run:
-          name: Deploy
-          command: |
-            git push cpanel main
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_moduless
+    - checkout
+    - run: {name: Update npm, command: sudo npm install -g npm@latest}
+    - restore_cache: {key: 'dependency-cache-{{ checksum "package.json" }}'}
+    - add_ssh_keys:
+        fingerprints: ['40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f', '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23', '83:1e:ce:f5:22:9c:c2:ef:d2:55:ab:11:54:ca:80:a4']
+    - run:
+        name: Add user
+        command: |
+          git config --global user.name "answeringLegal"
+          git config --global user.email "billy@answeringlegal.com"
+          git config --global user.name "answeringLegal"
+    - run: {name: Bypass host key checking, command: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit}
+    - run: {name: Add cpanel remote, command: 'git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website'}
+    - run: {name: Verify remotes, command: git remote -v}
+    - run: {name: Pull cPanel remote changes into origin remote, command: git pull cpanel main}
+    - run: {name: Install node modules, command: npm install}
+    - run: {name: Run build, command: npm run build}
+    - run: {name: Stage public folder for commit, command: git add public/*}
+    - run: {name: Commit public folder, command: git commit --allow-empty -m 'CircleCI build and deploy'}
+    - run:
+        name: Deploy
+        command: |
+          git push cpanel main
+    - save_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths: [./node_moduless]
+workflows:
+  version: 2
+  build:
+    jobs:
+    - build: {}

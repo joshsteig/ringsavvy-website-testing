@@ -26,7 +26,7 @@ jobs:
     - run:
         name: Deploy
         command: |
-          git push cpanel main
+          git push cpanel old-main
     - save_cache:
         key: dependency-cache-{{ checksum "package.json" }}
         paths: [./node_moduless]

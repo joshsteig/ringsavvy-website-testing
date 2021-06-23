@@ -32,7 +32,7 @@ jobs:
           command: git remote -v
       - run:
           name: Pull cPanel remote changes into origin remote
-          command: git pull cpanel main
+          command: git pull cpanel old-main
       - run:
           name: Install node modules
           command: npm install

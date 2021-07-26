@@ -11,9 +11,9 @@ const Pricing = () => {
       id: 1,
       name: 'Small',
       minutes: '50',
-      price: '$178/month',
+      price: '$150/month',
       features: [
-        '30% overage protection',
+        'No overage protection',
         'Every premium feature we offer',
         '24/7 live support',
         '24 hour bilingual receptionist',
@@ -25,7 +25,7 @@ const Pricing = () => {
       id: 2,
       name: 'Medium',
       minutes: '100',
-      price: '$300/month',
+      price: '$270/month',
       features: [
         '25% overage protection',
         'Every premium feature we offer',
@@ -55,7 +55,7 @@ const Pricing = () => {
     {
       id: 1,
       minutes: '200',
-      price: '$570/month',
+      price: '$470/month',
     },
     {
       id: 2,

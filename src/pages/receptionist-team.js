@@ -37,7 +37,7 @@ export default function RootIndex(props) {
 }
 
 export const pageQuery = graphql`
-  
+  query homeQueryAndHomeQuery {
     allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 3) {
       edges {
         node {
@@ -46,7 +46,7 @@ export const pageQuery = graphql`
           featuredImage {
             fluid(maxWidth: 470, maxHeight: 230) {
               ...GatsbyContentfulFluid
-            
+            }
           }
         }
       }

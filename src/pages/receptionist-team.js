@@ -14,23 +14,42 @@ import Footer from '../components/LandingBody/footer';
 export default function RootIndex(props) {
   const { location, data } = props;
 
-   return (
-    <Layout location={location}>
+  return (
+    <>
       <Helmet>
         <title>
-          Answering Service for the Field Service Industry - RingSavvy, Inc.
+          Best Quality 24/7 Live Answering Service and Virtual Receptionists
         </title>
+        <meta
+          name='description'
+          content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
+        />
       </Helmet>
-      <Hero heading={heroData.heading} />
-      <BulletSection bulletData={bulletData[0]} />
-      <BulletSection isFlipped bulletData={bulletData[1]} />
-      <BulletSection bulletData={bulletData[2]} />
-      <CardGrid
-        contentData={contentData.find((data) => data.id === 2)}
-        cardData={cardData}
-      />
-      <Testimonials />
-      <FaqAccordion contentData={contentData.find((data) => data.id === 1)} />
-    </Layout>
+      <Navbar />
+      <Benefits />
+      <Persons />
+      <Banner />
+      <Peoples />
+      <Feedback/>
+      <Footer/>
+    </>
   );
 }
+
+export const pageQuery = graphql`
+  query HomeQuery {
+    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 3) {
+      edges {
+        node {
+          title
+          slug
+          featuredImage {
+            fluid(maxWidth: 470, maxHeight: 230) {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`;

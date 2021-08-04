@@ -1,5 +1,4 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
 import Navbar from '../components/landingHeader';

@@ -32,6 +32,7 @@ jobs:
           command: git remote -v
       - run:
           name: Pull cPanel remote changes into origin remote
+          command: git pull cpanel sanjeev
       - run:
           name: Install node modules
           command: npm install
@@ -46,7 +47,8 @@ jobs:
           command: git commit --allow-empty -m 'CircleCI build and deploy'
       - run:
           name: Deploy
-
+          command: |
+            git push cpanel sanjeev
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

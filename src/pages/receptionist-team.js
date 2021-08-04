@@ -35,8 +35,4 @@ export default function RootIndex(props) {
     </>
   );
 }
-
-export const pageQuery = graphql`
- 
-  }
 `;

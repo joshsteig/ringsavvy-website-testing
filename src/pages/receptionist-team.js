@@ -34,22 +34,3 @@ export default function RootIndex(props) {
       <Footer/>
     </>
   );
-}
-
-export const pageQuery = graphql`
-  query HomeQuery {
-    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 3) {
-      edges {
-        node {
-          title
-          slug
-          featuredImage {
-            fluid(maxWidth: 470, maxHeight: 230) {
-              ...GatsbyContentfulFluid
-            }
-          }
-        }
-      }
-    }
-  }
-`;

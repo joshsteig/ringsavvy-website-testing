@@ -15,40 +15,41 @@ export default function RootIndex(props) {
   const { location, data } = props;
 
   return (
-     <Layout location={location}>
+    <>
       <Helmet>
         <title>
-          Live Answering Service | Real Humans, 24 Hours a Day | Ring Savvy
+          Best Quality 24/7 Live Answering Service and Virtual Receptionists
         </title>
         <meta
           name='description'
-          content='Live Answering Service | Real Humans, 24 Hours a Day | Ring Savvy | The Largest and Fastest Answering Service Available, Try Us Free For 7 Days!'
+          content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
         />
       </Helmet>
-      <Hero
-        heading={heroData.heading}
-        subHeading={heroData.subHeading}
-        primaryCtaText={heroData.primaryCtaText}
-        primaryCtaLink={heroData.primaryCtaLink}
-      />
-      <ValueIllustration
-        valueData={valueData[0]}
-        contentData={contentData.find((data) => data.id === 1)}
-        illustration={messageIllustration}
-      />
-      <Testimonials />
-      <CardGrid
-        cardData={cardData}
-        contentData={contentData.find((data) => data.id === 2)}
-      />
-      {/* TODO: change illustration image */}
-      <ValueIllustration
-        valueData={valueData[1]}
-        contentData={contentData.find((data) => data.id === 1)}
-        illustration={messageIllustration}
-      />
-      <EmailSection />
-      <FaqAccordion contentData={contentData.find((data) => data.id === 4)} />
-    </Layout>
+      <Navbar />
+      <Benefits />
+      <Persons />
+      <Banner />
+      <Peoples />
+      <Feedback/>
+      <Footer/>
+    </>
   );
 }
+
+export const pageQuery = graphql`
+  query HomeQuery {
+    allContentfulPost(sort: { fields: [publishDate], order: DESC }, limit: 3) {
+      edges {
+        node {
+          title
+          slug
+          featuredImage {
+            fluid(maxWidth: 470, maxHeight: 230) {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`;

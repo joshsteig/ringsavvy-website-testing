@@ -32,7 +32,7 @@ jobs:
           command: git remote -v
       - run:
           name: Pull cPanel remote changes into origin remote
-          command: git pull cpanel diesel
+          command: git pull cpanel rachet
       - run:
           name: Install node modules
           command: npm install
@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            git push cpanel diesel
+            git push cpanel rachet
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

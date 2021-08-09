@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from '../logo';
-import favicon from '../../assets/images/ringsavvy_favicon.png';
 
 const index = () => {
   return (
@@ -25,10 +24,7 @@ const index = () => {
               </p>
               <br />
               <br />
-                  <a href='www.ringsavvy.com/get-a-quote'
-              <button className='landing-nav-button'>GET A QUOTE
-                </button>
-              </a>
+              <button className='landing-nav-button'>GET A QUOTE</button>
             </Col>
           </Row>
         </div>

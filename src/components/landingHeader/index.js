@@ -24,7 +24,7 @@ const index = () => {
               </p>
               <br />
               <br />
-              <button className='landing-nav-button'>GET A QUOTE</button>
+              <button className='landing-nav-button'>GET A QOUTE</button>
             </Col>
           </Row>
         </div>

@@ -25,10 +25,10 @@ const index = () => {
               </p>
               <br />
               <br />
-                  <link to: '/get-a-quote/'>
-              <button className='landing-nav-button'><a href='www.ringsavvy.com/get-a-quote'</a>GET A QUOTE
+                  <a href='www.ringsavvy.com/get-a-quote'
+              <button className='landing-nav-button'>GET A QUOTE
                 </button>
-</link>
+              </a>
             </Col>
           </Row>
         </div>

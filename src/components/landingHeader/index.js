@@ -26,7 +26,7 @@ const index = () => {
               <br />
               <br />
                   <link to: '/get-a-quote/'>
-              <button className='landing-nav-button'>GET A QUOTE
+              <button className='landing-nav-button'><a href='www.ringsavvy.com/get-a-quote'</a>GET A QUOTE
                 </button>
 </link>
             </Col>

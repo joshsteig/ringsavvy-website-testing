@@ -25,9 +25,10 @@ const index = () => {
               </p>
               <br />
               <br />
+                  <link to: '/get-a-quote/'>
               <button className='landing-nav-button'>GET A QUOTE
-              ctaLink: '/get-a-quote/',
                 </button>
+</link>
             </Col>
           </Row>
         </div>

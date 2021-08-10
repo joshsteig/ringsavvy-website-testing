@@ -73,7 +73,7 @@ export default function ScholarshipTradeSchools({ location }) {
                 a completed application along with 1,000 word minimum essay.
               </p>
               <h3>Deadline for applications</h3>
-              <p>November 5, 2020</p>
+              <p>November 5, 2021</p>
               <h3>Essay Topic</h3>
               <p>Essay must be between 500 and 1000 words.</p>
               <ol>

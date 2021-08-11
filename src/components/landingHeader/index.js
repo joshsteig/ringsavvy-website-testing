@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from '../logo';
+import { Link } from 'react-router';
 
 const index = () => {
   return (
@@ -24,7 +25,7 @@ const index = () => {
               </p>
               <br />
               <br />
-              <button className='landing-nav-button'>GET A QUOTE</button>
+              <button className='landing-nav-button'><Link to="/get-a-quote">GET A QUOTE</Link></button>
             </Col>
           </Row>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from '../logo';
-import { Link } from 'react-router';
 
 const index = () => {
   return (

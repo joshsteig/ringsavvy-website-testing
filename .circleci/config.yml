@@ -32,7 +32,7 @@ jobs:
           command: git remote -v
       - run:
           name: Pull cPanel remote changes into origin remote
-          command: git pull cpanel rose
+          command: git pull cpanel iwc
       - run:
           name: Install node modules
           command: npm install
@@ -48,7 +48,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            git push cpanel rose
+            git push cpanel iwc
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:

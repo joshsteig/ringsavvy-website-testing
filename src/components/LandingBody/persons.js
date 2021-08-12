@@ -25,12 +25,10 @@ const benefits = () => {
        
         <Col xs={12} lg={5} style={{ margin: 'auto' }}>
           <h3 className='benefits_heading'>
-            Customize your greeting and call forwarding
+            Build out your service
           </h3>
           <p className='benefits_details'>
-            We only need to ask you a few questions about how you’d like your
-            phones answered. After that, we set up the call forwarding exactly
-            how you want it.
+            Add everything you need to ensure you convert callers and keep your existing customers happy. 
           </p>
 
         </Col>

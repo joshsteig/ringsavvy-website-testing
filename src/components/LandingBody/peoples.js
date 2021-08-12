@@ -27,11 +27,9 @@ const benefits = () => {
       <Row style={{marginTop:"30px"}}>
         
         <Col xs={12} lg={6} style={{ margin: 'auto' }}>
-          <h3 className='peoples_heading'>The industry-wide problem:</h3>
+          <h3 className='peoples_heading'>The Ring Savvy solution:</h3>
           <p className='benefits_details'>
-            Field Service workers have to stop what they’re doing in order to
-            answer the phone. No one wants to take a call from a roof, a hot
-            attic, or a crawlspace.
+            Ring Savvy enables you to focus on the task at hand, while not sacrificing customer service or losing out on new customers.
           </p>
         </Col>
         <Col lg={1} />

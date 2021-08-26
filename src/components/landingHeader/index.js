@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Logo from '../logo';
-import { Link } from 'react-router';
+import {navigate} from 'gatsby';
 
 const index = () => {
   return (
@@ -25,7 +25,7 @@ const index = () => {
               </p>
               <br />
               <br />
-              <a href="https://www.ringsavvy.com/get-a-quote/"><button className='landing-nav-button'>GET A QUOTE</button></a>
+              <a href="https://www.ringsavvy.com/get-a-quote/"><button onClick={()=>navigate('get-a-quote')} className='landing-nav-button'>GET A QUOTE</button></a>
             </Col>
           </Row>
         </div>

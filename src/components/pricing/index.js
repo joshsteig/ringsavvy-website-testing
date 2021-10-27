@@ -11,7 +11,7 @@ const Pricing = () => {
       id: 1,
       name: 'Small',
       minutes: '50',
-      price: '$178/month',
+      price: '$179/month',
       features: [
         '30% overage protection',
         'Every premium feature we offer',

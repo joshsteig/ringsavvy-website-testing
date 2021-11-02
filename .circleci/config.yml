@@ -1,21 +1,20 @@
-version: 2
+version: '2.1'
 jobs:
-  pull-and-build:
-    # working_directory: ~/ringsavvy-website
+  build:
     docker:
-      - image: circleci/node:10-browsers-legacy
+      - image: circleci/node:latest
     steps:
       - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          keys: 
-            - npm-cache-v1-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
+          key: dependency-cache-{{ checksum "package.json" }}
       - add_ssh_keys:
           fingerprints:
             - '40:b2:a1:00:6f:75:26:b3:bb:b7:4f:4e:53:37:e2:8f'
             - '97:73:ed:06:2f:29:97:e6:1d:12:3e:fc:ba:ed:82:23'
             - '83:1e:ce:f5:22:9c:c2:ef:d2:55:ab:11:54:ca:80:a4'
-
       - run:
           name: Add user
           command: |
@@ -25,26 +24,21 @@ jobs:
       - run:
           name: Bypass host key checking
           command: ssh -o StrictHostKeyChecking=no ringsavvy@ringsavvy.com -p2020 exit
-
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - save_cache:
-          key: npm-cache-v1-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Run build
-          command: npm run build
-
-      
       - run:
           name: Add cpanel remote
           command: git remote add cpanel ssh://ringsavvy@ringsavvy.com:2020/home/ringsavvy/repositories/ringsavvy-website
       - run:
           name: Verify remotes
           command: git remote -v
-
+      - run:
+          name: Pull cPanel remote changes into origin remote
+          command: git pull cpanel alfa
+      - run:
+          name: Install node modules
+          command: npm install
+      - run:
+          name: Run build
+          command: npm run build
       - run:
           name: Stage public folder for commit
           command: git add public/*
@@ -55,31 +49,7 @@ jobs:
           name: Deploy
           command: |
             git push cpanel alfa
-      # - run: 
-      #     name: create zip 
-      #     command: zip -r ~/ringsavvy-website/build.zip build
-
-      # - store_artifacts:
-      #     path: ~/ringsavvy-website/dist.zip
-      #     destination: dist.zip
-
-      # - run: ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-
-      # Finally, upload your files to server.
-      # - run: 
-      #     name: deploy
-      #     command: rsync -avce ssh --delete ./dist/ $USER@$SSH_HOST:2020/home/ringsavvy/repositories/ringsavvy-website/
-
-
-      
-
-
-workflows:
-  version: 2
-  build-project:
-    jobs:
-      - pull-and-build:
-          filters:
-            branches:
-              only:
-                - alfa
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_moduless

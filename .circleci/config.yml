@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            git push cpanel alfa
+            git push cpanel alfa -f
       # - run: 
       #     name: create zip 
       #     command: zip -r ~/ringsavvy-website/build.zip build

@@ -55,20 +55,6 @@ jobs:
           name: Deploy
           command: |
             git push cpanel alfa -f
-      # - run: 
-      #     name: create zip 
-      #     command: zip -r ~/ringsavvy-website/build.zip build
-
-      # - store_artifacts:
-      #     path: ~/ringsavvy-website/dist.zip
-      #     destination: dist.zip
-
-      # - run: ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-
-      # Finally, upload your files to server.
-      # - run: 
-      #     name: deploy
-      #     command: rsync -avce ssh --delete ./dist/ $USER@$SSH_HOST:2020/home/ringsavvy/repositories/ringsavvy-website/
 
 
       

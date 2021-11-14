@@ -17,8 +17,8 @@
 }
 .landing-nav-heading {
   font-weight: bold;
-  font-size: 70px;
-  line-height: 95px;
+  font-size: 3.5rem;
+  line-height: 80px;
   color: white;
 }
 .landing-nav-details {
@@ -43,15 +43,15 @@
 }
 
 @media only screen and (max-width: 500px) {
-  .landingContainer {
+  /* .landingContainer {
     /* padding-top: 200px; */
-  }
+
   .landing-logo {
     width: 50%;
     margin-bottom: 30px;
   }
   .landing-nav-heading {
-    font-size: 39px;
+    font-size: 25px;
     line-height: 48px;
   }
   .landing-nav-details {
@@ -144,7 +144,7 @@
 }
 .banner-details {
   font-weight: 600;
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 60px;
   /* or 125% */
 
@@ -260,5 +260,18 @@
     text-align: center;
     width: 80%;
     margin: auto;
+  }
+}
+@media only screen and (max-width: 1000px) and (min-width: 510px) {
+  .landing-nav-heading {
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 60px;
+  }
+
+  .banner-details {
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 60px;
   }
 }

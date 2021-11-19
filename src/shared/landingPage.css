@@ -1,5 +1,7 @@
 /* LANDING------------------- */
 
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css';
+
 .landingContainer {
   padding-top: 20px;
 }
@@ -186,6 +188,27 @@
   box-shadow: 15px 40px 100px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 10px;
+  height: 19rem;
+}
+
+.feedback-comment {
+  height: 5rem;
+  margin-top: 1rem;
+}
+
+.ellipse {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -moz-binding: url('http://seancannon.com/_test/ellipsis.xml#ellipsis');
+}
+
+.readMore-Button {
+  background-color: #fff;
+  color: #35b452;
+  border: none;
 }
 
 .feedbackImgDiv {
@@ -206,8 +229,9 @@
 
 .feeback-details {
   font-weight: normal;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 30px;
+  margin-bottom: initial;
   /* or 150% */
 
   text-align: center;
@@ -260,6 +284,13 @@
     text-align: center;
     width: 80%;
     margin: auto;
+    height: 19rem;
+  }
+  .feedback-name {
+    font-size: 24px;
+  }
+  .feedback-comment {
+    height: 6rem;
   }
 }
 @media only screen and (max-width: 1000px) and (min-width: 510px) {
@@ -274,4 +305,66 @@
     font-size: 2rem;
     line-height: 60px;
   }
+}
+
+:root {
+  --star-color: #fff;
+  --star-background: #fc0;
+}
+.Stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+
+  display: inline-block;
+  font-size: 40px;
+  font-family: Times;
+  line-height: 1;
+}
+.Stars::before {
+  content: '★★★★★';
+  letter-spacing: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--star-background) var(--percent),
+    var(--star-color) var(--percent)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.Modal {
+  position: fixed;
+  z-index: 2;
+  background-color: white;
+  width: 70%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 1rem;
+  left: 15%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  border-radius: 0.75rem;
+}
+
+.crossIcon i {
+  position: absolute;
+  cursor: pointer;
+  right: 5%;
+}
+
+@media (min-width: 600px) {
+  .modal {
+    width: 31.25rem;
+    left: calc(50% - 15.625rem);
+  }
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }

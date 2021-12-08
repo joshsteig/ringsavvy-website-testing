@@ -15,7 +15,7 @@ export default function SignUp({ location }) {
     'Ring Savvy’s free trial is 100% free. No credit card required.';
 
   return (
-    <Layout navHidden footerHidden location={location}>
+    <Layout navHidden promoHidden footerHidden location={location}>
       <Helmet>
         <title>Sign Up | Ring Savvy | Get Our 7 Day Free Trial Now!</title>
         <meta

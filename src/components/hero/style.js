@@ -77,12 +77,13 @@ export const HeadingAndVideo = styled.div`
   }
 `;
 export const heading = styled.div`
-  max-width: 628px;
+  max-width: 35rem;
 `;
 export const video = styled.div`
   iframe {
-    width: 21rem;
-    height: 12rem;
+    width: 25rem;
+    height: 14rem;
+    margin-top: 1rem;
   }
   @media (max-width: 767px) {
     iframe {

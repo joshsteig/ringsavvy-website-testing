@@ -25,7 +25,7 @@ export default function BookNow({ location }) {
     'Ring Savvy’s free trial is 100% free. No credit card required.';
 
   return (
-    <Layout navHidden footerHidden location={location}>
+    <Layout navHidden promoHidden footerHidden location={location}>
       <Helmet>
         <title>Book an Appointment to Speak With Us Here- Ring Savvy</title>
         <meta

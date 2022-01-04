@@ -11,7 +11,7 @@ const Pricing = () => {
       id: 1,
       name: 'Small',
       minutes: '50',
-      price: '$179/month',
+      price: '$200/month',
       features: [
         '30% overage protection',
         'Every premium feature we offer',
@@ -25,7 +25,7 @@ const Pricing = () => {
       id: 2,
       name: 'Medium',
       minutes: '100',
-      price: '$300/month',
+      price: '$320/month',
       features: [
         '25% overage protection',
         'Every premium feature we offer',
@@ -55,32 +55,32 @@ const Pricing = () => {
     {
       id: 1,
       minutes: '200',
-      price: '$470/month',
+      price: '$580/month',
     },
     {
       id: 2,
       minutes: '300',
-      price: '$645/month',
+      price: '$817/month',
     },
     {
       id: 3,
       minutes: '400',
-      price: '$844/month',
+      price: '$922/month',
     },
     {
       id: 4,
       minutes: '500',
-      price: '$1025/month',
+      price: '$1,100/month',
     },
     {
       id: 5,
       minutes: '600',
-      price: '$1170/month',
+      price: '$1,280/month',
     },
     {
       id: 6,
       minutes: '700',
-      price: '$1330+/month',
+      price: '$1,470+/month',
     },
   ];
 

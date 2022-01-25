@@ -27,11 +27,7 @@ const GetPricing = () => {
           </p>
           <p class='form-appointment'>
             Want to talk later? Schedule a consultation with us{' '}
-            <a href='<!-- Calendly link widget begin -->
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/ring-savvy-team'});return false;">Schedule time with us</a>
-<!-- Calendly link widget end -->'>
+            <a href='https://ringsavvy.com/book-now'>
               here
             </a>
             .

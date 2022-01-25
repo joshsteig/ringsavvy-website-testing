@@ -26,7 +26,7 @@ const GetPricing = () => {
             representative.
           </p>
           <p class='form-appointment'>
-            Want to talk later? Schedule a consultation with us!{' '}
+            Want to talk later? Schedule a consultation with us{' '}
             <a href='https://calendly.com/ring-savvy-team'>
               here
             </a>

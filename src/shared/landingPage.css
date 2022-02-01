@@ -137,7 +137,7 @@
 .landing-banner {
   background-image: url(../assets/images/banner.png);
   background-size: cover;
-  height: 877px;
+  height: 600px;
   line-height: 877px;
   background-position: center;
   text-align: center;
@@ -151,20 +151,20 @@
   /* or 125% */
 
   text-align: center;
-  margin-top: 100px;
+  margin-top: 11.5rem;
   color: #ffffff;
 }
 @media only screen and (max-width: 500px) {
   .landing-banner {
     padding-top: 90px;
-    height: 620px;
+    height: 350px;
   }
 
   .banner-details {
     font-size: 21px;
     line-height: 37px;
     text-align: center;
-    margin-top: 55px;
+    margin-top: 7rem;
   }
 }
 

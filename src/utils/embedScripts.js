@@ -10,7 +10,7 @@ export const getPricing =
 export const pdfDownload =
   '<script type="text/javascript" src="https://answeringlegal.formstack.com/forms/js.php/ebook_download?nomodernizr=1&no_style=1&no_style_strict=1"></script><noscript><a href="https://answeringlegal.formstack.com/forms/ebook_download" title="Online Form">Online Form - PDF Download</a></noscript>';
 
-export const calendly = `<div class="calendly-inline-widget" data-url="https://calendly.com/ring-savvy-team" style="min-width:320px;height:630px;"></div>
+export const calendly = `<div class="calendly-inline-widget" data-url="https://calendly.com/ring-savvy-team?hide_gdpr_banner=1" style="min-width:320px;height:630px;"></div>
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>`;
 
 // Scholarship forms

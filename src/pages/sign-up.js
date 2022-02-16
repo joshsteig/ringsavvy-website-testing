@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import postscribe from 'postscribe';
-import { signUp } from '../utils/embedScripts';
+import styled from 'styled-components';
+import { calendly } from '../utils/embedScripts';
 import Layout from '../components/layout';
 import { FlexRow, FlexCol } from '../components/globals';
 import GreenHalf from '../components/greenHalf';
 
+const Heading = styled.h1`
+  font-size: ${({ theme }) => theme.global.fontSizes.xl};
+  margin-bottom: 0.5em;
+`;
+
+const EmbedContainer = styled.div`
+  width: 100%;
+`;
+
 export default function SignUp({ location }) {
   useEffect(() => {
-    postscribe('#formEmbed', signUp);
+    postscribe('#formEmbed', calendly);
   }, []);
 
   const freeTrial =
@@ -17,16 +27,22 @@ export default function SignUp({ location }) {
   return (
     <Layout navHidden promoHidden footerHidden location={location}>
       <Helmet>
-        <title>Sign Up | Ring Savvy | Get Our 7 Day Free Trial Now!</title>
+        <title>Book an Appointment to Speak With Us Here- Ring Savvy</title>
         <meta
           name='description'
-          content='Sign Up | Ring Savvy | Get Our 7 Day Free Trial With Access to Every Feature We Offer. No Credit Card Down to Try, So Sign Up Now!'
+          content='Book an Appointment to Speak With Us Here- Ring Savvy'
         />
       </Helmet>
       <FlexRow wrap>
         <GreenHalf text={freeTrial} />
         <FlexCol center>
-          <div id='formEmbed' />
+          <Heading>Thank you for choosing us!</Heading>
+          <p>
+            To finish getting setup, call us at{' '}
+            <a href='tel:631-600-1111'>631-600-1111</a> or schedule an
+            appointment with us below!
+          </p>
+          <EmbedContainer id='formEmbed' />
         </FlexCol>
       </FlexRow>
     </Layout>

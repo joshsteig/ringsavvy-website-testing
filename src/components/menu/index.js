@@ -113,6 +113,10 @@ const industries = [
     name: 'Cleaning',
     path: '/industries/cleaning-answering-service',
   },
+  {
+    name: 'Electrician',
+    path: '/industries/electrician-answering-service',
+  },
 ];
 
 const support = [

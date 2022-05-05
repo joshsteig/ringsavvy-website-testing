@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 import Google from '../../assets/images/google-logo.svg';
@@ -6,8 +6,40 @@ import ArrowPrev from '../../assets/images/reviews-prev.svg';
 import ArrowNext from '../../assets/images/reviews-next.svg';
 import { Wrapper } from '../wrapper';
 import * as Styled from './style';
+import Modal from '../modal';
 
 const Testimonials = ({ style }) => {
+  const [reviewsData, setReviewsData] = useState([]);
+  const [reviewComment, setReviewComment] = useState('');
+
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  const ModalVisible = (r) => {
+    setShowModal(true);
+    setReviewComment(r);
+  };
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        'https://api.reviews.io/merchant/latest?store=ring-savvy&apikey=9e7cd5031384c35c723c6d723aa915eb'
+      );
+      const { reviews } = await response.json();
+      setReviewsData(reviews);
+    })();
+  }, []);
+
+  function convertHTMLEntity(text) {
+    const span = document.createElement('span');
+
+    return text.replace(/&[#A-Za-z0-9]+;/gi, (entity, position, text) => {
+      span.innerHTML = entity;
+      return span.innerText;
+    });
+  }
+
   const [swiper, setSwiper] = useState(null);
   const params = {
     slidesPerView: 1,
@@ -57,26 +89,53 @@ const Testimonials = ({ style }) => {
       },
     },
   ];
+  console.log(showModal);
 
   return (
     <Styled.Slider>
       <Styled.GreenContainer />
+      <Modal show={showModal} closeModal={closeModal}>
+        <div style={{ width: '90%' }}>
+          {reviewsData.length > 0 && convertHTMLEntity(reviewComment)}
+        </div>
+      </Modal>
       <Wrapper>
         <h2 style={{ maxWidth: '480px' }}>What our clients are saying</h2>
       </Wrapper>
       <Swiper {...params}>
-        {testimonials.map((testimonial, i) => (
-          <Styled.SliderItem key={i}>
-            <h4>{testimonial.heading}</h4>
-            <Styled.Description marginTop={1}>
-              {testimonial.review}
-            </Styled.Description>
-            <Styled.Author>
-              <Styled.AuthorName>{testimonial.author.name}</Styled.AuthorName>
-              <p>{testimonial.author.title}</p>
-            </Styled.Author>
-          </Styled.SliderItem>
-        ))}
+        {reviewsData.length > 0 &&
+          reviewsData.map((testimonial, i) => (
+            <Styled.SliderItem key={i}>
+              {/* <Modal show={showModal} closeModal={closeModal}>
+                <div style={{ width: '90%' }}>
+                  {reviewsData.length > 0 &&
+                    convertHTMLEntity(testimonial.comments)}
+                </div>
+              </Modal> */}
+              {/* <h4>{testimonial.heading}</h4> */}
+              <Styled.Description marginTop={1}>
+                {testimonial.comments.length > 80
+                  ? convertHTMLEntity(testimonial.comments.substring(0, 80)) +
+                    '...'
+                  : convertHTMLEntity(testimonial.comments)}
+                {/* {convertHTMLEntity(testimonial.comments)} */}
+                {testimonial.comments.length >= 80 && (
+                  <button
+                    className='readMore-Button'
+                    onClick={() => ModalVisible(testimonial.comments)}
+                  >
+                    Read more
+                  </button>
+                )}
+              </Styled.Description>
+              <Styled.Author>
+                <Styled.AuthorName>
+                  {testimonial.reviewer.first_name}
+                </Styled.AuthorName>
+                {/* <p>{testimonial.author.title}</p> */}
+              </Styled.Author>
+            </Styled.SliderItem>
+          ))}
       </Swiper>
       <Wrapper>
         <Styled.Bottom>

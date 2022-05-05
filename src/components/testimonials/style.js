@@ -25,7 +25,6 @@ export const Slider = styled(Section)`
 `;
 
 export const SliderItem = styled.div`
-  min-height: 280px;
   max-width: 880px;
   background-color: #fff;
   border-radius: 5px;

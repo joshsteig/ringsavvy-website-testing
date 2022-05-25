@@ -31,6 +31,7 @@ export const SliderItem = styled.div`
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.08);
   padding: 3rem;
   text-align: left;
+  height: 205px;
 `;
 
 export const HeadingWrapper = styled.div`

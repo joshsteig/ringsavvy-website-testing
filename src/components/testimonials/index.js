@@ -114,12 +114,12 @@ const Testimonials = ({ style }) => {
               </Modal> */}
               {/* <h4>{testimonial.heading}</h4> */}
               <Styled.Description marginTop={1}>
-                {testimonial.comments.length > 80
-                  ? convertHTMLEntity(testimonial.comments.substring(0, 80)) +
+                {testimonial.comments.length > 280
+                  ? convertHTMLEntity(testimonial.comments.substring(0, 280)) +
                     '...'
                   : convertHTMLEntity(testimonial.comments)}
                 {/* {convertHTMLEntity(testimonial.comments)} */}
-                {testimonial.comments.length >= 80 && (
+                {testimonial.comments.length >= 280 && (
                   <button
                     className='readMore-Button'
                     onClick={() => ModalVisible(testimonial.comments)}

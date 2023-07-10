@@ -32,6 +32,7 @@
     "postscribe": "^2.0.8",
     "react": "^17.0.1",
     "react-bootstrap": "^2.0.0-beta.4",
+    "react-cookie-consent": "^8.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-id-swiper": "^4.0.0",
@@ -62,7 +63,7 @@
     "url": "https://github.com/answeringLegal/ringsavvy-website.git"
   },
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "gatsby develop ",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js"

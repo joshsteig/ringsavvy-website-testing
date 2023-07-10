@@ -7,6 +7,7 @@ import Tabs from '../components/tabs';
 import MarketingCampaign from '../components/marketingCampaign';
 import Testimonials from '../components/testimonials';
 import PromoBanner from '../components/promoBanner';
+import CookieConsentBanner from '../components/CookieConsentBanner';
 export default function RootIndex(props) {
   const { location, data } = props;
 
@@ -122,6 +123,7 @@ export default function RootIndex(props) {
             content='Ring Savvy | 24/7 Live Answering Service | Serving All Industries as a Quality Extension of Your Business | Try For Free! Fully Bilingual.'
           />
         </Helmet>
+        <CookieConsentBanner />
         <Hero
           heading={heroData.heading}
           headingVideo={true}

@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Styled from './style';
 
+
+
 const Card = ({ cardData }) => {
   const { heading, content, linkUrl } = cardData;
 
